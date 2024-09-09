@@ -1,0 +1,71 @@
+/* stones css */
+.background-color{
+    color: white;
+}
+
+.stones-section {
+    text-align: center;
+    margin: 20px 0;
+    padding: 10px;
+}
+
+.vertical-line {
+    width: 50px;
+    height: 4px;
+    background-color: #000;
+    margin: 10px auto;
+}
+
+.stones-description {
+    font-size: 1rem;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.sidebar {
+    width: 250px;
+    padding: 20px;
+    border: 1px solid #ddd;
+}
+
+.breadcrumb a {
+    color: #1a73e8;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.section {
+    margin-top: 20px;
+}
+
+.section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.section ul li {
+    margin-bottom: 8px;
+}
+
+.section ul li input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.view-more {
+    display: inline-block;
+    margin-top: 10px;
+    color: #1a73e8;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.view-more:hover {
+    text-decoration: underline;
+}
+

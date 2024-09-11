@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css" />
+    
+  </head>
+  <body>
+    
+    <div class="container">
+      <div class="login-section">
+        <h1>Login in to your account</h1>
+        <p>This is required to leave bids, register to bid or purchase gems</p>
+        <form>
+          <label for="email">Email Address </label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            required
+          />
+         </br>
+          <label for="password">Password </label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            required
+          />
+        </br>
+
+        <div class="terms">
+            <input type="checkbox" id="terms">
+            <label for="terms">I accept terms & conditions</label>
+        </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+        <a href="forgot-password.html" class="forgot-password">Forgot Password ?</a>
+      </div>
+
+      <div class="register-section">
+        <h2>Don’t have an account?<br><br>Register today</h2>
+        <br>
+        <p>
+            Registration is free and straightforward. An account with SAF Gems
+            gives you the opportunity to leave bids, register to bid live in our
+            online sales, and receive marketing updates for items of interest.
+          </p>
+        <div class="button-section">
+        <button type="button" onclick="goBack()">Create Account</button>
+        </div>
+        <script src="script.js"></script>
+      </div>
+    </div>
+  </body>
+</html>

@@ -37,10 +37,11 @@
         <label for="email">Email Address :</label>
         <input
           type="email"
-          id="email"
+          id="email"   
           placeholder="Enter email address"
           required
         />
+        <span id ="email-error" class="error-msg"></span>
         <br />
         <label for="password">Password :</label>
         <input
@@ -49,6 +50,7 @@
           placeholder="Enter password"
           required
         />
+        <span id="password-error" class="error-msg"></span>
         <br />
         <label for="confirm-password">Re-enter password :</label>
         <input
@@ -57,7 +59,9 @@
           placeholder="Re-enter password"
           required
         />
+        <span id="password-error" class="error-msg"></span>
         <br />
+        <span class="form-error" style="color: red;"></span>
         <button type="button" onclick="nextStep(1)">CREATE ACCOUNT</button>
       </form>
     </div>
@@ -89,6 +93,7 @@
           placeholder="Enter Phone Number"
           required
         />
+        <span id="phone-error" class="error-msg"></span> 
         <br />
         <h3>-Your Address-</h3>
         <label for="address1">Address line one :</label>
@@ -121,6 +126,7 @@
           required
         />
         <br />
+        <span class="form-error" style="color: red;"></span>
         <div class="button-section">
           <button type="button" onclick="prevStep(2)">CANCEL</button>
           <button type="button"  onclick="nextStep(2)">SAVE & CONTINUE</button>
@@ -144,6 +150,7 @@
           placeholder="Enter your NIC number"
           required
         />
+        <span id="nic-error" class="error-msg"></span> 
         <br />
         <label for="id-copy">NIC / Driving License / Passport Copy:</label>
         <input
@@ -164,12 +171,13 @@
         <canvas id="canvas" width="200" height="150"></canvas>
         <input type="hidden" id="photo" name="photo" />
         <br />
+        <span class="form-error" style="color: red;"></span>
         <div class="button-section">
           <button type="button" onclick="prevStep(3)">CANCEL</button>
           <button type="submit">Complete Registration</button>
         </div>
       </form>
-      <span id="spanErrorMsg"></span>
+      <!--<span id="spanErrorMsg"></span>-->
     <script src="register.js"></script>
   </body>
 </html>

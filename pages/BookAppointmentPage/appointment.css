@@ -1,20 +1,20 @@
-/* appointment.css */
+/* appointment.css
 
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-  }
+  } */
 
   h1 {
     text-align: center;
-    color: #333;
+    color: #000000;
     margin-bottom: 20px;
     width: 100%;
   }
   
-  .container {
+  .container-bookAppointment {
     max-width: 800px; 
     min-height: 400px;
     margin: 50px auto;
@@ -27,7 +27,7 @@ body {
   }
 
   
-  .section {
+  .section-bookAppointment {
     display: flex;
     flex-direction: column;
     width: 200px;
@@ -94,7 +94,7 @@ body {
 }
   
   
-  button {
+  /* button {
     background-color: #449b9b;
     color: #ffffff;
     padding: 10px 20px;
@@ -108,4 +108,4 @@ body {
   button:hover{
     background-color: #000000;
     
-  }
+  } */

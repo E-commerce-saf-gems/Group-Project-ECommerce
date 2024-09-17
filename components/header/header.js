@@ -1,6 +1,6 @@
 class Header extends HTMLElement {
     connectedCallback() {
-      this.innerHTML = `
+      this.innerHTML = 
         <header class="header">
             <div class="alert">
               <div class="container">
@@ -18,7 +18,7 @@ class Header extends HTMLElement {
                 
         
                 <div class="input-wrapper">
-                  <input type="search" name="search" placeholder="Search product" class="search-field">
+                  <input type="search" name="search" placeholder="Search product" class="search-field"></input>
         
                   <button class="search-submit" aria-label="search">
                     <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
@@ -26,17 +26,17 @@ class Header extends HTMLElement {
                 </div>
         
                 <a href="/pages/homepage/homepage.html" class="logo">
-                  <img src="/assets/images/logo.png" width="179" height="26" alt="SAF GEMS">
+                  <img src="/assets/images/logo.png" width="179" height="26" alt="SAF GEMS"></img>
                 </a>
         
                 <div class="header-actions">
         
                   <button class="header-action-btn" aria-label="user">
-                    <ion-icon name="person-outline" aria-hidden="true" aria-hidden="true"></ion-icon>
+                    <ion-icon name="person-outline" aria-hidden="true" ></ion-icon>
                   </button>
         
                   <button class="header-action-btn" aria-label="favourite item">
-                    <ion-icon name="star-outline" aria-hidden="true" aria-hidden="true"></ion-icon>
+                    <ion-icon name="star-outline" aria-hidden="true" ></ion-icon>
         
                     <span class="btn-badge">0</span>
                   </button>
@@ -44,7 +44,7 @@ class Header extends HTMLElement {
                   <button class="header-action-btn" aria-label="cart item">
                     <data class="btn-text" value="0"></data>
         
-                    <ion-icon name="bag-handle-outline" aria-hidden="true" aria-hidden="true"></ion-icon>
+                    <ion-icon name="bag-handle-outline" aria-hidden="true" ></ion-icon>
         
                     <span class="btn-badge">3</span>
                   </button>
@@ -74,9 +74,9 @@ class Header extends HTMLElement {
             </div>
         
           </header>
-      `;
+      ;
     }
-  }
+}
   
 customElements.define('custom-header', Header);
 
@@ -108,4 +108,3 @@ const closeNavbar = function () {
 }
 
 addEventOnElem(navbarLinks, "click", closeNavbar);
-  

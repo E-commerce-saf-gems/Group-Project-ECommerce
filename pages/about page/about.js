@@ -1,3 +1,5 @@
+
+
 const inputs = document.querySelectorAll(".input");
 
 function focusFunc() {

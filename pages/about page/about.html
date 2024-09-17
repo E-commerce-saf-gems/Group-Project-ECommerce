@@ -1,88 +1,426 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>About</title>
-	<link rel="stylesheet" href="style.css">
-</head>
-<body>
 
-  <nav class="navbar">
-    <div class="navdiv">
-        
-        <ul>
-            <li class="nav-item"><a href="#">Home</a></li>
-            <li class="nav-item"><a href="#">About</a></li>
-            <li class="nav-item"><a href="#">Contact</a></li>
-            <button class="button" style="margin-left: 850px;"><a href="#">Register</a></button>
-            <button class="button"><a href="#">Login</a></button>
-        </ul>
-        <div class="logo">
-            <img src="image/profile.png" alt="" class="profile-logo">
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <link rel="stylesheet" href="./about.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!--Font Awesome CDN-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="preload" as="image" href="./assets/images/logo.png">
+  <link rel="preload" as="image" href="./assets/images/hero1.png">
+  <link rel="preload" as="image" href="./assets/images/hero2.png">
+  <link rel="preload" as="image" href="./assets/images/hero3.png">
+
+</head>
+
+<body id="top">
+
+  <header class="header">
+
+    <!-- header -->
+      <div class="header-top" data-header>
+      <div class="container">
+
+        <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+          <span class="line line-1"></span>
+          <span class="line line-2"></span>
+          <span class="line line-3"></span>
+        </button>
+
+        <div class="input-wrapper">
+          <input type="search" name="search" placeholder="Search product" class="search-field">
+
+          <button class="search-submit" aria-label="search">
+            <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+          </button>
         </div>
+
+        <a href="#" class="logo">
+          <img src="./assets/images/logo.png" width="179" height="26" alt="Glowing">
+        </a>
+
+        <div class="header-actions">
+
+          <button class="header-action-btn" aria-label="user">
+            <ion-icon name="person-outline" aria-hidden="true" aria-hidden="true"></ion-icon>
+          </button>
+
+          <button class="header-action-btn" aria-label="favourite item">
+            <ion-icon name="star-outline" aria-hidden="true" aria-hidden="true"></ion-icon>
+
+            <span class="btn-badge">0</span>
+          </button>
+
+          <button class="header-action-btn" aria-label="cart item">
+            <data class="btn-text" value="0">$0.00</data>
+
+            <ion-icon name="bag-handle-outline" aria-hidden="true" aria-hidden="true"></ion-icon>
+
+            <span class="btn-badge">0</span>
+          </button>
+
+        </div>
+
+        
+
+        <nav class="navbar">
+          <ul class="navbar-list">
+            <li>
+              <a href="./index.html" class="navbar-link has-after">Home</a>
+            </li>
+            <li class="dropdown">
+                <a href="#shop" class="navbar-link dropdown-toggle" data-nav-link>Shop</a>
+                <ul class="dropdown-menu">
+                  <li><a href="#buy-stones" class="dropdown-item">Buy Stones</a></li>
+                  <li><a href="#bid" class="dropdown-item">Bid</a></li>
+                </ul>
+              </li>
+            <li>
+              <a href="#about" class="navbar-link has-after">About</a>
+            </li>
+            <li>
+              <a href="./contact.html" class="navbar-link has-after">Contact Us</a>
+            </li>
+
+          </ul>
+        </nav>
+
+      </div>
     </div>
-  </nav>
-  
-  
-  <div class="company">
-    <img class="company_logo" src="image/logo.png" alt="" >
-  <h1><b>SAF GEMS.Pvt.Ltd</b></h1>
+
+  </header>
+
+
+
+
+
+  <!-- 
+    - #MOBILE NAVBAR
+  -->
+
+  <div class="sidebar">
+    <div class="mobile-navbar" data-navbar>
+
+      <div class="wrapper">
+        <a href="#" class="logo">
+          <img src="./assets/images/logo.png" width="179" height="26" alt="SAF GEMS">
+        </a>
+
+        <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
+          <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+        </button>
+      </div>
+
+      <ul class="navbar-list">
+
+        <li>
+          <a href="#home" class="navbar-link" data-nav-link>Home</a>
+        </li>
+
+        <li class="dropdown">
+            <a href="#shop" class="navbar-link dropdown-toggle" data-nav-link>Shop</a>
+            <ul class="dropdown-menu">
+              <li><a href="#buy-stones" class="dropdown-item">Buy Stones</a></li>
+              <li><a href="#bid" class="dropdown-item">Bid</a></li>
+            </ul>
+        </li>
+          
+
+        <li>
+          <a href="#about" class="navbar-link" data-nav-link>About</a>
+        </li>
+
+        <li>
+          <a href="./contact.html" class="navbar-link" data-nav-link>Contact Us</a>
+        </li>
+
+      </ul>
+
+    </div>
+
+    <div class="overlay" data-nav-toggler data-overlay></div>
   </div>
+  
+  <!-- 
+    - #CONTENT
+  -->
+  
+  
+  
   <div class="about">
     <div class="mission">
         <h3>Our Mission</h3>
-        <img class="logo" src="image/mission.png" alt="" >
-        <p>asdgfhdjdjddjdjsjdsdkdksdsjfslfsjfss
-            sskfskfskfskssdsdnddkssssdsddsldjlsd
+        <img class="logo " style ="size:10px; margin-left:170px; margin-top:50px; margin-bottom:20px;" src="assets/images/mission.png" alt="" >
+        <p>To deliver the highest quality gemstones with a commitment to craftsmanship, authenticity, and customer satisfaction, fostering trust and long-term relationships with our clients through transparency, innovation, and exceptional service.
         </p>
     </div>
     
     <div class="mission">
         <h3>Our Vision</h3>
-        <img class="logo" src="image/vision.png" alt="" >
-        <p>asdgfhdjdjddjdjsjdsdkdksdsjfslfsjfss
-            sskfskfskfskssdsdnddkssssdsddsldjlsd
+        <img class="logo" style ="size:10px; margin-left:160px; margin-top:15px; margin-bottom:20px;" src="assets/images/vision.png" alt="" >
+        <p>To be a global leader in the gemstone industry, renowned for our ethical sourcing, exquisite collections, and pioneering technology that enhances the customer experience, while contributing to sustainable and responsible practices that protect our planet and empower communities.
         </p>
     </div> 
   </div>
 
-<div class="wrapper">
-  <h1>Our Business Members</h1>
-  <div class="team">
-    <div class="team_member">
-      <div class="team_img">
-        <img src="image/partner1.png" alt="">
-      </div>
-      <h3>Mr.Paul Doe</h3>
-      <p class="role">Business Manager</p>
-      <p>xadaddshjashfkfhfkdhdkfhdkfdh
-        fkfhkfhfkhskfdhfkdhfkdfhd
-        fkdhfkdfhdkfshfkhfkfhkfshfkhfs
-        kfhskfhf.</p>
+  <div class="wrapper">
+
+    <div class="title">
+        <h4>Our Business Partners </h4>
     </div>
-    <div class="team_member">
-      <div class="team_img">
-        <img src="image/partner2.png" alt="">
-      </div>
-      <h3>Mr.Kevin piter</h3>
-      <p class="role">Business Manager</p>
-      <p>xadaddshjashfkfhfkdhdkfhdkfdh
-        fkfhkfhfkhskfdhfkdhfkdfhd
-        fkdhfkdfhdkfshfkhfkfhkfshfkhfs
-        kfhskfhf.</p>
-    </div>
-    <div class="team_member">
-      <div class="team_img">
-        <img src="image/partner3.png" alt="">
-      </div>
-      <h3>Mr.Alex Wood</h3>
-      <p class="role">Business Manager</p>
-      <p>xadaddshjashfkfhfkdhdkfhdk
-        fdhfkfhkfhfkhskfdhfkdhf
-        kdfhdfkdhfkdfhdkfsh.</p>
+
+    <div class="card_Container">
+
+        <div class="card">
+
+            <div class="imbBx">
+                <img src="assets/images/partner1.png" alt="">
+            </div>
+
+            <div class="content">
+                <div class="contentBx">
+                    <h3>Mr.Paul Doe <br><span>Business Manager</span></h3>
+                </div>
+                <ul class="sci">
+                    <li style="--i: 1">
+                        <a href="#"><i class="fa-solid fa-envelope"></i></a>
+                    </li>
+                    <li style="--i: 2">
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    </li>
+                    <li style="--i: 3">
+                        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="imbBx">
+                <img src="assets/images/partner2.png" alt="">
+            </div>
+
+            <div class="content">
+                <div class="contentBx">
+                    <h3>Mr.Kevin Peter <br><span>Business Manager</span></h3>
+                </div>
+                <ul class="sci">
+                    <li style="--i: 1">
+                        <a href="#"><i class="fa-solid fa-envelope"></i></a>
+                    </li>
+                    <li style="--i: 2">
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    </li>
+                    <li style="--i: 3">
+                        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="imbBx">
+                <img src="assets/images/partner3.png" alt="">
+            </div>
+
+            <div class="content">
+                <div class="contentBx">
+                    <h3>Mr.Alex Smith <br><span>Business Manager</span></h3>
+                </div>
+                <ul class="sci">
+                    <li style="--i: 1">
+                        <a href="#"><i class="fa-solid fa-envelope"></i></a>
+                    </li>
+                    <li style="--i: 2">
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    </li>
+                    <li style="--i: 3">
+                        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
     </div>
   </div>
-</div>	
 
+  <!-- 
+    - #FOOTER
+  -->
+
+  <footer class="footer" data-section>
+    <div class="container">
+
+      <div class="footer-top">
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Company</p>
+          </li>
+
+          <li>
+            <p class="footer-list-text">
+              Find a location nearest you. See <a href="#" class="link">Our Stores</a>
+            </p>
+          </li>
+
+          <li>
+            <p class="footer-list-text bold">+391 (0)35 2568 4593</p>
+          </li>
+
+          <li>
+            <p class="footer-list-text">hello@domain.com</p>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Useful links</p>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">New Products</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Best Sellers</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Bundle & Save</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Online Gift Card</a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Infomation</p>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Start a Return</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Contact Us</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Shipping FAQ</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Terms & Conditions</a>
+          </li>
+
+          <li>
+            <a href="#" class="footer-link">Privacy Policy</a>
+          </li>
+
+        </ul>
+
+        <div class="footer-list">
+
+          <p class="newsletter-title">Good emails.</p>
+
+          <p class="newsletter-text">
+            Enter your email below to be the first to know about new collections and product launches.
+          </p>
+
+          <form action="" class="newsletter-form">
+            <input type="email" name="email_address" placeholder="Enter your email address" required
+              class="email-field">
+
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </form>
+
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+
+        <div class="wrapper">
+          <p class="copyright">
+            &copy; 2024 safgems
+          </p>
+
+          <ul class="social-list">
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-youtube"></ion-icon>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+
+        <a href="#" class="logo">
+          <img src="./assets/images/logo.png" width="179" height="26" loading="lazy" alt="Glowing">
+        </a>
+
+        <img src="./assets/images/pay.png" width="313" height="28" alt="available all payment method" class="w-100">
+
+      </div>
+
+    </div>
+  </footer>
+  
+  <!-- 
+    - #BACK TO TOP BUTTON
+  -->
+
+  <a href="#top" class="back-top-btn" aria-label="back to top" data-back-top-btn>
+    <ion-icon name="arrow-up" aria-hidden="true"></ion-icon>
+  </a>
+  
+  <!-- 
+    - ionicon link for search icon
+  -->
+  <script> src="about.js" </script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

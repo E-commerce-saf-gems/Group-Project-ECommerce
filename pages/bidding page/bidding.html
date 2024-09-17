@@ -147,16 +147,37 @@
             {type: 'sapphire', color: 'blue', shape: 'round', origin: 'srilanka', img: 'assets/images/stone10.png'},
         ];
 
-        function showTooltip(tooltipId) {
-            var tooltip = document.getElementById(tooltipId);
-            tooltip.style.display = 'block';
+        // Function to display gemstones
+        function displayGemstones(gemstonesToDisplay) {
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
+
+            if (gemstonesToDisplay.length === 0) {
+                resultsContainer.innerHTML = '<p>No gemstones found.</p>';
+            } else {
+                gemstonesToDisplay.forEach(gemstone => {
+                    const gemstoneDiv = document.createElement('div');
+                    gemstoneDiv.className = 'gemstone';
+                    gemstoneDiv.innerHTML = `
+                        <img src="${gemstone.img}" alt="${gemstone.type}" />
+                        <div>
+                            <p>Type: ${gemstone.type}</p>
+                            <p>Color: ${gemstone.color}</p>
+                            <p>Shape: ${gemstone.shape}</p>
+                            <p>Origin: ${gemstone.origin}</p>
+                        </div>
+                    `;
+                    resultsContainer.appendChild(gemstoneDiv);
+                });
+            }
         }
 
-        function hideTooltip(tooltipId) {
-            var tooltip = document.getElementById(tooltipId);
-            tooltip.style.display = 'none';
-        }
+        // Display all gemstones on page load
+        window.addEventListener('load', () => {
+            displayGemstones(gemstones);
+        });
 
+        // Add event listener for the Apply Filter button
         document.getElementById('apply-filter').addEventListener('click', function() {
             // Get selected values from filters
             const stoneType = document.getElementById('stone-type').value;
@@ -173,29 +194,10 @@
             });
 
             // Display filtered results
-            const resultsContainer = document.getElementById('results');
-            resultsContainer.innerHTML = '';
-            
-            if (filteredGemstones.length === 0) {
-                resultsContainer.innerHTML = '<p>No gemstones found.</p>';
-            } else {
-                filteredGemstones.forEach(gemstone => {
-                    const gemstoneDiv = document.createElement('div');
-                    gemstoneDiv.className = 'gemstone';
-                    gemstoneDiv.innerHTML = `
-                        <img src="${gemstone.img}" alt="${gemstone.type}" />
-                        <div>
-                            <p>Type: ${gemstone.type}</p>
-                            <p>Color: ${gemstone.color}</p>
-                            <p>Shape: ${gemstone.shape}</p>
-                            <p>Origin: ${gemstone.origin}</p>
-                        </div>
-                    `;
-                    resultsContainer.appendChild(gemstoneDiv);
-                });
-            }
+            displayGemstones(filteredGemstones);
         });
     </script>
+    
     </div>
     <div class="box fat-box">
       <!--Order By Search bar-->

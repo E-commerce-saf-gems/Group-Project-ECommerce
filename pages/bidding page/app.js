@@ -104,7 +104,11 @@ function placeBid() {
     // You can add more logic here as needed.
 }
 
-/*Countdown Timer*/
+/*#############@@@@@@@@@**********
+
+        Countdown Timer
+
+********@@@@@@@@@###############*/
 
 /*var target_mili_sec = new Date("Aug 24, 2024 00:00:0").getTime();*/
 function timer() 

@@ -9,7 +9,59 @@
 
 <body>
     <div class="top">
-        <h1>Our Auction</h1>
+        <h1><span style="margin-right: 50px; color: #0e745c;">WELCOME!</span>to the Gem Auction Extravaganza!</h1>
+        
+        <div class="auction-description">
+            <div class="auction-description-details" >
+                <p>Discover exquisite gems and rare stones through our exciting auction platform. Join now to bid on stunning gemstones and experience the thrill of the auction.</p>
+            </div>
+        </div>
+        
+        <!-- Process Flow -->
+        <section id="process-flow">
+            <h2>How It Works</h2>
+            <div class="flow-chart">
+                <div class="step" id="step1">
+                    <div class="flowtooltip">
+                        <span class="flowtooltiptext">Register or log in to your account.</span>
+                    </div>
+                    <p>1. Register or Login</p>
+                </div>
+                <div class="step" id="step2">
+                    <div class="flowtooltip">
+                        <span class="flowtooltiptext">Browse the available gemstones and choose the one you want to bid on.</span>
+                    </div>
+                    <p>2. Browse Gemstones</p>
+                </div>
+                <div class="step" id="step3">
+                    <div class="flowtooltip">
+                        <span class="flowtooltiptext">Place your bid on the gemstone of your choice.</span>
+                    </div>
+                    <p>3. Place Your Bid</p>
+                </div>
+                <div class="step" id="step4">
+                    <div class="flowtooltip">
+                        <span class="flowtooltiptext">If you win, follow the instructions for payment and shipping.</span>
+                    </div>
+                    <p>4. Payment & Shipping</p>
+                </div>
+            </div>
+        </section>
+        <!-- Auction Conditions -->
+        <section id="conditions">
+            <h2>Conditions & Restrictions</h2>
+            <ul>
+                <li>All bidders must be registered and verified to participate in the auction.</li>
+                <li>Sellers must complete the item listing form with accurate details.</li>
+                <li>Minimum bid increments are set for each auction item.</li>
+                <li>The auction house reserves the right to disqualify any participant who violates the rules.</li>
+                <li>Payment must be completed within 48 hours of winning an auction.</li>
+            </ul>
+        </section>
+        
+        
+        
+        
         <div class="auction">
             <!-- The image source will be dynamically changed using JavaScript -->
             <img id="gemImage" src="assets/images/default.jpg" alt="Gem Image">
@@ -17,7 +69,7 @@
             <div class="auction-details">
                 <h3 id="gemName">Gem Name</h3>
                 <p id="gemDescription">Description of the item goes here.</p>
-                <p id="gemLastBidValue">$0.00</p>
+                <h3>Gem Name:</h3><p id="gemLastBidValue">$0.00</p>
                 
                 
                 <div class="auction-form">
@@ -27,19 +79,15 @@
                     <div class="timer">
                         <div class="sub_timer">
                             <h1 id="day" class="digit">00</h1>
-                            <p class="digit_name">Days</p>
                         </div>
                         <div class="sub_timer">
                             <h1 id="hour" class="digit">00</h1>
-                            <p class="digit_name">Hours</p>
                         </div>
                         <div class="sub_timer">
                             <h1 id="min" class="digit">00</h1>
-                            <p class="digit_name">Minutes</p>
                         </div>
                         <div class="sub_timer">
                             <h1 id="sec" class="digit">00</h1>
-                            <p class="digit_name">Seconds</p>
                         </div>
                     </div>
     
@@ -48,9 +96,12 @@
                         <i class="fa fa-usd icon"></i>
                         <span id="lastBidValue">$0.00</span>
                     </div>-->
-    
-                    <button class="cartbutton" onclick="placeBid()"><a href="placebid.html">Place bid</a></button>
-                    <button class="backbutton"><a href="bidding.html">Back</a></button>
+
+                    <div class="button-group " style="gap: 120px; margin-left: -250px;">
+                        <button class="backbutton"><a href="bidding.html">Back</a></button>
+                        <button class="backbutton" style="background-color: rgb(21, 162, 65);" onclick="placeBid()"><a href="biddingroom.html?gem=gem4&image=assets/images/gem4.jpg">Go To Bidding Room</a></button>
+                        
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,7 +109,7 @@
     
 
     <div class="top">
-        <h1>More Bids</h1>
+        <h1 style="border-top: 5px solid chocolate; margin-top: 30PX;">More Bids</h1>
         <div class="upcomingbid">
           <!-- Previous Button -->
           <button class="prevbtn" id="prevBtn">&#10094;</button> <!-- Left arrow icon -->

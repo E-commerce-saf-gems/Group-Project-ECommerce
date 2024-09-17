@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Bidding</title>
+	<link rel="stylesheet" href="biddingstyle.css">
+</head>
+<body>
+
+  <div class="top">
+    <h1>Upcoming Bids</h1>
+    <div class="upcomingbid">
+      <!-- Previous Button -->
+      <button class="prevbtn" id="prevBtn">&#10094;</button> <!-- Left arrow icon -->
+  
+      <div class="slider-container">
+        <div class="slider">
+          <div class="bid_item">
+            <img src="/assets/images/stone1.jpg" alt="" class="gem_img">
+            <div class="gem_details">
+              <h3>Gem name1</h3>
+              <p class="price">#########</p>
+              <p>Description of gem 1.</p>
+              <button class="cartbutton"><a href="bidnow.html?gem=gem1">Bid Now!</a></button>
+            </div>
+          </div>
+          <div class="bid_item">
+            <img src="/assets/images/stone2.jpg" alt="" class="gem_img">
+            <div class="gem_details">
+              <h3>Gem name2</h3>
+              <p class="price">##########</p>
+              <p>Description of gem 2.</p>
+              <button class="cartbutton"><a href="bidnow.html?gem=gem2">Bid Now!</a></button>
+            </div>
+          </div>
+          <div class="bid_item">
+            <img src="/assets/images/stone3.jpg" alt="" class="gem_img">
+            <div class="gem_details">
+              <h3>Gem name3</h3>
+              <p class="price">#########</p>
+              <p>Description of gem 3.</p>
+              <button class="cartbutton"><a href="bidnow.html?gem=gem3">Bid Now!</a></button>
+            </div>
+          </div>
+          <div class="bid_item">
+            <img src="/assets/images/stone4.jpg" alt="" class="gem_img">
+            <div class="gem_details">
+              <h3>Gem name4</h3>
+              <p class="price">########</p>
+              <p>Description of gem 4.</p>
+              <button class="cartbutton"><a href="bidnow.html?gem=gem4">Bid Now!</a></button>
+            </div>
+          </div>
+          <div class="bid_item">
+            <img src="/assets/images/stone5.png" alt="" class="gem_img">
+            <div class="gem_details">
+              <h3>Gem name5</h3>
+              <p class="price">########</p>
+              <p>Description of gem 5.</p>
+              <button class="cartbutton"><a href="bidnow.html?gem=gem5">Bid Now!</a></button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Next Button -->
+      <button class="nextbtn" id="nextBtn">&#10095;</button> <!-- Right arrow icon -->
+    </div>
+  </div>
+  
+  
+  <div class="container">
+    <div class="box thin-box">
+      <div class="filter-container">
+        <h2>Select Your Perfect Gemstone</h2>
+        <div class="filter-section">
+            <label for="stone-type">Stone Type:</label>
+            <select id="stone-type" onmouseover="showTooltip('stone-type-tooltip')" onmouseout="hideTooltip('stone-type-tooltip')">
+                <option value="">All</option>
+                <option value="diamond" title="Diamonds are the hardest and most prized gemstones.">Diamond</option>
+                <option value="ruby" title="Rubies are valued for their deep red color and rarity.">Ruby</option>
+                <option value="sapphire" title="Sapphires are prized for their color variety and durability.">Sapphire</option>
+                <option value="emerald" title="Emeralds are cherished for their rich green color">Emerald</option>
+                <option value="garnet" title="Garnets are known for their deep red hue and versatility">Garnet</option>
+                <option value="opal" title="Opals are famous for their unique play of colors">Opal</option>
+            </select>
+            <span id="stone-type-tooltip" class="tooltip">Select Stone type</span>
+        </div>
+
+        <div class="filter-section">
+            <label for="color">Color:</label>
+            <select id="color" onmouseover="showTooltip('color-tooltip')" onmouseout="hideTooltip('color-tooltip')">
+                <option value="">All</option>
+                <option value="red" title="Red gemstones symbolize passion and energy">Red</option>
+                <option value="blue" title="Blue gemstones represent calm and serenity.">Blue</option>
+                <option value="green" title="Green gemstones are linked to nature and renewal.">Green</option>
+                <option value="yellow" title="Yellow gemstones are associated with joy and optimism.">Yellow</option>
+                <option value="purple" title="Purple gemstones signify royalty and luxury.">Purple</option>
+                <option value="pink" title="Pink gemstones are often associated with love and kindness.">Pink</option>
+            </select>
+            <span id="color-tooltip" class="tooltip">Select Color</span>
+        </div>
+        
+        <div class="filter-section">
+            <label for="shape">Shape:</label>
+            <select id="shape" onmouseover="showTooltip('shape-tooltip')" onmouseout="hideTooltip('shape-tooltip')">
+                <option value="">All</option>
+                <option value="round" title="Round shapes maximize brilliance and are the most popular.">Round</option>
+                <option value="oval" title="Oval shapes offer a unique look and enhance size perception.">Oval</option>
+                <option value="princess" title="Princess cuts have a modern square shape with sharp edges.">Princess</option>
+                <option value="pear" title="Pear shapes combine round and marquise cuts for a teardrop shape.">Pear</option>
+                <option value="heart" title="Heart shapes symbolize love and romance with a unique design">Heart</option>
+            </select>
+            <span id="shape-tooltip" class="tooltip">Select Shape</span>
+        </div>
+        
+        <div class="filter-section">
+            <label for="origin">Origin:</label>
+            <select id="origin" onmouseover="showTooltip('origin-tooltip')" onmouseout="hideTooltip('origin-tooltip')">
+                <option value="">All</option>
+                <option value="srilanka" title="Sri Lanka is known for its high-quality sapphires and rubies.">Sri Lanka</option>
+                <option value="madagascar" title="Madagascar produces vibrant and diverse gemstones.">Madagascar</option>
+            </select>
+            <span id="origin-tooltip" class="tooltip">Select Origin</span>
+        </div>
+        
+        <!-- Apply Filter Button -->
+        <button class="filterbtn" id="apply-filter">Apply Filter</button>
+
+        <!-- Results Section -->
+        <div id="results" class="results-container">
+            <!-- Filtered gemstones will be displayed here -->
+        </div>
+    </div>
+    <script>
+        // JavaScript Code
+
+        // Sample gemstone data with image URLs
+        const gemstones = [
+            {type: 'garnet', color: 'green', shape: 'pear', origin: 'madagascar', img: 'assets/images/stone1.jpg'},
+            {type: 'sapphire', color: 'blue', shape: 'princess', origin: 'srilanka', img: 'assets/images/stone2.jpg'},
+            {type: 'topaz', color: 'yellow', shape: 'oval', origin: 'srilanka', img: 'assets/images/stone3.jpg'},
+            {type: 'sapphire', color: 'green', shape: 'kite', origin: 'madagascar', img: 'assets/images/stone4.jpg'},
+            {type: 'sapphire', color: 'rose', shape: 'princess', origin: 'srilanka', img: 'assets/images/stone5.png'},
+            {type: 'opal', color: 'blue', shape: 'oval', origin: 'madagascar', img: 'assets/images/stone6.png'},
+            {type: 'emerald', color: 'red', shape: 'princess', origin: 'srilanka', img: 'assets/images/stone9.png'},
+            {type: 'sapphire', color: 'blue', shape: 'round', origin: 'srilanka', img: 'assets/images/stone10.png'},
+        ];
+
+        function showTooltip(tooltipId) {
+            var tooltip = document.getElementById(tooltipId);
+            tooltip.style.display = 'block';
+        }
+
+        function hideTooltip(tooltipId) {
+            var tooltip = document.getElementById(tooltipId);
+            tooltip.style.display = 'none';
+        }
+
+        document.getElementById('apply-filter').addEventListener('click', function() {
+            // Get selected values from filters
+            const stoneType = document.getElementById('stone-type').value;
+            const color = document.getElementById('color').value;
+            const shape = document.getElementById('shape').value;
+            const origin = document.getElementById('origin').value;
+
+            // Filter gemstones
+            const filteredGemstones = gemstones.filter(gemstone => {
+                return (stoneType === '' || gemstone.type === stoneType) &&
+                       (color === '' || gemstone.color === color) &&
+                       (shape === '' || gemstone.shape === shape) &&
+                       (origin === '' || gemstone.origin === origin);
+            });
+
+            // Display filtered results
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
+            
+            if (filteredGemstones.length === 0) {
+                resultsContainer.innerHTML = '<p>No gemstones found.</p>';
+            } else {
+                filteredGemstones.forEach(gemstone => {
+                    const gemstoneDiv = document.createElement('div');
+                    gemstoneDiv.className = 'gemstone';
+                    gemstoneDiv.innerHTML = `
+                        <img src="${gemstone.img}" alt="${gemstone.type}" />
+                        <div>
+                            <p>Type: ${gemstone.type}</p>
+                            <p>Color: ${gemstone.color}</p>
+                            <p>Shape: ${gemstone.shape}</p>
+                            <p>Origin: ${gemstone.origin}</p>
+                        </div>
+                    `;
+                    resultsContainer.appendChild(gemstoneDiv);
+                });
+            }
+        });
+    </script>
+    </div>
+    <div class="box fat-box">
+      <!--Order By Search bar-->
+      <div class="orderby-section">
+        <label for="order">Select by: </label>
+        <select id="order" name="order" onchange="navigateToSection()">
+            <option value="latest-section">Latest</option>
+            <option value="mostviewed-section">Most view</option>
+            <option value="expensive-section">Most expensive</option>
+        </select>
+      </div>
+      
+      <div id="latest-section">
+        <h2>Latest Gems</h2>
+        <div class="items-container1">
+        
+          <div class="item-box">
+            <img src="/assets/images/stone1.jpg" alt="gem Image">
+            <div class="item-details">
+                <h3>Gem name1</h3>
+                <p>Description of the first item goes here.</p>
+                <p class="price">$20.99</p>
+                <div class="button-group">
+                  <button class="itembutton"><a href="bidnow.html?gem=gem1">Bid Now</a></button>
+                  <button class="itembutton"><a href="#">View More</a></button>
+                </div>
+            </div>
+          </div>
+          <div class="item-box">
+            <img src="/assets/images/stone2.jpg" alt="gem Image">
+            <div class="item-details">
+                <h3>Gem name2</h3>
+                <p>Description of the second item goes here.</p>
+                <p class="price">$19.99</p>
+                <div class="button-group">
+                  <button class="itembutton"><a href="bidnow.html?gem=gem2">Bid Now</a></button>
+                  <button class="itembutton"><a href="#">View More</a></button>
+                </div>
+            </div>
+          </div>
+          <div class="item-box">
+            <img src="/assets/images/stone8.png" alt="gem Image">
+            <div class="item-details">
+                <h3>Gem name8</h3>
+                <p>Description of the eightth item goes here.</p>
+                <p class="price">$190.99</p>
+                <div class="button-group">
+                  <button class="itembutton"><a href="bidnow.html?gem=gem8">Bid Now</a></button>
+                  <button class="itembutton"><a href="#">View More</a></button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        
+      <div id="mostviewed-section">
+        <h2>Most Viewed Gems</h2>
+        <div  class="items-container2">
+          
+          <div class="item-box">
+            <img src="/assets/images/stone3.jpg" alt="gem Image">
+            <div class="item-details">
+                <h3>Gem name3</h3>
+                <p>Description of the third item goes here.</p>
+                <p class="price">$100.99</p>
+                <div class="button-group">
+                  <button class="itembutton"><a href="bidnow.html?gem=gem3">Bid Now</a></button>
+                  <button class="itembutton"><a href="#">View More</a></button>
+                </div>
+            </div>
+          </div>
+          <div class="item-box">
+            <img src="/assets/images/stone4.jpg" alt="gem Image">
+            <div class="item-details">
+                <h3>Gem name4</h3>
+                <p>Description of the fourth item goes here.</p>
+                <p class="price">$200.99</p>
+                <div class="button-group">
+                  <button class="itembutton"><a href="bidnow.html?gem=gem4">Bid Now</a></button>
+                  <button class="itembutton"><a href="#">View More</a></button>
+                </div>
+            </div>
+          </div>
+          <div class="item-box">
+            <img src="/assets/images/stone9.png" alt="gem Image">
+            <div class="item-details">
+                <h3>Gem name9</h3>
+                <p>Description of the nineth item goes here.</p>
+                <p class="price">$190.99</p>
+                <div class="button-group">
+                  <button class="itembutton"><a href="bidnow.html?gem=gem9">Bid Now</a></button>
+                  <button class="itembutton"><a href="#">View More</a></button>
+                </div>
+            </div>
+          </div>
+          <div class="item-box">
+            <img src="/assets/images/stone10.png" alt="gem Image">
+            <div class="item-details">
+                <h3>Gem name10</h3>
+                <p>Description of the tenth item goes here.</p>
+                <p class="price">$90.99</p>
+                <div class="button-group">
+                  <button class="itembutton"><a href="bidnow.html?gem=gem10">Bid Now</a></button>
+                  <button class="itembutton"><a href="#">View More</a></button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div id="expensive-section">
+        <h2>Most Expensive Gems</h2>
+        <div class="items-container1">
+          <div class="item-box">
+            <img src="/assets/images/stone5.png" alt="gem Image">
+            <div class="item-details">
+                <h3>Gem name5</h3>
+                <p>Description of the fifth item goes here.</p>
+                <p class="price">$1950.99</p>
+                <div class="button-group">
+                  <button class="itembutton"><a href="bidnow.html?gem=gem5">Bid Now</a></button>
+                  <button class="itembutton"><a href="#">View More</a></button>
+                </div>
+            </div>
+          </div>
+          <div class="item-box">
+            <img src="/assets/images/stone6.png" alt="gem Image">
+            <div class="item-details">
+                <h3>Gem name6</h3>
+                <p>Description of the sixth item goes here.</p>
+                <p class="price">$190.99</p>
+                <div class="button-group">
+                  <button class="itembutton"><a href="bidnow.html?gem=gem6">Bid Now</a></button>
+                  <button class="itembutton"><a href="#">View More</a></button>
+                </div>
+            </div>
+          </div>
+          <div class="item-box">
+            <img src="/assets/images/stone7.png" alt="gem Image">
+            <div class="item-details">
+                <h3>Gem name7</h3>
+                <p>Description of the seventh item goes here.</p>
+                <p class="price">$190.99</p>
+                <div class="button-group">
+                  <button class="itembutton"><a href="bidnow.html?gem=gem7">Bid Now</a></button>
+                  <button class="itembutton"><a href="#">View More</a></button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+
+  <!-- ****JavaScript to dynamically change the image based on the selected gem**** -->
+  <script>
+    // Function to get the value of a query parameter by name
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Load the corresponding gem details based on the query parameter
+    window.onload = function() {
+        const gem = getQueryParam('gem');
+
+        // Define the gem details
+        const gems = {
+            'gem1': {
+                src: 'assets/images/stone1.jpg',
+                name: 'Gem name1',
+                description: 'Description of the first item goes here.',
+                price: '$100.99'
+            },
+            'gem2': {
+                src: 'assets/images/stone2.jpg',
+                name: 'Gem name2',
+                description: 'Description of the second item goes here.',
+                price: '$105.99'
+            },
+            'gem3': {
+                src: 'assets/images/stone3.jpg',
+                name: 'Gem name3',
+                description: 'Description of the third item goes here.',
+                price: '$110.99'
+            },
+            'gem4': {
+                src: 'assets/images/stone4.jpg',
+                name: 'Gem name4',
+                description: 'Description of the fourth item goes here.',
+                price: '$350.99'
+            },
+            'gem5': {
+                src: 'assets/images/stone5.png',
+                name: 'Gem name5',
+                description: 'Description of the fifth item goes here.',
+                price: '$450.99'
+            },
+            'gem6': {
+                src: 'assets/images/stone6.png',
+                name: 'Gem name6',
+                description: 'Description of the sixth item goes here.',
+                price: '$400.99'
+            },
+            'gem7': {
+                src: 'assets/images/stone7.png',
+                name: 'Gem name7',
+                description: 'Description of the seventh item goes here.',
+                price: '$250.99'
+            },
+            'gem8': {
+                src: 'assets/images/stone8.png',
+                name: 'Gem name8',
+                description: 'Description of the eightth item goes here.',
+                price: '$150.99'
+            },
+            'gem9': {
+                src: 'assets/images/stone9.png',
+                name: 'Gem name9',
+                description: 'Description of the nineth item goes here.',
+                price: '$300.99'
+            },
+            'gem10': {
+                src: 'assets/images/stone10.png',
+                name: 'Gem name10',
+                description: 'Description of the tenth item goes here.',
+                price: '$200.99'
+            },
+        };
+
+        // Update the page content with the selected gem's details
+        if (gems[gem]) {
+            document.getElementById('gemImage').src = gems[gem].src;
+            document.getElementById('gemName').textContent = gems[gem].name;
+            document.getElementById('gemDescription').textContent = gems[gem].description;
+            
+            console.log(gems[gem].price);/*if the price is not updating or displaying correctly, adding a console.log helps you determine if the issue is with the data retrieval or with how the data is being displayed on the page*/
+            document.getElementById('gemLastBidValue').textcontent = gems[gem].price;
+
+        } else {
+            // Fallback for when no gem or an unknown gem is selected
+            document.getElementById('gemImage').src = 'image/default.png';
+            document.getElementById('gemName').textContent = 'Default Gem Name';
+            document.getElementById('gemDescription').textContent = 'Default gem description goes here.';
+            document.getElementById('gemLastBidValue').textcontent = '$00.00';
+        }
+    };
+</script>
+  
+</body>
+</html>
+
+
+    
+  

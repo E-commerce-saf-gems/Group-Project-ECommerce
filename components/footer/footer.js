@@ -90,7 +90,7 @@ class Footer extends HTMLElement {
               <a href="#" class="logo">
                 <img src="/assets/images/logo.png" width="179" height="26" loading="lazy" alt="Gemstone Elegance">
               </a>
-              <img src="./assets/images/pay.png" width="200" height="28" alt="available all payment methods">
+              <img src="/assets/images/pay.png" width="200" height="28" alt="available all payment methods">
             </div>
           </div>
         </footer>

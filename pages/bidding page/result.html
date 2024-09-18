@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auction Result</title>
+    <link rel="stylesheet" href="resultstyle.css">
+     <!-- Add specific stylesheet for result page -->
+</head>
+<body>
+    <div class="container">
+        <h1 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Winner Announcement</h1>
+        <div class="winner-announcement">
+            <div class="winner-profile" style="background-color:rgb(208, 190, 23);">
+                <img src="assets/images/partner1.png" alt="Winner Avatar" id="winner-avatar">
+                <p>Winner: John Doe</p>
+                <p>Winning Value: $ 10000</p>
+            </div>
+        </div>
+        <div class="winner-details">
+                <div class="info">
+                    <p class="title1">Winner Info</p>
+                    <div class="product">
+                        <p class="title2" >Product</p>
+                        <img src="assets/images/stone1.jpg" alt="">
+                        <h4>Product Name: Gem 1</h4>
+                        <h5>Type: Ruby</h5>
+                        <h5>Price: $ ####.##</h5>
+                    </div>        
+                    <div class="product">
+                        <p class="title2">Winner</p>
+                            <img src="assets/images/partner1.png" alt="">
+                            <h4>Name: Mr.Winner 1</h4>
+                            <h5>Contact No: 012-3456789</h5>
+                            <h5>Submitted Price: $ ####.##</h5>
+                            <button onclick="claimCertificate()" class="submit-button" style="background-color: darkgoldenrod;">Claim Your Rewards!!</button>
+                    </div> 
+                </div>
+                <div class="rank" style="background-color:  rgb(241, 230, 241);min-width: 50%;">
+                    <p class="title1">Bid Ranking</p>
+                    <dev class="leader-board" style="border: 2px solid ">
+                        <div class="participant-card">
+                            <div class="rank-box">
+                                <h3 style="background-color:#137e65; width: 30px; height: 70px;">1</h3>
+                            </div>
+                            <div class="participant-info" style="font-size: 10px;">
+                                <h3>Name: Participant 4</h3>
+                                <h3>Currently Submit: $ #####.##</h3>
+                            </div>
+                        </div>
+                        <div class="participant-card">
+                            <div class="rank-box">
+                                <h3 style="background-color:#137e65; width: 30px; height: 70px;">2</h3>
+                            </div>
+                            <div class="participant-info" style="font-size: 10px;">
+                                <h3>Name: Participant 4</h3>
+                                <h3>Currently Submit: $ #####.##</h3>
+                            </div>
+                        </div>
+                        <div class="participant-card">
+                            <div class="rank-box">
+                                <h3 style="background-color:#137e65; width: 30px; height: 70px;">3</h3>
+                            </div>
+                            <div class="participant-info" style="font-size: 10px;">
+                                <h3>Name: Participant 4</h3>
+                                <h3>Currently Submit: $ #####.##</h3>
+                            </div>
+                        </div>
+                        <div class="participant-card">
+                            <div class="rank-box">
+                                <h3 style="background-color:#137e65; width: 30px; height: 70px;">4</h3>
+                            </div>
+                            <div class="participant-info" style="font-size: 10px;">
+                                <h3>Name: Participant 4</h3>
+                                <h3>Currently Submit: $ #####.##</h3>
+                            </div>
+                        </div>
+                        <div class="participant-card">
+                            <div class="rank-box">
+                                <h3 style="background-color:#137e65; width: 30px; height: 70px;">5</h3>
+                            </div>
+                            <div class="participant-info" style="font-size: 10px;">
+                                <h3>Name: Participant 4</h3>
+                                <h3>Currently Submit: $ #####.##</h3>
+                            </div>
+                        </div>
+                        <div class="participant-card">
+                            <div class="rank-box">
+                                <h3 style="background-color:#137e65; width: 30px; height: 70px;">6</h3>
+                            </div>
+                            <div class="participant-info" style="font-size: 10px;">
+                                <h3>Name: Participant 4</h3>
+                                <h3>Currently Submit: $ #####.##</h3>
+                            </div>
+                        </div>
+                        <div class="participant-card">
+                            <div class="rank-box">
+                                <h3 style="background-color:#137e65; width: 30px; height: 70px;">7</h3>
+                            </div>
+                            <div class="participant-info" style="font-size: 10px;">
+                                <h3>Name: Participant 4</h3>
+                                <h3>Currently Submit: $ #####.##</h3>
+                            </div>
+                        </div>
+                        <div class="participant-card">
+                            <div class="rank-box">
+                                <h3 style="background-color:#137e65; width: 30px; height: 70px;">8</h3>
+                            </div>
+                            <div class="participant-info" style="font-size: 10px;">
+                                <h3>Name: Participant 4</h3>
+                                <h3>Currently Submit: $ #####.##</h3>
+                            </div>
+                        </div>   
+                        
+                    </div>  
+
+                </div>   
+        </div>
+        
+        <div class="auction-summary">
+        <h3>Auction Summary</h3>
+            <p>Final Bid Amounts: $<span id="final-bid-amount">10000</span></p>
+            <p>Number of Bids: <span id="number-of-bids">10</span></p>
+            <p>Duration: <span id="auction-duration">2 hours</span></p>
+        </div>
+        
+        
+        <div class="feedback-container">
+            <h1>We Value Your Feedback</h1>
+            <div id="response-message"></div>
+            <form id="feedback-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="name">Bid ID:</label>
+                    <input type="text" id="bid-id" name="bid-id" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="feedback-type">Feedback Type:</label>
+                    <select id="feedback-type" name="feedback-type" required>
+                        <option value="suggestion">Suggestion</option>
+                        <option value="complaint">Complaint</option>
+                        <option value="question">Question</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="comments">Comments:</label>
+                    <textarea id="comments" name="comments" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Submit Feedback</button>
+                </div>
+            </form>
+        </div>
+        
+        <h3>Share Your Achievement</h3>
+        <div id="social-media-buttons">
+            <button onclick="shareOnFacebook()">Share on Facebook</button>
+            <button onclick="shareOnTwitter()">Share on Twitter</button>
+        </div>
+        <a href="bidding.html" class="submit-button">Leave Bid</a>
+        
+    </div>
+
+    
+    <script src="result.js"></script> <!-- Add specific script for result page -->
+</body>
+</html>

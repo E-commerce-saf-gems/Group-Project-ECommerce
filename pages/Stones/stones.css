@@ -1,0 +1,156 @@
+/* Shop Section Styles */
+.stones-section {
+    text-align: center;
+    margin: 20px 0;
+    padding: 10px;
+}
+
+.vertical-line {
+    width: 50px;
+    height: 4px;
+    background-color: #000;
+    margin: 10px auto;
+}
+
+.stones-description {
+    font-size: 1rem;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Shop Section Styles */
+.section.shop {
+    background-color: #ffffff;
+    padding: 40px 0;
+}
+
+/* Shop Card Styles */
+ul.has-scrollbar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+ul.has-scrollbar li.scrollbar-item {
+    flex: 1;
+    margin-right: 10px;
+}
+
+/* Shop Card Container */
+.shop-card {
+    position: relative; /* Make the shop card container relative to position icons absolutely */
+    width: 220px; /* Adjust width according to your layout */
+}
+
+  /* Image Holder */
+  .img-holder {
+    position: relative; /* Ensures that the icons are positioned relative to this container */
+    width: 100%;
+    padding-top: 133.33%; /* Aspect ratio for the image holder */
+    overflow: hidden; /* Ensures that nothing overflows out of the container */
+}
+  
+  /* Image */
+.img-holder img.img-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the whole container */
+}
+  
+  /* Action Buttons Container */
+.card-actions {
+    position: absolute; /* Positions the buttons absolutely within the image holder */
+    top: 10px; /* Positions the buttons 10px from the top of the container */
+    right: 10px; /* Positions the buttons 10px from the right of the container */
+    display: flex; /* Aligns the buttons in a row */
+    gap: 10px; /* Space between the buttons */
+    z-index: 10; /* Ensures the icons are above the image */
+}
+  
+  /* Action Button Styles */
+.action-btn {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    border: none;
+    border-radius: 50%; /* Circular buttons */
+    padding: 10px;
+    color: #fff; /* White icon color */
+    cursor: pointer;
+    font-size: 1.2rem; /* Icon size */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+  
+  /* Hover Effect for Buttons */
+.action-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Darker background on hover */
+}
+  
+  /* Ionicons Size and Alignment */
+ion-icon {
+    vertical-align: middle; /* Align icon in the middle of the button */
+    font-size: 1.2rem; /* Icon size */
+}
+  
+
+.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #28a745;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.875rem;
+}
+
+/* Card Actions Container */
+
+.card-content {
+    padding: 15px;
+    text-align: center;
+}
+
+.price {
+    font-size: 1.2rem;
+    color: #000;
+    margin-bottom: 10px;
+}
+
+.price .del {
+    color: #999;
+    text-decoration: line-through;
+    margin-right: 5px;
+}
+
+.card-title {
+    color: #333;
+    font-size: 1.1rem;
+    text-decoration: none;
+    margin: 10px 0;
+    display: block;
+}
+
+.rating-text {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.has-scrollbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.scrollbar-item {
+    flex: 1 1 calc(33.333% - 20px); /* Adjust the width of the items */
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}

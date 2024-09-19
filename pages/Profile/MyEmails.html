@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/common.css">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="/components/header/header.css">
+    <link rel="stylesheet" href="/components/footer/footer.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preload" as="image" href="./assets/images/logo.png">
+
+
+    <title>My Emails</title>
+</head>
+<body>
+<!-- navbar -->
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="search-container">
+            <input type="text" placeholder="Search">
+            <button>GO</button>
+        </div>
+        <div class="account-options">
+            <a href="#">LOG OUT</a>
+            <a href="#">ACCOUNT</a>
+        </div>
+    </div>
+    </header>
+
+    <div class="container">
+        <div class="sidebar">
+            <h2>Hello</h2>
+            <ul>
+                <li><a href="MyDetails.html">My Details</a></li>
+                <li><a href="MyBids.html">My Bids</a></li>
+                <li><a href="MyWishlist.html">My Wishlist</a></li>
+                <li><a href="MySales.html">My Sales</a></li>
+                <li><a href="MyMeetings.html">My Meetings</a></li>
+                <li><a href="MyInvoices.html">Invoices</a></li>
+                <li><a href="MyEmails.html"  class="active">Email Preferences</a></li>
+                <li><a href="#">Signout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1>My Account</h1>
+            <h2>Email Preferences</h2>
+
+            <!-- Elmwood's Newsletter Section -->
+            <h3>SAF Gem’s Newsletter</h3>
+            <h4>Email Marketing:</h4>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="newsletter">
+                    Yes, I am happy to receive the SAF Gem's newsletter
+                </label>
+            </div>
+
+            <!-- Categories Section -->
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="categories" value="jewellery">
+                    Jewellery
+                </label>
+            </div>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="categories" value="signed-jewels">
+                    Signed Jewels
+                </label>
+            </div>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="categories" value="watches">
+                    Watches
+                </label>
+            </div>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="categories" value="designer-handbags-fashion">
+                    Designer Handbags & Fashion
+                </label>
+            </div>
+
+            <!-- Personalised Lot Alerts Section -->
+            <h3>Personalised Lot Alerts</h3>
+            <h4>Registered Interests</h4>
+            <p>
+                SAF Gem’s Lot Alert will search for your registered keywords every time an auction is posted online.
+                As our catalogues are published online, Lot Alert will email you a link to the lots matching your search criteria.
+            </p>
+            <p>
+                You can change or cancel your searches at any time by returning to this page. You may add new searches
+                to the Lot Alert below. Results will go to your email address <strong>safgems@live.com</strong>.
+            </p>
+
+            <!-- Add Interest Input -->
+            <div class="interest-input">
+                <input type="text" placeholder="Enter key words">
+                <button>ADD INTEREST</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    
+    <script src="../components/header/header.js"></script>
+    <script src="../components/footer/footer.js"></script>
+    <script src="profile.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+</body>
+</html>

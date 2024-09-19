@@ -1,12 +1,17 @@
-body {
+/* body {
     background-color: var(--white);
     color: var(--gray-web);
     font-family: Arial, Helvetica, sans-serif;
-    /* font-size: 1.6rem;
+    font-size: 1.6rem;
     font-weight: var(--fw-500);
-    line-height: 1.6; */
-}
+    line-height: 1.6;
+} */
+ @import url("/styles/common.css");
 
+.profile-h1 ,
+.profile-h2 {
+    color: #000;
+}
 
 .top-bar {
     display: flex;
@@ -31,7 +36,7 @@ body {
 
 .search-container button {
     padding: 10px 40px;
-    background-color: teal;
+    background-color: var(--teal);
     color: white;
     border: none;
     border-radius: 4px;
@@ -46,7 +51,7 @@ body {
     font-size: 14px;
 }
 
-.container {
+.profile-container {
     display: flex; /* Aligns items horizontally */
     flex-direction: row; /* Ensures items are aligned in a row */
     justify-content: space-between; /* Spreads out the items evenly */
@@ -59,7 +64,7 @@ body {
 }
 
 
-.sidebar {
+.profile-sidebar {
     width: 25%;
     background-color: white;
     padding: 20px;
@@ -67,7 +72,7 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.sidebar h2 {
+.profile-sidebar h2 {
     font-family: "Baskerville", serif;
     font-size: 28px;
     margin-bottom: 20px;
@@ -75,16 +80,16 @@ body {
     padding-bottom: 10px;
 }
 
-.sidebar ul {
+.profile-profile-sidebar ul {
     list-style-type: none;
     padding: 0;
 }
 
-.sidebar ul li {
+.profile-sidebar ul li {
     margin-bottom: 10px;
 }
 
-.sidebar ul li a {
+.profile-sidebar ul li a {
     text-decoration: none;
     color: #333;
     font-size: 15px;
@@ -93,19 +98,19 @@ body {
     border-radius: 5px;
 }
 
-.sidebar ul li a:hover,
-.sidebar ul li a.active {
+.profile-sidebar ul li a:hover,
+.profile-sidebar ul li a.active {
     background-color: #f4f4f4;
     font-weight: bold;
     border-left: 3px solid #000;
     padding-left: 7px; /* Adjust padding for the border */
 }
 
-.sidebar ul li:last-child {
+.profile-sidebar ul li:last-child {
     margin-top: 30px;
 }
 
-.sidebar ul li:last-child a {
+.profile-sidebar ul li:last-child a {
     color: #007bff;
     font-weight: bold;
 }
@@ -127,10 +132,11 @@ body {
 }
 
 .account-alert {
-    background-color: #4b928f;
+    background-color: #449b9b;
     padding: 10px;
-    border: 1px solid teal;
+    border: 1px solid #449b9b;
     margin-bottom: 20px;
+    color: white;
 }
 
 /* Form Styles */

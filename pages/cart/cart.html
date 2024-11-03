@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/styles/common.css">
     <link rel="stylesheet" href="/components/header/header.css">
     <link rel="stylesheet" href="/components/footer/footer.css">
+    <link rel="stylesheet" href="./cart.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,7 +15,88 @@
 </head>
 <body id="top">
     <custom-header></custom-header>
-    <br><br><br>
+    <div class="cart-title h1">Your Cart</div>
+    <main class="cart-container">
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="product-info">
+                        <img src="/assets/images/stone6.jpg" alt="Product Image" class="product-image">
+                        <span class="product-name">Blue Sapphire</span>
+                    </td>
+                    <td class="product-quantity">
+                        <input type="number" value="1" min="1" class="quantity-input">
+                    </td>
+                    <td class="product-price">$140,000.00</td>
+                    <td class="product-total">$140,000.00</td>
+                    <td class="product-remove">
+                        <button class="header-action-btn" aria-label="user" onclick="confirmDelete()">
+                            <ion-icon name="trash-outline"></ion-icon>  
+                        </button> 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="product-info">
+                        <img src="/assets/images/stone10.jpg" alt="Product Image" class="product-image">
+                        <span class="product-name">Sky Blue Sapphire</span>
+                    </td>
+                    <td class="product-quantity">
+                        <input type="number" value="1" min="1" class="quantity-input">
+                    </td>
+                    <td class="product-price">$140,000.00</td>
+                    <td class="product-total">$140,000.00</td>
+                    <td class="product-remove">
+                        <button class="header-action-btn" aria-label="user">
+                            <ion-icon name="trash-outline"></ion-icon>  
+                        </button> 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="product-info">
+                        <img src="/assets/images/stone3.jpg" alt="Product Image" class="product-image">
+                        <span class="product-name">Orange Patparaja</span>
+                    </td>
+                    <td class="product-quantity">
+                        <input type="number" value="1" min="1" class="quantity-input">
+                    </td>
+                    <td class="product-price">$140,000.00</td>
+                    <td class="product-total">$140,000.00</td>
+                    <td class="product-remove">
+                        <button class="header-action-btn" aria-label="user">
+                            <ion-icon name="trash-outline"></ion-icon>  
+                        </button> 
+                    </td>
+                </tr>
+    
+            </tbody>
+        </table>
+
+        <div class="cart-summary">
+            <h2>Cart Summary</h2>
+            <div class="summary-item">
+                <span>Subtotal</span>
+                <span>$140,000.00</span>
+            </div>
+            <div class="summary-item">
+                <span>Shipping</span>
+                <span>$100.00</span>
+            </div>
+            <div class="summary-item">
+                <span>Total</span>
+                <span>$140,100.00</span>
+            </div>
+            <a href="/pages/placeOrder/placeOrder.html" class="btn btn-primary">Proceed to Checkout</a>
+        </div>
+    </main>
 
     
     <script src="/components/header/header.js"></script>

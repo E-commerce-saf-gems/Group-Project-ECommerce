@@ -10,13 +10,80 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <title>Custom Requests</title>
+    <title>Confirm Order</title>
 </head>
 <body id="top">
     <custom-header></custom-header>
-    <br><br><br>
-
+    <main class="shipping-container">
+        <h1 class="page-title">Shipping Details</h1>
     
+        <form class="shipping-form">
+            <!-- Personal Information Section -->
+            <div class="personal-info">
+                <h2>Personal Information</h2>
+                
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Full Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Contact Number</label>
+                    <input type="tel" id="contact" name="contact" placeholder="Your Contact Number" required>
+                </div>
+            </div>
+
+            <!-- Custom Gemstone Request Section -->
+            <div class="custom-request">
+                <h2>Request a Custom Gemstone</h2>
+                <p>Fill out the form below to request a specific gemstone tailored to your needs.</p>
+
+                <div class="form-group">
+                    <label for="gem-type">Gemstone Type</label>
+                    <input type="text" id="gem-type" name="gem-type" placeholder="e.g., Diamond, Sapphire, Ruby" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="carat-weight">Carat Weight</label>
+                    <input type="number" id="carat-weight" name="carat-weight" placeholder="e.g., 1.5" step="0.1" min="0.1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cut">Cut</label>
+                    <select id="cut" name="cut" required>
+                        <option value="">Select a Cut</option>
+                        <option value="round">Round</option>
+                        <option value="oval">Oval</option>
+                        <option value="princess">Princess</option>
+                        <option value="emerald">Emerald</option>
+                        <option value="cushion">Cushion</option>
+                        <option value="marquise">Marquise</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="color">Color</label>
+                    <input type="text" id="color" name="color" placeholder="e.g., D (for diamonds) or blue (for sapphires)" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="special-requirements">Special Requirements</label>
+                    <textarea id="special-requirements" name="special-requirements" rows="4" placeholder="Specify any additional requirements, such as clarity, size dimensions, etc."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="request-btn" class="btn btn-primary">Submit Custom Request</button>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <script src="placeOrder.js"></script>
     <script src="/components/header/header.js"></script>
     <script src="/components/footer/footer.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

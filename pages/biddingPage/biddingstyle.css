@@ -1,0 +1,700 @@
+@import url('https://fonts.googleapis.com/css?family=Allura|Josefin+Sans');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+body{
+  background: #f9f9f9;
+  font-family: "Poppins", sans-serif;
+}
+/*HEADER*/
+.top h1{
+    font-family: 'Allura', cursive;
+    font-size: 4rem;
+    margin-bottom:1rem;
+    text-align: center;
+}
+.upcomingbid {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    align-items: center;
+    text-align: center;
+    /*margin-left: 2px;*/
+}
+/* Styling individual bid items */
+.bid_item {
+    flex: 0 0 33.33%;/*Show 3 items at a time*/
+    box-sizing: border-box;
+    padding: 1rem;
+    height: auto;/*300px*/
+    margin: 0.5rem;/*add small margins to space out items*/
+    background: linear-gradient(to top, #fafbfb, #b9c9c6);
+    border-radius: 1rem;
+    display: flex;
+}
+/* Container for the slider with overflow hidden to hide excess items */
+.slider-container {
+    overflow: hidden;
+    width: 100%; /* Adjusted width for three items */
+    
+}
+/* Flexbox layout for the slider items */
+.slider {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+     /* Adjust width to fit all items correctly */
+}
+
+/* Styling the images of gems */
+.gem_img {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    width: 45%;
+    height: auto;/*90%*/
+    border-radius: 1rem;
+}
+
+.gem_img:hover{
+    transform: scale(1.05);
+}
+.gem_details {
+    margin-top: 2rem;
+    margin-left: 1rem;
+}
+/*CART BUTTON*/
+.cartbutton{
+    margin-top: 5rem;
+    background-color: #0c715d;
+    border-radius: 0.5 rem;
+    padding: 0.5rem 1rem;
+    width: 8rem;/*120px*/
+    display: inline-block;
+}
+
+.cartbutton a{
+    color: #f3f7f5;
+    font-weight: bold;
+    font-size: 1rem;
+}
+/*NAVIGATION BUTTON*/
+.nextbtn, .prevbtn {
+    cursor: pointer;
+    background-color: #0c715d;
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    font-size: 1 rem;
+    border-radius: 0.5rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+/* Positioning the previous button to the left */
+.prevbtn {
+    /*margin-right: 10px;*/
+    left: 1rem;
+}
+  
+/* Positioning the next button to the right */
+.nextbtn {
+    /*margin-left: 10px;*/
+    right: 1rem;
+}
+/*SIDEBAR*/
+.leftside{
+    /*background-color: #f4f6f6;*/
+    width:25%; /*400px*/
+    height: auto;/*900px*/
+    margin: 2rem 1rem;
+}
+.searchbar{
+    margin: 2rem 1rem;
+    font-size: 1rem;
+}
+.container-bidding {
+    display: flex;
+    height: 1600px; /* Set the desired height */
+}
+.box {
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: rgb(5, 5, 5);
+    margin: 1px;
+    height: auto; /*2000px*/
+}
+.thin-box {
+    background-color: rgb(212, 248, 248);
+    width: 35%;
+    margin-left: 0.5rem;
+}
+.fat-box {
+    width: 65%;
+    margin-left: 0.5rem;
+    /*background-color: #fbfaf7;*/
+}
+.orderby-section {
+    width: 100%;
+    max-width: 450px;
+    margin: 2rem auto;
+    text-align: left;
+    background-color: #b4fdeb;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+}
+
+.orderby-section label {
+    margin-right: 1rem;
+    color: #060606;
+    font-weight: bold;
+}
+.orderby-section select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: #f3fe7e;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 0.5rem;
+    border: 1px solid #313508;
+}
+.items-container1, .items-container2{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 1rem;
+    margin-left: 20px;
+}
+.items-container1 {
+    background-color: #efeeef;
+}
+.items-container2 {
+    background-color: #e9e0e6;
+}
+
+.item-box {
+    flex: 1 1 calc(50% -1rem);/* Allows 2 items per row, with 20px gap */
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    color: #333;
+    max-width: 450px;
+    min-width: 250px;
+    height: auto; /*220px*/
+    box-sizing: border-box;
+    background-color: #ebcbfb;
+}
+
+.item-box img {
+    width: 90px;
+    height: 100px;
+    margin-right: 1rem;
+    
+    /*transform: rotate(0deg); Rotates the image by 45 degrees */
+    transition: transform 0.3s ease; /*Adds smooth animation when rotating */
+}
+.item-box img:hover {
+    transform: rotate(5deg);
+}
+
+.item-details h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: #0e745c;
+}
+
+.item-details p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.price{
+    color: #555;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.button-group {
+    display: flex; /* Use flexbox to arrange buttons horizontally */
+    gap: 1rem; /* Add some space between the buttons */
+    margin-top: 1rem;
+}
+
+.itembutton{
+    background-color: #e0ea1f;
+    padding: 0.5rem 1rem;
+    line-height: 20px;
+    border-radius: 0.5rem;
+    border: none;
+    transition: transform 0.3s ease;
+}
+.itembutton a{
+    color: #050505;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+.itembutton:hover{
+    transform: scale(1.1);
+}
+
+h2 {
+    font-size: 1.5rem; /* Adjust size as needed */
+    color: #0e745c; /* Match the color scheme */
+    margin-left: 1rem; /* Align to the left side */
+    margin-bottom: 1rem; /* Space between title and items */
+    padding-left: 1rem; /* Align with padding of fat-box */
+    font-weight: bold;
+    border-left: 5px solid #0e745c; /* Optional: add a decorative left border */
+    margin-top: 2rem;
+}
+
+/*Our Auctions section*/
+.auction-description{
+    margin: 2rem 0;
+    height: 30vh;/* Use viewport height for responsiveness */
+    display: flex;
+    background-image: url('assets/images/hero2.png');
+    background-size: cover; /* This makes sure the image covers the entire div */
+    background-position: center; /* This centers the background image */
+    background-repeat: no-repeat;
+}
+
+.auction-description-details {
+    /*margin-top: 30px;
+    margin-left: 60px;*/
+    margin: 2rem;
+    text-align: left;
+    color: #043429;
+    align-items: center;
+    width: 40%;
+    font-size: 1.5rem;
+}
+.auction{
+    display: flex;
+    align-items: center;
+    background-color: rgb(230, 251, 249);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    max-width: 750px;
+    height: auto; /*420px*/
+    /*box-sizing: border-box;
+    margin-left: 350px;*/
+    margin: 2rem auto;
+    /*background-image: url('assets/images/auction.png'); /* Replace with your actual image path */
+    background-size: cover; /* This makes sure the image covers the entire div */
+    background-position: center; /* This centers the background image */
+    background-repeat: no-repeat;
+}
+
+.auction img {
+    width: 10rem;
+    height: 10rem;
+    margin-left: 1.5rem;
+    margin-bottom: 200px;
+    border-radius: 1.875rem;/* Convert 30px to rem */
+}
+
+.auction-details{
+    margin-left: 1.5rem;
+    margin-top: 20px;
+}
+
+.auction-details h3 {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: #0e745c;
+    
+}
+
+.auction-details p {
+    color: #0a0108;
+    font-size: 1rem;
+    margin-top: 1rem;
+    
+}
+
+.auction-form{
+    margin-top: 2rem;
+    margin-left: 70px;
+    width: 100%; /*400px*/
+    max-width: 30rem;
+
+}
+
+.input-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+  
+  /* Style the form icons */
+
+  .icon {
+    padding: 10px;
+    background: #0e745c;
+    color: rgb(150, 243, 246);
+    min-width: 50px;
+    text-align: center;
+    opacity: 0.7;
+    border-radius: 50%;
+}
+  
+  /* Style the input fields */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+}
+  
+.input-field:focus {
+    border: 2px solid#0e745c;
+    
+}
+  
+  /* Set a style for the submit button */
+.btn {
+    background-color: #0e745c;
+    color: white;
+    font-weight: bold;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.7;
+}
+  
+.btn:hover {
+    opacity: 1;
+}
+
+.backbutton{
+    background-color: #ea441f;
+    line-height: 20px;
+    margin-left: 60px;
+    margin-bottom: 25px;
+    width: 150px;
+    height: 45px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+}
+.backbutton a{
+    color: antiquewhite;
+    font-weight: bold;
+}
+
+.backbutton:hover{
+    opacity: 1.1;
+}
+
+/*For Countdown Timer*/
+
+.timer{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.auction-form h3{
+    margin-top: 10px;
+    color: #0e745c;
+}
+.sub_timer{
+    width: 100px;
+    background: #cec7d1;
+    border-radius: 20px;
+    border: #060606 solid 3px;
+    margin: 5px;
+    overflow: hidden;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 130px;
+
+}
+.sub_timer p{
+    color: #353436;
+    font-weight: bold;   
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+    
+}
+
+.digit{
+    color: #fff;
+    font-weight: bold;
+    font-size: 4px;
+    text-align: center;
+    padding: 0.3rem 0;
+    
+}
+.digit_name{
+    min-width: 130px;
+    background-color: #cec7d1;
+    padding: 0.45rem 0;
+    text-align: left;
+    font-size: 1px;
+}
+
+/*####FILTER OPTION####*/
+
+.tooltip {
+    display: none;
+    position: absolute;
+    background-color: #0e745c;
+    color: #fff;
+    padding: 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    z-index: 1000;
+    white-space: nowrap;
+}
+.filter-container{
+    background-color: rgb(251, 251, 251);
+    width: 90%;
+    height: 1900px;
+    align-content: top;
+    margin-left: 20px;
+}
+.filter-container h2{
+    color: #0e745c;
+}
+
+.filter-section {
+    position: relative;
+    margin-bottom: 30px;
+    margin-left: 30px;
+}
+
+.filter-container .filterbtn{
+    background-color: rgb(212, 248, 248);
+    border: 5px solid #0e745c;
+    border-radius: 25px;
+    padding: 10px;
+    margin-left: 80px;
+    width: 250px;
+    font-weight: bold;
+    font-size: 15px;
+}
+.results-container {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.gemstone {
+    border: 2px solid #080808;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.gemstone img {
+    max-width: 100px;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.gemstone p {
+    margin: 0;
+}
+
+/* Process Flow */
+#process-flow {
+    margin-bottom: 40px;
+}
+
+.flow-chart {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.step {
+    background: #c8fcf0;
+    padding: 20px;
+    border: 2px solid #0e745c;
+    border-radius: 8px;
+    width: 200px;
+    text-align: center;
+    position: relative;
+}
+
+.flowtooltip {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.flowtooltiptext {
+    visibility: hidden;
+    width: 150px;
+    background-color: #0e745c;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position above the tooltip element */
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.step:hover .flowtooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Conditions & Restrictions */
+#conditions {
+    margin-bottom: 40px;
+}
+
+#conditions h2 {
+    font-size: 24px;
+    color: #2c3e50;
+}
+
+ul {
+    list-style-type: disc;
+    margin: 0;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+
+/* Mobile Responsive Styles */
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .top h1 {
+      font-size: 3rem; /* Smaller font size for smaller screens */
+    }
+  
+    .container {
+      width: 95%;
+      padding: 1.5rem;
+    }
+  
+    .bid_item {
+      flex: 1 1 calc(50% - 1rem); /* Two items per row on medium screens */
+    }
+  
+    .box {
+      flex: 1 1 calc(100% - 1rem); /* Full width on small screens */
+    }
+  
+    .leftside {
+      width: 100%;
+      margin: 1rem 0;
+    }
+  
+    .searchbar {
+      margin: 1rem 0;
+    }
+  
+    .item-box {
+      flex: 1 1 calc(100% - 1rem); /* Full width on smaller screens */
+      min-width: 100%; /* Full width on small screens */
+    }
+  
+    .auction img {
+      width: 8rem;
+      height: 8rem;
+    }
+  
+    .auction-description {
+      height: 40vh; /* Adjust height for smaller screens */
+    }
+  
+    .auction-description-details p{
+      width: 80%;
+      font-size: 1.2rem;
+    }
+  
+    .auction {
+      max-width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .auction-details h3 {
+      font-size: 1.2rem;
+    }
+  
+    .auction-form {
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .top h1 {
+      font-size: 2.5rem; /* Even smaller font size for very small screens */
+    }
+  
+    .container {
+      width: 100%;
+      padding: 1rem;
+    }
+  
+    .bid_item {
+      flex: 1 1 100%; /* Full width for very small screens */
+    }
+  
+    .box {
+      flex: 1 1 100%; /* Full width for very small screens */
+    }
+  
+    .leftside {
+      margin: 1rem 0;
+    }
+  
+    .searchbar {
+      margin: 1rem 0;
+    }
+  
+    .item-box {
+      flex: 1 1 100%;
+    }
+  
+    .auction img {
+      width: 6rem;
+      height: 6rem;
+    }
+  
+    .auction-description {
+      height: 50vh;
+    }
+  
+    .auction-description-details p{
+      width: 90%;
+      font-size: 1rem;
+    }
+  }
+
+
+
+

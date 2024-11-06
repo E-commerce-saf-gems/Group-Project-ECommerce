@@ -1,0 +1,111 @@
+/* appointment.css
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  } */
+
+  h1 {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .container-bookAppointment {
+    max-width: 800px; 
+    min-height: 400px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  
+  .section-bookAppointment {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    margin-top: 90px;
+    margin-right: 100px;  
+    margin-left: 20px;
+  }
+  
+  .calendar-section{
+    margin-left: 10px;
+    margin-right: 60px;
+    text-align: center;
+  }
+  
+  .calendar-section h3 {
+    color: #333;
+    margin-bottom: 50px;
+    text-align: left;
+  }
+  
+  label {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+    margin-left: 30px;
+  }
+  
+  input[type="date"] {
+    width: 60%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #449b9b;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  
+  .time-slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .time-slot {
+    color: #000000;
+    width: 100px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #00070e;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.time-slot.active {
+    background-color: #449b9b;
+    border-color: #c0eeca;
+}
+
+.time-slot:hover, .time-slot.selected {
+    background-color: #449b9b;
+    color: white;
+}
+  
+  
+  /* button {
+    background-color: #449b9b;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  button:hover{
+    background-color: #000000;
+    
+  } */

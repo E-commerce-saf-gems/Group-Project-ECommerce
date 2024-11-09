@@ -1,0 +1,94 @@
+/*-----------------------------------*\
+  #ABOUT US SECTION
+\*-----------------------------------*/
+.about-us {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row-reverse; /* Swap the content and image */
+}
+
+.about-content {
+  flex: 1;
+  max-width: 600px;
+}
+
+.about-image {
+  flex: 1;
+  max-width: 500px;
+}
+
+.about-text {
+  font-size: var(--fs-6);
+  margin-bottom: 15px;
+  color: var(--gray-web);
+  line-height: 1.8;
+}
+
+.img-responsive {
+  width: 100%;
+  border-radius: var(--radius-3);
+  box-shadow: var(--shadow-2); /* Subtle shadow for the image */
+}
+
+/* Add a specific media query for larger screens */
+@media (min-width: 992px) {
+  .about-us {
+    flex-direction: row; /* Restore the original orientation */
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-us {
+    flex-direction: column; /* Stack on mobile */
+  }
+
+  .about-image {
+    max-width: 100%;
+  }
+}
+
+/*-----------------------------------*\
+  #CERTIFICATION SECTION
+\*-----------------------------------*/
+.certification {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 50px;
+  border-top: 1px solid white;
+}
+
+.certification-content {
+  max-width: 700px;
+}
+
+.certification .h2 {
+  margin-bottom: 20px;
+  color: var(--teal);
+}
+
+.certification-text {
+  font-size: var(--fs-6);
+  color: var(--black);
+  margin-bottom: 15px;
+  line-height: 1.8;
+}
+
+.certification ion-icon {
+  font-size: 60px;
+  color: var(--teal); /* Use the teal color for the icon */
+  margin-left: 305px;
+  margin-bottom: 50 px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .certification {
+    padding-inline: 15px;
+  }
+}

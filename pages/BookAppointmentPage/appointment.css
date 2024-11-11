@@ -26,19 +26,22 @@ body {
     justify-content: space-between;
   }
 
-  
+  .calendar-section-bookAppointment{
+    width: 500px;
+  }
+
   .section-bookAppointment {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 100px;
     margin-top: 90px;
-    margin-right: 100px;  
-    margin-left: 20px;
+    margin-right: 10px;  
+    margin-left: 40px;
   }
   
   .calendar-section{
-    margin-left: 10px;
-    margin-right: 60px;
+    margin-left: 20px;
+    margin-right: 10px;
     text-align: center;
   }
   
@@ -57,13 +60,22 @@ body {
   }
   
   input[type="date"] {
-    width: 60%;
+    width: 100%;
     padding: 8px;
     font-size: 16px;
     border: 1px solid #449b9b;
     border-radius: 4px;
     margin-bottom: 20px;
   }
+
+   select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
   
   .time-slots {
     display: flex;

@@ -3,37 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/common.css">
+    <link rel="stylesheet" href="../../styles/common.css">
     <link rel="stylesheet" href="./customRequest.css">
-    <link rel="stylesheet" href="/components/header/header.css">
-    <link rel="stylesheet" href="/components/footer/footer.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../../components/header/header.css">
+    <link rel="stylesheet" href="../../components/footer/footer.css">
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
     <title>Confirm Order</title>
 </head>
 <body id="top">
     <custom-header></custom-header>
     <main class="shipping-container">
-            <div class="custom-request">
-                <h2>Request a Custom Gemstone</h2>
-                <p>Fill out the form below to request a specific gemstone tailored to your needs.</p>
-
+        <form id="customRequestForm" action="./createCustomRequest.php" method="post">
+            <div>
+                <h3 class="h3" style="text-align: center;">Request a Custom Gemstone</h3>
+                <br>
                 <div class="form-group">
                     <label for="gem-type">Gemstone Type</label>
-                    <input type="text" id="gem-type" name="gem-type" placeholder="e.g., Diamond, Sapphire, Ruby" required>
+                    <input type="text" id="gem-type" name="gem-type" placeholder="Diamond, Sapphire, Ruby" required>
                 </div>
 
                 <div class="form-group">
                     <label for="carat-weight">Carat Weight</label>
-                    <input type="number" id="carat-weight" name="carat-weight" placeholder="e.g., 1.5" step="0.1" min="0.1" required>
+                    <input type="number" id="carat-weight" name="carat-weight" placeholder="1.5" step="0.1" min="0.1" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="cut">Cut</label>
+                    <label for="cut">Shape</label>
                     <select id="cut" name="cut" required>
-                        <option value="">Select a Cut</option>
+                        <option value="">Select a Shape</option>
                         <option value="round">Round</option>
                         <option value="oval">Oval</option>
                         <option value="princess">Princess</option>
@@ -45,7 +42,7 @@
 
                 <div class="form-group">
                     <label for="color">Color</label>
-                    <input type="text" id="color" name="color" placeholder="e.g., D (for diamonds) or blue (for sapphires)" required>
+                    <input type="text" id="color" name="color" placeholder="Aqua , Green" required>
                 </div>
 
                 <div class="form-group">
@@ -54,20 +51,21 @@
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-primary" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <br>
+                    <button type="reset" class="btn btn-primary">Clear Form</button>
                 </div>
             </div>
         </form>
     </main>
-    <!-- Footer Component -->
+    <div class="success-message" id="successMessage">
+        Request submitted successfully!
+    </div>
+    
     <custom-footer></custom-footer>
 
-    <!-- JavaScript for footer component -->
-    <script src="/components/footer/footer.js"></script>
-
-    <script src="placeOrder.js"></script>
-    <script src="/components/header/header.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="../../components/footer/footer.js"></script>
+    <script src="../../components/header/header.js"></script>
+    <!-- <script src="./customRequest.js"></script> -->
 </body>
 </html>

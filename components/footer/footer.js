@@ -4,7 +4,7 @@ class Footer extends HTMLElement {
           <footer class="footer">
               <div class="footer-content">
                   <a href="#" class="footer-logo">
-                      <img src="/assets/images/logo-grey.png" width="80" height="80" alt="Company Logo">
+                      <img src="../../assets/images/logo-grey.png" width="80" height="80" alt="Company Logo">
                   </a>
                   <ul class="social-links">
                       <li>

@@ -27,7 +27,7 @@ this.innerHTML = `
         </div>
 
         <a href="/pages/homepage/homepage.html" class="logo">
-          <img src="/assets/images/logo.png" width="179" height="26" alt="SAF GEMS">
+          <img src="../../assets/images/logo.png" width="179" height="26" alt="SAF GEMS">
         </a>
 
         <div class="header-actions">
@@ -36,17 +36,8 @@ this.innerHTML = `
               <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
             </button>
             <ul class="dropdown-menu">
-              ${
-                isLoggedIn
-                  ? `
                     <li><a href="/pages/Profile/MyDetails.html" class="dropdown-item">Profile</a></li>
                     <li><a href="#" class="dropdown-item" id="logout">Logout</a></li>
-                    `
-                  : `
-                    <li><a href="/pages/Login/login.html" class="dropdown-item">Login</a></li>
-                    <li><a href="/pages/RegisterPage/register.html" class="dropdown-item">Register</a></li>
-                    `
-              }
             </ul>
           </div>
 

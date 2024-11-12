@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/common.css">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="/components/header/header.css">
+    <link rel="stylesheet" href="/components/footer/footer.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preload" as="image" href="./assets/images/logo.png">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+
+
+    <title>Edit Request Gems</title>
+</head>
+<body>
+    <custom-header></custom-header>
+    <div class="profile-container profile-h1">
+        <div class="profile-sidebar">
+            <h2>Hello</h2>
+            <ul>
+                <li><a href="MyDetails.html">My Details</a></li>
+                <li><a href="MyBids.html">My Bids</a></li>
+                <li><a href="MyWishlist.html">My Wishlist</a></li>
+                <li><a href="MySales.html">My Sales</a></li>
+                <li><a href="MyMeetings.html" >My Meetings</a></li>
+                <li><a href="MyInvoices.html">Invoices</a></li>
+                <li><a href="MyRequest.html" class="active">Requests</a></li>
+                <li><a href="MyEmails.html">Email Preferences</a></li>
+                <li><a href="#">Signout</a></li>
+            </ul>
+        </div>
+
+     <div class="main-content">
+        <h1>Edit Request Gems</h1>
+        <h2>Enter Details</h2>
+            <div class="tab-content">
+                <form class="edit-sales-form" id="editSalesForm">
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+    
+                    <!-- <div class="form-group">
+                        <label for="type">Type</label>
+                        <select id="type" name="type">
+                            <option value="Gem Sale">Gem Sale</option>
+                            <option value="Jewelry Sale">Jewelry Sale</option>
+                        </select>
+                    </div> -->
+    
+                    <!-- Customer Field -->
+                    <div class="form-group">
+                        <label for="customer">Customer Name</label>
+                        <input type="number" id="customer" name="customer" placeholder="Customer Name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+                    </div>
+
+                    <!-- NIC Field -->
+                     <div class="form-group">
+                        <label for="nic">NIC Number</label>
+                        <input type="text" id="nic" name="nic" placeholder="NIC Number" required>
+                    </div>
+
+                    <!-- Email Field -->
+                     <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Email Address" required>
+                    </div>
+
+                    <!-- Total purchases Field -->
+                     <div class="form-group">
+                        <label for="totalPurchases">Total Purchases</label>
+                        <input type="number" id="totalPurchases" name="totalPurchases" placeholder="Total Purchases" required>
+                    </div>
+
+                    <!-- Status Field -->
+                    <!-- <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" name="status">
+                            <option value="online">Online Registered</option>
+                            <option value="offline">Walking Customer</option>
+                        </select>
+                    </div>
+                     -->
+                    <!-- Save Button -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-save">
+                            <a href="../Profile/MyRequest.html">
+                                <i class='bx bx-save'></i> Save Changes
+                            </a>
+                        </button>
+                    </div>
+                </form>
+            </div>
+    </div>
+</div>
+
+    
+    <script src="/components/header/header.js"></script>
+    <script src="/components/footer/footer.js"></script>
+    <script src="profile.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+</body>
+</html>

@@ -2,11 +2,6 @@ class Header extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <header class="header">
-          <div class="alert">
-            <div class="container">
-              <p class="alert-text">Biddings Now Going On <u>Bid Now</u></p>
-            </div>
-          </div>
       
           <div class="header-top" data-header>
             <div class="container">
@@ -16,15 +11,6 @@ class Header extends HTMLElement {
                 <span class="line line-3"></span>
               </button>
               
-      
-              <div class="input-wrapper">
-                <input type="search" name="search" placeholder="Search product" class="search-field">
-      
-                <button class="search-submit" aria-label="search">
-                  <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
-                </button>
-              </div>
-      
               <a href="/pages/homepage/homepage.html" class="logo">
                 <img src="/assets/images/logo.png" width="179" height="26" alt="SAF GEMS">
               </a>

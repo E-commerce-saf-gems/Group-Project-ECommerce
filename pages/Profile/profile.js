@@ -228,6 +228,7 @@ const subscribeForm = document.querySelector('.subscription-form');
 
     document.getElementById("editGemsForm").addEventListener("submit", function (event) {
         event.preventDefault(); // Prevent form submission by default
+        console.log("Form submission event triggered"); // Log to ensure event is triggered
     
         // Get form fields
         const date = document.getElementById("date").value;
@@ -236,6 +237,8 @@ const subscribeForm = document.querySelector('.subscription-form');
         const weight = document.getElementById("weight").value.trim();
         const color = document.getElementById("color").value.trim();
         const special = document.getElementById("special").value.trim();
+        
+        console.log(date, shape, type, weight, color, special); // Check values
     
         // Validation Flags
         let isValid = true;
@@ -280,9 +283,12 @@ const subscribeForm = document.querySelector('.subscription-form');
     
         // If validation passes, redirect to MyRequest.html, otherwise show error message
         if (isValid) {
-            // Redirect to MyRequest.html
-            window.location.href = "../Profile/MyRequest.html";
+            // Log success and show alert
+            console.log("Form is valid, redirecting...");
+            alert('Your request has been updated successfully.');
+            window.location.href = "../Profile/MyRequest.html";  // Ensure the path is correct
         } else {
+            console.log("Form is invalid, showing error messages");
             // Show error message
             alert(errorMessage); // Display validation error messages
         }

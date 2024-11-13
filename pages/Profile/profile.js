@@ -225,6 +225,75 @@ const subscribeForm = document.querySelector('.subscription-form');
         });
     });
 
+
+    document.getElementById("editGemsForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form submission by default
+        console.log("Form submission event triggered"); // Log to ensure event is triggered
     
-
-
+        // Get form fields
+        const date = document.getElementById("date").value;
+        const shape = document.getElementById("shape").value.trim();
+        const type = document.getElementById("type").value.trim();
+        const weight = document.getElementById("weight").value.trim();
+        const color = document.getElementById("color").value.trim();
+        const special = document.getElementById("special").value.trim();
+        
+        console.log(date, shape, type, weight, color, special); // Check values
+    
+        // Validation Flags
+        let isValid = true;
+        let errorMessage = "";
+    
+        // Date validation: Check if date is not empty
+        if (!date) {
+            isValid = false;
+            errorMessage += "Please enter a valid date.\n";
+        }
+    
+        // Shape validation: Check if shape is a non-empty string
+        if (shape === "") {
+            isValid = false;
+            errorMessage += "Please enter a shape.\n";
+        }
+    
+        // Type validation: Check if gem type is a non-empty string
+        if (type === "") {
+            isValid = false;
+            errorMessage += "Please enter the gem type.\n";
+        }
+    
+        // Weight validation: Check if weight is a positive number
+        const weightValue = parseFloat(weight);
+        if (isNaN(weightValue) || weightValue <= 0) {
+            isValid = false;
+            errorMessage += "Please enter a valid weight (positive number).\n";
+        }
+    
+        // Color validation: Check if color is a non-empty string
+        if (color === "") {
+            isValid = false;
+            errorMessage += "Please enter a color.\n";
+        }
+    
+        // Special requirements validation: Check if special requirements are filled
+        if (special === "") {
+            isValid = false;
+            errorMessage += "Please enter any special requirements.\n";
+        }
+    
+        // If validation passes, redirect to MyRequest.html, otherwise show error message
+        if (isValid) {
+            // Log success and show alert
+            console.log("Form is valid, redirecting...");
+            alert('Your request has been updated successfully.');
+            window.location.href = "../Profile/MyRequest.html";  // Ensure the path is correct
+        } else {
+            console.log("Form is invalid, showing error messages");
+            // Show error message
+            alert(errorMessage); // Display validation error messages
+        }
+    });
+    
+    
+    
+    

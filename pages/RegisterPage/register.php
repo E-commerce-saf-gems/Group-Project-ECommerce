@@ -1,43 +1,84 @@
 <?php
-include '/database/db.php';
 
+include('../../database/db.php'); // Make sure this file sets up $conn for database connection
+
+
+$errors = [];
+
+// Check if the request is a POST request
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Retrieve text data
-    $title = $_POST['title'];
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
-    $email = $_POST['email'];
-    $gender = $_POST['gender'];
-    $dob = $_POST['dob'];
-    $phone = $_POST['phone'];
-    $address1 = $_POST['address1'];
-    $address2 = $_POST['address2'];
-    $city = $_POST['city'];
-    $country = $_POST['country'];
-    $postalCode = $_POST['postalCode'];
-    $nic = $_POST['nic'];
-
-    // Handle file uploads
-    if (isset($_FILES['idCopy'])) {
-        $idCopyPath = 'uploads/' . basename($_FILES['idCopy']['name']);
-        move_uploaded_file($_FILES['idCopy']['tmp_name'], $idCopyPath);
+    // Step 1: Collect and sanitize the input data
+    $title = mysqli_real_escape_string($conn, $_POST['title']);
+    $first_name = mysqli_real_escape_string($conn, $_POST['firstName']); 
+    $last_name = mysqli_real_escape_string($conn, $_POST['lastName']);
+    
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $confirm_password = mysqli_real_escape_string($conn, $_POST['confirm_password']);
+    
+    // Step 2: Validate email and password
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Invalid email format.";
     }
-
-    // Handle base64 image
-    if (isset($_FILES['photo'])) {
-        $photoPath = 'uploads/photo_' . uniqid() . '.png';
-        move_uploaded_file($_FILES['photo']['tmp_name'], $photoPath);
-    }
-
-    // Insert data into database
-    $sql = "INSERT INTO customer (title, firstName, lastName, email, password, contactNo, NIC, status)
-            VALUES ('$title', '$first_name', '$last_name', '$email', '$password', '$phone', '$nic' , '$status')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo json_encode(["message" => "Registration successful"]);
+    
+    if ($password !== $confirm_password) {
+        $errors[] = "Passwords do not match.";
     } else {
-        echo json_encode(["message" => "Error: " . $conn->error]);
-    }}
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+    }
 
-    $conn->close();
+    // Step 3: Continue collecting data for Step 2 and Step 3
+    $gender = mysqli_real_escape_string($conn, $_POST['gender']);
+    $dob = mysqli_real_escape_string($conn, $_POST['dob']);
+    $phone = mysqli_real_escape_string($conn, $_POST['phone']);
+    $address1 = mysqli_real_escape_string($conn, $_POST['address1']);
+    $address2 = mysqli_real_escape_string($conn, $_POST['address2']);
+    $city = mysqli_real_escape_string($conn, $_POST['city']);
+    $country = mysqli_real_escape_string($conn, $_POST['country']);
+    $postal_code = mysqli_real_escape_string($conn, $_POST['postal_code']);
+    $nic = mysqli_real_escape_string($conn, $_POST['nic']);
+
+    // Photo handling
+    if (!empty($_POST['photo'])) {
+        $base64_string = $_POST['photo'];
+        $data = explode(',', $base64_string);
+        $image_data = base64_decode($data[1]);
+        $target_dir = "../../uploads/";
+        $photo_filename = "photo_" . time() . ".png";
+        $photo_file = $target_dir . $photo_filename;
+        file_put_contents($photo_file, $image_data);
+    } else {
+        $errors[] = "Photo capture was not successful.";
+    }
+
+    // Handle ID copy upload
+    if (!empty($_FILES["id_copy"]["name"])) {
+        $id_copy_file = $target_dir . basename($_FILES["id_copy"]["name"]);
+        if (!move_uploaded_file($_FILES["id_copy"]["tmp_name"], $id_copy_file)) {
+            $errors[] = "There was an error uploading your ID copy.";
+        }
+    } else {
+        $errors[] = "ID copy is required.";
+    }
+
+    // Insert into database if there are no errors
+    if (empty($errors)) {
+        $sql = "INSERT INTO customer (title, firstName, lastName, email, password, gender, DOB, contactNo, address1, address2, city, country, postalCode, NIC, image, pdf)
+                VALUES ('$title', '$first_name', '$last_name', '$email', '$hashed_password', '$gender', '$dob', '$phone', '$address1', '$address2', '$city', '$country', '$postal_code', '$nic', '$photo_file', '$id_copy_file')";
+        
+        if (mysqli_query($conn, $sql)) {
+            echo "Registration successful!";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+    } else {
+        foreach ($errors as $error) {
+            echo "<p style='color: red;'>$error</p>";
+        }
+    }
+
+
+    // Close the database connection
+    mysqli_close($conn);
+}
 ?>

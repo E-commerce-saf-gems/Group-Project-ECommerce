@@ -235,44 +235,45 @@ document.addEventListener("DOMContentLoaded", () => {
   
   
   
-  // Photo capture script
-  "use strict";
-  
-  const video = document.getElementById("video");
-  const canvas = document.getElementById("canvas");
-  const snap = document.getElementById("snap");
-  const errorMsgElement = document.getElementById("spanErrorMsg");
-  const photoData = document.getElementById("photo-data");
-  
-  const constraints = {
-    audio: false,
-    video: {
-      width: 200,
-      height: 150,
-    },
-  };
-  
-  // Initialize video stream
-  async function init() {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia(constraints);
-      handleSuccess(stream);
-    } catch (e) {
-      errorMsgElement.innerHTML = `navigator.getUserMedia.error: ${e.toString()}`;
-    }
+"use strict";
+
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+const snap = document.getElementById("snap");
+const errorMsgElement = document.getElementById("spanErrorMsg");
+const photoInput = document.getElementById("photo");  // Make sure this references the correct hidden input
+
+const constraints = {
+  audio: false,
+  video: {
+    width: 200,
+    height: 150,
+  },
+};
+
+// Initialize video stream
+async function init() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    handleSuccess(stream);
+  } catch (e) {
+    errorMsgElement.innerHTML = `Error accessing camera: ${e.toString()}`;
   }
+}
+
+function handleSuccess(stream) {
+  window.stream = stream;
+  video.srcObject = stream;
+}
+
+init();
+
+const context = canvas.getContext("2d");
+snap.addEventListener("click", function () {
+  // Capture photo from video stream and set it to the canvas
+  context.drawImage(video, 0, 0, canvas.width, canvas.height);
   
-  function handleSuccess(stream) {
-    window.stream = stream;
-    video.srcObject = stream;
-  }
-  
-  init();
-  
-  const context = canvas.getContext("2d");
-  snap.addEventListener("click", function () {
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    // Convert the captured image to base64 and set it as hidden input value
-    const dataURL = canvas.toDataURL("image/png");
-    document.getElementById("photo").value = dataURL;
-  });
+  // Convert the canvas image to base64 and set it as the value of the hidden photo input
+  const dataURL = canvas.toDataURL("image/png");
+  photoInput.value = dataURL;
+});

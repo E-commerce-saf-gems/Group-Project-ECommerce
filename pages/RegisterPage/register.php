@@ -1,13 +1,12 @@
 <?php
 
-include('../../database/db.php'); // Make sure this file sets up $conn for database connection
-
+include('../../database/db.php'); 
 
 $errors = [];
 
-// Check if the request is a POST request
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Step 1: Collect and sanitize the input data
+
     $title = mysqli_real_escape_string($conn, $_POST['title']);
     $first_name = mysqli_real_escape_string($conn, $_POST['firstName']); 
     $last_name = mysqli_real_escape_string($conn, $_POST['lastName']);
@@ -16,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     $confirm_password = mysqli_real_escape_string($conn, $_POST['confirm_password']);
     
-    // Step 2: Validate email and password
+
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "Invalid email format.";
     }
@@ -63,19 +62,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Insert into database if there are no errors
     if (empty($errors)) {
-        $sql = "INSERT INTO customer (title, firstName, lastName, email, password, gender, DOB, contactNo, address1, address2, city, country, postalCode, NIC, image, pdf)
-                VALUES ('$title', '$first_name', '$last_name', '$email', '$hashed_password', '$gender', '$dob', '$phone', '$address1', '$address2', '$city', '$country', '$postal_code', '$nic', '$photo_file', '$id_copy_file')";
+        // Check if email already exists
+        $email_check_query = "SELECT * FROM customer WHERE email = '$email' LIMIT 1";
+        $email_result = mysqli_query($conn, $email_check_query);
         
-        if (mysqli_query($conn, $sql)) {
-            echo "Registration successful!";
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        // Check if NIC already exists
+        $nic_check_query = "SELECT * FROM customer WHERE NIC = '$nic' LIMIT 1";
+        $nic_result = mysqli_query($conn, $nic_check_query);
+        
+        if (mysqli_num_rows($email_result) > 0) {
+            $errors[] = "The email address is already registered.";
         }
-    } else {
-        foreach ($errors as $error) {
-            echo "<p style='color: red;'>$error</p>";
+        
+        if (mysqli_num_rows($nic_result) > 0) {
+            $errors[] = "The NIC number is already registered.";
+        }
+    
+        if (empty($errors)) {
+            // If no errors, proceed with registration
+            $sql = "INSERT INTO customer (title, firstName, lastName, email, password, gender, DOB, contactNo, address1, address2, city, country, postalCode, NIC, image, pdf)
+                    VALUES ('$title', '$first_name', '$last_name', '$email', '$hashed_password', '$gender', '$dob', '$phone', '$address1', '$address2', '$city', '$country', '$postal_code', '$nic', '$photo_file', '$id_copy_file')";
+            
+            if (mysqli_query($conn, $sql)) {
+                echo "Registration successful!";
+            } else {
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+            }
+        } else {
+            // Output errors
+            foreach ($errors as $error) {
+                echo "<p style='color: red;'>$error</p>";
+            }
         }
     }
+    
 
 
     // Close the database connection

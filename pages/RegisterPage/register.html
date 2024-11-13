@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="/components/header/header.css">
   </head>
   <body>
-      <h1>Register for an account</h1>
       <form action="./register.php" method="post" enctype="multipart/form-data">
+        <h1>Create Your Saf Gems Account</h1>
+        <br>
         <label for="title">Title :</label>
         <select id="title" name="title">
           <option value="Mr">Mr</option>
@@ -51,6 +52,7 @@
         
           <label for="dob">Date of Birth :</label>
           <input type="date" name="dob" id="dob" placeholder="MM/DD/YY" required/>
+          <span id="dob-error" class="error-msg"></span>
           <br/>
 
           <label for="phone">Phone Number :</label>

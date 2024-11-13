@@ -1,61 +1,11 @@
- //Function to show the specified step and hide the others
-function showStep(step) {
-    document.querySelectorAll(".step").forEach((el) => {
-      el.classList.remove("active");
-    });
-  
-    const stepElement = document.getElementById(`step${step}`);
-    if (stepElement) {
-      stepElement.classList.add("active");
-    } else {
-      console.error(`Step ${step} does not exist.`);
-    }
-  }
-  
-  // Function to validate all required fields in the current step
-  function validateStep(step) {
-    const stepElement = document.getElementById(`step${step}`);
-    if (!stepElement) {
-      console.error(`Step ${step} does not exist.`);
-      return false;
-    }
-  
-    const requiredFields = stepElement.querySelectorAll("[required]");
-    let isValid = true;
-  
-    requiredFields.forEach((field) => {
-      // Validate file inputs
-      if (field.type === "file") {
-        if (field.files.length === 0) {
-          isValid = false;
-          field.classList.add("error");
-        } else {
-          field.classList.remove("error");
-        }
-      } 
-      // Validate text inputs and email
-      else if (!field.value.trim()) {
-        isValid = false;
-        field.classList.add("error");
-      } else {
-        field.classList.remove("error");
-      }
-    });
-  
-    // Additional check for the photo in step 3
-    if (step === 3) {
-      const photo = document.getElementById("photo").value;
-      if (!photo) {
-        isValid = false;
-        alert("Please capture a photo.");
-      }
-    }
-  
-    return isValid;
-  }
+const photo = document.getElementById("photo").value;
+if (!photo) {
+  isValid = false;
+  alert("Please capture a photo.");
+}
 
 
-// Validate email function
+// To Validate Email
 function validateEmail() {
     const email = document.getElementById("email");
     const emailError = document.getElementById("email-error");
@@ -156,6 +106,43 @@ if (confirmPassword.value.trim() === "") {
   document.getElementById("phone").addEventListener("input", validatephoneNumber );
   document.getElementById("phone").addEventListener("blur", validatephoneNumber );
 
+
+
+function validateDOB() {
+  const dob = document.getElementById("dob");
+  const dobError = document.getElementById("dob-error");
+
+  const today = new Date();
+  const birthDate = new Date(dob.value);
+  const age = today.getFullYear() - birthDate.getFullYear();
+
+  // Adjust the age calculation if the birthday hasn't occurred yet this year
+  const monthDifference = today.getMonth() - birthDate.getMonth();
+  if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  dobError.textContent = ""; // Clear previous error message
+
+  // Check if the age is 18 or older
+  if (age < 18) {
+    // Show error message if under 18
+    dobError.textContent = "You must be at least 18 years old to register.";
+    dobError.style.color = "red";
+    dob.classList.add("error");
+  } else {
+    // Remove error styling if valid
+    dobError.textContent = ""; // Clear error message
+    dob.classList.remove("error");
+  }
+}
+
+// Add event listeners to validate on input (typing) and blur (losing focus)
+document.getElementById("dob").addEventListener("input", validateDOB);
+document.getElementById("dob").addEventListener("blur", validateDOB);
+
+
+
    
   //validate nic number
   function validateNIC(){
@@ -221,18 +208,7 @@ document.querySelectorAll("input").forEach(inputField => {
       formError.textContent = ""; // Clear the error message on input
     });
   });
-  
 
-// Navigate to the previous step
-function prevStep(currentStep) {
-    showStep(currentStep - 1);
-}
-
-// Initialize to show the first step
-document.addEventListener("DOMContentLoaded", () => {
-    showStep(1);
-});
-  
   
   
 "use strict";
@@ -241,7 +217,7 @@ const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const snap = document.getElementById("snap");
 const errorMsgElement = document.getElementById("spanErrorMsg");
-const photoInput = document.getElementById("photo");  // Make sure this references the correct hidden input
+const photoInput = document.getElementById("photo"); 
 
 const constraints = {
   audio: false,

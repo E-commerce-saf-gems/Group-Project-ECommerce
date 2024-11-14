@@ -69,7 +69,7 @@ button[type="button"]:hover, button[type="submit"]:hover {
   background-color: #333;
 }
 
-<<<<<<< HEAD
+
        /* #email-error{
             position: absolute;
             top: 100%;
@@ -80,7 +80,7 @@ button[type="button"]:hover, button[type="submit"]:hover {
         } */
 
        
-=======
+
 .button-section {
   display: flex;
   justify-content: space-between;
@@ -144,4 +144,4 @@ button[type="button"]:hover {
     width: 100%;
   }
 }
->>>>>>> origin/Sadheeya
+

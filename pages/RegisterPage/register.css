@@ -69,18 +69,6 @@ button[type="button"]:hover, button[type="submit"]:hover {
   background-color: #333;
 }
 
-
-       /* #email-error{
-            position: absolute;
-            top: 100%;
-            left: 2px;
-            font-size: 6px;
-            font-weight: 400;
-            color: red;
-        } */
-
-       
-
 .button-section {
   display: flex;
   justify-content: space-between;
@@ -144,4 +132,3 @@ button[type="button"]:hover {
     width: 100%;
   }
 }
-

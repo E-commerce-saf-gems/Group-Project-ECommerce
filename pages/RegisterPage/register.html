@@ -4,14 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="register.css" />
     <!-- <link rel="stylesheet" href="/styles/common.css"> -->
+=======
+    <link rel="stylesheet" href="./register.css" />
+    <link rel="stylesheet" href="/components/header/header.css">
+>>>>>>> origin/Sadheeya
   </head>
   <body>
-    <!-- Step 1 -->
-    <div id="step1" class="step active form-container">
-      <h1>Register for an account</h1>
-      <form>
+      <form action="./register.php" method="post" enctype="multipart/form-data">
+        <div class="alert">
+          
+        </div>
+        <h1>Create Your Saf Gems Account</h1>
+        <br>
         <label for="title">Title :</label>
         <select id="title" name="title">
           <option value="Mr">Mr</option>
@@ -19,41 +26,44 @@
           <option value="Ms">Ms</option>
         </select>
         <br />
-        <label for="first-name">First Name :</label>
-        <input
-          type="text"
-          id="first-name"
-          placeholder="Enter first name"
-          required
-        />
+        <label for="firstName">First Name :</label>
+        <input name="firstName" type="text" id="first-name" placeholder="Enter first name" required/>
         <br />
+
         <label for="last-name">Last Name :</label>
-        <input
-          type="text"
-          id="last-name"
-          placeholder="Enter last name"
-          required
-        />
+        <input name="lastName" type="text" id="last-name" placeholder="Enter last name" required/>
         <br />
+
         <label for="email">Email Address :</label>
+<<<<<<< HEAD
         <input
           type="email"
           id="email"   
           placeholder="Enter email address"
           required
+=======
+        <input name="email" type="email" id="email" placeholder="Enter email address" required
+>>>>>>> origin/Sadheeya
         />
         <span id ="email-error" class="error-msg"></span>
         <br />
+
         <label for="password">Password :</label>
+<<<<<<< HEAD
         <input
           type="text"
           id="password"
           placeholder="Enter password"
           required
         />
+=======
+        <input  name="password"  type="password" id="password" placeholder="Enter password" required/>
+>>>>>>> origin/Sadheeya
         <span id="password-error" class="error-msg"></span>
         <br />
+
         <label for="confirm-password">Re-enter password :</label>
+<<<<<<< HEAD
         <input
           type="text"
           id="confirm-password"
@@ -134,16 +144,55 @@
         </div>
       </form>
     </div>
+=======
+        <input name="confirm_password" type="password" id="confirm-password" placeholder="Re-enter password" required/>
 
-    <!-- Step 3 -->
-    <div id="step3" class="step">
-      <h1>Verify Identity</h1>
-      <form
-        action="../Login/login.html"
-        method="get"
-        enctype="multipart/form-data"
-      >
+        <span id="password-error" class="error-msg"></span>
+        <br/>
+
+          <label for="gender">Gender :</label>
+          <select id="gender" name="gender">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
+          <br/>
+        
+          <label for="dob">Date of Birth :</label>
+          <input type="date" name="dob" id="dob" placeholder="MM/DD/YY" required/>
+          <span id="dob-error" class="error-msg"></span>
+          <br/>
+
+          <label for="phone">Phone Number :</label>
+          <input name="phone" type="tel" id="phone" placeholder="Enter Phone Number" required/>
+          <span id="phone-error" class="error-msg"></span> 
+          <br/>
+
+        <h2>Your Address</h2>
+        <label for="address1">Address line one :</label>
+        <input name="address1" type="text" id="address1" placeholder="Enter address line one " required/>
+        <br/>
+>>>>>>> origin/Sadheeya
+
+        <label for="address2">Address line two :</label>
+        <input name="address2" type="text" id="address2" placeholder="Enter address line two " required/>
+        <br/>
+
+        <label for="city">City/Town :</label>
+        <input name="city" type="text" id="city" placeholder="Enter City/Town " required />
+        <br/>
+
+        <label for="country">Country :</label>
+        <input name="country" id="country" placeholder="Enter Country " required />
+        <br/>
+
+        <label for="postal-code">Postal Code :</label>
+        <input name="postal_code" type="text" id="postal-code" placeholder="Enter postal code " required/>
+        <br/>
+
+
+      <h2>Identity Verification</h2>
         <label for="nic">NIC-No :</label>
+<<<<<<< HEAD
         <input
           type="text"
           id="nic"
@@ -153,15 +202,16 @@
         />
         <span id="nic-error" class="error-msg"></span> 
         <br />
+=======
+        <input  name="nic"  type="text"  id="nic"  placeholder="Enter your NIC number"  required/>
+        <span id="nic-error" class="error-msg"></span> 
+        <br/>
+
+>>>>>>> origin/Sadheeya
         <label for="id-copy">NIC / Driving License / Passport Copy:</label>
-        <input
-          type="file"
-          id="id-copy"
-          name="id-copy"
-          accept=".pdf,.jpg,.jpeg,.png"
-          required
-        />
-        <br />
+        <input type="file" id="id-copy" name="id_copy" accept=".pdf,.jpg,.jpeg,.png" required/>
+        <br/>
+
         <label for="photo">Upload a Photo:</label>
         <div class="video-wrap">
           <video id="video" playsinline autoplay></video>
@@ -169,16 +219,28 @@
             <button type="button" id="snap">Capture</button>
           </div>
         </div>
-        <canvas id="canvas" width="200" height="150"></canvas>
+
+        <canvas id="canvas" width="200" height="150" style="display: none;"></canvas>
         <input type="hidden" id="photo" name="photo" />
+<<<<<<< HEAD
         <br />
         <span class="form-error" style="color: red;"></span>
+=======
+        <br/>
+
+>>>>>>> origin/Sadheeya
         <div class="button-section">
           <button type="button" onclick="prevStep(3)">CANCEL</button>
           <button type="submit">Complete Registration</button>
         </div>
       </form>
+<<<<<<< HEAD
       <!--<span id="spanErrorMsg"></span>-->
+=======
+    </div>
+    <span id="spanErrorMsg" style="color: red;"></span>
+>>>>>>> origin/Sadheeya
     <script src="register.js"></script>
+    <script src="/components/header/header.js"></script>
   </body>
 </html>

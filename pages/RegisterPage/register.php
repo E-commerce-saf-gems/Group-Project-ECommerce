@@ -4,6 +4,50 @@ include('../../database/db.php');
 
 $errors = [];
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require '../../vendor/autoload.php';
+
+function sendVerificationEmail($first_name, $email, $token) {
+    $mail = new PHPMailer(true);
+
+    try {
+        //Server settings
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+       
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'sadheeyasalim10@gmail.com';                     //SMTP username
+        $mail->Password   = 'ijkwzrnamjyfeimb';                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    
+        //Recipients
+        $mail->setFrom('sadheeysalim10@gmail.com', 'Saf Gems');
+        $mail->addAddress($email, $first_name);     //Add a recipient
+
+        $email_template = "
+            <h2>Your Registration Was Successful</h2>
+            <h5>Verify your email address with the link given below</h5>
+            <br/><br/>
+            <a href='http://localhost/Group-Project-ECommerce/pages/RegisterPage/verifyEmail.php?token=$token'>Click Here!</a>
+        " ;
+
+        //Content
+        $mail->isHTML(true);                      //Set email format to HTML
+        $mail->Subject = 'Email Verification';
+        $mail->Body    = $email_template ;
+    
+        $mail->send();
+       // echo 'Message has been sent';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -36,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $country = mysqli_real_escape_string($conn, $_POST['country']);
     $postal_code = mysqli_real_escape_string($conn, $_POST['postal_code']);
     $nic = mysqli_real_escape_string($conn, $_POST['nic']);
+    $token = md5(rand()) ;
 
     // Photo handling
     if (!empty($_POST['photo'])) {
@@ -72,21 +117,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         if (mysqli_num_rows($email_result) > 0) {
             $errors[] = "The email address is already registered.";
+            header("Location: ./register.html") ;
         }
         
         if (mysqli_num_rows($nic_result) > 0) {
             $errors[] = "The NIC number is already registered.";
+            header("Location: ./register.html") ;
         }
     
         if (empty($errors)) {
             // If no errors, proceed with registration
-            $sql = "INSERT INTO customer (title, firstName, lastName, email, password, gender, DOB, contactNo, address1, address2, city, country, postalCode, NIC, image, pdf)
-                    VALUES ('$title', '$first_name', '$last_name', '$email', '$hashed_password', '$gender', '$dob', '$phone', '$address1', '$address2', '$city', '$country', '$postal_code', '$nic', '$photo_file', '$id_copy_file')";
+            $sql = "INSERT INTO customer (title, firstName, lastName, email, password, gender, DOB, contactNo, address1, address2, city, country, postalCode, NIC, image, pdf, token)
+                    VALUES ('$title', '$first_name', '$last_name', '$email', '$hashed_password', '$gender', '$dob', '$phone', '$address1', '$address2', '$city', '$country', '$postal_code', '$nic', '$photo_file', '$id_copy_file', '$token')";
             
             if (mysqli_query($conn, $sql)) {
-                echo "Registration successful!";
+                sendVerificationEmail("$first_name", "$email", "$token") ;
+                echo "Registration successful! Verify Your Email Address";
+                header("Location: ./registrationSuccess.html") ;
             } else {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                header("Location: ./register.html") ;
             }
         } else {
             // Output errors

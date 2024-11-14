@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/common.css">
-    <link rel="stylesheet" href="profile.css">
-    <link rel="stylesheet" href="/components/header/header.css">
-    <link rel="stylesheet" href="/components/footer/footer.css">
+    <link rel="stylesheet" href="../../styles/common.css">
+    <link rel="stylesheet" href="./profile.css">
+    <link rel="stylesheet" href="../../components/header/header.css">
+    <link rel="stylesheet" href="../../components/footer/footer.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,21 +24,21 @@
         <div class="profile-sidebar">
             <h2 class="profile-h1">Hello</h2>
             <ul>
-                <li><a href="MyDetails.html" class="active">My Details</a></li>
+                <li><a href="MyDetails.html">My Details</a></li>
                 <li><a href="MyBids.html">My Bids</a></li>
                 <li><a href="MyWishlist.html">My Wishlist</a></li>
                 <li><a href="MySales.html">My Sales</a></li>
                 <li><a href="MyMeetings.html">My Meetings</a></li>
-                <li><a href="MyPurchases.html">Purchases</a></li>
-                <li><a href="MyRequest.html">Requests</a></li>
+                <li><a href="MyPurchases.html"  class="active">Purchases</a></li>
+                <li><a href="MyRequest.php">Requests</a></li>
                 <li><a href="MyEmails.html">Email Preferences</a></li>
                 <li><a href="#">Signout</a></li>
             </ul>
         </div>
         
         <div class="main-content">
-            <h1 class="profile-h1">My Account</h1>
-            <h2 class="profile-h2">My Details</h2>
+            <h1 class="h1">My Account</h1>
+            <h2 class="h2">My Details</h2>
             
             <div class="account-alert">
                 YOUR ACCOUNT IS CURRENTLY PENDING APPROVAL - CALL +94 713458731 FOR ASSISTANCE
@@ -65,10 +65,10 @@
                     <input type="text" id="phone" name="phone" value="0709871561">
                 </div>
                 
-                <button type="submit" class="update-button">Update Details</button>
+                <button type="submit" class="btn btn-primary">Update Details</button>
             </form>
-            
-            <h2>Password</h2>
+            <br>
+            <h2 class="h2">Password</h2>
             <form class="password-form">
                 <div class="form-group">
                     <label for="currentPassword">Current Password</label>
@@ -97,7 +97,7 @@
                     <input type="password" id="confirmPassword" name="confirmPassword">
                 </div>
                 
-                <button type="submit" class="update-button">Update Password</button>
+                <button type="submit" class="btn btn-primary">Update Password</button>
             </form>
             
             <h2>Billing & Shipping Details</h2>
@@ -107,22 +107,22 @@
                     <p>25A, Old Road,</p>
                     <p>kaludawala,</p>
                     <p>Panadura, Sri Lanka</p>
-                    <button class="edit-button">Edit Address</button>
+                    <button class="btn btn-primary">Edit Address</button>
                 </div>
                 <div class="address">
                     <h3>Shipping Address</h3>
                     <p>25A, Old Road,</p>
                     <p>kaludawala,</p>
                     <p>Panadura, Sri Lanka</p>
-                    <button class="edit-button">Edit Address</button>
+                    <button class="btn btn-primary">Edit Address</button>
                 </div>
             </div>
         </div>
     </div>
 
     
-    <script src="/components/header/header.js"></script>
-    <script src="/components/footer/footer.js"></script>
+    <script src="../../components/header/header.js"></script>
+    <script src="../../components/footer/footer.js"></script>
     <script src="profile.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

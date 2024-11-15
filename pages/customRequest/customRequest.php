@@ -12,7 +12,20 @@
 </head>
 <body id="top">
     <custom-header></custom-header>
+
     <main class="shipping-container">
+
+        <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+        <div class="success-message">
+            Your request has been sent successfully! <br> We will contact you shortly!
+        </div>
+        <?php elseif(isset($_GET['success']) && $_GET['success'] == 2) : ?>
+            <div class="error-message">
+                An error occurred while submitting your request! Try again!
+            </div>
+        <?php endif; ?>
+
+
         <form id="customRequestForm" action="./createCustomRequest.php" method="post">
             <div>
                 <h3 class="h3" style="text-align: center;">Request a Custom Gemstone</h3>
@@ -20,6 +33,7 @@
                 <div class="form-group">
                     <label for="gem-type">Gemstone Type</label>
                     <input type="text" id="gem-type" name="gem-type" placeholder="Diamond, Sapphire, Ruby" required>
+                    <span id="gem-type-error" class="err-message" style="color: red;"></span>
                 </div>
 
                 <div class="form-group">
@@ -43,6 +57,7 @@
                 <div class="form-group">
                     <label for="color">Color</label>
                     <input type="text" id="color" name="color" placeholder="Aqua , Green" required>
+                    <span id="color-error" class="err-message" style="color: red;"></span>
                 </div>
 
                 <div class="form-group">
@@ -58,14 +73,11 @@
             </div>
         </form>
     </main>
-    <div class="success-message" id="successMessage">
-        Request submitted successfully!
-    </div>
     
     <custom-footer></custom-footer>
 
     <script src="../../components/footer/footer.js"></script>
     <script src="../../components/header/header.js"></script>
-    <!-- <script src="./customRequest.js"></script> -->
+    <script src="./customRequest.js"></script>
 </body>
 </html>

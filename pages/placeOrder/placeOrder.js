@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
             checkoutBtn.textContent = 'Pay Now';
             checkoutBtn.onclick = function() {
                 if (validateForm()) {
-                    window.location.href = "payment.html"; // Redirect to payment page
+                    window.location.href = "#"; // Redirect to payment page
                 }
             };
         }

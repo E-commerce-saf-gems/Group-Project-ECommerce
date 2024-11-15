@@ -30,10 +30,13 @@ function sendVerificationEmail($first_name, $email, $token) {
         $mail->addAddress($email, $first_name);     //Add a recipient
 
         $email_template = "
-            <h2>Your Registration Was Successful</h2>
-            <h5>Verify your email address with the link given below</h5>
+            <h2 style='color='#449f9f''>Welcome To SAF GEMS</h2>
+            <h2>Thank you for registering with us!</h2>
+            <h3>To complete your registration, verify your email address with the link given below</h5>
             <br/><br/>
-            <a href='http://localhost/Group-Project-ECommerce/pages/RegisterPage/verifyEmail.php?token=$token'>Click Here!</a>
+            <button>
+                <a href='http://localhost/Group-Project-ECommerce/pages/RegisterPage/verifyEmail.php?token=$token'>Click Here!</a>
+            </button>
         " ;
 
         //Content

@@ -217,7 +217,7 @@ const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const snap = document.getElementById("snap");
 const errorMsgElement = document.getElementById("spanErrorMsg");
-const photoInput = document.getElementById("photo");
+const photoInput = document.getElementById("photo"); 
 
 const constraints = {
   audio: false,
@@ -233,8 +233,7 @@ async function init() {
     const stream = await navigator.mediaDevices.getUserMedia(constraints);
     handleSuccess(stream);
   } catch (e) {
-    console.error("Error accessing camera:", e);
-    errorMsgElement.innerHTML = `Error accessing camera: ${e.message}`;
+    errorMsgElement.innerHTML = `Error accessing camera: ${e.toString()}`;
   }
 }
 
@@ -246,9 +245,6 @@ function handleSuccess(stream) {
 init();
 
 const context = canvas.getContext("2d");
-canvas.width = constraints.video.width; // Set canvas width
-canvas.height = constraints.video.height; // Set canvas height
-
 snap.addEventListener("click", function () {
   // Capture photo from video stream and set it to the canvas
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -256,5 +252,4 @@ snap.addEventListener("click", function () {
   // Convert the canvas image to base64 and set it as the value of the hidden photo input
   const dataURL = canvas.toDataURL("image/png");
   photoInput.value = dataURL;
-  console.log("Captured image data:", dataURL); // Debugging line to confirm base64 value
 });

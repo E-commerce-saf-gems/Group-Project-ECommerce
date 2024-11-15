@@ -1,3 +1,11 @@
+document.querySelector("form").addEventListener("submit", function (event) {
+    if (!validateEmail()) {
+        event.preventDefault(); // Prevent form submission if email is invalid
+    }
+});
+
+
+
 // Validate email function
 function validateEmail() {
     const email = document.getElementById("email");

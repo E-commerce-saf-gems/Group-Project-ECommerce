@@ -19,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_now_btn'])) {
         $user = $result->fetch_assoc();
         
         if (password_verify($password, $user['password'])) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_email'] = $user['email'];
+            $_SESSION['customer_id'] = $user['customer_id'];
+            $_SESSION['email'] = $user['email'];
 
             header("Location: ../homepage/homepage.html");
             exit();

@@ -42,9 +42,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($conn->query($sql) === TRUE) {
             $successMessage = "Your meeting request has been submitted successfully!";
             echo $successMessage ;
+            header("Location: ./submit-appointment.php?success=1") ;
         } else {
             $errorMessage = "Error: " . $conn->error;
             echo $errorMessage ;
+            header("Location: ./submit-appointment.php?success=2") ;
         }
     }
 }

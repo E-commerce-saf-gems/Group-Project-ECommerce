@@ -1,4 +1,4 @@
-/* appointment.css
+
 
 body {
     font-family: Arial, sans-serif;
@@ -116,8 +116,7 @@ body {
     color: white;
 }
   
-  
-  /* button {
+button {
     background-color: #449b9b;
     color: #ffffff;
     padding: 10px 20px;
@@ -131,4 +130,26 @@ body {
   button:hover{
     background-color: #000000;
     
-  } */
+  }
+
+  .success-message {
+    background-color: #d4ede9; 
+    color: #449f9f ;
+    padding: 15px;
+    border: 1px solid #c3e6cb; 
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.error-message {
+    background-color: #d4ede9; 
+    color: #9f4444 ; 
+    padding: 15px;
+    border: 1px solid #c3e6cb; 
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 20px 0;
+    text-align: center;
+}

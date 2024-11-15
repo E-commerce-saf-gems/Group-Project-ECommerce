@@ -16,6 +16,16 @@
     <custom-header></custom-header>
 <main>
     <div>
+        <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+            <div class="success-message">
+                Your appointment has been booked! <br> We will contact you shortly!
+            </div>
+        <?php elseif(isset($_GET['success']) && $_GET['success'] == 2) : ?>
+            <div class="error-message">
+                An error occurred while submitting your appointment! Try again!
+            </div>
+        <?php endif; ?>
+
         <h1>Book Your Appointment Now</h1>
         <form action="process-appointment.php" method="POST">
          
@@ -56,13 +66,7 @@
         </form>
     </div>
 </main>
-
-    <div class="success-message" id="successMessage">  <!--success-message -->
-        Request submitted successfully!
-    </div>
-
     <script src="../../components/header/header.js"></script>
-
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="./appointment.js"></script>

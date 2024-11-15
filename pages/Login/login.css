@@ -1,6 +1,6 @@
 
 /*login*/
-body {
+main {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -11,7 +11,19 @@ body {
     background-color: #f9f9f9;
   }
   
-  .container {
+    main {
+      font-family: 'Urbanist', sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  
+ .login-container {
+   
     display: flex;
     max-width: 1200px;
     width: 100%;

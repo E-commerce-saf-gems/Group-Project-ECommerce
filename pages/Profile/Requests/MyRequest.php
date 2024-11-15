@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../styles/common.css">
+    <link rel="stylesheet" href="./requests.css">
     <link rel="stylesheet" href="../profile.css">
-    <link rel="stylesheet" href="../../../components/header/header.css">
+    <link rel="stylesheet" href="../../../components/profileHeader/header.css">
     <link rel="stylesheet" href="../../../components/footer/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,15 +26,15 @@
         <div class="profile-sidebar">
             <h2>Hello</h2>
             <ul>
-                <li><a href="../MyDetails.html">My Details</a></li>
-                <li><a href="../MyBids.html">My Bids</a></li>
-                <li><a href="../MyWishlist.html">My Wishlist</a></li>
-                <li><a href="../MySales.html" >My Sales</a></li>
-                <li><a href="../MyMeetings.html">My Meetings</a></li>
-                <li><a href="../MyPurchases.html">Purchases</a></li>
-                <li><a href="./MyRequest.php" class="active">Requests</a></li>
-                <li><a href="../MyEmails.html">Email Preferences</a></li>
-                <li><a href="#">Signout</a></li>
+            <li><a href="../Details/MyDetails.html">My Details</a></li>
+                <li><a href="../Bids/MyBids.html">My Bids</a></li>
+                <li><a href="../Wishlist/MyWishlist.html" >My Wishlist</a></li>
+                <li><a href="../Sales/MySales.html">My Sales</a></li>
+                <li><a href="../Meetings/MyMeetings.html">My Meetings</a></li>
+                <li><a href="../Purchases/MyPurchases.html">Purchases</a></li>
+                <li><a href="../Requests/MyRequest.php">Requests</a></li>
+                <li><a href="../Emails/MyEmails.html" class="active">Email Preferences</a></li>
+                <li><a href="../../Login/logout.php">Signout</a></li>
             </ul>
         </div>
 
@@ -41,6 +42,27 @@
         <div class="main-content">
             <h1>My Account</h1>
             <h2>My Requests</h2>
+            
+            <?php if (isset($_GET['deleteSuccess']) && $_GET['deleteSuccess'] == 1): ?>
+            <div class="success-message">
+                Your request has been deleted!
+            </div>
+            <?php elseif(isset($_GET['deleteSuccess']) && $_GET['deletesuccess'] == 2) : ?>
+                <div class="error-message">
+                    An error occurred while deleting your request! Try again!
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($_GET['editSuccess']) && $_GET['editSuccess'] == 1): ?>
+            <div class="success-message">
+                Your request has been edited!
+            </div>
+            <?php elseif(isset($_GET['editSuccess']) && $_GET['editsuccess'] == 2) : ?>
+                <div class="error-message">
+                    An error occurred while editing your request! Try again!
+                </div>
+            <?php endif; ?>
+
                 <div class="tab-content">
                     <table class="sales-table">
                         <thead>
@@ -74,17 +96,21 @@
                                             <td>" . $row['color'] . "</td>
                                             <td>" . $row['requirement'] . "</td>
                                             <td>" . $row['status'] . "</td>
-                                            <td class='actions'>
-                                                <a href='./editGemRequest.php?id=" . $row['request_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>
-                                                <a href='./deleteGemRequest.php?id=" . $row['request_id'] . "' class='btn'><i class='bx bx-trash'></i></a>
-                                            </td>
+                                            <td class='actions'>";
+                                
+                                    if ($row['status'] === 'P') {
+                                        echo "<a href='./editGemRequest.php?id=" . $row['request_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>
+                                                <a href='#' onclick='confirmDelete(" . $row['request_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
+                                    }
+                                
+                                    echo "</td>
                                         </tr>";
-                                }
+                                }                                
                             } else {
                                 echo "<tr><td colspan='7'>No requests found.</td></tr>";
                             }
     
-                            $conn->close(); // Close the database connection
+                            $conn->close();
                             ?>
                         </tbody>
                     </table>
@@ -93,8 +119,23 @@
     </div>
 
 
+    <script>
+    function confirmDelete(requestId) {
+        const userConfirmed = confirm("Are you sure you want to delete this request?");
+        if (userConfirmed) {
+            window.location.href = `./deleteRequest.php?id=${requestId}`;
+        }
+    }
+
+    setTimeout(function() {
+        const message = document.querySelector(".success-message");
+        if (message) {
+            message.style.display = "none";
+        }
+    }, 5000);
+    </script>
     
-    <script src="../../../components/header/header.js"></script>
+    <script src="../../../components/profileHeader/header.js"></script>
     <script src="../../../components/footer/footer.js"></script>
     <script src="../profile.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

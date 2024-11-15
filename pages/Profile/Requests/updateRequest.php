@@ -18,10 +18,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         echo "Record updated successfully.";
-        header("Location: ./MyRequest.php"); 
+        header("Location: ./MyRequest.php?editSuccess=1"); 
         exit();
     } else {
         echo "Error updating record: " . $conn->error;
+        header("Location: ./MyRequest.php?editSuccess=2"); 
+
     }
     $stmt->close();
     $conn->close();

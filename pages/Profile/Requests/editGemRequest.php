@@ -31,7 +31,7 @@ if (isset($_GET['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../styles/common.css">
     <link rel="stylesheet" href="../profile.css">
-    <link rel="stylesheet" href="../../../components/header/header.css">
+    <link rel="stylesheet" href="../../../components/profileHeader/header.css">
     <link rel="stylesheet" href="../../../components/footer/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,15 +47,14 @@ if (isset($_GET['id'])) {
         <div class="profile-sidebar">
             <h2>Hello</h2>
             <ul>
-                <li><a href="../MyDetails.html">My Details</a></li>
-                <li><a href="../MyBids.html">My Bids</a></li>
-                <li><a href="../MyWishlist.html">My Wishlist</a></li>
-                <li><a href="../MySales.html">My Sales</a></li>
-                <li><a href="../MyMeetings.html">My Meetings</a></li>
-                <li><a href="../MyPurchases.html">Purchases</a></li>
-                <li><a href="./MyRequest.php" class="active">Requests</a></li>
-                <li><a href="../MyEmails.html">Email Preferences</a></li>
-                <li><a href="#">Signout</a></li>
+            <li><a href="../Bids/MyBids.html">My Bids</a></li>
+                <li><a href="../Wishlist/MyWishlist.html" >My Wishlist</a></li>
+                <li><a href="../Sales/MySales.html">My Sales</a></li>
+                <li><a href="../Meetings/MyMeetings.html">My Meetings</a></li>
+                <li><a href="../Purchases/MyPurchases.html">Purchases</a></li>
+                <li><a href="../Requests/MyRequest.php">Requests</a></li>
+                <li><a href="../Emails/MyEmails.html" class="active">Email Preferences</a></li>
+                <li><a href="../../Login/logout.php">Signout</a></li>
             </ul>
         </div>
 
@@ -96,7 +95,7 @@ if (isset($_GET['id'])) {
 
                     <div class="form-group">
                         <label for="special-requirements">Special Requirements</label>
-                        <textarea id="special-requirements" name="requirement" rows="7" placeholder="Specify any additional requirements, such as clarity, size dimensions, etc."><?php echo $row['requirement']; ?></textarea>
+                        <textarea id="special-requirements" name="requirement" cols="100" rows="10" placeholder="Specify any additional requirements, such as clarity, size dimensions, etc."><?php echo $row['requirement']; ?></textarea>
                     </div>
 
                     <?php if ($row['status'] === 'P') { ?>
@@ -116,7 +115,7 @@ if (isset($_GET['id'])) {
     </div>
 
     <script src="../profile.js"></script>
-    <script src="../../../components/header/header.js"></script>
+    <script src="../../../components/profileHeader/header.js"></script>
     <script src="../../../components/footer/footer.js"></script>
     
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

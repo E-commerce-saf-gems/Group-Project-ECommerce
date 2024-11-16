@@ -33,8 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errorMessage = "All fields are required.";
     } else {
         // Construct the SQL query
-        $sql = "INSERT INTO meeting (type, date, time, customer_id) 
-                VALUES ('$appointmentType', '$meetingDate', '$meetingTime','$customerID')";
+        $sql = "INSERT INTO meeting (type, date, time,email, customer_id) 
+                VALUES ('$appointmentType', '$meetingDate', '$meetingTime','$participantEmail','$customerID')";
 
         echo $sql;
 

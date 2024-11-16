@@ -33,27 +33,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errorMessage = "All fields are required.";
     } else {
         // Construct the SQL query
-        $sql = "INSERT INTO meeting (type, date, time,customer_id) 
-                VALUES ('$appointmentType', '$meetingDate', '$meetingTime', '$customerID')";
+        $sql = "INSERT INTO meeting (type, date, time, customer_id) 
+                VALUES ('$appointmentType', '$meetingDate', '$meetingTime','$customerID')";
 
-echo $sql;
-
+        echo $sql;
 
         // Execute the query
         if ($conn->query($sql) === TRUE) {
             $successMessage = "Your meeting request has been submitted successfully!";
             echo $successMessage ;
-            header("Location: ./bookAppointment.html?status=1") ;
         } else {
             $errorMessage = "Error: " . $conn->error;
             echo $errorMessage ;
-            header("Location: ./bookAppointment.html?status=1") ;
         }
     }
 }
 
 // Close the database connection
 $conn->close();
-echo $sql;
-exit();
 ?>

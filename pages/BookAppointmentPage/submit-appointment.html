@@ -17,7 +17,7 @@
 <main>
     <div>
         <h1>Book Your Appointment Now</h1>
-        <form action="process-appointment.php" method="POST">
+        <form id="meetingRequestForm"    action="process-appointment.php" method="POST">
          
             <label for="appointment">Appintment Type :</label>
             <select id="appointment" name="appointment">
@@ -51,8 +51,12 @@
         <span id ="email-error" class="error-msg"></span>
     </br>  
       
-
-            <button type="submit">Schedule Event</button>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <br>
+        <button type="reset" class="btn btn-primary">Clear Form</button>
+    </div>
+           <!-- <button type="submit">Schedule Event</button> -->
         </form>
     </div>
 </main>

@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $request_id = $_POST['meeting_id'];
+    $meeting_id = $_POST['meeting_id'];
     $type = $_POST['appointment'];
     $date = $_POST['date'];
     $time = $_POST['time'];

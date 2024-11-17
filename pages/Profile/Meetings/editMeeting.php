@@ -98,7 +98,7 @@ if (isset($_GET['id'])) {
                     </div>
 
 
-                    <?php if ($row['status'] === 'p') { ?>
+                    <?php if ($row['status'] === 'P') { ?>
                         <div class="form-actions">
                             <button type="submit" class="btn btn-primary">
                                 <i class='bx bx-save'></i> Save Changes

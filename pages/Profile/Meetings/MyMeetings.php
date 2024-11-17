@@ -94,7 +94,7 @@
                                             <td>" . $row['status'] . "</td>
                                             <td class='actions'>";
 
-                                             if ($row['status'] === 'p') {
+                                             if ($row['status'] === 'P') {
                                         echo "<a href='./editMeeting.php?id=" . $row['meeting_id'] . "' class='btn'><i class='bx bx-pencil'></i></a>
                                                 <a href='#' onclick='confirmDelete(" . $row['meeting_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
                                     
@@ -118,7 +118,7 @@
 </div>
 
 <script>
-    function confirmDelete(meetingtId) {
+    function confirmDelete(meetingId) {
         const userConfirmed = confirm("Are you sure you want to delete this meeting?");
         if (userConfirmed) {
             window.location.href = `./deleteMeeting.php?id=${meetingId}`;

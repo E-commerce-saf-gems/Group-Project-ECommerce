@@ -4,6 +4,8 @@ session_start();
 // Include database connection
 include '../../database/db.php';  // Adjust the path to match the location of db.php relative to this file
 
+$customerID = $_SESSION['customer_id'];
+
 // Initialize variables for form inputs
 $gemType = "";
 $caratWeight = 0;
@@ -12,13 +14,6 @@ $color = "";
 $specialRequirements = "";
 $errorMessage = "";
 $successMessage = "";
-
-if (!isset($_SESSION['customer_id'])) {
-    header("Location: ./login.php") ;
-    exit;
-}
-
-$customerID = $_SESSION['customer_id'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gemType = isset($_POST['gem-type']) ? htmlspecialchars(trim($_POST['gem-type'])) : '';

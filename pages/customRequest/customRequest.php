@@ -1,3 +1,16 @@
+<?php
+
+session_start() ;
+
+if (!isset($_SESSION['customer_id'])) {
+    header("Location: ../Login/login.php?notloggedIn=1") ;
+    exit;
+}
+
+$customerID = $_SESSION['customer_id'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +30,8 @@
 
         <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
         <div class="success-message">
-            Your request has been sent successfully! <br> We will contact you shortly!
+            Your request has been sent successfully! <br> We will contact you shortly! Click Here to
+            <u><a href="../Profile/Requests/MyRequest.php">View Requests</a></u>
         </div>
         <?php elseif(isset($_GET['success']) && $_GET['success'] == 2) : ?>
             <div class="error-message">
@@ -79,5 +93,7 @@
     <script src="../../components/footer/footer.js"></script>
     <script src="../../components/header/header.js"></script>
     <script src="./customRequest.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

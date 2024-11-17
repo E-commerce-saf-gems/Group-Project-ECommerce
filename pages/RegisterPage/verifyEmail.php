@@ -16,29 +16,29 @@
 
                 if($updateQuery_run) {
                     $_SESSION['status'] = "Your Account Has Been Verfied Successfully" ;
-                    header("Location: ../Login/login.html") ;
+                    header("Location: ../Login/login.php") ;
                     exit(0) ;
                 }
                 else {
                     $_SESSION['status'] = "Verification Failed" ;
-                    header("Location: ../Login/login.html") ;
+                    header("Location: ../Login/login.php") ;
                     exit(0) ;
                 }
             }
             else {
                 $_SESSION['status'] = "This Email Has Been Verified Already!" ;
-                header("Location: ../Login/login.html") ;
+                header("Location: ../Login/login.php") ;
                 exit(0) ;
             }
         }
         else {
             $_SESSION['status'] = "This token does not exist" ;
-            header("Location: ../Login/login.html") ;
+            header("Location: ../Login/login.php") ;
         }
     }
     else {
         $_SESSION['status'] = "Not Allowed" ;
-        header("Location: ../Login/login.html") ;
+        header("Location: ../Login/login.php") ;
     }
 
 ?>

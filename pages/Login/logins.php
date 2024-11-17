@@ -19,16 +19,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_now_btn'])) {
         $user = $result->fetch_assoc();
         
         if (password_verify($password, $user['password'])) {
-            $_SESSION['customer_id'] = $user['customer_id'];
-            $_SESSION['email'] = $user['email'];
+            header('Content-Type: application/json');
+
+            if (isset($_SESSION['customer_id'])) {
+                echo json_encode([
+                    'loggedIn' => true,
+                    'email' => $_SESSION['email'],
+                    'customer_id' => $_SESSION['customer_id'],
+                ]);
+            } else {
+                echo json_encode(['loggedIn' => false]);
+            }
 
             header("Location: ../homepage/homepage.html");
             exit();
         } else {
             echo "<script>alert('Incorrect password. Please try again.');</script>";
+            header("Location: ../Login/login.php?fail=1");
         }
     } else {
         echo "<script>alert('Email not found. Please register.');</script>";
+        header("Location: ../Login/login.php?fail=2");
     }
 
     $stmt->close();

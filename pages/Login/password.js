@@ -1,7 +1,7 @@
 
 // Function to redirect to the login page
 function loginpage() {
-    window.location.href = 'login.html';
+    window.location.href = 'login.php';
 }
 
 

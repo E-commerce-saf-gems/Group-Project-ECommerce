@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="login.css" />
     <link rel="stylesheet" href="../../components/header/header.css">
     <link rel="stylesheet" href="../../styles/common.css">
-   
  
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
@@ -25,6 +24,23 @@
       <div class="login-section">
         <h1>Login in to your account</h1>
         <p>This is required to leave bids, register to bid or purchase gems</p>
+
+        <?php if (isset($_GET['fail']) && $_GET['fail'] == 1): ?>
+            <div class="error-message">
+                Invalid password or email! Try Again
+            </div>
+        <?php elseif(isset($_GET['fail']) && $_GET['fail'] == 2) : ?>
+            <div class="error-message">
+                Invalid password or email! Try Again
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($_GET['notloggedIn']) && $_GET['notloggedIn'] == 1): ?>
+            <div class="error-message">
+                Login to make a request.
+            </div>
+        <?php endif; ?>
+        
         <form action="logins.php" method="POST">
           <label for="email">Email Address </label>
           <input
@@ -50,7 +66,7 @@
             <label for="terms">I accept terms & conditions</label>
         </div>-->
        
-            <button type="submit" name="login_now_btn" class="login-btn" onclick="window.location.href='../homepage/homepage.html'">Login</button>
+            <button type="submit" name="login_now_btn" class="login-btn">Login</button>
 
         </form>
         <a href="forgot-password.html" class="forgot-password">Forgot Password ?</a>

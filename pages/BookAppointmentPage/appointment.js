@@ -4,7 +4,7 @@
     }
 }); */
 
-document.getElementById("meetingRequestForm").addEventListener("submit", function (event) {
+/*document.getElementById("meetingRequestForm").addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent page reload
 
     // Show the success message
@@ -18,7 +18,57 @@ document.getElementById("meetingRequestForm").addEventListener("submit", functio
 
     // Reset the form fields after submission
     event.target.reset();
+});*/
+
+// Select the form element
+const meetingRequestForm = document.getElementById("meetingRequestForm");
+
+// Add event listener for form submission
+meetingRequestForm.addEventListener("submit", function (event) {
+    // Prevent the default form submission
+    event.preventDefault();
+
+    // Clear previous messages
+    const successMessage = document.getElementById("successMessage");
+    successMessage.style.display = "none";
+
+    // Form data collection
+    const formData = new FormData(meetingRequestForm);
+
+    // Send the form data to the server
+    fetch(meetingRequestForm.action, {
+        method: "POST",
+        body: formData,
+    })
+        .then((response) => {
+            if (response.ok) {
+                return response.text(); // Get server's response as text
+            } else {
+                throw new Error("Server error occurred.");
+            }
+        })
+        .then((result) => {
+            // Show the success message
+            successMessage.style.display = "block";
+            successMessage.textContent = "Appointment booked successfully!";
+            console.log("Server Response:", result);
+
+            // Optionally reset the form
+            meetingRequestForm.reset();
+
+            // Hide success message after a delay
+            setTimeout(() => {
+                successMessage.style.display = "none";
+            }, 3000);
+        })
+        .catch((error) => {
+            // Handle errors
+            console.error("Error:", error);
+            successMessage.style.display = "block";
+            successMessage.textContent = "Error booking appointment. Please try again.";
+        });
 });
+
 
 
 

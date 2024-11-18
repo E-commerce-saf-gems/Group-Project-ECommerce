@@ -1,12 +1,10 @@
 <?php
 
 session_start();
-// Include database connection
-include '../../database/db.php';  // Adjust the path to match the location of db.php relative to this file
+include '../../database/db.php';  
 
 $customerID = $_SESSION['customer_id'];
 
-// Initialize variables for form inputs
 $gemType = "";
 $caratWeight = 0;
 $cut = "";

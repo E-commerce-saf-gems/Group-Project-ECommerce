@@ -1,24 +1,31 @@
 class Header extends HTMLElement {
-  connectedCallback() {
-    // Check if the user is logged in by looking for the "loggedInUser" key in localStorage
-    const isLoggedIn = localStorage.getItem("loggedInUser");
+  async connectedCallback() {
+    // Step 1: Fetch session data from the backend
+    let isLoggedIn = false; // Default to not logged in
+    try {
+      const response = await fetch("../../pages/Login/sessionData.php"); // Replace with the correct path
+      const sessionData = await response.json();
+      isLoggedIn = sessionData.loggedIn;
+    } catch (error) {
+      console.error("Failed to fetch session data:", error);
+    }
 
-    // Define the HTML structure for logged-in and not logged-in states
+    // Step 2: Define the HTML structure for logged-in and not logged-in states
     const loggedInMenu = `
       <ul class="dropdown-menu">
         <li><a href="../Profile/Details/MyDetails.html" class="dropdown-item">Profile</a></li>
-        <li><a href="../Login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
+        <li><a href="#" class="dropdown-item" id="logout">Logout</a></li>
       </ul>
     `;
 
     const loggedOutMenu = `
       <ul class="dropdown-menu">
         <li><a href="../Login/login.php" class="dropdown-item">Login</a></li>
-        <li><a href="../Register/register.html" class="dropdown-item">Register</a></li>
+        <li><a href="../RegisterPage/register.html" class="dropdown-item">Register</a></li>
       </ul>
     `;
 
-    // Set the innerHTML of the header
+    // Step 3: Dynamically set the header based on login state
     this.innerHTML = `
       <header class="header">
         <div class="alert">
@@ -89,17 +96,23 @@ class Header extends HTMLElement {
       </header>
     `;
 
-    // Adding Logout Functionality
+    // Step 4: Add logout functionality
     if (isLoggedIn) {
       const logoutButton = document.getElementById("logout");
       if (logoutButton) {
-        logoutButton.addEventListener("click", function () {
-          localStorage.removeItem("loggedInUser"); // Clear login info
-          location.reload(); // Reload to reflect the changes
+        logoutButton.addEventListener("click", async function () {
+          try {
+            const logoutResponse = await fetch("../Login/logout.php", { method: "POST" });
+            if (logoutResponse.ok) {
+              location.reload(); // Reload to update header state
+            }
+          } catch (error) {
+            console.error("Logout failed:", error);
+          }
         });
       }
     }
   }
 }
 
-customElements.define('custom-header', Header);
+customElements.define("custom-header", Header);

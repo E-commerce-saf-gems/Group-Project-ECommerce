@@ -14,7 +14,7 @@ $meetingTime = "";
 $participantName = "";
 $customerID = 1; 
 $participantEmail = "";
-$status = 'p';  // Default status
+$status = 'P';  // Default status
 
 $errorMessage = "";
 $successMessage = "";

@@ -80,8 +80,16 @@
                             include('../../../database/db.php'); // Include the database connection
     
                             // SQL query to fetch the requests data from the database
-                            $sql = "SELECT * FROM meeting"; // Replace with your actual table name
-                            $result = $conn->query($sql);
+                           // $sql = "SELECT * FROM meeting"; // Replace with your actual table name
+                            //$result = $conn->query($sql);
+
+                            // Fetch data from the 'request' and 'customer' tables using a JOIN
+                           $sql = "SELECT meeting.meeting_id, meeting.type, meeting.date, meeting.time,  customer.email AS email, meeting.status
+                           FROM meeting
+                           JOIN customer ON meeting.customer_id = customer.customer_id";
+                           $result = $conn->query($sql);
+
+
     
                             if ($result->num_rows > 0) {
                                 // Output each row of data

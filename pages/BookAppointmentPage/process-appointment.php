@@ -25,16 +25,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $appointmentType = isset($_POST['appointment']) ? htmlspecialchars(trim($_POST['appointment'])) : '';
     $meetingDate = isset($_POST['date']) ? htmlspecialchars(trim($_POST['date'])) : '';
     $meetingTime = isset($_POST['time']) ? htmlspecialchars(trim($_POST['time'])) : '';
-    $participantName = isset($_POST['name']) ? htmlspecialchars(trim($_POST['name'])) : '';
-    $participantEmail = isset($_POST['email']) ? htmlspecialchars(trim($_POST['email'])) : '';
+    //$participantName = isset($_POST['name']) ? htmlspecialchars(trim($_POST['name'])) : '';
+    //$participantEmail = isset($_POST['email']) ? htmlspecialchars(trim($_POST['email'])) : '';
 
     // Basic validation
-    if (empty($appointmentType) || empty($meetingDate) || empty($meetingTime) || empty($participantName) || empty($participantEmail)) {
+    if (empty($appointmentType) || empty($meetingDate) || empty($meetingTime) ) {
         $errorMessage = "All fields are required.";
     } else {
         // Construct the SQL query
-        $sql = "INSERT INTO meeting (type, date, time,email, customer_id) 
-                VALUES ('$appointmentType', '$meetingDate', '$meetingTime','$participantEmail','$customerID')";
+        $sql = "INSERT INTO meeting (type, date, time, customer_id) 
+                VALUES ('$appointmentType', '$meetingDate', '$meetingTime','$customerID')";
 
         echo $sql;
 

@@ -79,9 +79,8 @@ $customerID = $_SESSION['customer_id'];
                     <textarea id="special-requirements" name="special-requirements" rows="4" placeholder="Specify any additional requirements, such as clarity, size dimensions, etc."></textarea>
                 </div>
 
-                <div class="form-actions">
+                <div style="display: flex; gap: 10px;" class="form-actions">
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <br>
                     <button type="reset" class="btn btn-primary">Clear Form</button>
                 </div>
             </div>

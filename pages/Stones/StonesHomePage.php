@@ -8,7 +8,7 @@ $ssql = "SELECT
             origin,
             description,
             image, 
-            weight 
+            size 
         FROM inventory
         WHERE visibility = 'show' && availability = 'available'";
 
@@ -110,7 +110,7 @@ if (!$result) {
                 <div class="card-content">
                     <div class="price">$<?php echo number_format($row['amount'], 2); ?></div>
                     <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['type']); ?></a></h3>
-                    <p class="rating-text"><?php echo htmlspecialchars($row['description']); ?> - <?php echo $row['weight']; ?> Carats</p>
+                    <p class="rating-text"><?php echo htmlspecialchars($row['description']); ?> - <?php echo $row['size']; ?> Carats</p>
                     <a href="../../pages/Stones/viewmore.html"><span class="btn btn-primary">View More</span></a>
                 </div>
             </div>

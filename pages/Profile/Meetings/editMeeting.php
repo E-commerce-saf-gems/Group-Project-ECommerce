@@ -86,7 +86,7 @@ if (isset($_GET['id'])) {
                      <label for="time">Time:</label>
                     
             <select id="time" name="time" required>
-            <option value="">Select a time</option>
+            
                 <option value="14:30" <?php if ($row['time'] === '14:30') echo 'selected'; ?>>14:30</option>
                 <option value="15:30" <?php if ($row['time'] === '15:30') echo 'selected'; ?>>15:30</option>
                 <option value="16:30" <?php if ($row['time'] === '16:30') echo 'selected'; ?>>16:30</option>

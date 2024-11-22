@@ -28,7 +28,6 @@ function validateEmail() {
     }
 }
 
-// Add event listeners to remove the error message when input changes or loses focus
   document.getElementById("email").addEventListener("input", validateEmail );
   document.getElementById("email").addEventListener("blur", validateEmail );
 
@@ -38,3 +37,41 @@ function validateEmail() {
         message.style.display = "none";
     }
 }, 5000);
+
+document.getElementById('date').addEventListener('change', function() {
+    let selectedDate = this.value; // Get the selected date
+    if (selectedDate) {
+        fetchAvailableTimes(selectedDate);
+    }
+});
+
+function fetchAvailableTimes(date) {
+    const timeSelect = document.getElementById('time');
+    timeSelect.innerHTML = ''; // Clear previous times
+
+    fetch('getAvailableTimes.php?date=' + encodeURIComponent(date))
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Populate the time dropdown with available times
+                data.times.forEach(({ availableTime_id, time }) => {
+                    console.log('Adding option:', availableTime_id, time);
+                
+                    const option = document.createElement('option');
+                    option.value = availableTime_id; // This should be the ID
+                    option.textContent = time; // This should be the display text
+                    timeSelect.appendChild(option);
+                });
+                
+            } else {
+                // If no times available, inform the user
+                const option = document.createElement('option');
+                option.value = '';
+                option.textContent = 'No available times for this date';
+                timeSelect.appendChild(option);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching available times:', error);
+        });
+}

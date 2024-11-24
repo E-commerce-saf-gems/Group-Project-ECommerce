@@ -2,13 +2,7 @@
 include '../../database/db.php';
 
 // Corrected SQL query syntax
-$ssql = "SELECT 
-            amount, 
-            type, 
-            origin,
-            description,
-            image, 
-            size 
+$ssql = "SELECT *
         FROM inventory
         WHERE visibility = 'show' && availability = 'available'";
 
@@ -47,7 +41,7 @@ if (!$result) {
                 <h3>Sort By</h3>
                 <label for="sort">Sort By:</label>
                 <select id="sort">
-                    <option value="best-match">Best Match</option>
+                    <option value="new-arrival">New Arrival</option>
                     <option value="price-low-to-high">Price: Low to High</option>
                     <option value="price-high-to-low">Price: High to Low</option>
                 </select>
@@ -89,7 +83,7 @@ if (!$result) {
 
         <!-- Main content area with product catalog -->
         <main class="product-catalog">
-                <?php while ($row = $result->fetch_assoc()) : ?>
+            <?php while ($row = $result->fetch_assoc()) : ?>
             <div class="shop-card">
                 <div class="card-banner">
                 <img 
@@ -109,8 +103,11 @@ if (!$result) {
                 <div class="card-content">
                     <div class="price">$<?php echo number_format($row['amount'], 2); ?></div>
                     <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['type']); ?></a></h3>
-                    <p class="rating-text"><?php echo htmlspecialchars($row['description']); ?> - <?php echo $row['size']; ?> Carats</p>
-                    <a href="../../pages/Stones/viewmore.php"><span class="btn btn-primary">View More</span></a>
+                    <p class="rating-text"><?php echo htmlspecialchars($row['description']); ?> - <?php echo $row['origin']; ?> </p>
+                    <?php
+                    echo "<a href='./viewmore.php?id=" . $row['stone_id'] . "' class='btn btn-primary'>";
+                    ?> View More</a>
+
                 </div>
             </div>
         <?php endwhile; ?>

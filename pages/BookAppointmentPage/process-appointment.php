@@ -1,54 +1,52 @@
 <?php
-// Include database connection
-include '../../database/db.php';  // Adjust the path to match the location of db.php relative to this file
+session_start();
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-
-// Initialize variables for form inputs
-$appointmentType = "";
-$meetingDate = "";
-$meetingTime = "";
-$participantName = "";
-$customerID = 1; 
-$participantEmail = "";
-$status = 'P';  // Default status
-
-$errorMessage = "";
-$successMessage = "";
-
-// Check if form is submitted via POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize the input
-    $appointmentType = isset($_POST['appointment']) ? htmlspecialchars(trim($_POST['appointment'])) : '';
-    $meetingDate = isset($_POST['date']) ? htmlspecialchars(trim($_POST['date'])) : '';
-    $meetingTime = isset($_POST['time']) ? htmlspecialchars(trim($_POST['time'])) : '';
-    //$participantName = isset($_POST['name']) ? htmlspecialchars(trim($_POST['name'])) : '';
-    //$participantEmail = isset($_POST['email']) ? htmlspecialchars(trim($_POST['email'])) : '';
-
-    // Basic validation
-    if (empty($appointmentType) || empty($meetingDate) || empty($meetingTime) ) {
-        $errorMessage = "All fields are required.";
-    } else {
-        // Construct the SQL query
-        $sql = "INSERT INTO meeting (type, date, time, customer_id) 
-                VALUES ('$appointmentType', '$meetingDate', '$meetingTime','$customerID')";
-
-        echo $sql;
-
-        // Execute the query
-        if ($conn->query($sql) === TRUE) {
-            $successMessage = "Your meeting request has been submitted successfully!";
-            echo $successMessage ;
-        } else {
-            $errorMessage = "Error: " . $conn->error;
-            echo $errorMessage ;
-        }
-    }
+if (!isset($_SESSION['customer_id'])) {
+    header("Location: ../Login/login.php?notloggedIn=1");
+    exit;
 }
 
-// Close the database connection
-$conn->close();
+include '../../database/db.php';
+
+$customerID = $_SESSION['customer_id'];
+$availableTime_id = $_POST['time'] ?? null;
+$appointment_type = $_POST['appointment'] ?? null;
+
+if ($availableTime_id) {
+    try {
+        // Insert the meeting into the meeting table
+        $sql = "INSERT INTO meeting (customer_id, availableTimes_id, type) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iis", $customerID, $availableTime_id, $appointment_type);
+
+        if ($stmt->execute()) {
+            // After inserting the appointment, update the availability in availabletimes table to 'reserved'
+            $updateSql = "UPDATE availabletimes SET availability = 'reserved' WHERE availableTimes_id = ?";
+            $updateStmt = $conn->prepare($updateSql);
+            $updateStmt->bind_param("i", $availableTime_id);
+
+            if ($updateStmt->execute()) {
+                // Successfully updated availability to 'reserved'
+                header("Location: ./submit-appointment.php?success=1");
+            } else {
+                // Error updating availability
+                header("Location: ./submit-appointment.php?error=updateFailed");
+            }
+
+            $updateStmt->close();
+        } else {
+            // Error inserting appointment into meeting table
+            header("Location: ./submit-appointment.php?error=1");
+        }
+
+        $stmt->close();
+    } catch (Exception $e) {
+        error_log("Error processing appointment: " . $e->getMessage());
+        header("Location: ./submit-appointment.php?error=1");
+    }
+
+    $conn->close();
+} else {
+    header("Location: ./submit-appointment.php?error=invalidTime");
+}
 ?>

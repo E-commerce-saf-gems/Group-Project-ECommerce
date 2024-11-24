@@ -74,13 +74,12 @@ if (!$result) {
                     <option value="green">Green</option>
                     <option value="clear">Clear</option>
                 </select>
-                <label for="clarity">Clarity:</label>
-                <select id="clarity">
-                    <option value="flawless">Flawless</option>
-                    <option value="vs1">VS1</option>
-                    <option value="vs2">VS2</option>
-                    <option value="si1">SI1</option>
-                    <option value="si2">SI2</option>
+                <label for="origin">Origin</label>
+                <select id="origin">
+                    <option value="srilanka">Sri Lanka</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Dubai">Dubai</option>
+                    <option value="Africa">Africa</option>
                 </select>
                 <label for="price-range">Price Range:</label>
                 <input type="number" id="min-price" placeholder="Min" min="0" step="50">
@@ -111,7 +110,7 @@ if (!$result) {
                     <div class="price">$<?php echo number_format($row['amount'], 2); ?></div>
                     <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['type']); ?></a></h3>
                     <p class="rating-text"><?php echo htmlspecialchars($row['description']); ?> - <?php echo $row['size']; ?> Carats</p>
-                    <a href="../../pages/Stones/viewmore.html"><span class="btn btn-primary">View More</span></a>
+                    <a href="../../pages/Stones/viewmore.php"><span class="btn btn-primary">View More</span></a>
                 </div>
             </div>
         <?php endwhile; ?>

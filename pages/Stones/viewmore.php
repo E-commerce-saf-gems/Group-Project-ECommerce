@@ -1,3 +1,28 @@
+<?php
+include('../../../database/db.php'); 
+
+if (isset($_GET['id'])) {
+    $stone_id = $_GET['id'];
+
+    $sql = "SELECT * FROM inventory WHERE stone_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $stone_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+    } else {
+        echo "No record found";
+        exit;
+    }
+} else {
+    echo "No ID specified";
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -155,16 +180,16 @@
     <div class="container">
         <div class="product-detail" id="product-detail">
             <div class="product-image">
-                <img src="../../assets/images/stone1.jpg" alt="Corn Blue Sapphire" loading="lazy">
+            <img src="http://localhost/Business-Dashboard/uploads/ <?php echo htmlspecialchars($row['image']); ?>" alt="Stone Image" />
             </div>
             <div class="product-info">
-                <h2>Corn Blue Sapphire</h2>
-                <div class="price" id="current-price">$2000.00</div>
+                <h2><?php echo $row['type'];?></h2>
+                <div class="price" id="amount"><?php echo $row['amount'];?></div>
                 <div class="details">
-                    <p>Unheated 5.5 Carats</p>
-                    <p>Color: Blue</p>
-                    <p>Clarity: VS1</p>
-                    <p>Shape: Oval</p>
+                    <p><?php echo $row['description'];?></p>
+                    <p>Color: <?php echo $row['colour'];?></p>
+                    <p>Shape: <?php echo $row['shape'];?></p>
+                    <p>Amount: <?php echo $row['amount'];?>/p>
                 </div>
                 <button class="btn" onclick="viewCertificate()">View Certificate</button>   
                 <button class="btn" onclick="addtocart()">Add to cart</button>            
@@ -178,7 +203,7 @@
     <!-- Modal for displaying the certificate -->
     <div class="bid-confirmation" id="bid-confirmation">
         <h3>Certificate</h3>
-        <img src="../../assets/images/certificate.jpg" alt="Certificate">
+        <img src="http://localhost/Business-Dashboard/uploads/ <?php echo htmlspecialchars($row['certificate']); ?>" alt="Stone Image" />
         <div>
             <button onclick="closeModal()">Close</button>
             <button onclick="openInNewTab()">Open in New Tab</button>
@@ -201,7 +226,7 @@
 
         // Function to open the certificate image in a new tab
         function openInNewTab() {
-            const imageUrl = '../../assets/images/certificate.jpg';
+            const imageUrl = 'http://localhost/Business-Dashboard/uploads/';
             window.open(imageUrl, '_blank');
         }
 
@@ -210,51 +235,51 @@
         function addtocart() {
             alert(" You can add gems here.");
         }
-        function viewmore() {
-            // Check if a shop-card-container already exists; if not, create it
-            let cardContainer = document.querySelector('.shop-card-container');
-            if (!cardContainer) {
-                cardContainer = document.createElement('div');
-                cardContainer.classList.add('shop-card-container');
-                document.querySelector('.container').appendChild(cardContainer);
-            }
+        // function viewmore() {
+        //     // Check if a shop-card-container already exists; if not, create it
+        //     let cardContainer = document.querySelector('.shop-card-container');
+        //     if (!cardContainer) {
+        //         cardContainer = document.createElement('div');
+        //         cardContainer.classList.add('shop-card-container');
+        //         document.querySelector('.container').appendChild(cardContainer);
+        //     }
         
-            // Array of stones to dynamically add (you can add more objects if needed)
-            const stones = [
-                { img: '../../assets/images/stone1.jpg', price: '$2000.00', title: 'Corn Blue Sapphire', description: 'Unheated 5.5 Carats' },
-                { img: '../../assets/images/stone5.png', price: '$2000.00', title: 'Corn Blue Sapphire', description: 'Unheated 5.5 Carats' },
-                { img: '../../assets/images/stone6.png', price: '$2000.00', title: 'Corn Blue Sapphire', description: 'Unheated 5.5 Carats' }
-            ];
+        //     // Array of stones to dynamically add (you can add more objects if needed)
+        //     const stones = [
+        //         { img: '../../assets/images/stone1.jpg', price: '$2000.00', title: 'Corn Blue Sapphire', description: 'Unheated 5.5 Carats' },
+        //         { img: '../../assets/images/stone5.png', price: '$2000.00', title: 'Corn Blue Sapphire', description: 'Unheated 5.5 Carats' },
+        //         { img: '../../assets/images/stone6.png', price: '$2000.00', title: 'Corn Blue Sapphire', description: 'Unheated 5.5 Carats' }
+        //     ];
         
-            // Loop through each stone and create a new shop card
-            stones.forEach(stone => {
-                const shopCard = document.createElement('div');
-                shopCard.classList.add('shop-card');
-                shopCard.innerHTML = `
-                    <div class="card-banner">
-                        <img src="${stone.img}" alt="${stone.title}" style="width: 100%; height: auto;" />
-                        <div class="card-actions">
-                            <button class="action-btn btn" aria-label="bid now">
-                                <ion-icon name="hammer-outline" aria-hidden="true"></ion-icon>
-                            </button>
-                            <button class="action-btn btn" aria-label="view more">
-                                <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <div class="price">${stone.price}</div>
-                        <h3><a href="#" class="card-title">${stone.title}</a></h3>
-                        <p class="rating-text">${stone.description}</p>
-                        <a href="../../pages/Stones/viewmore.html"><span class="btn btn-primary">View More</span></a>
+        //     // Loop through each stone and create a new shop card
+        //     stones.forEach(stone => {
+        //         const shopCard = document.createElement('div');
+        //         shopCard.classList.add('shop-card');
+        //         shopCard.innerHTML = `
+        //             <div class="card-banner">
+        //                 <img src="${stone.img}" alt="${stone.title}" style="width: 100%; height: auto;" />
+        //                 <div class="card-actions">
+        //                     <button class="action-btn btn" aria-label="bid now">
+        //                         <ion-icon name="hammer-outline" aria-hidden="true"></ion-icon>
+        //                     </button>
+        //                     <button class="action-btn btn" aria-label="view more">
+        //                         <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
+        //                     </button>
+        //                 </div>
+        //             </div>
+        //             <div class="card-content">
+        //                 <div class="price">${stone.price}</div>
+        //                 <h3><a href="#" class="card-title">${stone.title}</a></h3>
+        //                 <p class="rating-text">${stone.description}</p>
+        //                 <a href="../../pages/Stones/viewmore.html"><span class="btn btn-primary">View More</span></a>
 
-                    </div>
-                `;
+        //             </div>
+        //         `;
         
-                // Append the new shop card to the card container
-                cardContainer.appendChild(shopCard);
-            });
-        }
+        //         // Append the new shop card to the card container
+        //         cardContainer.appendChild(shopCard);
+        //     });
+        // }
         
     </script>
 

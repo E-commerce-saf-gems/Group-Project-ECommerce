@@ -1,99 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
-@import url('/components/header/header.css');
-@import url('/components/footer/footer.css');
-
-
-
-/*-----------------------------------*\
-  #style.css
-\*-----------------------------------*/
-
-/*-----------------------------------*\
-  #MOBILE NAVBAR
-\*-----------------------------------*/
-
-.sidebar { 
-  z-index: 5; 
-}
-
-.mobile-navbar {
-  background-color: var(--white);
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  max-width: 350px;
-  width: 100%;
-  padding: 25px 40px;
-  z-index: 6;
-  transform: translateX(-100%);
-  visibility: hidden;
-  transition: 0.25s var(--cubic-in);
-}
-
-.mobile-navbar.active {
-  visibility: visible;
-  transform: translateX(0);
-  transition: 0.4s var(--cubic-out);
-}
-
-.mobile-navbar .wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-block-end: 55px;
-}
-
-.nav-close-btn {
-  font-size: 28px;
-  color: var(--hoockers-green);
-}
-
-.nav-close-btn ion-icon { --ionicon-stroke-width: 40px; }
-
-.mobile-navbar .navbar-link {
-  color: var(--black);
-  font-size: var(--fs-8);
-  text-transform: uppercase;
-  font-weight: var(--fw-600);
-  letter-spacing: 1px;
-  padding: 5px 0;
-  transition: var(--transition-1);
-}
-
-.mobile-navbar .navbar-link:is(:hover, :focus) { color: var(--teal); }
-
-.overlay {
-  background-color: transparent;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 5;
-  pointer-events: none;
-  transition: var(--transition-1);
-}
-
-.overlay.active {
-  background-color: var(--black_50);
-  pointer-events: all;
-}*/
-
-/*CONTENT.CSS  FOR CONTACT US PAGE*/
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  text-decoration: none;
-}
-
-
-body,
-input,
-textarea {
-  font-family: "Poppins", sans-serif;
-}
 
 .container1 {
   position: relative;
@@ -109,7 +13,7 @@ textarea {
 .form {
   width: 100%;
   max-width: 1200px;
-  background-color: #bbfadb;
+  background-color: #FFFFFF;
   border-radius: 10px;
   box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.1);
   z-index: 1000;
@@ -119,7 +23,7 @@ textarea {
 }
 
 .contact-form {
-  background-color: #1abc9c;
+  background-color: #449f9f;
   position: relative;
   
 }
@@ -129,7 +33,7 @@ textarea {
   position: absolute;
   width: 26px;
   height: 26px;
-  background-color: #bbfadb;
+  background-color: #FFFFFF;
   transform: rotate(45deg);
   top: 60px;
   left: -13px;
@@ -144,7 +48,6 @@ form {
 
 .title {
   color: #fff;
-  font-weight: 500;
   font-size: 1.5rem;
   line-height: 1;
   margin-bottom: 0.7rem;
@@ -162,8 +65,7 @@ form {
   background: none;
   padding: 0.6rem 1.2rem;
   color: #fff;
-  font-weight: 500;
-  font-size: 0.95rem;
+
   letter-spacing: 0.5px;
   border-radius: 25px;
   transition: 0.3s;
@@ -184,8 +86,6 @@ textarea.input {
   transform: translateY(-50%);
   padding: 0 0.4rem;
   color: #fafafa;
-  font-size: 0.9rem;
-  font-weight: 400;
   pointer-events: none;
   z-index: 1000;
   transition: 0.5s;
@@ -200,8 +100,7 @@ textarea.input {
   padding: 0.6rem 2rem;
   background-color: #fff;
   border: 2px solid #fafafa;
-  font-size: 1.2rem;
-  color: #1abc9c;
+  color: #449f9f;
   line-height: 1;
   border-radius: 15px;
   outline: none;
@@ -214,7 +113,7 @@ textarea.input {
 
 .btn {
     padding: 0.6rem 1.3rem;
-    background-color: #0e745c;
+    background-color: #449f9f;
     border: 2px solid #fafafa;
     font-size: 0.95rem;
     color: #f3fdfb;
@@ -229,7 +128,7 @@ textarea.input {
 .btn:hover {
   background-color: transparent;
   color: #0d0d0d;
-  border: 2px solid #0e745c;
+  border: 2px solid #449f9f;
 }
 
 
@@ -239,8 +138,6 @@ textarea.input {
   top: 0;
   left: 25px;
   transform: translateY(-50%);
-  font-size: 0.8rem;
-  padding: 0 0.4rem;
   color: transparent;
   pointer-events: none;
   z-index: 500;
@@ -254,7 +151,7 @@ textarea.input {
   opacity: 0;
   transition: 0.3s;
   height: 5px;
-  background-color: #1abc9c;
+  background-color: #449f9f;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -283,6 +180,7 @@ textarea.input {
 .contact-info {
   padding: 2.3rem 2.2rem;
   position: relative;
+  font-size: 15;
 }
 
 .appintment {
@@ -293,17 +191,18 @@ textarea.input {
 
 
 .contact-info .title {
-  color: #057257fc;
+  color: #449f9f;
 }
 
 .text {
-  color: #333;
+  color: #000000;
   margin: 1.5rem 0 2rem 0;
 }
 
 .information {
   display: flex;
   color: #555;
+  font-size: 10px;
   margin: 0.7rem 0;
   align-items: center;
   font-size: 0.95rem;
@@ -319,34 +218,40 @@ textarea.input {
 }
 
 .social-media p {
-  color: #333;
+  color: black;
 }
 
 .social-icons {
   display: flex;
   margin-top: 1rem;
-  margin-bottom: 2rem
+  margin-bottom: 2rem;
 }
 
 .social-icons a {
   width: 35px;
   height: 35px;
   border-radius: 5px;
-  background:  #f5f8f7;
-  color: #fffcfc;
+  background: #f5f8f7;  
+  color: #000000; 
   text-align: center;
   line-height: 35px;
   margin-right: 0.5rem;
   transition: 1s;
 }
 
-.social-icons a:hover {
-  transform: scale(1.15);
+.social-icons i {
+  font-size: 20px; 
+  color: #000000; 
 }
 
+.social-icons a:hover {
+  transform: scale(1.15);
+  background: #dcdcdc; 
+}
 
-
-
+.social-icons a:hover i {
+  color: #ffffff; 
+}
 
 /*-----------------------------------*\
   #MEDIA QUERIES

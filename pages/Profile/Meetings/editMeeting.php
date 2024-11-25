@@ -1,27 +1,23 @@
 <?php
-include('../../../database/db.php'); // Include your database connection here
+include('../../../database/db.php');
 
-// Check if request_id is provided in the URL
-if (isset($_GET['id'])) {
-    $meeting_id = $_GET['id'];
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-    // Fetch the record from the database
-    $sql = "SELECT * FROM meeting WHERE meeting_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $meeting_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+$meetingId = $_GET['id'];
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-    } else {
-        echo "No record found";
-        exit;
-    }
-} else {
-    echo "No ID specified";
-    exit;
-}
+// Fetch the meeting details
+$query = "SELECT meeting_id, availableTimes_id FROM meeting WHERE meeting_id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $meetingId);
+$stmt->execute();
+$result = $stmt->get_result();
+$meeting = $result->fetch_assoc();
+
+// Fetch available time slots (those with 'available' status)
+$timeSlotsQuery = "SELECT availableTimes_id, date, time FROM availabletimes WHERE availability = 'available'";
+$timeSlotsResult = $conn->query($timeSlotsQuery);
 ?>
 
 <!DOCTYPE html>
@@ -39,10 +35,13 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preload" as="image" href="./assets/images/logo.png">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <title>Edit Request Gems</title>
+
+
+
+    <title>Edit Meeting</title>
 </head>
 <body>
-    <custom-header></custom-header>
+<custom-header></custom-header>
     <div class="profile-container profile-h1">
         <div class="profile-sidebar">
             <h2>Hello</h2>
@@ -59,66 +58,33 @@ if (isset($_GET['id'])) {
         </div>
 
         <div class="main-content">
-            <h1>Edit Meeting</h1>
-            <h2>Enter Details</h2>
-            <div class="tab-content">
-                <form class="edit-sales-form" id="editGemsForm" action="./updateMeeting.php" method="POST">
-                    <input type="hidden" name="meeting_id" value="<?php echo $meeting_id; ?>">
+    <h1>Edit Meeting</h1>
+    <div class="tab-content">
+    <form method="POST" action="updateMeeting.php">
+        <input type="hidden" name="meeting_id" value="<?php echo $meeting['meeting_id']; ?>">
+        <div class="form-group">
+        <input type="hidden" name="currentAvailableTime_id" value="<?php echo $meeting['availableTimes_id']; ?>">
 
+        <label for="availableTimes_id">Choose a new date and time:</label>
+        <select name="availableTimes_id" required>
+            <?php while ($slot = $timeSlotsResult->fetch_assoc()) : ?>
+                <option value="<?php echo $slot['availableTimes_id']; ?>">
+                    <?php echo $slot['date'] . ' ' . $slot['time']; ?>
+                </option>
+            <?php endwhile; ?>
+        </select>
+        <div class="form-group">
+        <input type="hidden" name="currentAvailableTime_id" value="<?php echo $meeting['availableTimes_id']; ?>">
 
-                    <div class="form-group">
-                    <label for="appointment">Appintment Type :</label>
-                    <select id="appointment" name="appointment">
-                    <option value="">Select a Appointment Type</option>
-              <option value="online" <?php if ($row['type'] === 'online') echo 'selected'; ?>>Online</option>
-              <option value="physical" <?php if ($row['type'] === 'physical') echo 'selected'; ?>>Physical</option>
-            </select>
+        
             </div>
-
-                   
-
-                    <div class="form-group">
-                        <label for="date">date</label>
-                        <input type="date" id="date" name="date" value="<?php echo $row['date']; ?> required>
-                    </div>
-
-                     <div class="form-group">
-                     <label for="time">Time:</label>
-                    
-            <select id="time" name="time" required>
-            
-                <option value="14:30" <?php if ($row['time'] === '14:30') echo 'selected'; ?>>14:30</option>
-                <option value="15:30" <?php if ($row['time'] === '15:30') echo 'selected'; ?>>15:30</option>
-                <option value="16:30" <?php if ($row['time'] === '16:30') echo 'selected'; ?>>16:30</option>
-                <option value="17:30" <?php if ($row['time'] === '17:30') echo 'selected'; ?>>17:30</option>
-                <option value="18:30" <?php if ($row['time'] === '18:30') echo 'selected'; ?>>18:30</option>
-                <option value="19:30" <?php if ($row['time'] === '19:30') echo 'selected'; ?>>19:30</option>
-                <option value="20:30" <?php if ($row['time'] === '20:30') echo 'selected'; ?>>20:30</option>
-</select>
-                    </div>
-
-
-                    <?php if ($row['status'] === 'P') { ?>
-                        <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">
-                                <i class='bx bx-save'></i> Save Changes
-                            </button>
-                        </div>
-                    <?php } else { ?>
-                        <script>
-                            document.querySelectorAll('input, select').forEach(input => input.disabled = true);
-                        </script>
-                    <?php } ?>
-                </form>
+            <div class="form-actions">
+        <button type="submit"   class="btn btn-primary">Save Changes</button>
             </div>
-        </div>
-    </div>
-
-    <script src="../profile.js"></script>
-    <script src="../../../components/profileHeader/header.js"></script>
-    <script src="../../../components/footer/footer.js"></script>
-    
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+            </div>
+    </form>
+            </div>
 </body>
 </html>
+
+<?php $conn->close(); ?>

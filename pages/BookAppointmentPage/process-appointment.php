@@ -9,8 +9,8 @@ if (!isset($_SESSION['customer_id'])) {
 include '../../database/db.php';
 
 $customerID = $_SESSION['customer_id'];
-$availableTime_id = $_POST['time'] ?? null;
-$appointment_type = $_POST['appointment'] ?? null;
+$availableTime_id = $_POST['time'] ?? null;  
+$appointment_type = $_POST['appointment'] ?? null;  
 
 if ($availableTime_id) {
     try {
@@ -42,7 +42,7 @@ if ($availableTime_id) {
         $stmt->close();
     } catch (Exception $e) {
         error_log("Error processing appointment: " . $e->getMessage());
-        header("Location: ./submit-appointment.php?error=1");
+        header("Location: ./submit-appointment.php?error=2");
     }
 
     $conn->close();

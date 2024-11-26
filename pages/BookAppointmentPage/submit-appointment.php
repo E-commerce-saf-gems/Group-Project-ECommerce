@@ -33,7 +33,6 @@ $conn->close();
     <title>SAF Gems Book Appointment</title>
     <link rel="stylesheet" href="../RegisterPage/register.css" />
     <link rel="stylesheet" href="../../components/header/header.css">
-    <link rel="stylesheet" href="../../components/footer/footer.css">
     <link rel="stylesheet" href="./appointment.css" /> 
     <link rel="stylesheet" href="../../styles/common.css">
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -78,9 +77,7 @@ $conn->close();
             </form>
         </div>
     </main>
-    <custom-footer></custom-footer>
     <script src="../../components/header/header.js"></script>
-    <script src="../../components/footer/footer.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="./appointment.js"></script>

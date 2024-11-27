@@ -11,9 +11,7 @@
     
 
     <div>
-      
-      <h1>FORGOT PASSWORD ?</h1>
-      <form action="login.php" method="get>
+      <form action="login.php" method="get">
         <label for="email">Email Address : </label>
         <input
           type="email"

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link rel="stylesheet" href="./register.css" />
+    <link rel="stylesheet" href="/components/header/header.css">
+  </head>
+  <body>
+      <form action="./register.php" method="post" enctype="multipart/form-data">
+        <div class="alert">
+          
+        </div>
+        <h1>Create Your Saf Gems Account</h1>
+        <br>
+        <label for="title">Title :</label>
+        <select id="title" name="title">
+          <option value="Mr">Mr</option>
+          <option value="Mrs">Mrs</option>
+          <option value="Ms">Ms</option>
+        </select>
+        <br />
+        <label for="firstName">First Name :</label>
+        <input name="firstName" type="text" id="first-name" placeholder="Enter first name" required/>
+        <br />
+
+        <label for="last-name">Last Name :</label>
+        <input name="lastName" type="text" id="last-name" placeholder="Enter last name" required/>
+        <br />
+
+        <label for="email">Email Address :</label>
+        <input name="email" type="email" id="email" placeholder="Enter email address" required
+        />
+        <span id ="email-error" class="error-msg"></span>
+        <br />
+
+        <label for="password">Password :</label>
+        <input  name="password"  type="password" id="password" placeholder="Enter password" required/>
+        <span id="password-error" class="error-msg"></span>
+        <br />
+
+        <label for="confirm-password">Re-enter password :</label>
+        <input name="confirm_password" type="password" id="confirm-password" placeholder="Re-enter password" required/>
+
+        <span id="password-error" class="error-msg"></span>
+        <br/>
+
+          <label for="gender">Gender :</label>
+          <select id="gender" name="gender">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
+          <br/>
+        
+          <label for="dob">Date of Birth :</label>
+          <input type="date" name="dob" id="dob" placeholder="MM/DD/YY" required/>
+          <span id="dob-error" class="error-msg"></span>
+          <br/>
+
+          <label for="phone">Phone Number :</label>
+          <input name="phone" type="tel" id="phone" placeholder="Enter Phone Number" required/>
+          <span id="phone-error" class="error-msg"></span> 
+          <br/>
+
+        <h2>Your Address</h2>
+        <label for="address1">Address line one :</label>
+        <input name="address1" type="text" id="address1" placeholder="Enter address line one " required/>
+        <br/>
+
+        <label for="address2">Address line two :</label>
+        <input name="address2" type="text" id="address2" placeholder="Enter address line two " required/>
+        <br/>
+
+        <label for="city">City/Town :</label>
+        <input name="city" type="text" id="city" placeholder="Enter City/Town " required />
+        <br/>
+
+        <label for="country">Country :</label>
+        <input name="country" id="country" placeholder="Enter Country " required />
+        <br/>
+
+        <label for="postal-code">Postal Code :</label>
+        <input name="postal_code" type="text" id="postal-code" placeholder="Enter postal code " required/>
+        <br/>
+
+
+      <h2>Identity Verification</h2>
+        <label for="nic">NIC-No :</label>
+        <input  name="nic"  type="text"  id="nic"  placeholder="Enter your NIC number"  required/>
+        <span id="nic-error" class="error-msg"></span> 
+        <br/>
+
+        <label for="id-copy">NIC / Driving License / Passport Copy:</label>
+        <input type="file" id="id-copy" name="id_copy" accept=".pdf,.jpg,.jpeg,.png" required/>
+        <br/>
+
+        <label for="photo">Upload a Photo:</label>
+        <div class="video-wrap">
+          <video id="video" playsinline autoplay></video>
+          <div class="controller">
+            <button type="button" id="snap">Capture</button>
+          </div>
+        </div>
+
+        <canvas id="canvas" width="200" height="150" style="display: none;"></canvas>
+        <input type="hidden" id="photo" name="photo" />
+        <br/>
+
+        <div class="button-section">
+          <button type="button" onclick="prevStep(3)">CANCEL</button>
+          <button type="submit">Complete Registration</button>
+        </div>
+      </form>
+    </div>
+    <span id="spanErrorMsg" style="color: red;"></span>
+    <script src="register.js"></script>
+    <script src="/components/header/header.js"></script>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Appointment</title>
+    <link rel="stylesheet" href="../../components/header/header.css">
+    <link rel="stylesheet" href="appointment.css" />
+    <link rel="stylesheet" href="../../styles/common.css">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+   
+</head>
+<body>
+    <custom-header></custom-header>
+    <h1>Book Appointment</h1>
+    <div class="container-bookAppointment">
+        <!-- section-bookAppointment to select appointment type -->
+        <div class="section-bookAppointment">
+            <h3>Select Appointment Type</h3>
+            <div class="appointment-type">
+                <label>
+                    <input type="radio" name="appointmentType" value="Online" checked />
+                    <span>Online Appointment</span>
+                </label>
+                <label>
+                    <input type="radio" name="appointmentType" value="Physical" />
+                    <span>Physical Appointment</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- section-bookAppointment--bookAppointment to select date and time -->
+        <div class="calendar-section-bookAppointment">
+            <h3>Select Date & Time</h3>
+            <form action="./submit-appointment.html" method="get">
+                <label for="date">Date:</label>
+                <input type="date" name="date" id="date" required />
+                <br />
+
+                <!-- Time slots will be displayed based on appointment type -->
+                <div class="time-slots">
+                    <button type="button" class="time-slot">14:30</button>
+                    <button type="button" class="time-slot">15:30</button>
+                    <button type="button" class="time-slot">16:30</button>
+                    <button type="button" class="time-slot">17:30</button>
+                    <button type="button" class="time-slot">18:30</button>
+                    <button type="button" class="time-slot">19:30</button>
+                    <button type="button" class="time-slot">20:30</button>
+                    <button type="button" class="time-slot">21:30</button>
+                </div>
+
+                <input type="hidden" name="time" id="selectedTime" required />
+                <input type="hidden" name="appointmentType" id="selectedAppointmentType" value="Online" />
+
+                <a href="./submit-appointment.html" class="btn btn-primary">Confirm </a>
+            </form>
+        </div>
+    </div>
+    <script src="../../components/header/header.js"></script>
+    <script>
+        // JavaScript to handle appointment type and time slot selection
+        const appointmentTypeRadios = document.querySelectorAll('input[name="appointmentType"]');
+        const timeSlots = document.querySelectorAll('.time-slot');
+        const selectedTimeInput = document.getElementById('selectedTime');
+        const selectedAppointmentType = document.getElementById('selectedAppointmentType');
+
+        // Update selected appointment type based on user selection
+        appointmentTypeRadios.forEach(radio => {
+            radio.addEventListener('change', function () {
+                selectedAppointmentType.value = this.value;
+            });
+        });
+
+        // Add click event to each time slot button
+        timeSlots.forEach(slot => {
+            slot.addEventListener('click', function () {
+                // Remove active class from all slots and add to the clicked one
+                timeSlots.forEach(s => s.classList.remove('active'));
+                this.classList.add('active');
+                selectedTimeInput.value = this.textContent;
+            });
+        });
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+   
+   
+</body>
+</html>

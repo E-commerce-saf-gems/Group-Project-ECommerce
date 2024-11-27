@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bid Now</title>
+    <link rel="stylesheet" href="biddingstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div class="top">
+        <h1><span style="margin-right: 50px; color: #0e745c;">WELCOME!</span>to the Gem Auction Extravaganza!</h1>
+        
+        <div class="auction-description">
+            <div class="auction-description-details" >
+                <p>Discover exquisite gems and rare stones through our exciting auction platform. Join now to bid on stunning gemstones and experience the thrill of the auction.</p>
+            </div>
+        </div>
+        
+        <!-- Process Flow -->
+        <section id="process-flow">
+            <h2>How It Works</h2>
+            <div class="flow-chart">
+                <div class="step" id="step1">
+                    <div class="flowtooltip">
+                        <span class="flowtooltiptext">Register or log in to your account.</span>
+                    </div>
+                    <p>1. Register or Login</p>
+                </div>
+                <div class="step" id="step2">
+                    <div class="flowtooltip">
+                        <span class="flowtooltiptext">Browse the available gemstones and choose the one you want to bid on.</span>
+                    </div>
+                    <p>2. Browse Gemstones</p>
+                </div>
+                <div class="step" id="step3">
+                    <div class="flowtooltip">
+                        <span class="flowtooltiptext">Place your bid on the gemstone of your choice.</span>
+                    </div>
+                    <p>3. Place Your Bid</p>
+                </div>
+                <div class="step" id="step4">
+                    <div class="flowtooltip">
+                        <span class="flowtooltiptext">If you win, follow the instructions for payment and shipping.</span>
+                    </div>
+                    <p>4. Payment & Shipping</p>
+                </div>
+            </div>
+        </section>
+        <!-- Auction Conditions -->
+        <section id="conditions">
+            <h2>Conditions & Restrictions</h2>
+            <ul>
+                <li>All bidders must be registered and verified to participate in the auction.</li>
+                <li>Sellers must complete the item listing form with accurate details.</li>
+                <li>Minimum bid increments are set for each auction item.</li>
+                <li>The auction house reserves the right to disqualify any participant who violates the rules.</li>
+                <li>Payment must be completed within 48 hours of winning an auction.</li>
+            </ul>
+        </section>
+        
+        
+        
+        
+        <div class="auction">
+            <!-- The image source will be dynamically changed using JavaScript -->
+            <img id="gemImage" src="assets/images/default.jpg" alt="Gem Image">
+    
+            <div class="auction-details">
+                <h3 id="gemName">Gem Name</h3>
+                <p id="gemDescription">Description of the item goes here.</p>
+                <h3>Gem Name:</h3><p id="gemLastBidValue">$0.00</p>
+                
+                
+                <div class="auction-form">
+                    <!-- Countdown Timer Section -->
+                    <i class="fa fa-hourglass" aria-hidden="true"><span style="color: rgb(10, 150, 126); font-family: 'Times New Roman', Times, serif; margin-bottom: 20px; margin-left: 10px;">Bid Now! The clock is ticking.</span></i>
+                    
+                    <div class="timer">
+                        <div class="sub_timer">
+                            <h1 id="day" class="digit">00</h1>
+                        </div>
+                        <div class="sub_timer">
+                            <h1 id="hour" class="digit">00</h1>
+                        </div>
+                        <div class="sub_timer">
+                            <h1 id="min" class="digit">00</h1>
+                        </div>
+                        <div class="sub_timer">
+                            <h1 id="sec" class="digit">00</h1>
+                        </div>
+                    </div>
+    
+                    <!-- Last Bid Display Box 
+                    <div class="last-bid-box">
+                        <i class="fa fa-usd icon"></i>
+                        <span id="lastBidValue">$0.00</span>
+                    </div>-->
+
+                    <div class="button-group " style="gap: 120px; margin-left: -250px;">
+                        <button class="backbutton"><a href="bidding.html">Back</a></button>
+                        <button class="backbutton" style="background-color: rgb(21, 162, 65);" onclick="placeBid()"><a href="biddingroom.html?gem=gem4&image=assets/images/gem4.jpg">Go To Bidding Room</a></button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="top">
+        <h1 style="border-top: 5px solid chocolate; margin-top: 30PX;">More Bids</h1>
+        <div class="upcomingbid">
+          <!-- Previous Button -->
+          <button class="prevbtn" id="prevBtn">&#10094;</button> <!-- Left arrow icon -->
+      
+          <div class="slider-container">
+            <div class="slider">
+              <div class="bid_item">
+                <img src="/assets/images/stone4.jpg" alt="" class="gem_img">
+                <div class="gem_details">
+                  <h3>Gem name4</h3>
+                  <p class="price">########</p>
+                  <p>Description of gem 4.</p>
+                  <button class="cartbutton"><a href="bidnow.html?gem=gem4"><i class="fa fa-gavel" aria-hidden="true"></i></a></button>
+                </div>
+              </div>
+              <div class="bid_item">
+                <img src="/assets/images/stone5.png" alt="" class="gem_img">
+                <div class="gem_details">
+                  <h3>Gem name4</h3>
+                  <p class="price">########</p>
+                  <p>Description of gem 5.</p>
+                  <button class="cartbutton"><a href="bidnow.html?gem=gem5"><i class="fa fa-gavel" aria-hidden="true"></i></a></button>
+                </div>
+              </div>
+              <div class="bid_item">
+                <img src="/assets/images/stone6.png" alt="" class="gem_img">
+                <div class="gem_details">
+                  <h3>Gem name4</h3>
+                  <p class="price">########</p>
+                  <p>Description of gem 6.</p>
+                  <button class="cartbutton"><a href="bidnow.html?gem=gem6"><i class="fa fa-gavel" aria-hidden="true"></i></a></button>
+                </div>
+              </div>
+              <div class="bid_item">
+                <img src="/assets/images/stone7.png" alt="" class="gem_img">
+                <div class="gem_details">
+                  <h3>Gem name4</h3>
+                  <p class="price">########</p>
+                  <p>Description of gem 7.</p>
+                  <button class="cartbutton"><a href="bidnow.html?gem=gem7"><i class="fa fa-gavel" aria-hidden="true"></i></a></button>
+                </div>
+              </div>
+              <div class="bid_item">
+                <img src="/assets/images/stone8.png" alt="" class="gem_img">
+                <div class="gem_details">
+                  <h3>Gem name4</h3>
+                  <p class="price">########</p>
+                  <p>Description of gem 8.</p>
+                  <button class="cartbutton"><a href="bidnow.html?gem=gem8"><i class="fa fa-gavel" aria-hidden="true"></i></a></button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+      
+          <!-- Next Button -->
+          <button class="nextbtn" id="nextBtn">&#10095;</button> <!-- Right arrow icon -->
+        </div>
+    </div>
+
+    
+    
+    
+    
+    <!-- ****JavaScript to dynamically change the image based on the selected gem**** -->
+    
+    <script>
+        // Function to get the value of a query parameter by name
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+    
+        // Function to display gem details
+        function displayGemDetails(gem) {
+            const gems = {
+                'gem1': {
+                    src: 'assets/images/stone1.jpg',
+                    name: 'Gem name1',
+                    description: 'Description of the first item goes here.',
+                    price: '$100.99'
+                },
+                'gem2': {
+                    src: 'assets/images/stone2.jpg',
+                    name: 'Gem name2',
+                    description: 'Description of the second item goes here.',
+                    price: '$105.99'
+                },
+                'gem3': {
+                    src: 'assets/images/stone3.jpg',
+                    name: 'Gem name3',
+                    description: 'Description of the third item goes here.',
+                    price: '$110.99'
+                },
+                'gem4': {
+                    src: 'assets/images/stone4.jpg',
+                    name: 'Gem name4',
+                    description: 'Description of the fourth item goes here.',
+                    price: '$350.99'
+                },
+                'gem5': {
+                    src: 'assets/images/stone5.png',
+                    name: 'Gem name5',
+                    description: 'Description of the fifth item goes here.',
+                    price: '$400.99'
+                },
+                'gem6': {
+                    src: 'assets/images/stone6.png',
+                    name: 'Gem name6',
+                    description: 'Description of the sixth item goes here.',
+                    price: '$450.99'
+                },
+                'gem7': {
+                    src: 'assets/images/stone7.png',
+                    name: 'Gem name7',
+                    description: 'Description of the seventh item goes here.',
+                    price: '$250.99'
+                },
+                'gem8': {
+                    src: 'assets/images/stone8.png',
+                    name: 'Gem name8',
+                    description: 'Description of the eighth item goes here.',
+                    price: '$150.99'
+                },
+                'gem9': {
+                    src: 'assets/images/stone9.png',
+                    name: 'Gem name9',
+                    description: 'Description of the nineth item goes here.',
+                    price: '$300.99'
+                },
+                'gem10': {
+                    src: 'assets/images/stone10.png',
+                    name: 'Gem name10',
+                    description: 'Description of the tenth item goes here.',
+                    price: '$200.99'
+                },
+            };
+    
+            if (gems[gem]) {
+                // Update the page content with the selected gem's details
+                document.getElementById('gemImage').src = gems[gem].src;
+                document.getElementById('gemName').textContent = gems[gem].name;
+                document.getElementById('gemDescription').textContent = gems[gem].description;
+                
+                console.log(gems[gem].price);
+                document.getElementById('gemLastBidValue').textContent = gems[gem].price;
+    
+                // Store the selected gem in local storage
+                localStorage.setItem('selectedGem', gem);
+            }
+        }
+    
+        // Load the corresponding gem details based on the query parameter or local storage
+        window.onload = function() {
+            let gem = getQueryParam('gem');
+    
+            if (!gem) {
+                // If no query parameter, check local storage for the last selected gem
+                gem = localStorage.getItem('selectedGem');
+            }
+    
+            if (gem) {
+                displayGemDetails(gem);
+            } else {
+                console.log('No gem selected.');
+                // Optionally, handle the case where no gem is selected
+            }
+        };
+    
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>

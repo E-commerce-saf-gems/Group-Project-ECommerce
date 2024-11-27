@@ -10,12 +10,7 @@
     <title>Bidding Details</title>
     <style>
         /* Basic styling for the bidding detail page */
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
+        
 
         .product-detail {
             display: flex;
@@ -124,6 +119,105 @@
         .bid-confirmation button:hover {
             background-color: #367a7a;
         }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            align-items: flex-start; /* Align top of both sections */
+        }
+
+        /* Left Section (Gem Details & Bidding) */
+        .left-section {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-image img {
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            background-color: teal;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: rgb(1, 53, 53);
+        }
+
+        /* Right Section (Cycle Info & Timer) */
+        .right-section {
+            width: 35%;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .timer-container {
+            position: relative;
+            margin-top: 30px;
+        }
+
+        /* Circular Timer Style */
+        #countdown-timer {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 5px solid #f0f0f0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -131,40 +225,65 @@
     <custom-header></custom-header>
 
     <div class="container">
-        <div class="product-detail" id="product-detail">
-            <div class="product-image">
-                <img src="../../assets/images/stone1.jpg" alt="Corn Blue Sapphire" loading="lazy">
-            </div>
-            <div class="product-info">
-                <h2>Corn Blue Sapphire</h2>
-                <div class="price" id="current-price">$2000.00</div>
-                <div class="details">
-                    <p>Unheated 5.5 Carats</p>
-                    <p>Color: Blue</p>
-                    <p>Clarity: VS1</p>
-                    <p>Shape: Oval</p>
+        <!-- Left Section: Gem Details and Bidding -->
+        <div class="left-section">
+            <div class="product-detail" id="product-detail">
+                <div class="product-image">
+                    <img src="../../assets/images/stone1.jpg" alt="Corn Blue Sapphire" loading="lazy">
                 </div>
-                <button class="btn" onclick="viewCertificate()">View Certificate</button>
-                <button class="btn" id="bid-now" onclick="openBidConfirmation()">Bid Now</button>
+                <div class="product-info">
+                    <h2>Corn Blue Sapphire</h2>
+                    <div class="price" id="current-price">$2000.00</div>
+                    <div class="details">
+                        <p>Unheated 5.5 Carats</p>
+                        <p>Color: Blue</p>
+                        <p>Clarity: VS1</p>
+                        <p>Shape: Oval</p>
+                    </div>
+                    <button class="btn" onclick="viewCertificate()">View Certificate</button>
+                    <button class="btn" id="bid-now" onclick="openBidConfirmation()">Bid Now</button>
+                </div>
             </div>
         </div>
-
-        <div class="cycle-info">
-            <p>Current Cycle: <span id="cycle-number">1</span></p>
+    
+        <!-- Right Section: Cycle Details and Timer -->
+        <div class="right-section">
+            <div class="cycle-info">
+                <p>Current Cycle: <span id="cycle-number">1</span></p>
+                <div class="timer-container">
+                    <canvas id="countdown-timer"></canvas>
+                    <p>Time Left: <span id="time-left">1:00:00</span></p>
+                </div>
+            </div>
         </div>
     </div>
+    
+    <!-- Modal for Bid Confirmation -->
+    <div id="bid-confirmation-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeBidConfirmation()">&times;</span>
+            <h2>Bid Confirmation</h2>
+            <p>Are you sure you want to bid on this gem?</p>
+            <button onclick="confirmBid()">Yes</button>
+            <button onclick="closeBidConfirmation()">No</button>
+        </div>
+    </div>
+    
 
     <div id="overlay" class="overlay"></div>
 
     <div class="bid-confirmation" id="bid-confirmation">
         <h3>Place Your Bid</h3>
-        <div class="current-bid" id="current-bid">Current Bid: $2000.00</div>
-        <button onclick="incrementBid()">+ $50</button>
-        <button onclick="confirmBid()">Confirm Bid</button>
+        <div class="current-bid" id="start-bid">Starting Bid: Rs.200000.00</div>
+        <div class="current-bid" id="hightest-bid">Current Highest Bid: Rs.200000.00</div>
+        <div class="current-bid" id="current-bid">Your Bid: $2000.00</div>
+        <button onclick="incrementBid50()">+ $50</button>
+        <button onclick="incrementBid100()">+ $100</button>
+        <button onclick="confirmBid()">Confirm My Bid</button>
     </div>
 
     <script>
-        let currentBid = 2000; // Starting bid amount
+        let currentBid = 200000; // Starting bid amount
         let currentCycle = 1; // Initial cycle
         let hasBidThisCycle = false; // Track if the user has bid in the current cycle
 
@@ -186,8 +305,13 @@
         }
 
         // Function to increment the bid by $50
-        function incrementBid() {
+        function incrementBid50() {
             currentBid += 50;
+            updateBidDisplay();
+        }
+
+        function incrementBid100() {
+            currentBid += 100;
             updateBidDisplay();
         }
 
@@ -218,11 +342,12 @@
         }
 
         // Automatically start a new cycle after a delay (for demonstration)
-        setInterval(startNewCycle, 30000); // 30 seconds per cycle
+        setInterval(startNewCycle, 60*60*1000); // 1 hour per cycle
     </script>
 
     <script src="../../components/header/header.js"></script>
     <script src="../../components/footer/footer.js"></script>
+    <script src="./script.js"></script>
 </body>
 
 </html>

@@ -18,6 +18,8 @@
     <custom-header></custom-header>
 
     <div class="container">
+
+        
         <!-- Sidebar for filter and sort options -->
         <aside class="sidebar">
             <h2>Filter & Sort</h2>
@@ -43,6 +45,7 @@
                 <!-- Filter by Shape -->
                 <label for="shape">Shape:</label>
                 <select id="shape">
+                    <option value="all">All</option>
                     <option value="round">Round</option>
                     <option value="oval">Oval</option>
                     <option value="pear">Pear</option>
@@ -53,6 +56,7 @@
                 <!-- Filter by Color -->
                 <label for="color">Color:</label>
                 <select id="color">
+                    <option value="all">All</option>
                     <option value="blue">Blue</option>
                     <option value="yellow">Yellow</option>
                     <option value="pink">Pink</option>
@@ -60,9 +64,28 @@
                     <option value="clear">Clear</option>
                 </select>
 
+                <!-- Filter by Type -->
+                <label for="type">Type:</label>
+                <select id="type">
+                    <option value="all">All</option>
+                    <option value="ruby">Ruby</option>
+                    <option value="diamond">Diamond</option>
+                    <option value="sapphire">Sapphire</option>
+                    
+                </select>
+
+                <!-- Filter by Origin-->
+                <label for="origin">Origin:</label>
+                <select id="origin">
+                    <option value="all">All</option>
+                    <option value="srilanka">Sri Lanka</option>
+                    <option value="madagascar">Madagascar</option>
+                </select>
+
                 <!-- Filter by Clarity -->
                 <label for="clarity">Clarity:</label>
                 <select id="clarity">
+                    <option value="all">All</option>
                     <option value="flawless">Flawless</option>
                     <option value="vs1">VS1</option>
                     <option value="vs2">VS2</option>
@@ -71,86 +94,121 @@
                 </select>
 
                 <!-- Filter by Price Range -->
-                <label for="price-range">Price Range:</label>
-                <input type="number" id="min-price" placeholder="Min" min="0" step="50">
-                <input type="number" id="max-price" placeholder="Max" min="0" step="50">
+                 <div class="ranger" style="border: 2px solid teal; margin-top: 20px; border-radius: 20px; padding:10px ;">
+                    <label for="price-range" >Price Range:</label>
+                    <input type="number" id="min-price" placeholder="Min:0" min="0" step="50">
+                    <input type="number" id="max-price" placeholder="Max:0" min="0" step="50">
+                </div>
+
+                <button id=":filter-button" class="filter-button"> Filter </button>
             </div>
         </aside>
 
-        <main class="product-catalog">
-            <div class="shop-card">
-                <div class="card-banner">
-                    <img src="../../assets/images/stone13.jpg" alt="Corn Blue Sapphire" />
-                    <div class="card-actions">
-                        <button class="action-btn btn" aria-label="bid now">
-                            <ion-icon name="hammer-outline" aria-hidden="true"></ion-icon>
-                        </button>
-                        <button class="action-btn btn" aria-label="view more">
-                            <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
-                        </button>
+        
+
+        <main class="content">
+
+            <div class="slider-container">
+                
+                <div class="slider" id="slider">
+                    <div class="slide">
+                        <h3>Gem Name 1</h3>
+                        <p>Description of gem 1.</p>
+                        <button>Bid Now!</button>
+                    </div>
+                    <div class="slide">
+                        <h3>Gem Name 2</h3>
+                        <p>Description of gem 2.</p>
+                        <button>Bid Now!</button>
+                    </div>
+                    <div class="slide">
+                        <h3>Gem Name 3</h3>
+                        <p>Description of gem 3.</p>
+                        <button>Bid Now!</button>
+                    </div>
+                    <div class="slide">
+                        <h3>Gem Name 4</h3>
+                        <p>Description of gem 4.</p>
+                        <button>Bid Now!</button>
                     </div>
                 </div>
-                <div class="card-content">
-                    <div class="price">$2000.00</div>
-                    <h3><a href="#" class="card-title">Corn Blue Sapphire</a></h3>
-                    <p class="rating-text">Unheated 5.5 Carats</p>
-                    <div class="days-left">
-                        <ion-icon name="timer-outline" aria-hidden="true"></ion-icon>
-                        <span>5 Days Left</span> <!-- Days Left Section -->
-                    </div>
-                    <span class="btn btn-primary">Bid Now</span> <!-- Changed Bid Now to Text -->
-                </div>
+                
             </div>
 
-            <div class="shop-card">
-                <div class="card-banner">
-                    <img src="../../assets/images/stone10.jpg" alt="Corn Blue Sapphire" />
-                    <div class="card-actions">
-                        <button class="action-btn btn" aria-label="bid now">
-                            <ion-icon name="hammer-outline" aria-hidden="true"></ion-icon>
-                        </button>
-                        <button class="action-btn btn" aria-label="view more">
-                            <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
-                        </button>
+            <main class="product-catalog">
+                <div class="shop-card">
+                    <div class="card-banner">
+                        <img src="../../assets/images/stone13.jpg" alt="Corn Blue Sapphire" />
+                        <div class="card-actions">
+                            <button class="action-btn btn" aria-label="bid now">
+                                <ion-icon name="hammer-outline" aria-hidden="true"></ion-icon>
+                            </button>
+                            <button class="action-btn btn" aria-label="view more">
+                                <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="price">$2000.00</div>
+                        <h3><a href="#" class="card-title">Corn Blue Sapphire</a></h3>
+                        <p class="rating-text">Unheated 5.5 Carats</p>
+                        <div class="days-left">
+                            <ion-icon name="timer-outline" aria-hidden="true"></ion-icon>
+                            <span>5 Days Left</span> <!-- Days Left Section -->
+                        </div>
+                        <span class="btn btn-primary">Bid Now</span> <!-- Changed Bid Now to Text -->
                     </div>
                 </div>
-                <div class="card-content">
-                    <div class="price">$2000.00</div>
-                    <h3><a href="#" class="card-title">Corn Blue Sapphire</a></h3>
-                    <p class="rating-text">Unheated 5.5 Carats</p>
-                    <div class="days-left">
-                        <ion-icon name="timer-outline" aria-hidden="true"></ion-icon>
-                        <span>5 Days Left</span> <!-- Days Left Section -->
-                    </div>
-                    <span class="btn btn-primary">Bid Now</span> <!-- Changed Bid Now to Text -->
-                </div>
-            </div>
 
-            <div class="shop-card">
-                <div class="card-banner">
-                    <img src="../../assets/images/stone11.jpg" alt="Corn Blue Sapphire" />
-                    <div class="card-actions">
-                        <button class="action-btn btn" aria-label="bid now">
-                            <ion-icon name="hammer-outline" aria-hidden="true"></ion-icon>
-                        </button>
-                        <button class="action-btn btn" aria-label="view more">
-                            <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
-                        </button>
+                <div class="shop-card">
+                    <div class="card-banner">
+                        <img src="../../assets/images/stone10.jpg" alt="Corn Blue Sapphire" />
+                        <div class="card-actions">
+                            <button class="action-btn btn" aria-label="bid now">
+                                <ion-icon name="hammer-outline" aria-hidden="true"></ion-icon>
+                            </button>
+                            <button class="action-btn btn" aria-label="view more">
+                                <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="price">$2000.00</div>
+                        <h3><a href="#" class="card-title">Corn Blue Sapphire</a></h3>
+                        <p class="rating-text">Unheated 5.5 Carats</p>
+                        <div class="days-left">
+                            <ion-icon name="timer-outline" aria-hidden="true"></ion-icon>
+                            <span>5 Days Left</span> <!-- Days Left Section -->
+                        </div>
+                        <span class="btn btn-primary">Bid Now</span> <!-- Changed Bid Now to Text -->
                     </div>
                 </div>
-                <div class="card-content">
-                    <div class="price">$2000.00</div>
-                    <h3><a href="#" class="card-title">Corn Blue Sapphire</a></h3>
-                    <p class="rating-text">Unheated 5.5 Carats</p><br>
-                    <div class="days-left">
-                        <ion-icon name="timer-outline" aria-hidden="true"></ion-icon>
-                        <span>5 Days Left</span> <!-- Days Left Section -->
-                    </div>
-                    <span class="btn btn-primary">Bid Now</span> <!-- Changed Bid Now to Text -->
-                </div>
-            </div>
 
-            <div class="shop-card">
+                <div class="shop-card">
+                    <div class="card-banner">
+                        <img src="../../assets/images/stone11.jpg" alt="Corn Blue Sapphire" />
+                        <div class="card-actions">
+                            <button class="action-btn btn" aria-label="bid now">
+                                <ion-icon name="hammer-outline" aria-hidden="true"></ion-icon>
+                            </button>
+                            <button class="action-btn btn" aria-label="view more">
+                                <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="price">$2000.00</div>
+                        <h3><a href="#" class="card-title">Corn Blue Sapphire</a></h3>
+                        <p class="rating-text">Unheated 5.5 Carats</p><br>
+                        <div class="days-left">
+                            <ion-icon name="timer-outline" aria-hidden="true"></ion-icon>
+                            <span>5 Days Left</span> <!-- Days Left Section -->
+                        </div>
+                        <span class="btn btn-primary">Bid Now</span> <!-- Changed Bid Now to Text -->
+                    </div>
+                </div>
+
+                <div class="shop-card">
                 <div class="card-banner">
                     <img src="../../assets/images/stone6.jpg" alt="Corn Blue Sapphire" />
                     <div class="card-actions">
@@ -168,9 +226,9 @@
                     <p class="rating-text">Unheated 5.5 Carats</p>
                     <div class="days-left">
                         <ion-icon name="timer-outline" aria-hidden="true"></ion-icon>
-                        <span>5 Days Left</span> <!-- Days Left Section -->
+                        <span>5 Days Left</span> 
                     </div>
-                    <span class="btn btn-primary">Bid Now</span> <!-- Changed Bid Now to Text -->
+                    <span class="btn btn-primary">Bid Now</span> 
                 </div>
             </div>
 
@@ -192,9 +250,9 @@
                     <p class="rating-text">Unheated 5.5 Carats</p>
                     <div class="days-left">
                         <ion-icon name="timer-outline" aria-hidden="true"></ion-icon>
-                        <span>5 Days Left</span> <!-- Days Left Section -->
+                        <span>5 Days Left</span>
                     </div>
-                    <span class="btn btn-primary">Bid Now</span> <!-- Changed Bid Now to Text -->
+                    <span class="btn btn-primary">Bid Now</span> 
                 </div>
             </div>
 
@@ -216,35 +274,17 @@
                     <p class="rating-text">Unheated 5.5 Carats</p>
                     <div class="days-left">
                         <ion-icon name="timer-outline" aria-hidden="true"></ion-icon>
-                        <span>5 Days Left</span> <!-- Days Left Section -->
+                        <span>5 Days Left</span> 
                     </div>
-                    <span class="btn btn-primary">Bid Now</span> <!-- Changed Bid Now to Text -->
+                    <span class="btn btn-primary">Bid Now</span> 
                 </div>
             </div>
 
-            <div class="shop-card">
-                <div class="card-banner">
-                    <img src="../../assets/images/stone13.jpg" alt="Corn Blue Sapphire" />
-                    <div class="card-actions">
-                        <button class="action-btn btn" aria-label="bid now">
-                            <ion-icon name="hammer-outline" aria-hidden="true"></ion-icon>
-                        </button>
-                        <button class="action-btn btn" aria-label="view more">
-                            <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <div class="price">$2000.00</div>
-                    <h3><a href="#" class="card-title">Corn Blue Sapphire</a></h3>
-                    <p class="rating-text">Unheated 5.5 Carats</p>
-                    <div class="days-left">
-                        <ion-icon name="timer-outline" aria-hidden="true"></ion-icon>
-                        <span>5 Days Left</span> <!-- Days Left Section -->
-                    </div>
-                    <span class="btn btn-primary">Bid Now</span> <!-- Changed Bid Now to Text -->
-                </div>
-            </div>
+            
+
+            
+
+            
             
         </main>
     </div>
@@ -262,6 +302,31 @@
         caratWeightInput.addEventListener('input', function () {
             caratWeightDisplay.textContent = caratWeightInput.value + " carats";
         });
+    </script>
+
+    <script>
+        const slider = document.getElementById('slider');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let index = 0;
+
+        const moveSlider = (direction) => {
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+            const visibleSlides = 3; // Adjust based on how many slides fit in view
+
+            if (direction === 'next') {
+                index = (index + 1) % totalSlides;
+            } else if (direction === 'prev') {
+                index = (index - 1 + totalSlides) % totalSlides;
+            }
+
+            const offset = index * (100 / visibleSlides);
+            slider.style.transform = `translateX(-${offset}%)`;
+        };
+
+        nextBtn.addEventListener('click', () => moveSlider('next'));
+        prevBtn.addEventListener('click', () => moveSlider('prev'));
     </script>
 </body>
 

@@ -11,9 +11,11 @@ $sql = "SELECT
             meeting.status
         FROM meeting
         JOIN customer ON meeting.customer_id = customer.customer_id
-        JOIN availabletimes ON meeting.availableTimes_id = availabletimes.availableTimes_id";
+        JOIN availabletimes ON meeting.availableTimes_id = availabletimes.availableTimes_id
+        ORDER BY availabletimes.date DESC";
 $result = $conn->query($sql);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,40 +63,43 @@ $result = $conn->query($sql);
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                // Map status codes to full words
-                                $statusMap = [
-                                    'P' => 'Pending Request Meeting',
-                                    'A' => 'Meeting Approved',
-                                    'C' => 'Meeting Completed',
-                                    'R' => 'Pending Request to Delete'
-                                ];
-                                $statusFullWord = $statusMap[$row['status']] ?? 'Unknown'; // Default to 'Unknown' if status is unrecognized
+                    <?php
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        // Map status codes to full words
+        $statusMap = [
+            'P' => 'Pending Request Meeting',
+            'A' => 'Meeting Approved',
+            'C' => 'Meeting Completed',
+            'R' => 'Pending Request to Delete'
+        ];
+        $statusFullWord = $statusMap[$row['status']] ?? 'Unknown'; // Default to 'Unknown' if status is unrecognized
 
-                                echo "<tr>
-                                        <td>{$row['type']}</td>
-                                        <td>{$row['date']}</td>
-                                        <td>{$row['time']}</td>
-                                        <td>{$row['email']}</td>
-                                        <td>{$statusFullWord}</td>
-                                        <td class='actions'>";
-                                // Handle actions based on meeting status
-                                if ($row['status'] === 'P') {
-                                    // Edit and Delete options for pending meetings
-                                    echo "<a href='./editMeeting.php?id={$row['meeting_id']}' class='btn'><i class='bx bx-pencil'></i> Edit</a>";
-                                } elseif ($row['status'] === 'A') {
-                                    // Request to delete for approved meetings
-                                    echo "<a href='./requestDelete.php?id={$row['meeting_id']}' class='btn'><i class='bx bx-x'></i> Request Delete</a>";
-                                }
-                                echo "</td></tr>";
-                            }
-                        } else {
-                            echo "<tr><td colspan='6'>No meetings found.</td></tr>";
-                        }
-                        $conn->close();
-                        ?>
+        // Map type codes to full words
+        $typeFullWord = $row['type'] === 'on' ? 'Online' : ($row['type'] === 'ph' ? 'Physical' : 'Unknown');
+
+        echo "<tr>
+                <td>{$typeFullWord}</td>
+                <td>{$row['date']}</td>
+                <td>{$row['time']}</td>
+                <td>{$row['email']}</td>
+                <td>{$statusFullWord}</td>
+                <td class='actions'>";
+        // Handle actions based on meeting status
+        if ($row['status'] === 'P') {
+            // Edit and Delete options for pending meetings
+            echo "<a href='./editMeeting.php?id={$row['meeting_id']}' class='btn'><i class='bx bx-pencil'></i> Edit</a>";
+        } elseif ($row['status'] === 'A') {
+            // Request to delete for approved meetings
+            echo "<a href='./requestDelete.php?id={$row['meeting_id']}' class='btn'><i class='bx bx-x'></i> Request Delete</a>";
+        }
+        echo "</td></tr>";
+    }
+} else {
+    echo "<tr><td colspan='6'>No meetings found.</td></tr>";
+}
+?>
+
                     </tbody>
                 </table>
             </div>

@@ -63,11 +63,6 @@ class Header extends HTMLElement {
                 ${isLoggedIn ? loggedInMenu : loggedOutMenu}
               </div>
 
-              <button class="header-action-btn" aria-label="favourite item">
-                <ion-icon name="star-outline" aria-hidden="true"></ion-icon>
-                <span class="btn-badge">0</span>
-              </button>
-
               <a href="../cart/cart.html">
                 <button class="header-action-btn" aria-label="cart item">
                   <data class="btn-text" value="0"></data>

@@ -7,10 +7,10 @@ if ($date) {
     try {
         // Correct query to fetch unique times for the given date
         $sql = "SELECT MIN(availableTimes_id) AS availableTime_id, time 
-FROM availabletimes 
-WHERE date = ? AND availability = 'available' 
-GROUP BY time;
-";
+        FROM availabletimes 
+        WHERE date = ? AND availability = 'available' 
+        GROUP BY time;
+        ";
         
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $date);

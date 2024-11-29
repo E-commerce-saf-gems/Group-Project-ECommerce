@@ -192,7 +192,7 @@ if (isset($_GET['id'])) {
                     <p><?php echo $row['description'];?></p>
                     <p>Color: <?php echo $row['colour'];?></p>
                     <p>Shape: <?php echo $row['shape'];?></p>
-                    <p>Amount: $ <?php echo $row['amount'];?></p>
+                    <p>Amount: Rs. <?php echo $row['amount'];?></p>
                 </div>
                 <button class="btn" onclick="viewCertificate()">View Certificate</button>   
                 <button class="btn" onclick="addtocart()">Add to cart</button>            

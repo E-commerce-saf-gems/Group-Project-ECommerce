@@ -97,41 +97,24 @@ textarea.input {
 }
 
 .btn {
-  padding: 0.6rem 2rem;
-  background-color: #fff;
+  padding: 1rem 2rem; /* Increase padding for a larger button */
+  font-size: 1.2rem; /* Increase font size for text */
+  border-radius: 30px; /* Increase border-radius for a more prominent rounded look */
+  background-color: #449f9f; /* Retain the original color */
   border: 2px solid #fafafa;
-  color: #449f9f;
+  color: #f3fdfb;
   line-height: 1;
-  border-radius: 15px;
   outline: none;
   cursor: pointer;
   transition: 0.3s;
   margin: 0;
-  
-  
 }
-
-.btn {
-    padding: 0.6rem 1.3rem;
-    background-color: #449f9f;
-    border: 2px solid #fafafa;
-    font-size: 0.95rem;
-    color: #f3fdfb;
-    line-height: 1;
-    border-radius: 25px;
-    outline: none;
-    cursor: pointer;
-    transition: 0.3s;
-    margin: 0;
-  }
 
 .btn:hover {
   background-color: transparent;
   color: #0d0d0d;
   border: 2px solid #449f9f;
 }
-
-
 
 .input-container span {
   position: absolute;
@@ -183,11 +166,15 @@ textarea.input {
   font-size: 15;
 }
 
-.appintment {
-    padding: 2.3rem 2.2rem;
-    position: relative;
-    
+.appointment {
+  padding: 4rem 3rem; /* Increase padding for more spacing */
+  position: relative;
+  font-size: 1.2rem; /* Increase font size */
+  background-color: #f9f9f9; /* Optional: Add a background for better visibility */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for depth */
 }
+
 
 
 .contact-info .title {

@@ -26,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO request (type, weight, shape, color, requirement, customer_id) 
                 VALUES ('$gemType', '$caratWeight', '$cut', '$color', '$specialRequirements', '$customerID')";
 
-        // Execute the query
         if ($conn->query($sql) === TRUE) {
             $successMessage = "Your custom request has been submitted successfully!";
             header("Location: ./customRequest.php?success=1") ;
@@ -38,6 +37,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Close the database connection
 $conn->close();
 ?>

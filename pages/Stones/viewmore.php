@@ -194,8 +194,11 @@ if (isset($_GET['id'])) {
                     <p>Shape: <?php echo $row['shape'];?></p>
                     <p>Amount: Rs. <?php echo $row['amount'];?></p>
                 </div>
-                <button class="btn" onclick="viewCertificate()">View Certificate</button>   
-                <button class="btn" onclick="addtocart()">Add to cart</button>            
+                <button class="btn" onclick="viewCertificate()">View Certificate</button> 
+                <form action="./addToCart.php" method="POST">  
+                    <input type="hidden" name="stone_id" value="<?php echo $row['stone_id'];?>">
+                    <button type="submit">Add to cart</button>   
+                </form>         
             </div>
         </div>
     </div>

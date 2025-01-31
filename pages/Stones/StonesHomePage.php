@@ -10,7 +10,7 @@ $ssql = "SELECT
             image, 
             size 
         FROM inventory
-        WHERE visibility = 'show' && availability = 'available'";
+        WHERE visibility = 'show' && availability = 'available'|| availability = 'Available'";
 
 $result = $conn->query($ssql);
 

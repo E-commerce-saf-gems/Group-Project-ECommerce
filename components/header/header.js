@@ -63,7 +63,7 @@ class Header extends HTMLElement {
                 ${isLoggedIn ? loggedInMenu : loggedOutMenu}
               </div>
 
-              <a href="../cart/cart.html">
+              <a href="../cart/cart.php">
                 <button class="header-action-btn" aria-label="cart item">
                   <data class="btn-text" value="0"></data>
                   <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>

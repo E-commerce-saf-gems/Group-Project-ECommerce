@@ -1,76 +1,41 @@
 
-document.addEventListener('DOMContentLoaded', function() {
-    const shippingMethodRadios = document.querySelectorAll('input[name="shipping-method"]');
-    const paymentMethodRadios = document.querySelectorAll('input[name="payment-method"]');
-    const shippingAddress = document.querySelector('.shipping-address');
-    const pickupDate = document.querySelector('.pickup-date');
-    const checkoutBtn = document.getElementById('checkout-btn');
-    const payInStoreOption = document.querySelector('.pay-in-store-option');
-    const payInStoreRadio = document.querySelector('input[value="pay-in-store"]');
+    document.addEventListener("DOMContentLoaded", function () {
+        const shippingMethodInputs = document.querySelectorAll("input[name='shipping-method']");
+        const paymentMethodInputs = document.querySelectorAll("input[name='payment-method']");
+        const pickupDateContainer = document.querySelector(".pickup-date");
+        const shippingAddressContainer = document.querySelector(".shipping-address");
+        const payInStoreOption = document.querySelector(".pay-in-store-option");
+        const paypalContainer = document.getElementById("paypal-button-container");
+        const placeOrderButton = document.querySelector(".btn-primary");
 
-    // Toggle shipping options between "Home Shipping" and "Store Pickup"
-    function toggleShippingOptions() {
-        const selectedShippingMethod = document.querySelector('input[name="shipping-method"]:checked').value;
+        function updateFormVisibility() {
+            const selectedShippingMethod = document.querySelector("input[name='shipping-method']:checked").value;
+            const selectedPaymentMethod = document.querySelector("input[name='payment-method']:checked").value;
 
-        if (selectedShippingMethod === 'home-shipping') {
-            // Hide shipping address for home delivery
-            shippingAddress.classList.remove('hidden');
-            pickupDate.classList.add('hidden');
-            
-            // Hide the "Pay In Store" option for home shipping
-            payInStoreOption.classList.add('hidden');
-            payInStoreRadio.disabled = true;
+            // Show pickup date only if "Store Pickup" is selected
+            pickupDateContainer.style.display = selectedShippingMethod === "store-pickup" ? "block" : "none";
 
-            // Automatically select "Pay Online"
-            paymentMethodRadios[0].checked = true;
-        } else if (selectedShippingMethod === 'store-pickup') {
-            // Show store pickup related inputs
-            shippingAddress.classList.add('hidden');
-            pickupDate.classList.remove('hidden');
+            // Show shipping address only if "Home Shipping" is selected
+            shippingAddressContainer.style.display = selectedShippingMethod === "home-shipping" ? "block" : "none";
 
-            // Show the "Pay In Store" option for store pickup
-            payInStoreOption.classList.remove('hidden');
-            payInStoreRadio.disabled = false;
+            // Show or hide Pay In Store option based on shipping method
+            payInStoreOption.style.display = selectedShippingMethod === "store-pickup" ? "block" : "none";
+
+            // Show PayPal button and hide Place Order button when "Pay Online" is selected
+            if (selectedPaymentMethod === "pay-online") {
+                paypalContainer.style.display = "block";  // Show PayPal button
+                placeOrderButton.style.display = "none";  // Hide Proceed to Checkout
+            } else {
+                paypalContainer.style.display = "none";  // Hide PayPal button
+                placeOrderButton.style.display = "block";  // Show Proceed to Checkout for Pay In Store
+            }
         }
 
-        updateCheckoutButton();
-    }
+        // Attach event listeners
+        shippingMethodInputs.forEach(input => input.addEventListener("change", updateFormVisibility));
+        paymentMethodInputs.forEach(input => input.addEventListener("change", updateFormVisibility));
 
-    // Update checkout button behavior based on payment method
-    function updateCheckoutButton() {
-        const selectedShippingMethod = document.querySelector('input[name="shipping-method"]:checked').value;
-        const selectedPaymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
-
-        if (selectedShippingMethod === 'store-pickup' && selectedPaymentMethod === 'pay-in-store') {
-            checkoutBtn.textContent = 'Confirm Pickup';
-            checkoutBtn.onclick = function() {
-                alert("You have chosen to pay in-store. Your pickup date is confirmed.");
-            };
-        } else {
-            checkoutBtn.textContent = 'Pay Now';
-            checkoutBtn.onclick = function() {
-                if (validateForm()) {
-                    window.location.href = "#"; // Redirect to payment page
-                }
-            };
-        }
-    }
-
-    // Form validation (you can expand this function)
-    function validateForm() {
-        // Add form validation logic here if needed
-        return true;
-    }
-
-    // Initial toggle based on the default selection
-    toggleShippingOptions();
-
-    // Add event listeners for radio button changes
-    shippingMethodRadios.forEach(radio => {
-        radio.addEventListener('change', toggleShippingOptions);
+        // Run once on page load
+        updateFormVisibility();
     });
 
-    paymentMethodRadios.forEach(radio => {
-        radio.addEventListener('change', updateCheckoutButton);
-    });
-});

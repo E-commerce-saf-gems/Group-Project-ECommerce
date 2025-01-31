@@ -2,8 +2,13 @@
 session_start();
 include('../../database/db.php');
 
-$customer_id = $_SESSION['customer_id'] ?? null;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
+include('./sendOrderEmail.php'); 
+
+$customer_id = $_SESSION['customer_id'] ?? null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$customer_id) {
@@ -23,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Fetch cart items for the customer
     $cart_query = "
-        SELECT cart.stone_id, inventory.amount AS price 
+        SELECT cart.stone_id, inventory.amount AS price, inventory.type, inventory.shape, inventory.size, inventory.colour 
         FROM cart 
         INNER JOIN inventory ON cart.stone_id = inventory.stone_id 
         WHERE cart.customer_id = ?";
@@ -60,11 +65,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $order_items_query = "INSERT INTO order_items (order_id, stone_id, price) VALUES (?, ?, ?)";
             $order_items_stmt = $conn->prepare($order_items_query);
 
+            // Prepare inventory update query
+            $update_inventory_query = "UPDATE inventory SET availability = 'not Available' WHERE stone_id = ?";
+            $update_inventory_stmt = $conn->prepare($update_inventory_query);
+
+            // Prepare variables for email content
+            $order_items = [];
+            $total_amount = 0;
+
             while ($cart_item = $cart_result->fetch_assoc()) {
                 $stone_id = $cart_item['stone_id'];
                 $price = $cart_item['price']; // Price fetched from inventory
+                $total_amount += $price;
+
+                // Insert into order_items
                 $order_items_stmt->bind_param("iid", $order_id, $stone_id, $price);
                 $order_items_stmt->execute();
+
+                // Update inventory availability
+                $update_inventory_stmt->bind_param("i", $stone_id);
+                $update_inventory_stmt->execute();
+
+                // Collect the product details for email
+                $order_items[] = [
+                    'type' => $cart_item['type'],
+                    'shape' => $cart_item['shape'],
+                    'size' => $cart_item['size'],
+                    'colour' => $cart_item['colour'],
+                    'price' => number_format($price, 2) . " LKR"
+                ];
             }
 
             // Clear the cart
@@ -73,8 +102,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $clear_cart_stmt->bind_param("i", $customer_id);
             $clear_cart_stmt->execute();
 
+            // Fetch customer name and email for email sending
+            $customer_query = "SELECT firstName, email FROM customer WHERE customer_id = ?";
+            $customer_stmt = $conn->prepare($customer_query);
+            $customer_stmt->bind_param("i", $customer_id);
+            $customer_stmt->execute();
+            $customer_result = $customer_stmt->get_result();
+            $customer = $customer_result->fetch_assoc();
+
+            // Debugging customer data
+            if (!$customer) {
+                die("Customer details not found.");
+            }
+
+            // Output customer and order details before sending email
+            echo "<h3>Order Details for Customer: {$customer['firstName']} ({$customer['email']})</h3>";
+            echo "<p><strong>Shipping Method:</strong> $shipping_method</p>";
+            echo "<p><strong>Payment Method:</strong> $payment_method</p>";
+            echo "<p><strong>Total Amount:</strong> " . number_format($total_amount, 2) . " LKR</p>";
+
+            echo "<h4>Order Items:</h4>";
+            echo "<table border='1'>";
+            echo "<tr><th>Product</th><th>Shape</th><th>Size</th><th>Color</th><th>Price</th></tr>";
+            foreach ($order_items as $item) {
+                echo "<tr>";
+                echo "<td>{$item['type']}</td>";
+                echo "<td>{$item['shape']}</td>";
+                echo "<td>{$item['size']}</td>";
+                echo "<td>{$item['colour']}</td>";
+                echo "<td>{$item['price']}</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+
+            // Send the order confirmation email
+            sendOrderEmail($customer['firstName'], $customer['email'], [
+                'order_id' => $order_id,
+                'order_date' => date('Y-m-d'),  // Ensure the date is in correct format
+                'payment_method' => $payment_method,
+                'shipping_method' => $shipping_method,
+                'total_amount' => number_format($total_amount, 2),  // Ensure total amount is formatted correctly
+                'products' => $order_items
+            ]);
+
             $conn->commit();
-            echo "Order placed successfully!";
+            echo "<br/>Order placed successfully! A confirmation email has been sent.";
         } catch (Exception $e) {
             $conn->rollback();
             die("Error placing order: " . $e->getMessage());

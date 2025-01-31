@@ -1,12 +1,9 @@
 <?php
-// Start the session and include the database connection
 session_start();
 include('../../database/db.php');
 
-// Retrieve the logged-in customer's ID
 $customer_id = $_SESSION['customer_id'] ?? null;
 
-// Initialize customer details with default empty values
 $customer_details = [
     'address1' => '',
     'address2' => '',
@@ -16,7 +13,6 @@ $customer_details = [
 ];
 
 if ($customer_id) {
-    // Fetch customer shipping details from the database
     $customer_sql = "SELECT address1, address2, city, country, postalCode FROM customer WHERE customer_id = ?";
     $customer_stmt = $conn->prepare($customer_sql);
     $customer_stmt->bind_param("i", $customer_id);
@@ -108,9 +104,82 @@ if ($customer_id) {
     <div class="form-actions">
         <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
     </div>
+        <script src="https://www.paypal.com/sdk/js?client-id=AVle4HaFl3fiWsj3VRw3uC-Gb1NwhZ4j632SBgURYzQr8G9oR5KsrpkXUmCleQx3hNTwUnq5ZIdx8VRc&currency=USD"></script>
+
+        <div id="paypal-button-container"></div>
 </form>
 
     </main>
+
+    <?php
+        $customer_id = $_SESSION['customer_id'] ?? null;
+        $total_amount = 0; 
+
+        if ($customer_id) {
+            $cart_sql = "SELECT SUM(inventory.amount) AS total FROM cart 
+                        INNER JOIN inventory ON cart.stone_id = inventory.stone_id 
+                        WHERE cart.customer_id = ?";
+            $cart_stmt = $conn->prepare($cart_sql);
+            $cart_stmt->bind_param("i", $customer_id);
+            $cart_stmt->execute();
+            $cart_result = $cart_stmt->get_result();
+            
+            if ($row = $cart_result->fetch_assoc()) {
+                $total_amount = $row['total'] ?? 0;
+            }
+        }
+
+        $exchange_rate = 0.0031; 
+        $total_usd = $total_amount * $exchange_rate;
+    ?>
+
+<script>
+    let totalAmount = <?php echo number_format($total_usd, 2, '.', ''); ?>;
+
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: { value: totalAmount }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                // Send transaction details to placeOrder.php
+                fetch('./createOrder.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        orderID: data.orderID,
+                        payerID: details.payer.payer_id,
+                        shipping_method: document.querySelector('input[name="shipping-method"]:checked').value,
+                        payment_method: "PayPal",
+                        pickup_date: document.getElementById('pickup-date')?.value || null,
+                        address1: document.getElementById('address1')?.value || '',
+                        address2: document.getElementById('address2')?.value || '',
+                        city: document.getElementById('city')?.value || '',
+                        postalCode: document.getElementById('postalCode')?.value || '',
+                        country: document.getElementById('country')?.value || ''
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Transaction completed! Redirecting...');
+                        window.location.href = "./orderSuccess.php"; // Redirect to success page
+                    } else {
+                        alert('Error processing order. Please contact support.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        }
+    }).render('#paypal-button-container');
+
+</script>
+
+    
 
     <script src="placeOrder.js"></script>
     <script src="../../components/header/header.js"></script>

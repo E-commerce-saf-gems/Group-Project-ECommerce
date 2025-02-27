@@ -137,45 +137,49 @@ if ($customer_id) {
     let totalAmount = <?php echo number_format($total_usd, 2, '.', ''); ?>;
 
     paypal.Buttons({
-        createOrder: function(data, actions) {
-            return actions.order.create({
-                purchase_units: [{
-                    amount: { value: totalAmount }
-                }]
-            });
-        },
-        onApprove: function(data, actions) {
-            return actions.order.capture().then(function(details) {
-                // Send transaction details to placeOrder.php
-                fetch('./createOrder.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        orderID: data.orderID,
-                        payerID: details.payer.payer_id,
-                        shipping_method: document.querySelector('input[name="shipping-method"]:checked').value,
-                        payment_method: "PayPal",
-                        pickup_date: document.getElementById('pickup-date')?.value || null,
-                        address1: document.getElementById('address1')?.value || '',
-                        address2: document.getElementById('address2')?.value || '',
-                        city: document.getElementById('city')?.value || '',
-                        postalCode: document.getElementById('postalCode')?.value || '',
-                        country: document.getElementById('country')?.value || ''
-                    })
+    createOrder: function(data, actions) {
+        return actions.order.create({
+            purchase_units: [{
+                amount: { value: totalAmount }
+            }]
+        });
+    },
+    onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+            console.log("PayPal Transaction Successful:", details);
+
+            fetch('./createOrder.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    orderID: data.orderID,  // Keep orderID
+                    shipping_method: document.querySelector('input[name="shipping-method"]:checked').value,
+                    payment_method: "PayPal",
+                    pickup_date: document.getElementById('pickup-date')?.value || null,
+                    address1: document.getElementById('address1')?.value || '',
+                    address2: document.getElementById('address2')?.value || '',
+                    city: document.getElementById('city')?.value || '',
+                    postalCode: document.getElementById('postalCode')?.value || '',
+                    country: document.getElementById('country')?.value || ''
                 })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Transaction completed! Redirecting...');
-                        window.location.href = "./orderSuccess.php"; // Redirect to success page
-                    } else {
-                        alert('Error processing order. Please contact support.');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
+            })
+
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Payment successful! Redirecting...');
+                    window.location.href = "./orderSuccess.php"; // Redirect to success page
+                } else {
+                    alert('Error processing order: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Payment processed, but order failed. Contact support.");
             });
-        }
-    }).render('#paypal-button-container');
+        });
+    }
+}).render('#paypal-button-container');
 
 </script>
 

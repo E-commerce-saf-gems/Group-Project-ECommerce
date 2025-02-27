@@ -8,6 +8,26 @@ use PHPMailer\PHPMailer\Exception;
 
 include('./sendOrderEmail.php'); 
 
+// Check if JSON data is received from PayPal
+if ($_SERVER['CONTENT_TYPE'] === 'application/json') {
+    $json_data = json_decode(file_get_contents("php://input"), true);
+    
+    if (!isset($json_data['orderID'])) {
+        die(json_encode(["success" => false, "message" => "Invalid PayPal response."]));
+    }
+
+    // Override POST variables from JSON
+    $_POST['payment-method'] = 'pay-online';  
+    $_POST['shipping-method'] = $json_data['shipping_method'] ?? 'store-pickup';
+    $_POST['pickup-date'] = $json_data['pickup_date'] ?? null;
+    $_POST['address1'] = $json_data['address1'] ?? null;
+    $_POST['address2'] = $json_data['address2'] ?? null;
+    $_POST['city'] = $json_data['city'] ?? null;
+    $_POST['postalCode'] = $json_data['postalCode'] ?? null;
+    $_POST['country'] = $json_data['country'] ?? null;
+}
+
+
 $customer_id = $_SESSION['customer_id'] ?? null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

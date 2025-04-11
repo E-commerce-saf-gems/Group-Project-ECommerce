@@ -78,12 +78,12 @@ if (!$result) {
         <!-- Sidebar for filter and sort options -->
         <aside class="sidebar">
             <h2>Filter & Sort</h2>
-   <!-- filepath: c:\xampp\htdocs\Group-Project-ECommerce\pages\Stones\StonesHomePage.php -->
-<form method="GET" action="">
+<!-- filepath: c:\xampp\htdocs\Group-Project-ECommerce\pages\Stones\StonesHomePage.php -->
+<form method="GET" action="" id="filter-form">
     <div class="filter-section">
         <h3>Sort By</h3>
         <label for="sort">Sort By:</label>
-        <select id="sort" name="sort">
+        <select id="sort" name="sort" onchange="document.getElementById('filter-form').submit();">
             <option value="new-arrival" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'new-arrival') ? 'selected' : ''; ?>>New Arrival</option>
             <option value="price-low-to-high" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price-low-to-high') ? 'selected' : ''; ?>>Price: Low to High</option>
             <option value="price-high-to-low" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price-high-to-low') ? 'selected' : ''; ?>>Price: High to Low</option>
@@ -93,11 +93,11 @@ if (!$result) {
     <div class="filter-section">
         <h3>Filter By</h3>
         <label for="carat-weight">Carat Weight (in carats):</label>
-        <input type="range" id="carat-weight" name="carat-weight" min="1" max="10" value="<?php echo isset($_GET['carat-weight']) ? htmlspecialchars($_GET['carat-weight']) : '5'; ?>" step="0.5">
+        <input type="range" id="carat-weight" name="carat-weight" min="1" max="10" value="<?php echo isset($_GET['carat-weight']) ? htmlspecialchars($_GET['carat-weight']) : '5'; ?>" step="0.5" onchange="document.getElementById('filter-form').submit();">
         <span id="carat-weight-display"><?php echo isset($_GET['carat-weight']) ? htmlspecialchars($_GET['carat-weight']) : '5'; ?> carats</span><br />
 
         <label for="shape">Shape:</label>
-        <select id="shape" name="shape">
+        <select id="shape" name="shape" onchange="document.getElementById('filter-form').submit();">
             <option value="" <?php echo (!isset($_GET['shape']) || $_GET['shape'] == '') ? 'selected' : ''; ?>>Any</option>
             <option value="round" <?php echo (isset($_GET['shape']) && $_GET['shape'] == 'round') ? 'selected' : ''; ?>>Round</option>
             <option value="oval" <?php echo (isset($_GET['shape']) && $_GET['shape'] == 'oval') ? 'selected' : ''; ?>>Oval</option>
@@ -107,7 +107,7 @@ if (!$result) {
         </select>
 
         <label for="colour">Colour:</label>
-        <select id="colour" name="colour">
+        <select id="colour" name="colour" onchange="document.getElementById('filter-form').submit();">
             <option value="" <?php echo (!isset($_GET['colour']) || $_GET['colour'] == '') ? 'selected' : ''; ?>>Any</option>
             <option value="blue" <?php echo (isset($_GET['colour']) && $_GET['colour'] == 'blue') ? 'selected' : ''; ?>>Blue</option>
             <option value="yellow" <?php echo (isset($_GET['colour']) && $_GET['colour'] == 'yellow') ? 'selected' : ''; ?>>Yellow</option>
@@ -117,19 +117,18 @@ if (!$result) {
         </select>
 
         <label for="origin">Origin</label>
-        <select id="origin" name="origin">
+        <select id="origin" name="origin" onchange="document.getElementById('filter-form').submit();">
             <option value="" <?php echo (!isset($_GET['origin']) || $_GET['origin'] == '') ? 'selected' : ''; ?>>Any</option>
-            <option value="Sri Lanka" <?php echo (isset($_GET['origin']) && $_GET['origin'] == 'srilanka') ? 'selected' : ''; ?>>Sri Lanka</option>
+            <option value="srilanka" <?php echo (isset($_GET['origin']) && $_GET['origin'] == 'srilanka') ? 'selected' : ''; ?>>Sri Lanka</option>
             <option value="Canada" <?php echo (isset($_GET['origin']) && $_GET['origin'] == 'Canada') ? 'selected' : ''; ?>>Canada</option>
             <option value="Dubai" <?php echo (isset($_GET['origin']) && $_GET['origin'] == 'Dubai') ? 'selected' : ''; ?>>Dubai</option>
             <option value="Africa" <?php echo (isset($_GET['origin']) && $_GET['origin'] == 'Africa') ? 'selected' : ''; ?>>Africa</option>
         </select>
 
         <label for="price-range">Price Range:</label>
-        <input type="number" id="min-price" name="min-price" placeholder="Min" min="0" step="50" value="<?php echo isset($_GET['min-price']) ? htmlspecialchars($_GET['min-price']) : ''; ?>">
-        <input type="number" id="max-price" name="max-price" placeholder="Max" min="0" step="50" value="<?php echo isset($_GET['max-price']) ? htmlspecialchars($_GET['max-price']) : ''; ?>">
+        <input type="number" id="min-price" name="min-price" placeholder="Min" min="0" step="50" value="<?php echo isset($_GET['min-price']) ? htmlspecialchars($_GET['min-price']) : ''; ?>" onchange="document.getElementById('filter-form').submit();">
+        <input type="number" id="max-price" name="max-price" placeholder="Max" min="0" step="50" value="<?php echo isset($_GET['max-price']) ? htmlspecialchars($_GET['max-price']) : ''; ?>" onchange="document.getElementById('filter-form').submit();">
     </div>
-    <button type="submit">Apply Filters</button>
 </form>
         </aside>
 

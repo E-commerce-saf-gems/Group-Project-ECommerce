@@ -8,7 +8,8 @@ $ssql = "SELECT
             origin,
             description,
             image, 
-            size 
+            size,
+            colour 
         FROM inventory
         WHERE visibility = 'show' && availability = 'available'|| availability = 'Available'";
 
@@ -105,7 +106,7 @@ if (!$result) {
             <div class="shop-card">
                 <div class="card-banner">
                 <img 
-                src="<?php echo htmlspecialchars('../../../Business-Dashboard/uploads/' . $row['image']); ?>" 
+                src="<?php echo htmlspecialchars('http://localhost/Group-Project-ECommerce/assets/images/' . $row['image']); ?>" 
                 alt="<?php echo htmlspecialchars($row['type']); ?>" 
                 style="width: 200px; height: 200px; object-fit: cover;">
 
@@ -119,11 +120,11 @@ if (!$result) {
                     </div>
                 </div>
                 <div class="card-content">
-                    <div class="price">Rs. <?php echo number_format($row['amount'], 2); ?></div>
                     <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['type']); ?></a></h3>
-                    <p class="rating-text"><?php echo htmlspecialchars($row['description']); ?> - <?php echo $row['size']; ?> Carats</p>
+                    <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['colour']); ?></a></h3>
+                    <div class="price">Rs. <?php echo number_format($row['amount']); ?></div>
                     <?php
-                    echo "<a href='./viewmore.php?id=" . $row['stone_id'] . "' class='btn btn-primary'>";
+                    echo "<a href='./viewmore2.php?id=" . $row['stone_id'] . "' class='btn btn-primary'>";
                     ?>View More</span></a>
                 </div>
             </div>

@@ -168,7 +168,7 @@
   .btn {
     font-weight: var(--fw-600);
     max-width: max-content;
-    padding: 10px 30px;
+    padding: 10px 20px;
     border-radius: var(--radius-3);
     transition: var(--transition-1);
   }

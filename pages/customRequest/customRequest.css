@@ -1,0 +1,93 @@
+/* General Container Styling for the Shipping Container */
+.shipping-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-top: 20px ;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.heading-center {
+    text-align: center;
+}
+
+/* Form Group Styling */
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Label Styling */
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Input Fields Styling */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1.5rem;
+    color: #333;
+    background-color: #fdfdfd;
+}
+
+/* Styling for Select Dropdown */
+.form-group select {
+    cursor: pointer;
+}
+
+/* Focus State for Input Fields */
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #449b9b;
+}
+
+/* Textarea Styling */
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Success Message Styles */
+.success-message {
+    background-color: #d4ede9; /* Light green background */
+    color: #449f9f ; /* Dark green text */
+    padding: 15px;
+    border: 1px solid #c3e6cb; /* Light green border */
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.error-message {
+    background-color: #d4ede9; /* Light green background */
+    color: #9f4444 ; /* Dark green text */
+    padding: 15px;
+    border: 1px solid #c3e6cb; /* Light green border */
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.err-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+

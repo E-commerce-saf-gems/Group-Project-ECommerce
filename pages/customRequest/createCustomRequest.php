@@ -1,10 +1,10 @@
 <?php
 
 session_start();
-// Include database connection
-include '../../database/db.php';  // Adjust the path to match the location of db.php relative to this file
+include '../../database/db.php';  
 
-// Initialize variables for form inputs
+$customerID = $_SESSION['customer_id'];
+
 $gemType = "";
 $caratWeight = 0;
 $cut = "";
@@ -12,13 +12,6 @@ $color = "";
 $specialRequirements = "";
 $errorMessage = "";
 $successMessage = "";
-
-if (!isset($_SESSION['customer_id'])) {
-    header("Location: ./login.php") ;
-    exit;
-}
-
-$customerID = $_SESSION['customer_id'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $gemType = isset($_POST['gem-type']) ? htmlspecialchars(trim($_POST['gem-type'])) : '';
@@ -33,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO request (type, weight, shape, color, requirement, customer_id) 
                 VALUES ('$gemType', '$caratWeight', '$cut', '$color', '$specialRequirements', '$customerID')";
 
-        // Execute the query
         if ($conn->query($sql) === TRUE) {
             $successMessage = "Your custom request has been submitted successfully!";
             header("Location: ./customRequest.php?success=1") ;
@@ -45,6 +37,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Close the database connection
 $conn->close();
 ?>

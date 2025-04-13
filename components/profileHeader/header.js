@@ -46,7 +46,7 @@ this.innerHTML = `
             <span class="btn-badge">0</span>
           </button>
 
-          <a href="../../cart/cart.html">
+          <a href="../../cart/cart.php">
             <button class="header-action-btn" aria-label="cart item">
               <data class="btn-text" value="0"></data>
               <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
@@ -61,7 +61,7 @@ this.innerHTML = `
             <li class="dropdown">
               <a href="#shop" class="navbar-link dropdown-toggle" data-nav-link>Shop</a>
               <ul class="dropdown-menu">
-                <li><a href="../../Stones/StonesHomePage.html" class="dropdown-item">Buy Stones</a></li>
+                <li><a href="../../Stones/StonesHomePage.php" class="dropdown-item">Buy Stones</a></li>
                 <li><a href="../../bidding/bidding.html" class="dropdown-item">Bid</a></li>
               </ul>
             </li>

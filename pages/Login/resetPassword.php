@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Forgot Password</title>
     <link rel="stylesheet" href="../RegisterPage/register.css" />
+   
   </head>
   <body>
+    
+
     <div>
-      <h1>FORGOT PASSWORD ?</h1>
-      <form action="login.html" method="get>
+      <form action="login.php" method="get">
         <label for="email">Email Address : </label>
         <input
           type="email"
@@ -19,22 +21,24 @@
         />
         <br />
 
-        <label for="new-password">Password : </label>
+        <label for="new-password">New Password : </label>
         <input
           type="password"
           id="new-password"
           placeholder="Enter new password"
           required
         />
+        <span id="new-password-error" class="error-msg"></span>
         <br />
 
-        <label for="confirm-password">Password : </label>
+        <label for="confirm-password">Re- enter New Password : </label>
         <input
           type="password"
           id="confirm-password"
           placeholder="Re-enter new password"
           required
         />
+        <span id="confirm-password-error" class="error-msg"></span>
         <br />
 
         <div class="button-section">
@@ -44,5 +48,7 @@
       </form>
       <script src="password.js"></script>
     </div>
+
+    
   </body>
 </html>

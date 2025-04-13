@@ -1,316 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/styles/common.css">
-    <link rel="stylesheet" href="/components/header/header.css">
-    <link rel="stylesheet" href="/components/footer/footer.css">
-    <link rel="stylesheet" href="./styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bidding Details</title>
+    <link rel="stylesheet" href="../../components/header/header.css">
+    <link rel="stylesheet" href="../../components/footer/footer.css">
+    <link rel="stylesheet" href="../../styles/common.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        /* Basic styling for the bidding detail page */
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
+        /* Existing Styles */
+        .bidding-container {
+            width: 100%;
+            max-width: 600px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 0 auto;
         }
 
-        .product-detail {
+        .product-header {
+            background-color: #449f9f;
+            color: white;
+            padding: 15px;
             display: flex;
-            max-width: 800px;
-            width: 100%;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-header h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .product-content {
+            display: flex;
+            padding: 15px;
         }
 
         .product-image {
             flex: 1;
+            margin-right: 15px;
         }
 
         .product-image img {
-            width: 100%;
-            height: auto;
+            max-width: 100%;
+            border-radius: 8px;
         }
 
-        .product-info {
-            flex: 1;
-            padding: 20px;
+        .product-details {
+            flex: 2;
         }
 
-        .product-info h2 {
-            margin: 0;
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .detail-item .label {
+            color: #666;
+        }
+
+        .detail-item .value {
+            font-weight: bold;
+        }
+
+        .cycle-info {
+            background-color: #f0f0f0;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .cycle-timer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .cycle-timer-icon {
+            color: #449f9f;
             font-size: 24px;
         }
 
-        .price {
-            font-size: 20px;
-            font-weight: bold;
-            color: #333;
-            margin: 10px 0;
-        }
-
-        .details {
-            margin: 10px 0;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #449b9b;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #367a7a;
-        }
-
-        .bid-section {
-            margin-top: 20px;
-        }
-
-        .bid-input {
-            margin: 10px 0;
-            width: 100%;
-        }
-
-        .bid-input input {
-            width: calc(100% - 100px);
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .bid-input button {
-            padding: 10px 20px;
-            background-color: #449b9b;
+        .bid-now-btn {
+            background-color: #449f9f;
             color: white;
             border: none;
-            border-radius: 5px;
+            padding: 10px 20px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease;
         }
 
-        .bid-input button:hover {
+        .bid-now-btn:hover {
             background-color: #367a7a;
         }
 
-        .timer {
-            font-weight: bold;
-            color: #d9534f;
-        }
-
-        .more-bids {
-            margin-top: 40px;
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-        }
-
-        .more-bids h3 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .bids-list {
-            display: flex;
-            flex-wrap: wrap;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
             justify-content: center;
-            gap: 20px;
+            align-items: center;
+            z-index: 1000;
         }
 
-        .shop-card {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            overflow: hidden;
-            width: 200px;
-            position: relative;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
+        .popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
-        .shop-card img {
+        .popup-content h3 {
+            margin-top: 0;
+        }
+
+        .popup-content input[type="number"] {
             width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .shop-card .price {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
+            padding: 10px;
             margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
         }
 
-        .shop-card .card-title {
-            color: #333;
-            font-weight: 600;
-            margin: 5px 0;
-            text-decoration: none;
+        .popup-buttons {
+            display: flex;
+            justify-content: space-between;
         }
 
-        .shop-card .card-title:hover {
-            text-decoration: underline;
+        .popup-buttons button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
         }
+
+        .popup-buttons .confirm-btn {
+            background-color: #449f9f;
+            color: white;
+        }
+
+        .popup-buttons .cancel-btn {
+            background-color: #ccc;
+        }
+            /* Popup Buttons Styling */
+    .popup-increment-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+    }
+
+    .increment-btn {
+        flex: 1;
+        margin: 0 5px;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 6px;
+        background-color: #449f9f;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-align: center;
+    }
+
+    .increment-btn:hover {
+        background-color: #367a7a;
+    }
     </style>
 </head>
-
 <body>
     <custom-header></custom-header>
+    <div class="bidding-container">
+        <div class="product-header">
+            <h2>Total Time Left</h2>
+            <div class="total-time">24:00:00</div>
+        </div>
 
-    <div class="container">
-        <div class="product-detail">
+        <div class="product-content">
             <div class="product-image">
-                <img src="/assets/images/stone1.jpg" alt="Corn Blue Sapphire" loading="lazy">
+                <img src="../../assets/images/stone11.jpg" alt="Corn Blue Sapphire">
             </div>
-            <div class="product-info">
-                <h2>Corn Blue Sapphire</h2>
-                <div class="price" id="current-price">$2000.00</div>
-                <div class="details">
-                    <p>Unheated 5.5 Carats</p>
-                    <p>Color: Blue</p>
-                    <p>Clarity: VS1</p>
-                    <p>Shape: Oval</p>
+            <div class="product-details">
+                <div class="detail-item">
+                    <span class="label">Stone Details</span>
+                    <span class="value" id="current-bid" style="color: #449f9f;">Corn Blue Sapphire </span>
                 </div>
-                <a href="#" class="btn">View Certificate</a>
+                <div class="detail-item">
+                    <span class="label">Starting Bid</span>
+                    <span class="value" id="starting-bid">$2,000.00</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Current Highest Bid</span>
+                    <span class="value" id="current-bid">$2,000.00</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Your Bid</span>
+                    <span class="value" id="user-bid">None</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Cycle Number</span>
+                    <span class="value" id="user-bid">1</span>
+                </div>
+                <button class="bid-now-btn" id="bid-now-btn">
+                    <i class="fas fa-gavel"></i> Bid Now
+                </button>
             </div>
         </div>
 
-        <div class="bid-section">
-            <h3>Place Your Bid</h3>
-            <div class="timer" id="timer">Time Left: <span id="time-left">00:00:00</span></div>
-            <div class="current-cycle" id="current-cycle">Current Cycle: 1</div>
-            <div class="bid-input">
-                <input type="number" id="bid-amount" placeholder="Enter your bid" min="0" step="50" disabled>
-                <button id="place-bid" disabled>Place Bid</button>
-            </div>
-            <div id="bid-message"></div>
-        </div>
-
-        <div class="more-bids">
-            <h3>More Bids</h3>
-            <div class="bids-list" id="bids-list">
-                <div class="shop-card">
-                    <img src="/assets/images/stone2.jpg" alt="Gem 2">
-                    <div class="price">$1800.00</div>
-                    <h4 class="card-title">Gem 2</h4>
+        <div class="cycle-info">
+            <div class="cycle-timer">
+                <div>
+                    <i class="fas fa-sync cycle-timer-icon"></i> Cycle Time Left
                 </div>
-                <div class="shop-card">
-                    <img src="/assets/images/stone3.jpg" alt="Gem 3">
-                    <div class="price">$2200.00</div>
-                    <h4 class="card-title">Gem 3</h4>
-                </div>
-                <div class="shop-card">
-                    <img src="/assets/images/stone4.jpg" alt="Gem 4">
-                    <div class="price">$2100.00</div>
-                    <h4 class="card-title">Gem 4</h4>
-                </div>
-                <!-- Add more shop cards as needed -->
+                <div class="timer-display">1:00:00</div>
             </div>
         </div>
     </div>
 
-    <script src="/components/header/header.js"></script>
-    <script src="/components/footer/footer.js"></script>
+    <!-- Popup Structure -->
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup-content">
+            <h3>Place Your Bid</h3>
+            <input type="number" id="bid-amount" placeholder="Enter your bid amount">
+            <div class="popup-increment-buttons">
+                <button class="increment-btn" id="increment-100">+100</button>
+                <button class="increment-btn" id="increment-50">+50</button>
+            </div>
+            <div class="popup-buttons">
+                <button class="confirm-btn" id="confirm-bid">Confirm</button>
+                <button class="cancel-btn" id="cancel-bid">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <custom-footer></custom-footer>
+
     <script>
-        // Bidding logic with cycles and one bid per cycle
-        let currentPrice = 2000; // initial price
-        const incrementAmount = 50; // minimum increment for bidding
-        let cycleDuration = 60 * 5; // auction duration in seconds (5 minutes)
-        let cycleCount = 3; // number of cycles
-        let currentCycle = 1; // current cycle
-        let timerInterval;
-        let bids = []; // holds bids for each cycle
-        let bidPlaced = false; // Track if user placed bid in the current cycle
+        // JavaScript for Popup and Bidding Logic
+        const bidNowBtn = document.getElementById("bid-now-btn");
+        const popupOverlay = document.getElementById("popup-overlay");
+        const confirmBidBtn = document.getElementById("confirm-bid");
+        const cancelBidBtn = document.getElementById("cancel-bid");
+        const bidAmountInput = document.getElementById("bid-amount");
 
-        // Enable bid input and button only if a new cycle starts
-        function enableBidding() {
-            document.getElementById('bid-amount').disabled = false;
-            document.getElementById('place-bid').disabled = false;
-            bidPlaced = false; // reset bid placed status for new cycle
-        }
+        const startingBidEl = document.getElementById("starting-bid");
+        const currentBidEl = document.getElementById("current-bid");
+        const userBidEl = document.getElementById("user-bid");
 
-        // Function to start the countdown timer
-        function startTimer() {
-            const timeLeftDisplay = document.getElementById('time-left');
-            timerInterval = setInterval(() => {
-                const hours = Math.floor(cycleDuration / 3600);
-                const minutes = Math.floor((cycleDuration % 3600) / 60);
-                const seconds = cycleDuration % 60;
+        let hasPlacedBid = false; // Track if the user has already placed a bid in this cycle
+        const bidIncrement = 100; // Minimum increment
 
-                timeLeftDisplay.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        // Open the popup
+        bidNowBtn.addEventListener("click", () => {
+            if (hasPlacedBid) {
+                alert("You have already placed a bid in this cycle!");
+                return;
+            }
+            popupOverlay.style.display = "flex";
+        });
 
-                if (cycleDuration <= 0) {
-                    clearInterval(timerInterval);
-                    endCycle();
-                }
+        // Close the popup
+        cancelBidBtn.addEventListener("click", () => {
+            popupOverlay.style.display = "none";
+        });
 
-                cycleDuration--;
-            }, 1000);
-        }
+        // Confirm the bid
+        confirmBidBtn.addEventListener("click", () => {
+            const bidAmount = parseFloat(bidAmountInput.value);
+            const currentBid = parseFloat(currentBidEl.textContent.replace(/[^0-9.-]+/g, "")); // Remove $ symbol
 
-        // Function to handle end of cycle
-        function endCycle() {
-            const bidMessage = document.getElementById('bid-message');
-
-            if (bids.length > 0) {
-                const highestBid = Math.max(...bids);
-                currentPrice = highestBid;
-                document.getElementById('current-price').textContent = `$${currentPrice.toFixed(2)}`;
-                bidMessage.textContent = `Highest bid for Cycle ${currentCycle}: $${highestBid}`;
-            } else {
-                bidMessage.textContent = `No bids were placed in Cycle ${currentCycle}`;
+            if (bidAmount < currentBid + bidIncrement) {
+                alert(`Your bid must be at least $${(currentBid + bidIncrement).toFixed(2)}`);
+                return;
             }
 
-            bids = []; // clear bids for next cycle
-            currentCycle++;
+            // Update the bid information
+            currentBidEl.textContent = `$${bidAmount.toFixed(2)}`;
+            userBidEl.textContent = `$${bidAmount.toFixed(2)}`;
+            hasPlacedBid = true;
 
-            if (currentCycle <= cycleCount) {
-                document.getElementById('current-cycle').textContent = `Current Cycle: ${currentCycle}`;
-                cycleDuration = 60 * 5; // reset timer for next cycle
-                startTimer(); // restart timer
-                enableBidding(); // allow users to bid again
-            } else {
-                document.getElementById('bid-message').textContent = `All bidding cycles have ended. Final price: $${currentPrice}`;
-                document.getElementById('bid-amount').disabled = true;
-                document.getElementById('place-bid').disabled = true; // disable bidding
-            }
-        }
-
-        // Function to place a bid
-        function placeBid() {
-            const bidAmount = parseFloat(document.getElementById('bid-amount').value);
-            const bidMessage = document.getElementById('bid-message');
-
-            if (isNaN(bidAmount) || bidAmount <= currentPrice) {
-                bidMessage.textContent = "Bid must be higher than the current price!";
-            } else if ((bidAmount - currentPrice) % incrementAmount !== 0) {
-                bidMessage.textContent = `Bid must be a multiple of $${incrementAmount}.`;
-            } else if (bidPlaced) {
-                bidMessage.textContent = "You have already placed a bid for this cycle!";
-            } else {
-                bids.push(bidAmount);
-                bidMessage.textContent = "Bid placed successfully! Wait for the cycle to end.";
-                bidPlaced = true; // user can only place one bid per cycle
-                document.getElementById('bid-amount').value = ''; // clear input
-                document.getElementById('bid-amount').disabled = true; // disable input after placing a bid
-                document.getElementById('place-bid').disabled = true;
-            }
-        }
-
-        // Event listeners
-        document.getElementById('place-bid').addEventListener('click', placeBid);
-        enableBidding(); // initially enable bidding
-        startTimer();
+            // Close the popup
+            popupOverlay.style.display = "none";
+        });
     </script>
+    <script src="../../components/header/header.js"></script>
+    <script src="../../components/footer/footer.js"></script>
 </body>
-
 </html>

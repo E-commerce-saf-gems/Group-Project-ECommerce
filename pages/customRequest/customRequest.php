@@ -1,3 +1,16 @@
+<?php
+
+session_start() ;
+
+if (!isset($_SESSION['customer_id'])) {
+    header("Location: ../Login/login.php?notloggedIn=1") ;
+    exit;
+}
+
+$customerID = $_SESSION['customer_id'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +21,7 @@
     <link rel="stylesheet" href="../../components/header/header.css">
     <link rel="stylesheet" href="../../components/footer/footer.css">
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <title>Confirm Order</title>
+    <title>Custom Request</title>
 </head>
 <body id="top">
     <custom-header></custom-header>
@@ -17,7 +30,8 @@
 
         <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
         <div class="success-message">
-            Your request has been sent successfully! <br> We will contact you shortly!
+            Your request has been sent successfully! <br> We will contact you shortly! Click Here to
+            <u><a href="../Profile/Requests/MyRequest.php">View Requests</a></u>
         </div>
         <?php elseif(isset($_GET['success']) && $_GET['success'] == 2) : ?>
             <div class="error-message">
@@ -65,9 +79,8 @@
                     <textarea id="special-requirements" name="special-requirements" rows="4" placeholder="Specify any additional requirements, such as clarity, size dimensions, etc."></textarea>
                 </div>
 
-                <div class="form-actions">
+                <div style="display: flex; gap: 10px;" class="form-actions">
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <br>
                     <button type="reset" class="btn btn-primary">Clear Form</button>
                 </div>
             </div>
@@ -79,5 +92,7 @@
     <script src="../../components/footer/footer.js"></script>
     <script src="../../components/header/header.js"></script>
     <script src="./customRequest.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

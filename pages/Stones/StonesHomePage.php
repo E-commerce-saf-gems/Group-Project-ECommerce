@@ -1,51 +1,17 @@
 <?php
 include '../../database/db.php';
 
-// Base query
-$ssql = "SELECT * FROM inventory WHERE visibility = 'show' AND availability = 'available'";
-
-// Apply filters
-if (isset($_GET['carat-weight']) && !empty($_GET['carat-weight'])) {
-    $caratWeight = (float)$_GET['carat-weight'];
-    $ssql .= " AND size <= $caratWeight";
-}
-
-if (isset($_GET['shape']) && !empty($_GET['shape'])) {
-    $shape = $conn->real_escape_string($_GET['shape']);
-    $ssql .= " AND shape = '$shape'";
-}
-
-if (isset($_GET['colour']) && !empty($_GET['colour'])) {
-    $colour = $conn->real_escape_string($_GET['colour']);
-    $ssql .= " AND colour = '$colour'";
-}
-
-if (isset($_GET['origin']) && !empty($_GET['origin'])) {
-    $origin = $conn->real_escape_string($_GET['origin']);
-    $ssql .= " AND origin = '$origin'";
-}
-
-if (isset($_GET['min-price']) && is_numeric($_GET['min-price'])) {
-    $minPrice = (float)$_GET['min-price'];
-    $ssql .= " AND amount >= $minPrice";
-}
-
-if (isset($_GET['max-price']) && is_numeric($_GET['max-price'])) {
-    $maxPrice = (float)$_GET['max-price'];
-    $ssql .= " AND amount <= $maxPrice";
-}
-
-// Apply sorting
-if (isset($_GET['sort']) && !empty($_GET['sort'])) {
-    $sortOption = $_GET['sort'];
-    if ($sortOption == 'price-low-to-high') {
-        $ssql .= " ORDER BY amount ASC";
-    } elseif ($sortOption == 'price-high-to-low') {
-        $ssql .= " ORDER BY amount DESC";
-    } elseif ($sortOption == 'new-arrival') {
-        $ssql .= " ORDER BY stone_id DESC"; // Assuming `created_at` is a column for new arrivals
-    }
-}
+// Corrected SQL query syntax
+$ssql = "SELECT 
+            stone_id, amount, 
+            type, 
+            origin,
+            description,
+            image, 
+            size,
+            colour 
+        FROM inventory
+        WHERE visibility = 'show' && availability = 'available'|| availability = 'Available'";
 
 $result = $conn->query($ssql);
 
@@ -60,14 +26,14 @@ if (!$result) {
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/pages/homepage/styles.css">
-    <link rel="stylesheet" href="/styles/common.css">
-    <link rel="stylesheet" href="/components/header/header.css">
-    <link rel="stylesheet" href="/components/footer/footer.css">
+    <link rel="stylesheet" href="..//homepage/styles.css">
+    <link rel="stylesheet" href="../../styles/common.css">
+    <link rel="stylesheet" href="../../components/header/header.css">
+    <link rel="stylesheet" href="../../components/footer/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../Stones/styles.css">
+    <link rel="stylesheet" href="./styles.css">
     <title>Gem Product Catalog</title>
 </head>
 
@@ -78,67 +44,69 @@ if (!$result) {
         <!-- Sidebar for filter and sort options -->
         <aside class="sidebar">
             <h2>Filter & Sort</h2>
-<!-- filepath: c:\xampp\htdocs\Group-Project-ECommerce\pages\Stones\StonesHomePage.php -->
-<form method="GET" action="" id="filter-form">
-    <div class="filter-section">
-        <h3>Sort By</h3>
-        <label for="sort">Sort By:</label>
-        <select id="sort" name="sort" onchange="document.getElementById('filter-form').submit();">
-            <option value="new-arrival" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'new-arrival') ? 'selected' : ''; ?>>New Arrival</option>
-            <option value="price-low-to-high" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price-low-to-high') ? 'selected' : ''; ?>>Price: Low to High</option>
-            <option value="price-high-to-low" <?php echo (isset($_GET['sort']) && $_GET['sort'] == 'price-high-to-low') ? 'selected' : ''; ?>>Price: High to Low</option>
-        </select>
-    </div>
 
-    <div class="filter-section">
-        <h3>Filter By</h3>
-        <label for="carat-weight">Carat Weight (in carats):</label>
-        <input type="range" id="carat-weight" name="carat-weight" min="1" max="10" value="<?php echo isset($_GET['carat-weight']) ? htmlspecialchars($_GET['carat-weight']) : '5'; ?>" step="0.5" onchange="document.getElementById('filter-form').submit();">
-        <span id="carat-weight-display"><?php echo isset($_GET['carat-weight']) ? htmlspecialchars($_GET['carat-weight']) : '5'; ?> carats</span><br />
+            <div class="filter-section">
+                <h3>Sort By</h3>
+                <label for="sort">Sort By:</label>
+                <select id="sort">
+                    <option value="best-match">Recently Added</option>
+                    <option value="price-low-to-high">Price: Low to High</option>
+                    <option value="price-high-to-low">Price: High to Low</option>
+                </select>
+            </div>
 
-        <label for="shape">Shape:</label>
-        <select id="shape" name="shape" onchange="document.getElementById('filter-form').submit();">
-            <option value="" <?php echo (!isset($_GET['shape']) || $_GET['shape'] == '') ? 'selected' : ''; ?>>Any</option>
-            <option value="round" <?php echo (isset($_GET['shape']) && $_GET['shape'] == 'round') ? 'selected' : ''; ?>>Round</option>
-            <option value="oval" <?php echo (isset($_GET['shape']) && $_GET['shape'] == 'oval') ? 'selected' : ''; ?>>Oval</option>
-            <option value="pear" <?php echo (isset($_GET['shape']) && $_GET['shape'] == 'pear') ? 'selected' : ''; ?>>Pear</option>
-            <option value="emerald" <?php echo (isset($_GET['shape']) && $_GET['shape'] == 'emerald') ? 'selected' : ''; ?>>Emerald</option>
-            <option value="cushion" <?php echo (isset($_GET['shape']) && $_GET['shape'] == 'cushion') ? 'selected' : ''; ?>>Cushion</option>
-        </select>
+            <div class="filter-section">
+                <h3>Filter By</h3>
 
-        <label for="colour">Colour:</label>
-        <select id="colour" name="colour" onchange="document.getElementById('filter-form').submit();">
-            <option value="" <?php echo (!isset($_GET['colour']) || $_GET['colour'] == '') ? 'selected' : ''; ?>>Any</option>
-            <option value="blue" <?php echo (isset($_GET['colour']) && $_GET['colour'] == 'blue') ? 'selected' : ''; ?>>Blue</option>
-            <option value="yellow" <?php echo (isset($_GET['colour']) && $_GET['colour'] == 'yellow') ? 'selected' : ''; ?>>Yellow</option>
-            <option value="pink" <?php echo (isset($_GET['colour']) && $_GET['colour'] == 'pink') ? 'selected' : ''; ?>>Pink</option>
-            <option value="green" <?php echo (isset($_GET['colour']) && $_GET['colour'] == 'green') ? 'selected' : ''; ?>>Green</option>
-            <option value="clear" <?php echo (isset($_GET['colour']) && $_GET['colour'] == 'clear') ? 'selected' : ''; ?>>Clear</option>
-        </select>
+                <!-- Filter by Carat Weight -->
+                <label for="carat-weight">Carat Weight (in carats):</label>
+                <input type="range" id="carat-weight" name="carat-weight" min="1" max="10" value="5" step="0.5">
+                <span id="carat-weight-display">5 carats</span><br />
 
-        <label for="origin">Origin</label>
-        <select id="origin" name="origin" onchange="document.getElementById('filter-form').submit();">
-            <option value="" <?php echo (!isset($_GET['origin']) || $_GET['origin'] == '') ? 'selected' : ''; ?>>Any</option>
-            <option value="srilanka" <?php echo (isset($_GET['origin']) && $_GET['origin'] == 'srilanka') ? 'selected' : ''; ?>>Sri Lanka</option>
-            <option value="Canada" <?php echo (isset($_GET['origin']) && $_GET['origin'] == 'Canada') ? 'selected' : ''; ?>>Canada</option>
-            <option value="Dubai" <?php echo (isset($_GET['origin']) && $_GET['origin'] == 'Dubai') ? 'selected' : ''; ?>>Dubai</option>
-            <option value="Africa" <?php echo (isset($_GET['origin']) && $_GET['origin'] == 'Africa') ? 'selected' : ''; ?>>Africa</option>
-        </select>
+                <!-- Filter by Shape -->
+                <label for="shape">Shape:</label>
+                <select id="shape">
+                    <option value="round">Round</option>
+                    <option value="oval">Oval</option>
+                    <option value="pear">Pear</option>
+                    <option value="emerald">Emerald</option>
+                    <option value="cushion">Cushion</option>
+                </select>
 
-        <label for="price-range">Price Range:</label>
-        <input type="number" id="min-price" name="min-price" placeholder="Min" min="0" step="50" value="<?php echo isset($_GET['min-price']) ? htmlspecialchars($_GET['min-price']) : ''; ?>" onchange="document.getElementById('filter-form').submit();">
-        <input type="number" id="max-price" name="max-price" placeholder="Max" min="0" step="50" value="<?php echo isset($_GET['max-price']) ? htmlspecialchars($_GET['max-price']) : ''; ?>" onchange="document.getElementById('filter-form').submit();">
-    </div>
-</form>
+                <!-- Filter by Color -->
+                <label for="color">Color:</label>
+                <select id="color">
+                    <option value="blue">Blue</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="pink">Pink</option>
+                    <option value="green">Green</option>
+                    <option value="clear">Clear</option>
+                </select>
+
+                <!-- Filter by Clarity -->
+                <label for="clarity">Clarity:</label>
+                <select id="clarity">
+                    <option value="flawless">Flawless</option>
+                    <option value="vs1">VS1</option>
+                    <option value="vs2">VS2</option>
+                    <option value="si1">SI1</option>
+                    <option value="si2">SI2</option>
+                </select>
+
+                <!-- Filter by Price Range -->
+                <label for="price-range">Price Range:</label>
+                <input type="number" id="min-price" placeholder="Min" min="0" step="50">
+                <input type="number" id="max-price" placeholder="Max" min="0" step="50">
+            </div>
         </aside>
 
-        <!-- Main content area with product catalog -->
-        <main class="product-catalog">
-            <?php while ($row = $result->fetch_assoc()) : ?>
+<!-- Main content area with product catalog -->
+<main class="product-catalog">
+                <?php while ($row = $result->fetch_assoc()) : ?>
             <div class="shop-card">
                 <div class="card-banner">
                 <img 
-                src="<?php echo htmlspecialchars('http://localhost/Business-Dashboard/uploads/' . $row['image']); ?>" 
+                src="<?php echo htmlspecialchars('http://localhost/Group-Project-ECommerce/assets/images/' . $row['image']); ?>" 
                 alt="<?php echo htmlspecialchars($row['type']); ?>" 
                 style="width: 200px; height: 200px; object-fit: cover;">
 
@@ -152,14 +120,12 @@ if (!$result) {
                     </div>
                 </div>
                 <div class="card-content">
-                    <div class="price">$<?php echo number_format($row['amount'], 2); ?></div>
                     <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['type']); ?></a></h3>
-                    <div class="price"><?php echo number_format($row['size'], 2); ?> carats</div> <!-- new -->
-                    <p class="rating-text"><?php echo htmlspecialchars($row['description']); ?> - <?php echo $row['origin']; ?> </p>
+                    <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['colour']); ?></a></h3>
+                    <div class="price">Rs. <?php echo number_format($row['amount']); ?></div>
                     <?php
-                    echo "<a href='./viewmore.php?id=" . $row['stone_id'] . "' class='btn btn-primary'>";
-                    ?> View More</a>
-
+                    echo "<a href='./viewmore2.php?id=" . $row['stone_id'] . "' class='btn btn-primary'>";
+                    ?>View More</span></a>
                 </div>
             </div>
         <?php endwhile; ?>
@@ -167,9 +133,9 @@ if (!$result) {
         </main>
     </div>
 
-    <script src="/components/header/header.js"></script>
-    <script src="/components/footer/footer.js"></script>
-    <script src="/pages/homepage/script.js"></script>
+    <script src="../../components/header/header.js"></script>
+    <script src="../../components/footer/footer.js"></script>
+    <script src="../homepage/script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
@@ -182,8 +148,5 @@ if (!$result) {
         });
     </script>
 </body>
-</html>
 
-<?php
-$conn->close();
-?>
+</html>

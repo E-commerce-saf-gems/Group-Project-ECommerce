@@ -206,3 +206,15 @@ footer {
 .days-left ion-icon { 
     color: #449b9b; /* Icon color */
 }
+
+.btn {
+    font-weight: black;
+    max-width: max-content;
+    padding: 10px 20px;
+    border-radius: var(--radius-3);
+    transition: var(--transition-1)
+}
+
+.btn:hover {
+    background-color: #449b9b;
+}

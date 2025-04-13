@@ -1,7 +1,7 @@
 <?php
 include '../../database/db.php';
 
-// Corrected SQL query syntax
+// Base query
 $ssql = "SELECT 
             stone_id, amount, 
             type, 
@@ -9,17 +9,63 @@ $ssql = "SELECT
             description,
             image, 
             size,
+            shape,
             colour 
         FROM inventory
-        WHERE visibility = 'show' && availability = 'available'|| availability = 'Available'";
+        WHERE visibility = 'show' AND (availability = 'available' OR availability = 'Available')";
+
+// Apply filters
+if (isset($_GET['carat-weight']) && !empty($_GET['carat-weight'])) {
+    $caratWeight = (float)$_GET['carat-weight'];
+    $ssql .= " AND size <= $caratWeight";
+}
+
+if (isset($_GET['shape']) && !empty($_GET['shape'])) {
+    $shape = $conn->real_escape_string($_GET['shape']);
+    $ssql .= " AND shape = '$shape'";
+}
+
+if (isset($_GET['color']) && !empty($_GET['color'])) {
+    $color = $conn->real_escape_string($_GET['color']);
+    $ssql .= " AND colour = '$color'";
+}
+
+if (isset($_GET['origin']) && !empty($_GET['origin'])) {
+    $origin = $conn->real_escape_string($_GET['origin']);
+    $ssql .= " AND origin = '$origin'";
+}
+
+if (isset($_GET['min-price']) && is_numeric($_GET['min-price'])) {
+    $minPrice = (float)$_GET['min-price'];
+    $ssql .= " AND amount >= $minPrice";
+}
+
+if (isset($_GET['max-price']) && is_numeric($_GET['max-price'])) {
+    $maxPrice = (float)$_GET['max-price'];
+    $ssql .= " AND amount <= $maxPrice";
+}
+
+// Sorting
+if (isset($_GET['sort']) && !empty($_GET['sort'])) {
+    $sortOption = $_GET['sort'];
+    if ($sortOption == 'price-low-to-high') {
+        $ssql .= " ORDER BY amount ASC";
+    } elseif ($sortOption == 'price-high-to-low') {
+        $ssql .= " ORDER BY amount DESC";
+    } else {
+        $ssql .= " ORDER BY stone_id DESC"; // default or new arrival
+    }
+} else {
+    $ssql .= " ORDER BY stone_id DESC"; // default sort
+}
 
 $result = $conn->query($ssql);
 
-// Check if query was successful
 if (!$result) {
     die("Query failed: " . $conn->error);
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,60 +90,65 @@ if (!$result) {
         <!-- Sidebar for filter and sort options -->
         <aside class="sidebar">
             <h2>Filter & Sort</h2>
+            <form method="GET" id="filter-form">
+    <div class="filter-section">
+        <h3>Sort By</h3>
+        <label for="sort">Sort By:</label>
+        <select id="sort" name="sort" onchange="document.getElementById('filter-form').submit();">
+            <option value="new-arrival" <?= (isset($_GET['sort']) && $_GET['sort'] == 'new-arrival') ? 'selected' : ''; ?>>Recently Added</option>
+            <option value="price-low-to-high" <?= (isset($_GET['sort']) && $_GET['sort'] == 'price-low-to-high') ? 'selected' : ''; ?>>Price: Low to High</option>
+            <option value="price-high-to-low" <?= (isset($_GET['sort']) && $_GET['sort'] == 'price-high-to-low') ? 'selected' : ''; ?>>Price: High to Low</option>
+        </select>
+    </div>
 
-            <div class="filter-section">
-                <h3>Sort By</h3>
-                <label for="sort">Sort By:</label>
-                <select id="sort">
-                    <option value="best-match">Recently Added</option>
-                    <option value="price-low-to-high">Price: Low to High</option>
-                    <option value="price-high-to-low">Price: High to Low</option>
-                </select>
-            </div>
+    <div class="filter-section">
+        <h3>Filter By</h3>
 
-            <div class="filter-section">
-                <h3>Filter By</h3>
+        <label for="carat-weight">Carat Weight:</label>
+        <input type="range" id="carat-weight" name="carat-weight" min="1" max="10" step="0.5" 
+               value="<?= isset($_GET['carat-weight']) ? htmlspecialchars($_GET['carat-weight']) : 5; ?>"
+               onchange="document.getElementById('filter-form').submit();">
+        <span id="carat-weight-display"><?= isset($_GET['carat-weight']) ? htmlspecialchars($_GET['carat-weight']) : 5; ?> carats</span><br>
 
-                <!-- Filter by Carat Weight -->
-                <label for="carat-weight">Carat Weight (in carats):</label>
-                <input type="range" id="carat-weight" name="carat-weight" min="1" max="10" value="5" step="0.5">
-                <span id="carat-weight-display">5 carats</span><br />
+        <label for="shape">Shape:</label>
+        <select id="shape" name="shape" onchange="document.getElementById('filter-form').submit();">
+            <option value="">Any</option>
+            <option value="round" <?= (isset($_GET['shape']) && $_GET['shape'] == 'round') ? 'selected' : ''; ?>>Round</option>
+            <option value="oval" <?= (isset($_GET['shape']) && $_GET['shape'] == 'oval') ? 'selected' : ''; ?>>Oval</option>
+            <option value="pear" <?= (isset($_GET['shape']) && $_GET['shape'] == 'pear') ? 'selected' : ''; ?>>Pear</option>
+            <option value="emerald" <?= (isset($_GET['shape']) && $_GET['shape'] == 'emerald') ? 'selected' : ''; ?>>Emerald</option>
+            <option value="cushion" <?= (isset($_GET['shape']) && $_GET['shape'] == 'cushion') ? 'selected' : ''; ?>>Cushion</option>
+        </select>
 
-                <!-- Filter by Shape -->
-                <label for="shape">Shape:</label>
-                <select id="shape">
-                    <option value="round">Round</option>
-                    <option value="oval">Oval</option>
-                    <option value="pear">Pear</option>
-                    <option value="emerald">Emerald</option>
-                    <option value="cushion">Cushion</option>
-                </select>
+        <label for="color">Color:</label>
+        <select id="color" name="color" onchange="document.getElementById('filter-form').submit();">
+            <option value="">Any</option>
+            <option value="blue" <?= (isset($_GET['color']) && $_GET['color'] == 'blue') ? 'selected' : ''; ?>>Blue</option>
+            <option value="yellow" <?= (isset($_GET['color']) && $_GET['color'] == 'yellow') ? 'selected' : ''; ?>>Yellow</option>
+            <option value="pink" <?= (isset($_GET['color']) && $_GET['color'] == 'pink') ? 'selected' : ''; ?>>Pink</option>
+            <option value="green" <?= (isset($_GET['color']) && $_GET['color'] == 'green') ? 'selected' : ''; ?>>Green</option>
+            <option value="clear" <?= (isset($_GET['color']) && $_GET['color'] == 'clear') ? 'selected' : ''; ?>>Clear</option>
+        </select>
 
-                <!-- Filter by Color -->
-                <label for="color">Color:</label>
-                <select id="color">
-                    <option value="blue">Blue</option>
-                    <option value="yellow">Yellow</option>
-                    <option value="pink">Pink</option>
-                    <option value="green">Green</option>
-                    <option value="clear">Clear</option>
-                </select>
+        <label for="origin">Origin:</label>
+        <select id="origin" name="origin" onchange="document.getElementById('filter-form').submit();">
+            <option value="">Any</option>
+            <option value="srilanka" <?= (isset($_GET['origin']) && $_GET['origin'] == 'srilanka') ? 'selected' : ''; ?>>Sri Lanka</option>
+            <option value="Canada" <?= (isset($_GET['origin']) && $_GET['origin'] == 'Canada') ? 'selected' : ''; ?>>Canada</option>
+            <option value="Dubai" <?= (isset($_GET['origin']) && $_GET['origin'] == 'Dubai') ? 'selected' : ''; ?>>Dubai</option>
+            <option value="Africa" <?= (isset($_GET['origin']) && $_GET['origin'] == 'Africa') ? 'selected' : ''; ?>>Africa</option>
+        </select>
 
-                <!-- Filter by Clarity -->
-                <label for="clarity">Clarity:</label>
-                <select id="clarity">
-                    <option value="flawless">Flawless</option>
-                    <option value="vs1">VS1</option>
-                    <option value="vs2">VS2</option>
-                    <option value="si1">SI1</option>
-                    <option value="si2">SI2</option>
-                </select>
+        <label for="min-price">Price Range:</label>
+        <input type="number" id="min-price" name="min-price" min="0" placeholder="Min" step="50"
+               value="<?= isset($_GET['min-price']) ? htmlspecialchars($_GET['min-price']) : ''; ?>" 
+               onchange="document.getElementById('filter-form').submit();">
+        <input type="number" id="max-price" name="max-price" min="0" placeholder="Max" step="50"
+               value="<?= isset($_GET['max-price']) ? htmlspecialchars($_GET['max-price']) : ''; ?>" 
+               onchange="document.getElementById('filter-form').submit();">
+    </div>
+</form>
 
-                <!-- Filter by Price Range -->
-                <label for="price-range">Price Range:</label>
-                <input type="number" id="min-price" placeholder="Min" min="0" step="50">
-                <input type="number" id="max-price" placeholder="Max" min="0" step="50">
-            </div>
         </aside>
 
 <!-- Main content area with product catalog -->
@@ -140,12 +191,13 @@ if (!$result) {
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
     <script>
-        // JavaScript to display the selected carat weight value dynamically
-        const caratWeightInput = document.getElementById('carat-weight');
-        const caratWeightDisplay = document.getElementById('carat-weight-display');
-        caratWeightInput.addEventListener('input', function () {
-            caratWeightDisplay.textContent = caratWeightInput.value + " carats";
-        });
+const caratWeightInput = document.getElementById('carat-weight');
+const caratWeightDisplay = document.getElementById('carat-weight-display');
+
+caratWeightInput.addEventListener('input', () => {
+    caratWeightDisplay.textContent = caratWeightInput.value + ' carats';
+});
+
     </script>
 </body>
 

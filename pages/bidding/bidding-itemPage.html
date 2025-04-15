@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bidding Details</title>
+    <link rel="stylesheet" href="../../components/header/header.css">
+    <link rel="stylesheet" href="../../components/footer/footer.css">
+    <link rel="stylesheet" href="../../styles/common.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Existing Styles */
+        .bidding-container {
+            width: 100%;
+            max-width: 600px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .product-header {
+            background-color: #449f9f;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-header h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .product-content {
+            display: flex;
+            padding: 15px;
+        }
+
+        .product-image {
+            flex: 1;
+            margin-right: 15px;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .product-details {
+            flex: 2;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .detail-item .label {
+            color: #666;
+        }
+
+        .detail-item .value {
+            font-weight: bold;
+        }
+
+        .cycle-info {
+            background-color: #f0f0f0;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .cycle-timer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .cycle-timer-icon {
+            color: #449f9f;
+            font-size: 24px;
+        }
+
+        .bid-now-btn {
+            background-color: #449f9f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .bid-now-btn:hover {
+            background-color: #367a7a;
+        }
+
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup-content h3 {
+            margin-top: 0;
+        }
+
+        .popup-content input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        .popup-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .popup-buttons button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .popup-buttons .confirm-btn {
+            background-color: #449f9f;
+            color: white;
+        }
+
+        .popup-buttons .cancel-btn {
+            background-color: #ccc;
+        }
+            /* Popup Buttons Styling */
+    .popup-increment-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+    }
+
+    .increment-btn {
+        flex: 1;
+        margin: 0 5px;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 6px;
+        background-color: #449f9f;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-align: center;
+    }
+
+    .increment-btn:hover {
+        background-color: #367a7a;
+    }
+    </style>
+</head>
+<body>
+    <custom-header></custom-header>
+    <div class="bidding-container">
+        <div class="product-header">
+            <h2>Total Time Left</h2>
+            <div class="total-time">24:00:00</div>
+        </div>
+
+        <div class="product-content">
+            <div class="product-image">
+                <img src="../../assets/images/stone11.jpg" alt="Corn Blue Sapphire">
+            </div>
+            <div class="product-details">
+                <div class="detail-item">
+                    <span class="label">Stone Details</span>
+                    <span class="value" id="current-bid" style="color: #449f9f;">Corn Blue Sapphire </span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Starting Bid</span>
+                    <span class="value" id="starting-bid">$2,000.00</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Current Highest Bid</span>
+                    <span class="value" id="current-bid">$2,000.00</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Your Bid</span>
+                    <span class="value" id="user-bid">None</span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Cycle Number</span>
+                    <span class="value" id="user-bid">1</span>
+                </div>
+                <button class="bid-now-btn" id="bid-now-btn">
+                    <i class="fas fa-gavel"></i> Bid Now
+                </button>
+            </div>
+        </div>
+
+        <div class="cycle-info">
+            <div class="cycle-timer">
+                <div>
+                    <i class="fas fa-sync cycle-timer-icon"></i> Cycle Time Left
+                </div>
+                <div class="timer-display">1:00:00</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup Structure -->
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup-content">
+            <h3>Place Your Bid</h3>
+            <input type="number" id="bid-amount" placeholder="Enter your bid amount">
+            <div class="popup-increment-buttons">
+                <button class="increment-btn" id="increment-100">+100</button>
+                <button class="increment-btn" id="increment-50">+50</button>
+            </div>
+            <div class="popup-buttons">
+                <button class="confirm-btn" id="confirm-bid">Confirm</button>
+                <button class="cancel-btn" id="cancel-bid">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <custom-footer></custom-footer>
+
+    <script>
+        // JavaScript for Popup and Bidding Logic
+        const bidNowBtn = document.getElementById("bid-now-btn");
+        const popupOverlay = document.getElementById("popup-overlay");
+        const confirmBidBtn = document.getElementById("confirm-bid");
+        const cancelBidBtn = document.getElementById("cancel-bid");
+        const bidAmountInput = document.getElementById("bid-amount");
+
+        const startingBidEl = document.getElementById("starting-bid");
+        const currentBidEl = document.getElementById("current-bid");
+        const userBidEl = document.getElementById("user-bid");
+
+        let hasPlacedBid = false; // Track if the user has already placed a bid in this cycle
+        const bidIncrement = 100; // Minimum increment
+
+        // Open the popup
+        bidNowBtn.addEventListener("click", () => {
+            if (hasPlacedBid) {
+                alert("You have already placed a bid in this cycle!");
+                return;
+            }
+            popupOverlay.style.display = "flex";
+        });
+
+        // Close the popup
+        cancelBidBtn.addEventListener("click", () => {
+            popupOverlay.style.display = "none";
+        });
+
+        // Confirm the bid
+        confirmBidBtn.addEventListener("click", () => {
+            const bidAmount = parseFloat(bidAmountInput.value);
+            const currentBid = parseFloat(currentBidEl.textContent.replace(/[^0-9.-]+/g, "")); // Remove $ symbol
+
+            if (bidAmount < currentBid + bidIncrement) {
+                alert(`Your bid must be at least $${(currentBid + bidIncrement).toFixed(2)}`);
+                return;
+            }
+
+            // Update the bid information
+            currentBidEl.textContent = `$${bidAmount.toFixed(2)}`;
+            userBidEl.textContent = `$${bidAmount.toFixed(2)}`;
+            hasPlacedBid = true;
+
+            // Close the popup
+            popupOverlay.style.display = "none";
+        });
+    </script>
+    <script src="../../components/header/header.js"></script>
+    <script src="../../components/footer/footer.js"></script>
+</body>
+</html>

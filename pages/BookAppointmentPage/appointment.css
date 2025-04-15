@@ -1,0 +1,155 @@
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  } 
+
+  main {
+    font-family: 'Urbanist', sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+  h1 {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .container-bookAppointment {
+    max-width: 800px; 
+    min-height: 400px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .calendar-section-bookAppointment{
+    width: 500px;
+  }
+
+  .section-bookAppointment {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    margin-top: 90px;
+    margin-right: 10px;  
+    margin-left: 40px;
+  }
+  
+  .calendar-section{
+    margin-left: 20px;
+    margin-right: 10px;
+    text-align: center;
+  }
+  
+  .calendar-section h3 {
+    color: #333;
+    margin-bottom: 50px;
+    text-align: left;
+  }
+  
+  label {
+    display: block;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+    margin-left: 30px;
+  }
+  
+  input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #449b9b;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+
+   select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+  
+  .time-slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .time-slot {
+    color: #000000;
+    width: 100px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #00070e;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.time-slot.active {
+    background-color: #449b9b;
+    border-color: #c0eeca;
+}
+
+.time-slot:hover, .time-slot.selected {
+    background-color: #449b9b;
+    color: white;
+}
+  
+button {
+    background-color: #449b9b;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  button:hover{
+    background-color: #000000;
+    
+  }
+
+  .success-message {
+    background-color: #d4ede9; 
+    color: #449f9f ;
+    padding: 15px;
+    border: 1px solid #c3e6cb; 
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.error-message {
+    background-color: #d4ede9; 
+    color: #9f4444 ; 
+    padding: 15px;
+    border: 1px solid #c3e6cb; 
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 20px 0;
+    text-align: center;
+}

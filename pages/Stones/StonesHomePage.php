@@ -172,7 +172,7 @@ if (!$result) {
                     </div>
                 </div>
                 <div class="card-content">
-                    <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['type']); ?></a></h3>
+                    <div class="price"><?php echo htmlspecialchars($row['type']); ?></div>
                     <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['colour']); ?></a></h3>
                     <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['size']) ; ?> carats</a></h3>
                     <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['origin']); ?></a></h3>

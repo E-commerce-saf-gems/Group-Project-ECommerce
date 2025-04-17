@@ -84,6 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nic = mysqli_real_escape_string($conn, $_POST['nic']);
     $token = md5(rand()) ;
 
+
+    $target_dir = "../../uploads/";
     // Photo handling
     if (!empty($_POST['photo'])) {
         $base64_string = $_POST['photo'];

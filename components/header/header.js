@@ -13,7 +13,7 @@ class Header extends HTMLElement {
     // Step 2: Define the HTML structure for logged-in and not logged-in states
     const loggedInMenu = `
       <ul class="dropdown-menu">
-        <li><a href="../Profile/Details/MyDetails.html" class="dropdown-item">Profile</a></li>
+        <li><a href="../Profile/Details/MyDetails.php" class="dropdown-item">Profile</a></li>
         <li><a href="#" class="dropdown-item" id="logout">Logout</a></li>
       </ul>
     `;

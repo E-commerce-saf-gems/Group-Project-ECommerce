@@ -35,15 +35,16 @@ $result = $conn->query($sql);
         <div class="profile-sidebar">
             <h2>Hello</h2>
             <ul>
-                <li><a href="../MyDetails.html">My Details</a></li>
+                <li><a href="../Details/MyDetails.php">My Details</a></li>
                 <li><a href="../MyBids.html">My Bids</a></li>
                 <li><a href="../MyWishlist.html">My Wishlist</a></li>
                 <li><a href="../MySales.html">My Sales</a></li>
                 <li><a href="../MyMeetings.php" class="active">My Meetings</a></li>
-                <li><a href="../MyPurchases.html">Purchases</a></li>
+                <li><a href="../MyPurchases.php">Purchases</a></li>
                 <li><a href="../MyRequest.php">Requests</a></li>
                 <li><a href="../MyEmails.html">Email Preferences</a></li>
                 <li><a href="../../Login/logout.php">Signout</a></li>
+                
             </ul>
         </div>
         <div class="main-content">

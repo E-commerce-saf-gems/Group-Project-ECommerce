@@ -68,7 +68,7 @@ $bookedStmt->close();
             <li><a href="../Wishlist/MyWishlist.html">My Wishlist</a></li>
             <li><a href="../Sales/MySales.html">My Sales</a></li>
             <li><a href="../Meetings/MyMeetings.php" class="active">My Meetings</a></li>
-            <li><a href="../Purchases/MyPurchases.html">Purchases</a></li>
+            <li><a href="../Purchases/MyPurchases.php">Purchases</a></li>
             <li><a href="../Requests/MyRequest.php">Requests</a></li>
             <li><a href="../Emails/MyEmails.html">Email Preferences</a></li>
             <li><a href="../../Login/logout.php">Signout</a></li>

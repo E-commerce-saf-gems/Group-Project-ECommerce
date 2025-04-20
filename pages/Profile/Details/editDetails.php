@@ -68,7 +68,7 @@ $conn->close();
                 <li><a href="../Bids/MyBids.html">My Bids</a></li>
                 <li><a href="../Wishlist/MyWishlist.html">My Wishlist</a></li>
                 <li><a href="../Sales/MySales.html">My Sales</a></li>
-                <li><a href="../Meetings/MyMeetings.html">My Meetings</a></li>
+                <li><a href="../Meetings/MyMeetings.php">My Meetings</a></li>
                 <li><a href="../Purchases/MyPurchases.html">Purchases</a></li>
                 <li><a href="../Requests/MyRequest.php">Requests</a></li>
                 <li><a href="../Emails/MyEmails.html">Email Preferences</a></li>

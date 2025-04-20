@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../styles/common.css">
+    <link rel="stylesheet" href="../profile.css">
+    <link rel="stylesheet" href="./bids.css">
+    <link rel="stylesheet" href="../../../components/profileHeader/header.css">
+    <link rel="stylesheet" href="../../../components/footer/footer.css">
+    <link rel="stylesheet" href="./bidsSection.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preload" as="image" href="../../../assets/images/logo.png">
+
+
+    <title>My Bids</title>
+</head>
+<body>
+    <custom-header></custom-header>
+
+    <div class="profile-container profile-h2">
+        <div class="profile-sidebar">
+            <h2>Hello</h2>
+            <ul>
+                <li><a href="../Details/MyDetails.html">My Details</a></li>
+                <li><a href="../Bids/MyBids.html" class="active">My Bids</a></li>
+                <li><a href="../Wishlist/MyWishlist.html">My Wishlist</a></li>
+                <li><a href="../Sales/MySales.html">My Sales</a></li>
+                <li><a href="../Meetings/MyMeetings.php">My Meetings</a></li>
+                <li><a href="../Purchases/MyPurchases.html">Purchases</a></li>
+                <li><a href="../Requests/MyRequest.php">Requests</a></li>
+                <li><a href="../Emails/MyEmails.html">Email Preferences</a></li>
+                <li><a href="../../Login/logout.php">Signout</a></li>
+            </ul>
+        </div>
+
+         <!-- Main Content -->
+         <div class="main-content">
+            <h1>My Account</h1>
+            <h2>My Bids</h2>
+            <div class="bid-details-container">
+                <div class="bid-details-box">
+                  <div class="bid-header">
+                    <div class="bid-title">
+                      <h2>Bid No #345</h2>
+                    </div>
+                    <div class="bid-status">
+                      <span class="dot dot-active"></span>
+                      <span class="live-text-active">Live</span>
+                    </div>
+                  </div>
+        
+                  <div class="bid-info-box">
+                    <div class="bid-image-section">
+                      <img id="mainImage" src="../../../../Group-Project-ECommerce/assets/images/stone11.jpg" alt="Stone" class="main-image">
+                      <img id="certificateImage" src="../../../../Group-Project-ECommerce/assets/images/certificate.jpg" alt="Certificate" class="cert-image">
+                    </div>
+        
+                    <div class="bid-info">
+                      <div><strong>Stone ID:</strong> <span class="info-value">123</span></div>
+                      <div><strong>Starting Bid:</strong> <span class="info-value">$150</span></div>
+                      <div><strong>Cycles Completed:</strong> <span class="info-value">3 of 5</span></div>
+                      <div><strong>Cycle Time:</strong> <span class="info-value">2h</span></div>
+                    </div>
+        
+                    <div class="bid-info">
+                      <div><strong>Time Left:</strong> <span class="info-value">1d 3h</span></div>
+                      <div><strong>End Date:</strong> <span class="info-value">2025-04-25</span></div>
+                      <div><strong>Current Highest:</strong> <span class="info-value">$195</span></div>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="bid-cycle-container">
+                    <table class="bids-table">
+                        <thead>
+                          <tr>
+                            <th>Bid ID</th>
+                            <th>Cycle Number</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Value</th>
+                            <th>Status</th>
+                            <th>Cycle Time Left</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#123</td>
+                                <td>1 of 6</td>
+                                <td>12th April</td>
+                                <td>12:33 PM</td>
+                                <td>$2300</td>
+                                <td>
+                                    <div class="bid-result-div">
+                                        <span class="bid-result win">Win</span>
+                                    </div>
+                                </td>
+                                <td>Ended</td>
+                            </tr>
+                            <tr>
+                                <td>#123</td>
+                                <td>2 of 6</td>
+                                <td>12th April</td>
+                                <td>12:33 PM</td>
+                                <td>$2450</td>
+                                <td>
+                                    <div class="bid-result-div">
+                                        <span class="bid-result loss">Loss</span>
+                                    </div>
+                                </td>
+                                <td>Ended</td>
+                            </tr>
+                            <tr>
+                                <td>#123</td>
+                                <td>3 of 6</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>
+                                    <div class="bid-result-div">
+                                        <span class="bid-result none">No Bids</span>
+                                    </div>
+                                </td>
+                                <td>Ended</td>
+                            </tr>
+                            <tr>
+                                <td>#123</td>
+                                <td>4 of 6</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td><a href="../../bidding/bidding-itemPage.html" class="bid-now-button">Bid Now</a></td>
+                                <td>
+                                    <div class="bid-result-div">
+                                        <span class="bid-result pending">Pending</span>
+                                    </div>
+                                </td>
+                                <td>1 Hr 55 Mins</td>
+                            </tr>
+                        </tbody>
+                      </table>
+                      
+                </div>
+              </div>
+        </div>
+    </div>
+    </div>
+
+    
+    <script src="../../../components/profileHeader/header.js"></script>
+    <script src="../../components/footer/footer.js"></script>
+    <script src="./profile.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+</body>
+</html>

@@ -21,25 +21,27 @@ function sendVerificationEmail($first_name, $email, $token) {
 
     try {
         //Server settings
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-        $mail->isSMTP();                                            //Send using SMTP
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      
+        $mail->isSMTP();                                            
        
-        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-        $mail->Username   = 'sadheeyasalim10@gmail.com';                     //SMTP username
-        $mail->Password   = 'ijkwzrnamjyfeimb';                               //SMTP password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+        $mail->Host       = 'smtp.gmail.com';                     
+        $mail->SMTPAuth   = true;                                 
+        $mail->Username   = 'sadheeyasalim10@gmail.com';          
+        $mail->Password   = 'ijkwzrnamjyfeimb';                   
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;          
+        $mail->Port       = 465;                                  
     
-        //Recipients
         $mail->setFrom('sadheeysalim10@gmail.com', 'Saf Gems');
-        $mail->addAddress($email, $first_name);     //Add a recipient
+        $mail->addAddress($email, $first_name);    
 
         $email_template = "
-            <h2>Your Registration Was Successful</h2>
-            <h5>Verify your email address with the link given below</h5>
+            <h2 style='color='#449f9f''>Welcome To SAF GEMS</h2>
+            <h2>Thank you for registering with us!</h2>
+            <h3>To complete your registration, verify your email address with the link given below</h5>
             <br/><br/>
-            <a href='http://localhost/Group-Project-ECommerce/pages/RegisterPage/verifyEmail.php?token=$token'>Click Here!</a>
+            <button>
+                <a href='http://localhost/Group-Project-ECommerce/pages/RegisterPage/verifyEmail.php?token=$token'>Click Here!</a>
+            </button>
         " ;
 
         //Content

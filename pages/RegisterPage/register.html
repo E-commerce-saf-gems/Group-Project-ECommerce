@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
     <link rel="stylesheet" href="./register.css" />
-    <link rel="stylesheet" href="/components/header/header.css">
+    <link rel="stylesheet" href="../../styles/common.css">
+    <link rel="stylesheet" href="../../components/header/header.css">
   </head>
   <body>
-      <form action="./register.php" method="post" enctype="multipart/form-data">
-        <div class="alert">
-          
+    <custom-header></custom-header>
+      <form action="./register.php" method="post" enctype="multipart/form-data">          
         </div>
         <h1>Create Your Saf Gems Account</h1>
         <br>
@@ -102,19 +102,18 @@
             <button type="button" id="snap">Capture</button>
           </div>
         </div>
-
-        <canvas id="canvas" width="200" height="150" style="display: none;"></canvas>
+        <canvas id="canvas" width="200" height="150"></canvas>
         <input type="hidden" id="photo" name="photo" />
-        <br/>
+        <br />
 
         <div class="button-section">
-          <button type="button" onclick="prevStep(3)">CANCEL</button>
+          <button type="reset">Clear</button>
           <button type="submit">Complete Registration</button>
         </div>
       </form>
     </div>
     <span id="spanErrorMsg" style="color: red;"></span>
     <script src="register.js"></script>
-    <script src="/components/header/header.js"></script>
+    <script src="../../components/header/header.js"></script>
   </body>
 </html>

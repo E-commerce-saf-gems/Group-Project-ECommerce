@@ -44,6 +44,7 @@ $conn->close();
             <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                 <div class="success-message">
                     Your appointment has been booked! <br> We will contact you shortly!
+                    <u><a href="../Profile/Meetings/MyMeetings.php">View Meetings</a></u>
                 </div>
             <?php elseif (isset($_GET['success']) && $_GET['success'] == 2): ?>
                 <div class="error-message">

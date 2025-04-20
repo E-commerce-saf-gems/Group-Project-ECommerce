@@ -37,7 +37,7 @@
 
         <?php if (isset($_GET['notloggedIn']) && $_GET['notloggedIn'] == 1): ?>
             <div class="error-message">
-                Login to make a request.
+                Login First.
             </div>
         <?php endif; ?>
         

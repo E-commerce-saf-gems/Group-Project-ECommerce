@@ -1,3 +1,39 @@
+<?php
+include '../../database/db.php'; // Include the database connection
+
+// Get the biddingStone_id from the query parameter
+$biddingStoneId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+// Fetch the bidding and stone details
+$query = "
+    SELECT 
+        CONCAT(i.colour, ' ', i.type) AS stone_name, 
+        i.image AS stone_image, 
+        b.startingBid, 
+        b.currentBid, 
+        b.startDate, 
+        b.finishDate, 
+        b.cycle_no_completed, 
+        b.no_of_Cycles 
+    FROM 
+        biddingstone b
+    JOIN 
+        inventory i 
+    ON 
+        b.stone_id = i.stone_id
+    WHERE 
+        b.biddingStone_id = $biddingStoneId
+";
+$result = $conn->query($query);
+
+if (!$result || $result->num_rows === 0) {
+    die("Bidding details not found.");
+}
+
+$row = $result->fetch_assoc();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -186,25 +222,32 @@
     <div class="bidding-container">
         <div class="product-header">
             <h2>Total Time Left</h2>
-            <div class="total-time">24:00:00</div>
+            <div class="total-time">
+                <?php
+                $finishDate = new DateTime($row['finishDate']);
+                $now = new DateTime();
+                $interval = $now->diff($finishDate);
+                echo $interval->format('%d Days %h Hours %i Minutes');
+                ?>
+            </div>
         </div>
 
         <div class="product-content">
             <div class="product-image">
-                <img src="../../assets/images/stone11.jpg" alt="Corn Blue Sapphire">
+                <img src="../../assets/images/<?php echo htmlspecialchars($row['stone_image']); ?>" alt="<?php echo htmlspecialchars($row['stone_name']); ?>">
             </div>
             <div class="product-details">
                 <div class="detail-item">
                     <span class="label">Stone Details</span>
-                    <span class="value" id="current-bid" style="color: #449f9f;">Corn Blue Sapphire </span>
+                    <span class="value" id="stone-name" style="color: #449f9f;"><?php echo htmlspecialchars($row['stone_name']); ?></span>
                 </div>
                 <div class="detail-item">
                     <span class="label">Starting Bid</span>
-                    <span class="value" id="starting-bid">$2,000.00</span>
+                    <span class="value" id="starting-bid">Rs.<?php echo number_format($row['startingBid'], 2); ?></span>
                 </div>
                 <div class="detail-item">
                     <span class="label">Current Highest Bid</span>
-                    <span class="value" id="current-bid">$2,000.00</span>
+                    <span class="value" id="current-bid">Rs.<?php echo number_format($row['currentBid'], 2); ?></span>
                 </div>
                 <div class="detail-item">
                     <span class="label">Your Bid</span>
@@ -212,7 +255,11 @@
                 </div>
                 <div class="detail-item">
                     <span class="label">Cycle Number</span>
-                    <span class="value" id="user-bid">1</span>
+                    <span class="value" id="cycle-number"><?php echo htmlspecialchars($row['cycle_no_completed'] + 1); ?></span>
+                </div>
+                <div class="detail-item">
+                    <span class="label">Total Cycles</span>
+                    <span class="value"><?php echo htmlspecialchars($row['no_of_Cycles']); ?></span>
                 </div>
                 <button class="bid-now-btn" id="bid-now-btn">
                     <i class="fas fa-gavel"></i> Bid Now
@@ -225,7 +272,14 @@
                 <div>
                     <i class="fas fa-sync cycle-timer-icon"></i> Cycle Time Left
                 </div>
-                <div class="timer-display">1:00:00</div>
+                <div class="timer-display">
+                    <?php
+                    // Example: Assume each cycle lasts 1 hour
+                    $cycleTimeLeft = new DateTime('+1 hour');
+                    $interval = $now->diff($cycleTimeLeft);
+                    echo $interval->format('%h:%i:%s');
+                    ?>
+                </div>
             </div>
         </div>
     </div>
@@ -236,8 +290,8 @@
             <h3>Place Your Bid</h3>
             <input type="number" id="bid-amount" placeholder="Enter your bid amount">
             <div class="popup-increment-buttons">
-                <button class="increment-btn" id="increment-100">+100</button>
-                <button class="increment-btn" id="increment-50">+50</button>
+                <button class="increment-btn" id="increment-100">+1000</button>
+                <button class="increment-btn" id="increment-50">+500</button>
             </div>
             <div class="popup-buttons">
                 <button class="confirm-btn" id="confirm-bid">Confirm</button>
@@ -246,55 +300,78 @@
         </div>
     </div>
     <custom-footer></custom-footer>
-
     <script>
-        // JavaScript for Popup and Bidding Logic
-        const bidNowBtn = document.getElementById("bid-now-btn");
-        const popupOverlay = document.getElementById("popup-overlay");
-        const confirmBidBtn = document.getElementById("confirm-bid");
-        const cancelBidBtn = document.getElementById("cancel-bid");
-        const bidAmountInput = document.getElementById("bid-amount");
+    const bidNowBtn = document.getElementById("bid-now-btn");
+    const popupOverlay = document.getElementById("popup-overlay");
+    const confirmBidBtn = document.getElementById("confirm-bid");
+    const cancelBidBtn = document.getElementById("cancel-bid");
+    const bidAmountInput = document.getElementById("bid-amount");
+    const increment100Btn = document.getElementById("increment-100");
+    const increment50Btn = document.getElementById("increment-50");
 
-        const startingBidEl = document.getElementById("starting-bid");
-        const currentBidEl = document.getElementById("current-bid");
-        const userBidEl = document.getElementById("user-bid");
+    const startingBidEl = document.getElementById("starting-bid");
+    const currentBidEl = document.getElementById("current-bid");
+    const userBidEl = document.getElementById("user-bid");
 
-        let hasPlacedBid = false; // Track if the user has already placed a bid in this cycle
-        const bidIncrement = 100; // Minimum increment
+    const biddingStoneId = <?php echo $biddingStoneId; ?>; // Get the biddingStoneId from PHP
+    const bidIncrement = 500; // Minimum increment
 
-        // Open the popup
-        bidNowBtn.addEventListener("click", () => {
-            if (hasPlacedBid) {
-                alert("You have already placed a bid in this cycle!");
-                return;
+// Open the popup
+bidNowBtn.addEventListener("click", () => {
+    popupOverlay.style.display = "flex";
+    const currentBid = parseFloat(currentBidEl.textContent.replace(/[^0-9.-]+/g, ""));
+    bidAmountInput.value = Math.round(currentBid); // Set the input field to the current highest bid
+});
+// Close the popup
+cancelBidBtn.addEventListener("click", () => {
+    popupOverlay.style.display = "none";
+});
+
+// Increment bid amount by 1000
+increment100Btn.addEventListener("click", () => {
+    bidAmountInput.value = Math.round(parseFloat(bidAmountInput.value) + 1000);
+});
+
+// Increment bid amount by 500
+increment50Btn.addEventListener("click", () => {
+    bidAmountInput.value = Math.round(parseFloat(bidAmountInput.value) + 500);
+});
+
+// Confirm the bid
+confirmBidBtn.addEventListener("click", () => {
+    const bidAmount = Math.round(parseFloat(bidAmountInput.value)); // Round to avoid floating-point issues
+    const currentBid = parseFloat(currentBidEl.textContent.replace(/[^0-9.-]+/g, "")); // Remove Rs. symbol
+
+    if (bidAmount < currentBid + bidIncrement) {
+        alert(`Your bid must be at least Rs.${(currentBid + bidIncrement)}`);
+        return;
+    }
+
+    // Send the new bid to the server
+    fetch('./updateBid.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `biddingStoneId=${biddingStoneId}&newBid=${bidAmount}`,
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                // Update the current bid on the webpage
+                currentBidEl.textContent = `Rs.${bidAmount}`;
+                userBidEl.textContent = `Rs.${bidAmount}`;
+                popupOverlay.style.display = "none";
+            } else {
+                alert('Failed to place the bid. Please try again.');
             }
-            popupOverlay.style.display = "flex";
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
         });
-
-        // Close the popup
-        cancelBidBtn.addEventListener("click", () => {
-            popupOverlay.style.display = "none";
-        });
-
-        // Confirm the bid
-        confirmBidBtn.addEventListener("click", () => {
-            const bidAmount = parseFloat(bidAmountInput.value);
-            const currentBid = parseFloat(currentBidEl.textContent.replace(/[^0-9.-]+/g, "")); // Remove $ symbol
-
-            if (bidAmount < currentBid + bidIncrement) {
-                alert(`Your bid must be at least $${(currentBid + bidIncrement).toFixed(2)}`);
-                return;
-            }
-
-            // Update the bid information
-            currentBidEl.textContent = `$${bidAmount.toFixed(2)}`;
-            userBidEl.textContent = `$${bidAmount.toFixed(2)}`;
-            hasPlacedBid = true;
-
-            // Close the popup
-            popupOverlay.style.display = "none";
-        });
-    </script>
+});
+</script>
     <script src="../../components/header/header.js"></script>
     <script src="../../components/footer/footer.js"></script>
 </body>

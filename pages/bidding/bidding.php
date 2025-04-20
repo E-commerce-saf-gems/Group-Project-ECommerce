@@ -169,9 +169,7 @@ include '../../database/db.php'; // Include the database connection
             </div>
 
              <!-- Main Product Catalog -->
-        <main class="product-catalog">
            <!-- <div> <h1 style="margin-left: 20px;">Main Product Catalog</h1><div> -->
-            <div class="catalog-container">
             <?php
             // Fetch main product catalog data
             $query = "
@@ -203,10 +201,11 @@ include '../../database/db.php'; // Include the database connection
             }
 
             // Loop through the results and display each product
-            while ($row = $result->fetch_assoc()) :
-            ?>
+            // while ($row = $result->fetch_assoc()) :
+            // ?>
 
             <main class="product-catalog">
+            <?php while ($row = $result->fetch_assoc()) : ?>
                 <div class="shop-card">
                     <div class="card-banner">
                         <img src="../../assets/images/<?php echo htmlspecialchars($row['image']); ?>" alt="<?php echo htmlspecialchars($row['type']); ?>" />

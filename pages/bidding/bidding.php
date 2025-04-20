@@ -204,6 +204,7 @@ include '../../database/db.php'; // Include the database connection
             // while ($row = $result->fetch_assoc()) :
             // ?>
 
+            <div> <h1 style="margin-left: 20px;">Available Bidding Stones</h1></div>
             <main class="product-catalog">
             <?php while ($row = $result->fetch_assoc()) : ?>
                 <div class="shop-card">

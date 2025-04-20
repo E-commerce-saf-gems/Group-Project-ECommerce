@@ -1,6 +1,12 @@
 <?php
 
+
 include('../../database/db.php'); 
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 
 $errors = [];
 
@@ -134,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $sql = "INSERT INTO customer (title, firstName, lastName, email, password, gender, DOB, contactNo, address1, address2, city, country, postalCode, NIC, image, pdf, token)
                     VALUES ('$title', '$first_name', '$last_name', '$email', '$hashed_password', '$gender', '$dob', '$phone', '$address1', '$address2', '$city', '$country', '$postal_code', '$nic', '$photo_file', '$id_copy_file', '$token')";
             
-            if (mysqli_query($conn, $sql)) {
+            if (mysqli_query($conn, $sql)) { 
                 sendVerificationEmail("$first_name", "$email", "$token") ;
                 echo "Registration successful! Verify Your Email Address";
                 header("Location: ./registrationSuccess.html") ;

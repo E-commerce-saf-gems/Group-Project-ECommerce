@@ -25,9 +25,9 @@ if (isset($_GET['shape']) && !empty($_GET['shape'])) {
     $ssql .= " AND shape = '$shape'";
 }
 
-if (isset($_GET['colour']) && !empty($_GET['colour'])) {
-    $colour = $conn->real_escape_string($_GET['colour']);
-    $ssql .= " AND colour = '$colour'";
+if (isset($_GET['color']) && !empty($_GET['color'])) {
+    $color = $conn->real_escape_string($_GET['color']);
+    $ssql .= " AND colour = '$color'";
 }
 
 if (isset($_GET['origin']) && !empty($_GET['origin'])) {
@@ -123,11 +123,11 @@ if (!$result) {
         <label for="color">Color:</label>
         <select id="color" name="color" onchange="document.getElementById('filter-form').submit();">
             <option value="">Any</option>
-            <option value="blue" <?= (isset($_GET['colour']) && $_GET['colour'] == 'blue') ? 'selected' : ''; ?>>Blue</option>
-            <option value="yellow" <?= (isset($_GET['colour']) && $_GET['colour'] == 'yellow') ? 'selected' : ''; ?>>Yellow</option>
-            <option value="pink" <?= (isset($_GET['colour']) && $_GET['colour'] == 'pink') ? 'selected' : ''; ?>>Pink</option>
-            <option value="green" <?= (isset($_GET['colour']) && $_GET['colour'] == 'green') ? 'selected' : ''; ?>>Green</option>
-            <option value="clear" <?= (isset($_GET['colour']) && $_GET['colour'] == 'clear') ? 'selected' : ''; ?>>Clear</option>
+            <option value="blue" <?= (isset($_GET['color']) && $_GET['color'] == 'blue') ? 'selected' : ''; ?>>Blue</option>
+            <option value="yellow" <?= (isset($_GET['color']) && $_GET['color'] == 'yellow') ? 'selected' : ''; ?>>Yellow</option>
+            <option value="pink" <?= (isset($_GET['color']) && $_GET['color'] == 'pink') ? 'selected' : ''; ?>>Pink</option>
+            <option value="green" <?= (isset($_GET['color']) && $_GET['color'] == 'green') ? 'selected' : ''; ?>>Green</option>
+            <option value="clear" <?= (isset($_GET['color']) && $_GET['color'] == 'clear') ? 'selected' : ''; ?>>Clear</option>
         </select>
 
         <label for="origin">Origin:</label>
@@ -147,7 +147,6 @@ if (!$result) {
                value="<?= isset($_GET['max-price']) ? htmlspecialchars($_GET['max-price']) : ''; ?>" 
                onchange="document.getElementById('filter-form').submit();">
     </div>
-    <button type="button" onclick="window.location.href='<?= strtok($_SERVER['REQUEST_URI'], '?'); ?>'">Reset Filters</button>
 </form>
 
         </aside>
@@ -172,10 +171,8 @@ if (!$result) {
                     </div>
                 </div>
                 <div class="card-content">
-                    <div class="price"><?php echo htmlspecialchars($row['type']); ?></div>
+                    <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['type']); ?></a></h3>
                     <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['colour']); ?></a></h3>
-                    <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['size']) ; ?> carats</a></h3>
-                    <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['origin']); ?></a></h3>
                     <div class="price">Rs. <?php echo number_format($row['amount']); ?></div>
                     <?php
                     echo "<a href='./viewmore2.php?id=" . $row['stone_id'] . "' class='btn btn-primary'>";
@@ -194,12 +191,12 @@ if (!$result) {
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
     <script>
-        const caratWeightInput = document.getElementById('carat-weight');
-        const caratWeightDisplay = document.getElementById('carat-weight-display');
+const caratWeightInput = document.getElementById('carat-weight');
+const caratWeightDisplay = document.getElementById('carat-weight-display');
 
-        caratWeightInput.addEventListener('input', () => {
-            caratWeightDisplay.textContent = caratWeightInput.value + ' carats';
-        });
+caratWeightInput.addEventListener('input', () => {
+    caratWeightDisplay.textContent = caratWeightInput.value + ' carats';
+});
 
     </script>
 </body>

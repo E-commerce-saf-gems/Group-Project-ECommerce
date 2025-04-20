@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../styles/common.css">
+    <link rel="stylesheet" href="../../components/header/header.css">
+    <link rel="stylesheet" href="../../components/footer/footer.css">
+    <!-- <link rel="stylesheet" href="./styles.css"> -->
+    <title>View More Details</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .product-detail {
+            display: flex;
+            max-width: 800px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: white;
+            z-index: 1000;
+        }
+
+        .product-image {
+            flex: 1;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .product-info {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .product-info h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .details {
+            margin: 10px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #449b9b;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .btn:hover {
+            background-color: #367a7a;
+        }
+
+        /* Overlay for background blur effect */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 900;
+        }
+
+        .blurred {
+            filter: blur(5px);
+        }
+
+        /* Bidding confirmation box */
+        .bid-confirmation {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .bid-confirmation h3 {
+            margin: 0 0 20px;
+            font-size: 20px;
+        }
+
+        .bid-confirmation button {
+            padding: 10px 20px;
+            background-color: #449b9b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 5px;
+        }
+
+        .bid-confirmation button:hover {
+            background-color: #367a7a;
+        }
+    </style>
+</head>
+
+<body>
+    <custom-header></custom-header>
+    <a href="../../pages/Stones/StonesHomePage.html"><button>Back</button></a>
+    <div class="container">
+        <div class="product-detail" id="product-detail">
+            <div class="product-image">
+                <img src="../../assets/images/stone1.jpg" alt="Corn Blue Sapphire" loading="lazy">
+            </div>
+            <div class="product-info">
+                <h2>Corn Blue Sapphire</h2>
+                <div class="price" id="current-price">$2000.00</div>
+                <div class="details">
+                    <p>Unheated 5.5 Carats</p>
+                    <p>Color: Blue</p>
+                    <p>Clarity: VS1</p>
+                    <p>Shape: Oval</p>
+                </div>
+                <button class="btn" onclick="viewCertificate()">View Certificate</button>            </div>
+        </div>
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+
+    <script>
+        function viewCertificate() {
+            alert("Certificate details can be viewed here.");
+        }
+    </script>
+
+    <script src="/components/header/header.js"></script>
+    <script src="/components/footer/footer.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

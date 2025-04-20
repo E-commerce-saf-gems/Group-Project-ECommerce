@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../styles/common.css">
     <link rel="stylesheet" href="../profile.css">
+    <link rel="stylesheet" href="./bids.css">
     <link rel="stylesheet" href="../../../components/profileHeader/header.css">
     <link rel="stylesheet" href="../../../components/footer/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,17 +40,194 @@
          <div class="main-content">
             <h1>My Account</h1>
             <h2>My Bids</h2>
+            <div class="bids-wrapper">
+                <div class="bids-top">
+                  <!-- Active Bids -->
+                  <div class="bids-box">
+                    <h3 class="active-text"><span class="dot red"></span> Active Bids</h3>
+                    <div class="bids-table-wrapper">
+                        <table class="bids-table">
+                            <thead>
+                                <tr>
+                                <th></th>
+                                <th>Bid ID</th>
+                                <th>Starting Bid</th>
+                                <th>Cycle No</th>
+                                <th>My Cycle Bid</th>
+                                <th>Time Left</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src="../../../assets/images/stone14.jpg" alt="stone"></td>
+                                    <td><a href="./activeBids.html">#010</a></td>
+                                    <td>$2000</td>
+                                    <td>2 of 5</td>
+                                    <td><a href="../../bidding/bidding-itemPage.html" class="bid-now-button">Bid Now</a></td>
+                                    <td>1 Hr 20 Mins</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="../../../assets/images/stone14.jpg" alt="stone"></td>
+                                    <td><a href="./activeBids.html">#010</a></td>
+                                    <td>$2000</td>
+                                    <td>2 of 5</td>
+                                    <td>$2100</td>
+                                    <td>1 Hr 20 Mins</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="../../../assets/images/stone14.jpg" alt="stone"></td>
+                                    <td><a href="./activeBids.html">#010</a></td>
+                                    <td>$2000</td>
+                                    <td>2 of 5</td>
+                                    <td>$2100</td>
+                                    <td>1 Hr 20 Mins</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="../../../assets/images/stone14.jpg" alt="stone"></td>
+                                    <td><a href="./activeBids.html">#010</a></td>
+                                    <td>$2000</td>
+                                    <td>2 of 5</td>
+                                    <td><a href="../../bidding/bidding-itemPage.html" class="bid-now-button">Bid Now</a></td>
+                                    <td>1 Hr 20 Mins</td>
+                                </tr>
+                            </tbody>
+                            </table>
+                    </div>
+                  </div>
+              
+                  <!-- Upcoming Bids -->
+                  <div class="bids-box">
+                    <h3 class="upcoming-text"><span class="dot orange"></span> Upcoming Bids</h3>
+                    <div class="bids-table-wrapper">
+                        <table class="bids-table">
+                            <thead>
+                                <tr>
+                                <th></th>
+                                <th>Bid ID</th>
+                                <th>Starting Bid</th>
+                                <th>No Of Cycles</th>
+                                <th>Start Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><img src="../../../assets/images/stone9.jpg" alt="stone"></td>
+                                    <td><a href="./upcomingBids.html">#010</a></td>
+                                    <td>$1800</td>
+                                    <td>6</td>
+                                    <td>Apr 30</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="../../../assets/images/stone17.jpg" alt="stone"></td>
+                                    <td><a href="./upcomingBids.html">#010</a></td>
+                                    <td>$1800</td>
+                                    <td>6</td>
+                                    <td>Apr 30</td>
+                                    </tr>
+                                <tr>
+                                    <td><img src="../../../assets/images/stone14.jpg" alt="stone"></td>
+                                    <td><a href="./upcomingBids.html">#010</a></td>
+                                    <td>$1800</td>
+                                    <td>6</td>
+                                    <td>Apr 30</td>
+                                </tr>
+                                <tr>
+                                    <td><img src="../../../assets/images/stone11.jpg" alt="stone"></td>
+                                    <td><a href="./upcomingBids.html">#010</a></td>
+                                    <td>$1800</td>
+                                    <td>6</td>
+                                    <td>Apr 30</td>
+                                </tr>
+                            </tbody>
+                            </table>
+                    </div>
 
-            <!-- My Bids Section -->
-            <div class="bids-section">
-                <div class="tabs">
-                    <button class="tab-link active">Active Bids</button>
-                    <button class="tab-link">Historic Bids</button>
+                  </div>
                 </div>
-                <div class="tab-content">
-                    <p>No active bids.</p>
+              
+                <div class="bids-box">
+                  <h3 class="completed-text"><span class="dot green"></span>Completed Bids</h3>
+                  <div class="bids-table-wrapper">
+                    <table class="bids-table">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Bid ID</th>
+                            <th>End Date</th>
+                            <th>Win/Loss</th>
+                            <th>Final Value</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><img src="../../../assets/images/stone4.jpg" alt="stone"></td>
+                                <td><a href="./completedBids.html">#010</a></td>
+                                <td>Apr 10</td>
+                                <td>
+                                    <div class="bid-result-div">
+                                        <span class="bid-result win">Win</span>
+                                    </div>
+                                </td>
+                                <td>$2200</td>
+                                <td>Purchased</td>
+                            </tr>
+                            <tr>
+                                <td><img src="../../../assets/images/stone4.jpg" alt="stone"></td>
+                                <td><a href="./completedBids.html">#010</a></td>
+                                <td>Apr 10</td>
+                                <td>
+                                    <div class="bid-result-div">
+                                        <span class="bid-result win">Win</span>
+                                    </div>
+                                </td>
+                                <td>$2200</td>
+                                <td>Add To Cart</td>
+                            </tr>
+                            <tr>
+                                <td><img src="../../../assets/images/stone4.jpg" alt="stone"></td>
+                                <td><a href="./completedBids.html">#010</a></td>
+                                <td>Apr 10</td>
+                                <td>
+                                    <div class="bid-result-div">
+                                        <span class="bid-result loss">Loss</span>
+                                    </div>
+                                </td>
+                                <td>$2200</td>
+                                <td>Add To Cart</td>
+                            </tr>
+                            <tr>
+                                <td><img src="../../../assets/images/stone4.jpg" alt="stone"></td>
+                                <td><a href="./completedBids.html">#010</a></td>
+                                <td>Apr 10</td>
+                                <td>
+                                    <div class="bid-result-div">
+                                        <span class="bid-result win">Win</span>
+                                    </div>
+                                </td>
+                                <td>$2200</td>
+                                <td>Purchased</td>
+                            </tr>
+                            <tr>
+                                <td><img src="../../../assets/images/stone4.jpg" alt="stone"></td>
+                                <td><a href="./completedBids.html">#010</a></td>
+                                <td>Apr 10</td>
+                                <td>
+                                    <div class="bid-result-div">
+                                        <span class="bid-result loss">Loss</span>
+                                    </div>
+                                </td>
+                                <td>$2200</td>
+                                <td>In Cart</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+
                 </div>
-            </div>
+              </div>
+              
+
         </div>
     </div>
     </div>

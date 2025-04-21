@@ -75,11 +75,10 @@ if ($result->num_rows > 0) {
         ];
         $statusFullWord = $statusMap[$row['status']] ?? 'Unknown'; // Default to 'Unknown' if status is unrecognized
 
-        // Map type codes to full words
-        $typeFullWord = $row['type'] === 'on' ? 'Online' : ($row['type'] === 'ph' ? 'Physical' : 'Unknown');
+        
 
         echo "<tr>
-                <td>{$typeFullWord}</td>
+                <td>{$row['type']}</td>
                 <td>{$row['date']}</td>
                 <td>{$row['time']}</td>
                 <td>{$row['email']}</td>

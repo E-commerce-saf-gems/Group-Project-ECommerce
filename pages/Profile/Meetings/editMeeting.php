@@ -34,7 +34,8 @@ $bookedResult = $bookedStmt->get_result();
 $bookedTime = $bookedResult->fetch_assoc();
 
 // Fetch available time slots (those with 'available' status)
-$timeSlotsQuery = "SELECT availableTimes_id, date, time FROM availabletimes WHERE availability = 'available'";
+$timeSlotsQuery = "SELECT availableTimes_id, date, time FROM availabletimes WHERE availability = 'available'AND CONCAT(date, ' ', time) >= NOW()     /*hide past time slots*/
+                        ORDER BY date, time";
 $timeSlotsResult = $conn->query($timeSlotsQuery);
 
 // Close the statement for meeting details

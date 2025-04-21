@@ -8,7 +8,7 @@ if ($date) {
         // Query to fetch available times for the given date
         $sql = "SELECT availableTimes_id, time 
                 FROM availabletimes 
-                WHERE date = ? AND status = 'available'";
+                WHERE date = ? AND status = 'available' AND CONCAT(date, ' ', time) >= NOW() ORDER BY date, time";
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $date);

@@ -36,7 +36,7 @@ this.innerHTML = `
               <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
             </button>
             <ul class="dropdown-menu">
-                    <li><a href="../../Profile/Details/MyDetails.html" class="dropdown-item">Profile</a></li>
+                    <li><a href="../../Profile/Details/MyDetails.php" class="dropdown-item">Profile</a></li>
                     <li><a href="../../Login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
             </ul>
           </div>

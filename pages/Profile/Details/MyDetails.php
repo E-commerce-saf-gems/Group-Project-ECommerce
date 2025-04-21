@@ -171,9 +171,9 @@ $conn->close();
     </div> 
 
     <script src="../../../components/profileHeader/header.js"></script>
-    <script src="../../../components/footer/footer.js"></script>
-    <script src="../profile.js"></script>
+    <script src="../../components/footer/footer.js"></script>
+    <script src="./profile.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

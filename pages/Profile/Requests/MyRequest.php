@@ -22,18 +22,18 @@
 <body>
     <custom-header></custom-header>
 
-    <div class="profile-container profile-h1">
+    <div class="profile-container profile-h2">
         <div class="profile-sidebar">
             <h2>Hello</h2>
             <ul>
-            <li><a href="../Details/MyDetails.php">My Details</a></li>
-                <li><a href="../Bids/MyBids.html">My Bids</a></li>
-                <li><a href="../Wishlist/MyWishlist.html" >My Wishlist</a></li>
+                <li><a href="../Details/MyDetails.php">My Details</a></li>
+                <li><a href="../Bids/MyBids.html" class="active">My Bids</a></li>
+                <li><a href="../Wishlist/MyWishlist.html">My Wishlist</a></li>
                 <li><a href="../Sales/MySales.html">My Sales</a></li>
                 <li><a href="../Meetings/MyMeetings.php">My Meetings</a></li>
                 <li><a href="../Purchases/MyPurchases.html">Purchases</a></li>
-                <li><a href="../Requests/MyRequest.php" class="active">Requests</a></li>
-                <li><a href="../Emails/MyEmails.html" >Email Preferences</a></li>
+                <li><a href="../Requests/MyRequest.php">Requests</a></li>
+                <li><a href="../Emails/MyEmails.html">Email Preferences</a></li>
                 <li><a href="../../Login/logout.php">Signout</a></li>
             </ul>
         </div>

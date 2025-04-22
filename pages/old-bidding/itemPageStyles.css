@@ -1,0 +1,168 @@
+.bidding-container {
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.product-header {
+    background-color: #449f9f;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.product-content {
+    display: flex;
+    padding: 15px;
+}
+
+.product-image {
+    flex: 1;
+    margin-right: 15px;
+}
+
+.product-image img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.product-details {
+    flex: 2;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+.detail-item .label {
+    color: #666;
+}
+
+.detail-item .value {
+    font-weight: bold;
+}
+
+.cycle-info {
+    background-color: #f0f0f0;
+    padding: 15px;
+    text-align: center;
+}
+
+.cycle-timer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cycle-timer-icon {
+    color: #449f9f;
+    font-size: 24px;
+}
+
+.bid-now-btn {
+    background-color: #449f9f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.bid-now-btn:hover {
+    background-color: #367a7a;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content h3 {
+    margin-top: 0;
+}
+
+.popup-content input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.popup-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup-buttons button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.popup-buttons .confirm-btn {
+    background-color: #449f9f;
+    color: white;
+}
+
+.popup-buttons .cancel-btn {
+    background-color: #ccc;
+}
+.popup-increment-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.increment-btn {
+    flex: 1;
+    margin: 0 5px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    background-color: #449f9f;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.increment-btn:hover {
+    background-color: #367a7a;
+}
+

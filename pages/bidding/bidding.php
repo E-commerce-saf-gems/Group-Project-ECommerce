@@ -23,8 +23,11 @@ include '../../database/db.php'; // Include the database connection
 
     <div class="container">
 
+        
+        <!-- Sidebar for filter and sort options -->
         <aside class="sidebar">
             <h2>Filter & Sort</h2>
+
             <div class="filter-section">
                 <h3>Sort By</h3>
                 <label for="sort">Sort By:</label>
@@ -65,6 +68,7 @@ include '../../database/db.php'; // Include the database connection
                     <option value="clear">Clear</option>
                 </select>
 
+                <!-- Filter by Type -->
                 <label for="type">Type:</label>
                 <select id="type">
                     <option value="all">All</option>
@@ -74,6 +78,7 @@ include '../../database/db.php'; // Include the database connection
                     
                 </select>
 
+                <!-- Filter by Origin-->
                 <label for="origin">Origin:</label>
                 <select id="origin">
                     <option value="all">All</option>
@@ -81,6 +86,7 @@ include '../../database/db.php'; // Include the database connection
                     <option value="madagascar">Madagascar</option>
                 </select>
 
+                <!-- Filter by Clarity -->
                 <label for="clarity">Clarity:</label>
                 <select id="clarity">
                     <option value="all">All</option>
@@ -91,6 +97,7 @@ include '../../database/db.php'; // Include the database connection
                     <option value="si2">SI2</option>
                 </select>
 
+                <!-- Filter by Price Range -->
                  <div class="ranger" style="border: 2px solid teal; margin-top: 20px; border-radius: 20px; padding:10px ;">
                     <label for="price-range" >Price Range:</label>
                     <input type="number" id="min-price" placeholder="Min:0" min="0" step="50">
@@ -101,15 +108,20 @@ include '../../database/db.php'; // Include the database connection
             </div>
         </aside>
 
-        <main class="content">
+        
+
+         <!-- Upcoming Bids Section -->
+         <main class="content">
             <h1 style="margin-left: 20px;">Upcoming Bids</h1>
             <div class="slider-container">
                 <div class="slider" id="slider">
                     <?php
+                    // Fetch upcoming bids data
                     $query = "
                         SELECT 
                             b.biddingStone_id, 
                             b.startingBid, 
+                            b.currentBid, 
                             b.startDate, 
                             b.finishDate, 
                             i.colour AS colour, 
@@ -123,7 +135,7 @@ include '../../database/db.php'; // Include the database connection
                         ON 
                             b.stone_id = i.stone_id
                         WHERE 
-                            b.finishDate > NOW() -- Only show upcoming bids
+                             b.startDate > NOW() -- Only show upcoming bids
                         ORDER BY 
                             b.finishDate ASC
                     ";
@@ -133,6 +145,7 @@ include '../../database/db.php'; // Include the database connection
                         die("Query failed: " . $conn->error);
                     }
 
+                    // Loop through the results and display each upcoming bid
                     while ($row = $result->fetch_assoc()) :
                     ?>
                         <div class="slide">
@@ -140,28 +153,32 @@ include '../../database/db.php'; // Include the database connection
                             <h3><?php echo htmlspecialchars($row['colour']); ?></h3>
                             <h3><?php echo htmlspecialchars($row['type']); ?></h3>
                             <h4><?php echo htmlspecialchars($row['origin']); ?></h4>
-                            <p>Starting Bid: Rs.<?php echo number_format($row['startingBid'], 2); ?></p>
-                            <span>
+                            <p>Current Bid: Rs.<?php echo number_format($row['currentBid'], 2); ?></p>
+                            <!-- <span>
                                 <?php
                                 $finishDate = new DateTime($row['finishDate']);
                                 $now = new DateTime();
                                 $interval = $now->diff($finishDate);
                                 echo $interval->format('%d Days Left');
                                 ?>
-                            </span>
+                            </span> -->
                             <button>Bid Now!</button>
                         </div>
                     <?php endwhile; ?>
                 </div>
             </div>
 
+             <!-- Main Product Catalog -->
         <main class="product-catalog">
+           <!-- <div> <h1 style="margin-left: 20px;">Main Product Catalog</h1><div> -->
             <div class="catalog-container">
             <?php
+            // Fetch main product catalog data
             $query = "
                 SELECT 
                     b.biddingStone_id, 
                     b.startingBid, 
+                    b.currentBid, 
                     b.startDate, 
                     b.finishDate, 
                     i.colour AS colour, 
@@ -174,6 +191,8 @@ include '../../database/db.php'; // Include the database connection
                     inventory i 
                 ON 
                     b.stone_id = i.stone_id
+                WHERE 
+                    b.startDate <= NOW()
                 ORDER BY 
                     b.startDate DESC
             ";
@@ -183,6 +202,7 @@ include '../../database/db.php'; // Include the database connection
                 die("Query failed: " . $conn->error);
             }
 
+            // Loop through the results and display each product
             while ($row = $result->fetch_assoc()) :
             ?>
 
@@ -190,13 +210,21 @@ include '../../database/db.php'; // Include the database connection
                 <div class="shop-card">
                     <div class="card-banner">
                         <img src="../../assets/images/<?php echo htmlspecialchars($row['image']); ?>" alt="<?php echo htmlspecialchars($row['type']); ?>" />
+                        <div class="card-actions">
+                            <button class="action-btn btn" aria-label="bid now">
+                                <ion-icon name="hammer-outline" aria-hidden="true"></ion-icon>
+                            </button>
+                            <button class="action-btn btn" aria-label="view more">
+                                <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
+                            </button>
+                        </div>
                     </div>
                     <div class="card-content">
                         <h3><?php echo htmlspecialchars($row['colour']); ?></h3>
                         <h3><?php echo htmlspecialchars($row['type']); ?></h3>
                         <h4><?php echo htmlspecialchars($row['origin']); ?></h4>
-                    <div class="price">Starting Bid: Rs.<?php echo number_format($row['startingBid'], 2); ?></div>
-                    <div class="days-left">
+                    <div class="price">Current Bid: Rs.<?php echo number_format($row['currentBid'], 2); ?></div>
+                    <!-- <div class="days-left">
                         <ion-icon name="timer-outline" aria-hidden="true"></ion-icon>
                         <span>
                             <?php
@@ -206,13 +234,14 @@ include '../../database/db.php'; // Include the database connection
                             echo $interval->format('%d Days Left');
                             ?>
                         </span>
-                    </div>
+                    </div> -->
                     <a href="./bidding-itemPage.php?id=<?php echo $row['biddingStone_id']; ?>" class="btn btn-primary">Bid Now</a>
                 </div>
             </div>
         <?php endwhile; ?>
         </div>
     </main>
+
     </div>
 
     <script src="../../components/header/header.js"></script>
@@ -222,6 +251,7 @@ include '../../database/db.php'; // Include the database connection
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
     <script>
+        // JavaScript to display the selected carat weight value dynamically
         const caratWeightInput = document.getElementById('carat-weight');
         const caratWeightDisplay = document.getElementById('carat-weight-display');
         caratWeightInput.addEventListener('input', function () {
@@ -238,7 +268,7 @@ include '../../database/db.php'; // Include the database connection
         const moveSlider = (direction) => {
             const slides = document.querySelectorAll('.slide');
             const totalSlides = slides.length;
-            const visibleSlides = 3;
+            const visibleSlides = 3; // Adjust based on how many slides fit in view
 
             if (direction === 'next') {
                 index = (index + 1) % totalSlides;
@@ -247,7 +277,7 @@ include '../../database/db.php'; // Include the database connection
             }
 
             const offset = index * (100 / visibleSlides);
-            slider.style.transform = translateX(-${offset}%);
+            slider.style.transform = `translateX(-${offset}%)`;
         };
 
         nextBtn.addEventListener('click', () => moveSlider('next'));

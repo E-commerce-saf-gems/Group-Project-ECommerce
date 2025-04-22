@@ -1,0 +1,142 @@
+<?php
+session_start();
+$customer_id = $_SESSION['customer_id'];
+
+include '../../../database/db.php';  // Your database connection file
+
+// Get the current date and time
+$currentDateTime = date('Y-m-d H:i:s');
+
+// Get the specific biddingstone details (for the selected bidding stone)
+$biddingStoneId = $_GET['id']; // Get bidding stone ID from URL query string
+$biddingStoneQuery = "
+    SELECT bs.*, 
+           (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) AS highestBid
+    FROM biddingstone bs
+    WHERE bs.biddingStone_id = $biddingStoneId
+";
+$biddingStoneResult = $conn->query($biddingStoneQuery);
+$biddingStone = $biddingStoneResult->fetch_assoc();
+
+// Get all the bids for this bidding stone
+$bidsQuery = "
+    SELECT b.bid_id, b.amount, b.time, c.firstName AS bidderName
+    FROM bid b
+    INNER JOIN customer c ON b.customer_id = c.customer_id
+    WHERE b.biddingStone_id = $biddingStoneId
+    ORDER BY b.time DESC
+";
+$bidsResult = $conn->query($bidsQuery);
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../styles/common.css">
+    <link rel="stylesheet" href="../profile.css">
+    <link rel="stylesheet" href="./bids.css">
+    <link rel="stylesheet" href="../../../components/profileHeader/header.css">
+    <link rel="stylesheet" href="../../../components/footer/footer.css">
+    <link rel="stylesheet" href="./bidsSection.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preload" as="image" href="../../../assets/images/logo.png">
+
+    <title>My Bids</title>
+</head>
+<body>
+    <custom-header></custom-header>
+
+    <div class="profile-container profile-h2">
+        <div class="profile-sidebar">
+            <h2>Hello</h2>
+            <ul>
+                <li><a href="../Details/MyDetails.php">My Details</a></li>
+                <li><a href="../Bids/MyBids.php" class="active">My Bids</a></li>
+                <li><a href="../Wishlist/MyWishlist.html">My Wishlist</a></li>
+                <li><a href="../Sales/MySales.html">My Sales</a></li>
+                <li><a href="../Meetings/MyMeetings.php">My Meetings</a></li>
+                <li><a href="../Purchases/MyPurchases.php">Purchases</a></li>
+                <li><a href="../Requests/MyRequest.php">Requests</a></li>
+                <li><a href="../Emails/MyEmails.html">Email Preferences</a></li>
+                <li><a href="../../Login/logout.php">Signout</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1>My Account</h1>
+            <h2>My Bids</h2>
+            <div class="bid-details-container">
+                <div class="bid-details-box">
+                    <div class="bid-header">
+                        <div class="bid-title">
+                            <h2>Bid No #<?= $biddingStone['biddingStone_id'] ?></h2>
+                        </div>
+                        <div class="bid-status">
+                            <span class="dot dot-active"></span>
+                            <span class="live-text-active">Live</span>
+                        </div>
+                    </div>
+
+                    <div class="bid-info-box">
+                        <div class="bid-image-section">
+                            <img id="mainImage" src="../../../../Group-Project-ECommerce/assets/images/stone11.jpg" alt="Stone" class="main-image">
+                        </div>
+
+                        <div class="bid-info">
+                            <div><strong>Stone ID:</strong> <span class="info-value"><?= $biddingStone['stone_id'] ?></span></div>
+                            <div><strong>Starting Bid:</strong> <span class="info-value"><?= number_format($biddingStone['startingBid']) ?></span></div>
+                            <div><strong>Start Date:</strong> <span class="info-value"><?= $biddingStone['startDate'] ?></span></div>
+                        </div>
+
+                        <div class="bid-info">
+                            <div><strong>End Date:</strong> <span class="info-value"><?= $biddingStone['finishDate'] ?></span></div>
+                            <div><strong>Time Left:</strong> <span class="info-value">1d 3h</span></div>
+                            <div><strong>Current Highest:</strong> <span class="info-value"><?= number_format($biddingStone['highestBid']) ?></span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bid-cycle-container">
+                    <table class="bids-table">
+                        <thead>
+                          <tr>
+                            <th>Bid ID</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Value</th>
+                            <th>Bidder Name</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <?php while($row = $bidsResult->fetch_assoc()): ?>
+                                <tr>
+                                    <td>#<?= $row['bid_id'] ?></td>
+                                    <td><?= date('d M Y', strtotime($row['time'])) ?></td>
+                                    <td><?= date('h:i A', strtotime($row['time'])) ?></td>
+                                    <td><?= number_format($row['amount']) ?></td>
+                                    <td><?= $row['bidderName'] ?></td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+              </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="../../../components/profileHeader/header.js"></script>
+    <script src="../../components/footer/footer.js"></script>
+    <script src="./profile.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+</body>
+</html>

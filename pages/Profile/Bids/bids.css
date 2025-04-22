@@ -65,6 +65,9 @@
     color: red ;
   }
 
+  .mybids-text {
+    color: rgb(13, 97, 199) ;
+  }
   .completed-text{
     color: green ;
   }
@@ -88,6 +91,10 @@
   }
   .dot.green {
     background-color: green;
+  }
+
+  .dot.blue {
+    background-color: rgb(13, 97, 199);
   }
   /* Table styling */
   .bids-table {
@@ -148,9 +155,25 @@
 
   .bid-result {
     padding: 2px 6px;
+    font-size: 18px;
     border-radius: 2px;
     display: inline-block;
   }
+
+  .bid-result-difference {
+    padding: 1px 4px;
+    font-size: 14px;
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  .bid-result-difference.win {
+    color: #2e7d32;  /* Dark green text */
+}
+
+.bid-result-difference.loss {
+    color: #c62828;  /* Dark red text */
+}
 
   .bid-result-div{
     display: flex;
@@ -165,6 +188,16 @@
     .bid-result.loss {
         background-color: #ffebee;  /* Light red background */
         color: #c62828;  /* Dark red text */
+    }
+
+    .bid-result.pending {
+      background-color: #fff5eb;  /* Light red background */
+      color: #c66a28;  /* Dark red text */
+    }
+    
+    .bid-result.none {
+        background-color: #ebf7ff;  /* Light red background */
+        color: #2845c6;  /* Dark red text */
     }
     
     .bid-now-button {

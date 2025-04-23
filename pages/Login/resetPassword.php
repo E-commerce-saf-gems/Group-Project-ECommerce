@@ -11,41 +11,43 @@
     
 
     <div>
-      <form action="login.php" method="get">
-        <label for="email">Email Address : </label>
-        <input
-          type="email"
-          id="email"
-          placeholder="Enter your eamil"
-          required
-        />
-        <br />
+    <form action="resetPasswordUpdate.php" method="post">
+  <label for="email">Email Address:</label>
+  <input
+    type="email"
+    id="email"
+    name="email"
+    placeholder="Enter your email"
+    required
+  />
+  <br />
 
-        <label for="new-password">New Password : </label>
-        <input
-          type="password"
-          id="new-password"
-          placeholder="Enter new password"
-          required
-        />
-        <span id="new-password-error" class="error-msg"></span>
-        <br />
+  <label for="new-password">New Password:</label>
+  <input
+    type="password"
+    id="new-password"
+    name="new_password"
+    placeholder="Enter new password"
+    required
+  />
+  <br />
 
-        <label for="confirm-password">Re- enter New Password : </label>
-        <input
-          type="password"
-          id="confirm-password"
-          placeholder="Re-enter new password"
-          required
-        />
-        <span id="confirm-password-error" class="error-msg"></span>
-        <br />
+  <label for="confirm-password">Re-enter New Password:</label>
+  <input
+    type="password"
+    id="confirm-password"
+    name="confirm_password"
+    placeholder="Re-enter new password"
+    required
+  />
+  <br />
 
-        <div class="button-section">
-          <button type="button" onclick="loginpage()">Cancel</button>
-          <button type="submit">Save</button>
-        </div>
-      </form>
+  <div class="button-section">
+    <button type="button" onclick="loginpage()">Cancel</button>
+    <button type="submit">Save</button>
+  </div>
+</form>
+
       <script src="password.js"></script>
     </div>
 

@@ -14,7 +14,7 @@ if (!$stone_id) {
     die("Stone ID is missing.");
 }
 
-// Step 1: Get the biddingStone_id for this stone
+// Step 1: Check if this is a bidding stone
 $biddingStoneQuery = "SELECT biddingStone_id FROM biddingstone WHERE stone_id = ?";
 $biddingStmt = $conn->prepare($biddingStoneQuery);
 $biddingStmt->bind_param("i", $stone_id);
@@ -22,33 +22,29 @@ $biddingStmt->execute();
 $biddingResult = $biddingStmt->get_result();
 $biddingRow = $biddingResult->fetch_assoc();
 
-if (!$biddingRow) {
-    die("This stone is not part of any bidding.");
+if ($biddingRow) {
+    // It's a bidding stone
+    $biddingStone_id = $biddingRow['biddingStone_id'];
+
+    // Step 2: Get the highest bid
+    $bidQuery = "SELECT MAX(amount) AS highestBid FROM bid WHERE biddingStone_id = ?";
+    $bidStmt = $conn->prepare($bidQuery);
+    $bidStmt->bind_param("i", $biddingStone_id);
+    $bidStmt->execute();
+    $bidResult = $bidStmt->get_result();
+    $bidRow = $bidResult->fetch_assoc();
+    $highestBid = $bidRow['highestBid'] ?? null;
+
+    // Step 3: Update inventory price if there's a bid
+    if ($highestBid) {
+        $updateInventoryQuery = "UPDATE inventory SET amount = ? WHERE stone_id = ?";
+        $updateInventoryStmt = $conn->prepare($updateInventoryQuery);
+        $updateInventoryStmt->bind_param("di", $highestBid, $stone_id);
+        $updateInventoryStmt->execute();
+    }
 }
 
-$biddingStone_id = $biddingRow['biddingStone_id'];
-
-// Step 2: Get the highest bid for this bidding stone
-$bidQuery = "SELECT MAX(amount) AS highestBid FROM bid WHERE biddingStone_id = ?";
-$bidStmt = $conn->prepare($bidQuery);
-$bidStmt->bind_param("i", $biddingStone_id);
-$bidStmt->execute();
-$bidResult = $bidStmt->get_result();
-$bidRow = $bidResult->fetch_assoc();
-
-$highestBid = $bidRow['highestBid'] ?? null;
-
-if (!$highestBid) {
-    die("No bids found for this stone.");
-}
-
-// Step 3: Update the inventory price to match the highest bid
-$updateInventoryQuery = "UPDATE inventory SET amount = ? WHERE stone_id = ?";
-$updateInventoryStmt = $conn->prepare($updateInventoryQuery);
-$updateInventoryStmt->bind_param("di", $highestBid, $stone_id);
-$updateInventoryStmt->execute();
-
-// Step 4: Check if the stone is already in the cart
+// Step 4: Add to cart (only once)
 $checkQuery = "SELECT cart_id FROM cart WHERE customer_id = ? AND stone_id = ?";
 $checkStmt = $conn->prepare($checkQuery);
 $checkStmt->bind_param("ii", $customer_id, $stone_id);
@@ -56,7 +52,6 @@ $checkStmt->execute();
 $checkResult = $checkStmt->get_result();
 
 if ($checkResult->num_rows === 0) {
-    // Step 5: Insert into cart
     $insertQuery = "INSERT INTO cart (customer_id, stone_id) VALUES (?, ?)";
     $insertStmt = $conn->prepare($insertQuery);
     $insertStmt->bind_param("ii", $customer_id, $stone_id);

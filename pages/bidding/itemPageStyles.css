@@ -25,6 +25,7 @@
 }
 .detail-row {
     margin-bottom: 15px;
+    color: black;
     padding-bottom: 10px;
     border-bottom: 1px solid #eee;
 }
@@ -129,4 +130,26 @@ font-weight: bold;
 
 .submit-bid-btn:hover {
 background-color: #357f7f;
+}
+
+  .success-message {
+    background-color: #d4ede9; 
+    color: #449f9f ;
+    padding: 15px;
+    border: 1px solid #c3e6cb; 
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.error-message {
+    background-color: #d4ede9; 
+    color: #9f4444 ; 
+    padding: 15px;
+    border: 1px solid #c3e6cb; 
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 20px 0;
+    text-align: center;
 }

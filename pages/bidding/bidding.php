@@ -97,7 +97,6 @@ include '../../database/db.php'; // Include the database connection
                     <option value="si2">SI2</option>
                 </select>
 
-                <!-- Filter by Price Range -->
                  <div class="ranger" style="border: 2px solid teal; margin-top: 20px; border-radius: 20px; padding:10px ;">
                     <label for="price-range" >Price Range:</label>
                     <input type="number" id="min-price" placeholder="Min:0" min="0" step="50">
@@ -108,15 +107,11 @@ include '../../database/db.php'; // Include the database connection
             </div>
         </aside>
 
-        
-
-         <!-- Upcoming Bids Section -->
          <main class="content">
             <h1 style="margin-left: 20px;">Upcoming Bids</h1>
             <div class="slider-container">
                 <div class="slider" id="slider">
                     <?php
-                    // Fetch upcoming bids data
                     $query = "
                         SELECT 
                             b.biddingStone_id, 
@@ -144,7 +139,6 @@ include '../../database/db.php'; // Include the database connection
                         die("Query failed: " . $conn->error);
                     }
 
-                    // Loop through the results and display each upcoming bid
                     while ($row = $result->fetch_assoc()) :
                     ?>
                         <div class="slide">
@@ -171,7 +165,6 @@ include '../../database/db.php'; // Include the database connection
            <!-- <div> <h1 style="margin-left: 20px;">Main Product Catalog</h1><div> -->
             <div class="catalog-container">
             <?php
-            // Fetch main product catalog data
             $query = "
                 SELECT 
                     b.biddingStone_id, 
@@ -199,7 +192,6 @@ include '../../database/db.php'; // Include the database connection
                 die("Query failed: " . $conn->error);
             }
 
-            // Loop through the results and display each product
             while ($row = $result->fetch_assoc()) :
             ?>
 
@@ -249,7 +241,6 @@ include '../../database/db.php'; // Include the database connection
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
     <script>
-        // JavaScript to display the selected carat weight value dynamically
         const caratWeightInput = document.getElementById('carat-weight');
         const caratWeightDisplay = document.getElementById('carat-weight-display');
         caratWeightInput.addEventListener('input', function () {
@@ -266,7 +257,7 @@ include '../../database/db.php'; // Include the database connection
         const moveSlider = (direction) => {
             const slides = document.querySelectorAll('.slide');
             const totalSlides = slides.length;
-            const visibleSlides = 3; // Adjust based on how many slides fit in view
+            const visibleSlides = 3; 
 
             if (direction === 'next') {
                 index = (index + 1) % totalSlides;

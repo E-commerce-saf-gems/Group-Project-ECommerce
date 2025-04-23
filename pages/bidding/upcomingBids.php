@@ -8,7 +8,6 @@ if ($biddingStoneId <= 0) {
     die("Invalid bidding item ID.");
 }
 
-// Get stone details
 $query = "
     SELECT 
         CONCAT(i.colour, ' ', i.type) AS stone_name, 

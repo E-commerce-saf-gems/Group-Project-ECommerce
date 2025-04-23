@@ -19,12 +19,6 @@ this.innerHTML = `
           <span class="line line-3"></span>
         </button>
 
-        <div class="input-wrapper">
-          <input type="search" name="search" placeholder="Search product" class="search-field">
-          <button class="search-submit" aria-label="search">
-            <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
-          </button>
-        </div>
 
         <a href="../../../assets/images/logo.png" class="logo">
           <img src="../../../assets/images/logo.png" width="179" height="26" alt="SAF GEMS">
@@ -36,7 +30,7 @@ this.innerHTML = `
               <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
             </button>
             <ul class="dropdown-menu">
-                    <li><a href="../../Profile/Details/MyDetails.html" class="dropdown-item">Profile</a></li>
+                    <li><a href="../../Profile/Details/MyDetails.php" class="dropdown-item">Profile</a></li>
                     <li><a href="../../Login/logout.php" class="dropdown-item" id="logout">Logout</a></li>
             </ul>
           </div>

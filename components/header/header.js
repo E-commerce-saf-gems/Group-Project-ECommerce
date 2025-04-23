@@ -13,7 +13,7 @@ class Header extends HTMLElement {
     // Step 2: Define the HTML structure for logged-in and not logged-in states
     const loggedInMenu = `
       <ul class="dropdown-menu">
-        <li><a href="../Profile/Details/MyDetails.html" class="dropdown-item">Profile</a></li>
+        <li><a href="../Profile/Details/MyDetails.php" class="dropdown-item">Profile</a></li>
         <li><a href="#" class="dropdown-item" id="logout">Logout</a></li>
       </ul>
     `;
@@ -44,12 +44,7 @@ class Header extends HTMLElement {
               <span class="line line-3"></span>
             </button>
 
-            <div class="input-wrapper">
-              <input type="search" name="search" placeholder="Search product" class="search-field">
-              <button class="search-submit" aria-label="search">
-                <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
-              </button>
-            </div>
+        
 
             <a href="../homepage/homepage.html" class="logo">
               <img src="../../assets/images/logo.png" width="179" height="26" alt="SAF GEMS">

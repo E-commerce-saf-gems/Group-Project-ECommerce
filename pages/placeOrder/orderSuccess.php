@@ -1,12 +1,10 @@
 <?php
 session_start();
 
-// Check if the user is logged in
 if (!isset($_SESSION['customer_id']) || empty($_SESSION['customer_id'])) {
     header("Location: ../Login/login.php?notloggedIn=1");
     exit();
 }
-
 ?>
 
 <!DOCTYPE html>

@@ -161,7 +161,7 @@ include '../../database/db.php'; // Include the database connection
                                 echo $interval->format('%d Days Left');
                                 ?>
                             </span>
-                            <a href="./upcomingBids.php?id=<?php echo $row['biddingStone_id']; ?>" class="btn btn-primary">More Details</a>
+                            <a href="./upcomingBid.php?id=<?php echo $row['biddingStone_id']; ?>" class="btn btn-primary">More Details</a>
                         </div>
                     <?php endwhile; ?>
                 </div>

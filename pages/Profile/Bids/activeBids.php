@@ -12,16 +12,19 @@ $currentDateTime = date('Y-m-d H:i:s');
 $biddingStoneId = $_GET['id']; // Get bidding stone ID from URL query string
 $biddingStoneQuery = "
     SELECT bs.*, 
+           inv.type, inv.colour, inv.shape, inv.origin, inv.description, inv.size, inv.image,
            (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) AS highestBid
     FROM biddingstone bs
+    JOIN inventory inv ON bs.stone_id = inv.stone_id
     WHERE bs.biddingStone_id = $biddingStoneId
 ";
+
 $biddingStoneResult = $conn->query($biddingStoneQuery);
 $biddingStone = $biddingStoneResult->fetch_assoc();
 
 // Get all the bids for this bidding stone
 $bidsQuery = "
-    SELECT b.bid_id, b.amount, b.time, c.firstName AS bidderName
+    SELECT b.bid_id, b.amount,b.validity, b.time, c.firstName AS bidderName
     FROM bid b
     INNER JOIN customer c ON b.customer_id = c.customer_id
     WHERE b.biddingStone_id = $biddingStoneId
@@ -41,6 +44,7 @@ $bidsResult = $conn->query($bidsQuery);
     <link rel="stylesheet" href="./bids.css">
     <link rel="stylesheet" href="../../../components/profileHeader/header.css">
     <link rel="stylesheet" href="../../../components/footer/footer.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="./bidsSection.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -87,16 +91,24 @@ $bidsResult = $conn->query($bidsQuery);
 
                     <div class="bid-info-box">
                         <div class="bid-image-section">
-                            <img id="mainImage" src="../../../../Group-Project-ECommerce/assets/images/stone11.jpg" alt="Stone" class="main-image">
+                            <img id="mainImage" src="http://localhost/Group-Project-ECommerce/assets/images/<?= $biddingStone['image'] ?>" alt="stone" class="main-image">
                         </div>
 
                         <div class="bid-info">
-                            <div><strong>Stone ID:</strong> <span class="info-value"><?= $biddingStone['stone_id'] ?></span></div>
+                            <div><strong>Details:</strong> <span class="info-value">
+                              <?=
+                                $biddingStone['type'] .' - ' .
+                                $biddingStone['size'] .'crt -' .
+                                $biddingStone['colour'] . ' - ' .
+                                $biddingStone['shape'] . ' - ' .
+                                $biddingStone['origin']
+                              ?></span></div>
+                            <div><strong>Description:</strong> <span class="info-value"><?= $biddingStone['description'] ?></span></div>
                             <div><strong>Starting Bid:</strong> <span class="info-value"><?= number_format($biddingStone['startingBid']) ?></span></div>
-                            <div><strong>Start Date:</strong> <span class="info-value"><?= $biddingStone['startDate'] ?></span></div>
                         </div>
 
                         <div class="bid-info">
+                            <div><strong>Start Date:</strong> <span class="info-value"><?= $biddingStone['startDate'] ?></span></div>
                             <div><strong>End Date:</strong> <span class="info-value"><?= $biddingStone['finishDate'] ?></span></div>
                             <div><strong>Time Left:</strong> <span class="info-value">1d 3h</span></div>
                             <div><strong>Current Highest:</strong> <span class="info-value"><?= number_format($biddingStone['highestBid']) ?></span></div>
@@ -116,16 +128,35 @@ $bidsResult = $conn->query($bidsQuery);
                           </tr>
                         </thead>
                         <tbody>
-                            <?php while($row = $bidsResult->fetch_assoc()): ?>
-                                <tr>
-                                    <td>#<?= $row['bid_id'] ?></td>
-                                    <td><?= date('d M Y', strtotime($row['time'])) ?></td>
-                                    <td><?= date('h:i A', strtotime($row['time'])) ?></td>
-                                    <td><?= number_format($row['amount']) ?></td>
-                                    <td><?= $row['bidderName'] ?></td>
-                                </tr>
-                            <?php endwhile; ?>
-                        </tbody>
+                          <?php
+                          $previousAmount = null; // Initialize variable outside loop
+
+                          while($row = $bidsResult->fetch_assoc()):
+                              $currentAmount = $row['amount'];
+                              $diffFromPrevious = $previousAmount !== null ? $previousAmount-$currentAmount : 0;
+                              $diffFormatted = number_format($diffFromPrevious);
+                          ?>
+                              <tr>
+                                  <td>#<?= $row['bid_id'] ?></td>
+                                  <td><?= date('d M Y', strtotime($row['time'])) ?></td>
+                                  <td><?= date('h:i A', strtotime($row['time'])) ?></td>
+                                  <td>
+                                      <span class="bid-result win"><?= number_format($currentAmount) ?></span>
+                                      <?php if ($previousAmount !== null): ?>
+                                          <span class="bid-result-difference <?= $diffFromPrevious >= 0 ? 'win' : 'loss' ?>">
+                                              <i class='bx <?= $diffFromPrevious >= 0 ? 'bx-chevrons-up' : 'bx-chevrons-down' ?>'></i>
+                                              <?= $diffFormatted ?>
+                                          </span>
+                                      <?php endif; ?>
+                                  </td>
+                                  <td><?= $row['bidderName'] ?></td>
+                              </tr>
+                          <?php
+                              $previousAmount = $currentAmount; // Update for next loop
+                          endwhile;
+                          ?>
+                      </tbody>
+
                     </table>
                 </div>
               </div>

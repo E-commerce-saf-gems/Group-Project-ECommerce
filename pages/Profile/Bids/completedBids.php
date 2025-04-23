@@ -12,11 +12,14 @@ $currentDateTime = date('Y-m-d H:i:s');
 $biddingStoneId = $_GET['id'];
 
 $biddingStoneQuery = "
-    SELECT bs.*, 
+    SELECT bs.*,
+            inv.type, inv.colour, inv.shape, inv.origin, inv.description, inv.size, inv.image,
            (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) AS highestBid
     FROM biddingstone bs
+    JOIN inventory inv ON bs.stone_id = inv.stone_id
     WHERE bs.biddingStone_id = $biddingStoneId AND bs.finishDate < '$currentDateTime'
 ";
+
 $biddingStoneResult = $conn->query($biddingStoneQuery);
 $biddingStone = $biddingStoneResult->fetch_assoc();
 
@@ -92,12 +95,20 @@ $purchaseDeadline = date('Y-m-d H:i:s', strtotime($biddingStone['finishDate'] . 
                     </div>
 
                     <div class="bid-info-box">
-                        <div class="bid-image-section">
-                            <img id="mainImage" src="../../../../Group-Project-ECommerce/assets/images/stone11.jpg" alt="Stone" class="main-image">
+                    <div class="bid-image-section">
+                            <img id="mainImage" src="http://localhost/Group-Project-ECommerce/assets/images/<?= $biddingStone['image'] ?>" alt="stone" class="main-image">
                         </div>
 
                         <div class="bid-info">
-                            <div><strong>Stone ID:</strong> <span class="info-value"><?= $biddingStone['stone_id'] ?></span></div>
+                            <div><strong>Details:</strong> <span class="info-value">
+                              <?=
+                                $biddingStone['type'] .' - ' .
+                                $biddingStone['size'] .'crt -' .
+                                $biddingStone['colour'] . ' - ' .
+                                $biddingStone['shape'] . ' - ' .
+                                $biddingStone['origin']
+                              ?></span></div>
+                            <div><strong>Description:</strong> <span class="info-value"><?= $biddingStone['description'] ?></span></div>
                             <div><strong>Starting Bid:</strong> <span class="info-value"><?= number_format($biddingStone['startingBid']) ?></span></div>
                             <div><strong>Start Date:</strong> <span class="info-value"><?= $biddingStone['startDate'] ?></span></div>
                             <div><strong>End Date:</strong> <span class="info-value"><?= $biddingStone['finishDate'] ?></span></div>

@@ -1,37 +1,66 @@
 <?php
 include('../../database/db.php'); 
-
 session_start();
 
-// Check if the customer is logged in
 if (!isset($_SESSION['customer_id']) || empty($_SESSION['customer_id'])) {
-    // Redirect to the login page if not logged in
     header("Location: ../Login/login.php?notloggedIn=1");
     exit();
 }
 
 $customer_id = $_SESSION['customer_id'];
-$stone_id = $_POST['stone_id'];
+$stone_id = $_GET['stone_id'] ?? $_POST['stone_id'] ?? null;
 
-$sql = "SELECT cart_id FROM cart WHERE customer_id = ? AND stone_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ii", $customer_id, $stone_id);
-$stmt->execute();
-$result = $stmt->get_result();
+if (!$stone_id) {
+    die("Stone ID is missing.");
+}
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $new_quantity = $row['quantity'] + $quantity;
+// Step 1: Get the biddingStone_id for this stone
+$biddingStoneQuery = "SELECT biddingStone_id FROM biddingstone WHERE stone_id = ?";
+$biddingStmt = $conn->prepare($biddingStoneQuery);
+$biddingStmt->bind_param("i", $stone_id);
+$biddingStmt->execute();
+$biddingResult = $biddingStmt->get_result();
+$biddingRow = $biddingResult->fetch_assoc();
 
-    $update_sql = "UPDATE cart SET quantity = ? WHERE cart_id = ?";
-    $update_stmt = $conn->prepare($update_sql);
-    $update_stmt->bind_param("ii", $new_quantity, $row['cart_id']);
-    $update_stmt->execute();
-} else {
-    $insert_sql = "INSERT INTO cart (customer_id, stone_id) VALUES (?, ?)";
-    $insert_stmt = $conn->prepare($insert_sql);
-    $insert_stmt->bind_param("ii", $customer_id, $stone_id);
-    $insert_stmt->execute();
+if (!$biddingRow) {
+    die("This stone is not part of any bidding.");
+}
+
+$biddingStone_id = $biddingRow['biddingStone_id'];
+
+// Step 2: Get the highest bid for this bidding stone
+$bidQuery = "SELECT MAX(amount) AS highestBid FROM bid WHERE biddingStone_id = ?";
+$bidStmt = $conn->prepare($bidQuery);
+$bidStmt->bind_param("i", $biddingStone_id);
+$bidStmt->execute();
+$bidResult = $bidStmt->get_result();
+$bidRow = $bidResult->fetch_assoc();
+
+$highestBid = $bidRow['highestBid'] ?? null;
+
+if (!$highestBid) {
+    die("No bids found for this stone.");
+}
+
+// Step 3: Update the inventory price to match the highest bid
+$updateInventoryQuery = "UPDATE inventory SET amount = ? WHERE stone_id = ?";
+$updateInventoryStmt = $conn->prepare($updateInventoryQuery);
+$updateInventoryStmt->bind_param("di", $highestBid, $stone_id);
+$updateInventoryStmt->execute();
+
+// Step 4: Check if the stone is already in the cart
+$checkQuery = "SELECT cart_id FROM cart WHERE customer_id = ? AND stone_id = ?";
+$checkStmt = $conn->prepare($checkQuery);
+$checkStmt->bind_param("ii", $customer_id, $stone_id);
+$checkStmt->execute();
+$checkResult = $checkStmt->get_result();
+
+if ($checkResult->num_rows === 0) {
+    // Step 5: Insert into cart
+    $insertQuery = "INSERT INTO cart (customer_id, stone_id) VALUES (?, ?)";
+    $insertStmt = $conn->prepare($insertQuery);
+    $insertStmt->bind_param("ii", $customer_id, $stone_id);
+    $insertStmt->execute();
 }
 
 header("Location: ../cart/cart.php");

@@ -166,7 +166,7 @@ $completedResult = $conn->query($completedQuery);
 
                                         <td><?= date_diff(date_create($currentDateTime), date_create($row['finishDate']))->format('%dD %hH %iM') ?></td>
                                     </tr>
-                                    <?php endwhile; ?>
+                            <?php endwhile; ?>
                             </tbody>
                         </table>
                     </div>

@@ -123,7 +123,11 @@ $result = $stmt->get_result();
             <p class="error-message">⚠️ Cart total exceeds the limit of Rs. 500,000. Please remove some items.</p>
             <button class="btn btn-primary" disabled>Proceed to Checkout</button>
         <?php else: ?>
-            <a href="../placeOrder/placeOrder.php" class="btn btn-primary">Proceed to Checkout</a>
+            <form action="../placeOrder/placeOrder.php" method="POST">
+                <input type="hidden" name="total" value="<?php echo htmlspecialchars($total); ?>">
+                <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
+            </form>
+
         <?php endif; ?>
     </div>
 

@@ -129,7 +129,7 @@ $bidsResult = $conn->query($bidsQuery);
                         </thead>
                         <tbody>
                           <?php
-                          $previousAmount = null; // Initialize variable outside loop
+                          $previousAmount = null; 
 
                           while($row = $bidsResult->fetch_assoc()):
                               $currentAmount = $row['amount'];

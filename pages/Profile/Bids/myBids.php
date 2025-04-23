@@ -9,7 +9,7 @@ $currentDateTime = date('Y-m-d H:i:s');
 
 $myBidsQuery = "
     SELECT bs.*, 
-           i.image,
+           i.image, CONCAT (i.size, 'crt ' ,i.colour, '  ', i.type) as stone,
            (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id AND customer_id = $customer_id) AS myHighestBid,
            (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) AS highestBid
     FROM biddingstone bs
@@ -26,10 +26,9 @@ $myBidsQuery = "
 
 $myBidsResult = $conn->query($myBidsQuery);
 
-// Get Live Bids (ongoing bids where user hasn’t bid yet)
 $liveBidsQuery = "
     SELECT bs.*, 
-           i.image,
+           i.image, CONCAT (i.size, 'crt  ' ,i.colour, '  ', i.type) as stone,
            (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) as highestBid
     FROM biddingstone bs
     JOIN inventory i ON bs.stone_id = i.stone_id
@@ -42,17 +41,15 @@ $liveBidsQuery = "
 
 $liveBidsResult = $conn->query($liveBidsQuery);
 
-// Get Upcoming Bids
 $upcomingQuery = "SELECT * FROM biddingstone WHERE startDate > '$currentDateTime'";
 $upcomingResult = $conn->query($upcomingQuery);
 
-// Get Completed Bids (bids that ended and user participated in)
 $completedQuery = "
     SELECT bs.*, 
-           i.image,
+           i.image, CONCAT (i.size, 'crt  ' ,i.colour, '  ', i.type) as stone,
            (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) as finalValue,
            (CASE 
-                WHEN (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id AND customer_id = $customer_id) = (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) 
+                WHEN (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id AND bs.customer_id = $customer_id) = (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) 
                 THEN 'Win' ELSE 'Loss' 
             END) as result
     FROM biddingstone bs
@@ -117,7 +114,7 @@ $completedResult = $conn->query($completedQuery);
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Bid ID</th>
+                                    <th>Stone</th>
                                     <th>Starting Bid (Rs.)</th>
                                     <th>Highest Bid (Rs.)</th>
                                     <th>My Highest Bid (Rs.)</th>
@@ -140,7 +137,7 @@ $completedResult = $conn->query($completedQuery);
                                 ?>
                                     <tr>
                                         <td><img src="http://localhost/Group-Project-ECommerce/assets/images/<?= $row['image'] ?>" alt="stone"></td>
-                                        <td>#<?= $row['biddingStone_id'] ?></td>
+                                        <td><?= $row['stone'] ?></td>
                                         <td><?= number_format($startingBid) ?></td>
 
                                         <td>
@@ -180,7 +177,7 @@ $completedResult = $conn->query($completedQuery);
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Bid ID</th>
+                                    <th>Stone</th>
                                     <th>Starting Bid (Rs.)</th>
                                     <th>Highest Bid (Rs.)</th>
                                     <th>Actions</th>
@@ -191,7 +188,7 @@ $completedResult = $conn->query($completedQuery);
                             <?php while($row = $liveBidsResult->fetch_assoc()): ?>
                                 <tr>
                                     <td><img src="http://localhost/Group-Project-ECommerce/assets/images/<?= $row['image'] ?>" alt="stone"></td>
-                                    <td>#<?= $row['biddingStone_id'] ?></td>
+                                    <td>#<?= $row['stone'] ?></td>
                                     <td><?= number_format($row['startingBid']) ?></td>
                                     <td><span class="bid-result none"><?= number_format($row['highestBid']) ?></span></td>
                                     <td>
@@ -214,11 +211,10 @@ $completedResult = $conn->query($completedQuery);
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Bid ID</th>
+                                    <th>Stone</th>
                                     <th>End Date</th>
                                     <th>Win/Loss</th>
                                     <th>Final Value</th>
-                                    <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -226,7 +222,7 @@ $completedResult = $conn->query($completedQuery);
                             <?php while($row = $completedResult->fetch_assoc()): ?>
                                 <tr>
                                     <td><img src="http://localhost/Group-Project-ECommerce/assets/images/<?= $row['image'] ?>" alt="stone"></td>
-                                    <td>#<?= $row['biddingStone_id'] ?></td>
+                                    <td><?= $row['stone'] ?></td>
                                     <td><?= date('M d', strtotime($row['finishDate'])) ?></td>
                                     <td>
                                         <div class="bid-result-div">
@@ -234,7 +230,6 @@ $completedResult = $conn->query($completedQuery);
                                         </div>
                                     </td>
                                     <td><?= number_format($row['finalValue']) ?></td>
-                                    <td><?= $row['result'] === 'Win' ? 'Purchased' : 'In Cart' ?></td>
                                     <td>
                                         <a href="./completedBids.php?id=<?= $row['biddingStone_id'] ?>" class="bid-now-button">Details</a>
                                     </td>
@@ -250,5 +245,10 @@ $completedResult = $conn->query($completedQuery);
     </div>
 
     <custom-footer></custom-footer>
+    <script src="../../../components/profileHeader/header.js"></script>
+    <script src="../../components/footer/footer.js"></script>
+    <script src="./profile.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

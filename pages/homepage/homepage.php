@@ -1,3 +1,28 @@
+<?php
+include '../../database/db.php'; // Include the database connection
+
+// Query to fetch stones
+$stonesQuery = "
+    SELECT 
+        stone_id, amount, 
+        type, 
+        origin,
+        description,
+        image, 
+        size,
+        shape,
+        colour 
+    FROM inventory
+    WHERE visibility = 'show' AND (availability = 'available' OR availability = 'Available')
+";
+
+$stonesResult = $conn->query($stonesQuery);
+
+if (!$stonesResult) {
+    die("Query failed: " . $conn->error);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +48,6 @@
 </head>
 
 <body id="top">
-
   <custom-header></custom-header>
 
   <!-- #MOBILE NAVBAR -->
@@ -138,220 +162,62 @@
         </p>
     </div>
     <section class="section shop" id="shop" aria-label="shop" data-section>
-        <div class="container">
-
-          <ul class="has-scrollbar">
-            <li class="scrollbar-item">
-              <div class="shop-card">
-                <div class="card-banner img-holder" style="--width: 540; --height: 720;">
-                  <img src="../../assets/images/stone1.jpg" width="540" height="720" loading="lazy"
-                    alt="Gem1" class="img-cover">
-
-                  <span class="badge" aria-label="20% off">-10%</span>
-
-                  <div class="card-actions">
-                    <button class="action-btn" aria-label="add to cart">
-                      <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="card-content">
-                  <div class="price">
-                    <del class="del">$1500.00</del>
-
-                    <span class="span">$1350.00</span>
-                  </div>
-
-                  <h3><a href="#" class="card-title">Emerald</a></h3>
-                  <p class="rating-text">Unheated 4 Carts</p>
-                </div>
-
-              </div>
-            </li>
-
-            <li class="scrollbar-item">
-                <div class="shop-card">
-                  <div class="card-banner img-holder" style="--width: 540; --height: 720;">
-                    <img src="../../assets/images/stone3.jpg" width="540" height="720" loading="lazy"
-                      alt="Gem1" class="img-cover">
-  
-  
-                    <div class="card-actions">
-                      <button class="action-btn" aria-label="add to cart">
-                        <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                      </button>
-                      <button class="action-btn" aria-label="add to wishlist">
-                        <ion-icon name="star-outline" aria-hidden="true"></ion-icon>
-                      </button>
+    <div class="container">
+        <ul class="has-scrollbar">
+            <?php while ($row = $stonesResult->fetch_assoc()) : ?>
+                <li class="scrollbar-item">
+                    <div class="shop-card">
+                        <div class="card-banner img-holder" style="--width: 540; --height: 720;">
+                            <img src="../../assets/images/<?php echo htmlspecialchars($row['image']); ?>" 
+                                 width="540" height="720" loading="lazy" 
+                                 alt="<?php echo htmlspecialchars($row['type']); ?>" class="img-cover">
+                        </div>
+                        <div class="card-content">
+                            <div class="price">
+                                <span class="span">LKR <?php echo number_format($row['amount'], 2); ?></span>
+                            </div>
+                            <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['type']); ?></a></h3>
+                            <p class="rating-text"><?php echo htmlspecialchars($row['size']); ?> Carats</p>
+                        </div>
                     </div>
-                  </div>
-  
-                  <div class="card-content">
-                    <div class="price">  
-                      <span class="span">$2000.00</span>
-                    </div>
-  
-                    <h3><a href="#" class="card-title">Corn Blue Sapphire</a></h3>
-                    <p class="rating-text">Unheated 5.5 Carts</p>
-                  </div>
-  
-                </div>
-              </li>
-
-            <li class="scrollbar-item">
-                <div class="shop-card">
-                  <div class="card-banner img-holder" style="--width: 540; --height: 720;">
-                    <img src="../../assets/images/stone2.jpg" width="540" height="720" loading="lazy"
-                      alt="Gem1" class="img-cover">
-  
-  
-                    <div class="card-actions">
-                      <button class="action-btn" aria-label="add to cart">
-                        <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                      </button>
-                      <button class="action-btn" aria-label="add to wishlist">
-                        <ion-icon name="star-outline" aria-hidden="true"></ion-icon>
-                      </button>
-                    </div>
-                  </div>
-  
-                  <div class="card-content">
-                    <div class="price">  
-                      <span class="span">$2100.00</span>
-                    </div>
-  
-                    <h3><a href="#" class="card-title">Corn Blue Sapphire</a></h3>
-                    <p class="rating-text">Unheated 4.5 Carts</p>
-                  </div>
-  
-                </div>
-              </li>
-
-            <li class="scrollbar-item">
-              <div class="shop-card">
-
-                <div class="card-banner img-holder" style="--width: 540; --height: 720;">
-                  <img src="../../assets/images/stone5.jpg" width="540" height="720" loading="lazy"
-                    alt="Facial cleanser" class="img-cover">
-
-                  <div class="card-actions">
-
-                    <button class="action-btn" aria-label="add to cart">
-                      <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                    </button>
-
-                    <button class="action-btn" aria-label="add to whishlist">
-                      <ion-icon name="star-outline" aria-hidden="true"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="card-content">
-
-                  <div class="price">
-                    <span class="span">$14000</span>
-                  </div>
-
-                  <h3>
-                    <a href="#" class="card-title">Pink Sapphire</a>
-                  </h3>
-                  <p class="rating-text">Heated 3.2 Carts</p>
-                </div>
-              </div>
-            </li>
-     
-            <li class="scrollbar-item">
-                <div class="shop-card">
-  
-                  <div class="card-banner img-holder" style="--width: 540; --height: 720;">
-                    <img src="../../assets/images/stone8.jpg" width="540" height="720" loading="lazy"
-                      alt="Facial cleanser" class="img-cover">
-  
-                    <div class="card-actions">
-  
-                      <button class="action-btn" aria-label="add to cart">
-                        <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                      </button>
-  
-                      <button class="action-btn" aria-label="add to whishlist">
-                        <ion-icon name="star-outline" aria-hidden="true"></ion-icon>
-                      </button>
-                    </div>
-                  </div>
-  
-                  <div class="card-content">
-  
-                    <div class="price">
-                      <span class="span">$14000</span>
-                    </div>
-  
-                    <h3>
-                      <a href="#" class="card-title">Pink Sapphire</a>
-                    </h3>
-                    <p class="rating-text">Heated 3.2 Carts</p>
-                  </div>
-                </div>
-              </li>
-
-            <li class="scrollbar-item">
-              <div class="shop-card">
-                <div class="card-banner img-holder" style="--width: 540; --height: 720;">
-                  <img src="../../assets/images/stone6.jpg" width="540" height="720" loading="lazy"
-                    alt="Facial cleanser" class="img-cover">
-                  <div class="card-actions">
-                    <button class="action-btn" aria-label="add to cart">
-                      <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                    </button>
-                    <button class="action-btn" aria-label="add to whishlist">
-                      <ion-icon name="star-outline" aria-hidden="true"></ion-icon>
-                    </button>
-                  </div>
-                </div>
-                <div class="card-content">
-                  <div class="price">
-                    <span class="span">$14000</span>
-                  </div>
-                  <h3><a href="#" class="card-title">Pink Sapphire</a></h3>
-                  <p class="rating-text">Heated 3.2 Carts</p>
-                </div>
-              </div>
-            </li>
-
-          </ul>
-          <a href="../Stones/StonesHomePage.php" class="btn btn-primary view-all-btn">View All</a>
-        </div>
-    </section>
+                </li>
+            <?php endwhile; ?>
+        </ul>
+    </div>
+</section>
 
 
-    <!-- New Collection -->
-    <section class="section banner" aria-label="banner" data-section>
-      <div class="container">
-  
-          <ul class="banner-list">
-  
-              <li>
-                  <div class="banner-card banner-card-1 has-before hover:shine">
-                      <p class="card-subtitle">New Exclusive Collection</p>
-                      <h2 class="h2 card-title">Explore Our<br>Precious<br>Gemstones</h2>
-                      <a href="../Stones/StonesHomePage.php" class="btn btn-secondary">Discover More</a>
-                      <div class="has-bg-image" style="background-image: url('../../assets/images/stone12.jpg')"></div>
-                  </div>
-              </li>
-  
-              <li>
-                  <div class="banner-card banner-card-2 has-before hover:shine">
-                      <h2 class="h2 card-title">Upto 10% off on Gemstones</h2>
-                      <p class="card-text">Find the perfect gemstone for your unique style.</p>
-                      <a href="../Stones/StonesHomePage.php" class="btn btn-secondary">Shop Now</a>
-                      <div class="has-bg-image" style="background-image: url('../../assets/images/stone14.jpg')"></div>
-                  </div>
-              </li>
-          </ul>
-      </div>
-  </section>
-  
+      <?php
+      // Query to fetch ongoing auctions
+      $auctionsQuery = "
+          SELECT 
+              b.biddingStone_id, 
+              b.startingBid, 
+              b.currentBid, 
+              b.startDate, 
+              b.finishDate, 
+              i.size AS size,
+              i.shape AS shape,
+              i.colour AS colour, 
+              i.type AS type,
+              i.origin AS origin,
+              i.image AS image 
+          FROM 
+              biddingstone b
+          JOIN 
+              inventory i 
+          ON 
+              b.stone_id = i.stone_id
+          WHERE 
+              b.finishDate > NOW() AND b.startDate < NOW()
+      ";
 
+      $auctionsResult = $conn->query($auctionsQuery);
+
+      if (!$auctionsResult) {
+          die("Query failed: " . $conn->error);
+      }
+      ?>
     <!-- auctions -->
     <div class="stones-section">
         <div class="stones-title"><h1 class="h1">Our Auctions</h1></div>
@@ -361,47 +227,29 @@
         </p>
     </div>
     <section class="section collection" id="collection" aria-label="collection" data-section>
-        <div class="container">
-
+      <div class="container">
           <ul class="collection-list">
-            <li>
-              <div class="collection-card has-before hover:shine">
-                <h2 class="h2 card-title">August Birth Stone</h2>
-                <p class="card-text">Starting at <span class="badge" aria-label="20% off">$1500</span></p>
-                <a href="../bidding/bidding.html" class="btn-link">
-                  <span class="span">Bid Now</span>
-                  <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
-                </a>
-                <div class="has-bg-image" style="background-image: url('../../assets/images/stone13.jpg')"></div>
-              </div>
-            </li>
-
-            <li>
-                <div class="collection-card has-before hover:shine">
-                  <h2 class="h2 card-title">Green Patparaja</h2>
-                  <p class="card-text">Starting at <span class="badge" aria-label="20% off">$1900</span></p>
-                  <a href="../bidding/bidding.html" class="btn-link">
-                    <span class="span">Bid Now</span>
-                    <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
-                  </a>
-                  <div class="has-bg-image" style="background-image: url('../../assets/images/stone3.jpg')"></div>
-                </div>
-              </li>
-
-              <li>
-                <div class="collection-card has-before hover:shine">
-                  <h2 class="h2 card-title">August Birth Stone</h2>
-                  <p class="card-text">Starting at <span class="badge" aria-label="20% off">$1500</span></p>
-                  <a href="../bidding/bidding.html" class="btn-link">
-                    <span class="span">Bid Now</span>
-                    <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
-                  </a>
-                  <div class="has-bg-image" style="background-image: url('../../assets/images/stone10.jpg')"></div>
-                </div>
-              </li>
+              <?php while ($row = $auctionsResult->fetch_assoc()) : ?>
+                  <li>
+                      <div class="collection-card has-before hover:shine">
+                          <h2 class="h2 card-title"><?php echo htmlspecialchars($row['type']); ?></h2>
+                          <p class="card-text">Starting at 
+                              <span class="badge" aria-label="Starting Bid">
+                                  LKR <?php echo number_format($row['startingBid'], 2); ?>
+                              </span>
+                          </p>
+                          <a href="../bidding/bidding-itemPage.php?id=<?php echo $row['biddingStone_id']; ?>" class="btn-link">
+                              <span class="span">Bid Now</span>
+                              <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+                          </a>
+                          <div class="has-bg-image" style="background-image: url('../../assets/images/<?php echo htmlspecialchars($row['image']); ?>')"></div>
+                      </div>
+                  </li>
+              <?php endwhile; ?>
           </ul>
+    
 
-          <a href="../bidding/bidding.html" class="btn btn-primary view-all-btn">View All</a>
+          <a href="../bidding/bidding.php" class="btn btn-primary view-all-btn">View All</a>
 
         </div>
     </section>
@@ -424,38 +272,81 @@
     </div>
 
 
+
+    <?php
+      session_start();
+      include '../../database/db.php';
+
+      // Fetch the latest upcoming bid
+      $query = "
+          SELECT 
+              CONCAT(i.colour, ' ', i.type) AS stone_name, 
+              i.image AS stone_image, 
+              b.startingBid, 
+              b.startDate, 
+              b.finishDate
+          FROM 
+              biddingstone b
+          JOIN 
+              inventory i 
+          ON 
+              b.stone_id = i.stone_id
+          WHERE 
+              b.startDate > NOW()
+          ORDER BY 
+              b.startDate ASC
+          LIMIT 1
+      ";
+
+      $result = $conn->query($query);
+
+      if (!$result || $result->num_rows === 0) {
+          die("No upcoming bids found.");
+      }
+
+      $row = $result->fetch_assoc();
+
+      $startDateStr = $row['startDate'];
+      $now = new DateTime();
+      $startDate = new DateTime($row['startDate']);
+      $isAuctionStarted = $now >= $startDate; // Checks if auction has already started
+      ?>
+
     <!-- #OFFER -->
     <section class="section offer" id="offer" aria-label="offer" data-section>
-      <div class="container">
-  
-          <figure class="offer-banner">
-              <img src="../../assets/images/stone9.jpg" width="600" height="750" loading="lazy" alt="New bid starting">
-          </figure>
-  
-          <div class="offer-content">
-              <p class="offer-subtitle">
+    <div class="container">
+        <figure class="offer-banner">
+            <img src="../../assets/images/<?php echo htmlspecialchars($row['stone_image']); ?>" 
+                 width="600" height="750" loading="lazy" 
+                 alt="<?php echo htmlspecialchars($row['stone_name']); ?>">
+        </figure>
+
+        <div class="offer-content">
+            <p class="offer-subtitle">
                 <span class="span">New Bid Starting</span>
-                <span class="badge" aria-label="Starting on August 25th, 2024">Starting on Aug 25, 2024</span>
-              </p>
-  
-              <h2 class="h2-large section-title">Rare Red Sapphire Auction</h2>
-  
-              <p class="section-text">
-                Participate in our exclusive auction for a rare, unheated rlue sapphire. Bidding starts at $500. Don't miss your chance to own this stunning gemstone.
-              </p>
-  
-              <div class="countdown">
-                <span class="time" aria-label="days">05</span>
-                <span class="time" aria-label="hours">12</span>
-                <span class="time" aria-label="minutes">34</span>
-                <span class="time" aria-label="seconds">56</span>
-              </div>
-  
-              <a href="../bidding/bidding.php" class="btn btn-primary">Join the Bid</a>
-          </div>
-  
-      </div>
-  </section>
+                <span class="badge" aria-label="Starting on <?php echo $startDate->format('d M Y H:i'); ?>">
+                    Starting on <?php echo $startDate->format('d M Y H:i'); ?>
+                </span>
+            </p>
+
+            <h2 class="h2-large section-title"><?php echo htmlspecialchars($row['stone_name']); ?> Auction</h2>
+
+            <p class="section-text">
+                Participate in our exclusive auction for this stunning gemstone. Bidding starts at 
+                Rs.<?php echo number_format($row['startingBid'], 2); ?>. Don't miss your chance to own this unique treasure.
+            </p>
+
+            <div class="countdown">
+                <span class="time" aria-label="days">--</span>
+                <span class="time" aria-label="hours">--</span>
+                <span class="time" aria-label="minutes">--</span>
+                <span class="time" aria-label="seconds">--</span>
+            </div>
+
+            <a href="../bidding/upcomingBids.php?id=<?php echo $row['biddingStone_id']; ?>" class="btn btn-primary">Join the Bid</a>
+        </div>
+    </div>
+</section>
 
 
     <!-- timeline -->
@@ -609,6 +500,35 @@
   <script src="../../components/header/header.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <script>
+    const auctionStartTime = new Date("<?php echo $startDateStr; ?>").getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const timeLeft = auctionStartTime - now;
+
+        if (timeLeft <= 0) {
+            document.querySelector(".countdown").innerHTML = "Auction has started";
+            return;
+        }
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.querySelector(".countdown").innerHTML = `
+            <span class="time" aria-label="days">${days}</span>
+            <span class="time" aria-label="hours">${hours}</span>
+            <span class="time" aria-label="minutes">${minutes}</span>
+            <span class="time" aria-label="seconds">${seconds}</span>
+        `;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    </script>
 
 </body>
 

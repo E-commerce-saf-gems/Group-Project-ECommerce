@@ -46,7 +46,7 @@ class Header extends HTMLElement {
 
         
 
-            <a href="../homepage/homepage.html" class="logo">
+            <a href="../homepage/homepage.php" class="logo">
               <img src="../../assets/images/logo.png" width="179" height="26" alt="SAF GEMS">
             </a>
 
@@ -69,7 +69,7 @@ class Header extends HTMLElement {
 
             <nav class="navbar">
               <ul class="navbar-list">
-                <li><a href="../homepage/homepage.html" class="navbar-link has-after">Home</a></li>
+                <li><a href="../homepage/homepage.php" class="navbar-link has-after">Home</a></li>
                 <li class="dropdown">
                   <a class="navbar-link dropdown-toggle" data-nav-link>Shop</a>
                   <ul class="dropdown-menu">

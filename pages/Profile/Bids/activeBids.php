@@ -5,6 +5,7 @@ $customer_id = $_SESSION['customer_id'];
 include '../../../database/db.php';  // Your database connection file
 
 // Get the current date and time
+date_default_timezone_set('Asia/Kolkata');
 $currentDateTime = date('Y-m-d H:i:s');
 
 // Get the specific biddingstone details (for the selected bidding stone)

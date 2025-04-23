@@ -111,7 +111,7 @@ $completedResult = $conn->query($completedQuery);
             <div class="bids-wrapper">
                 <!-- My Active Bids -->
                 <div class="bids-box">
-                    <h3 class="mybids-text"><span class="dot blue"></span> My Bids</h3>
+                    <h3 class="mybids-text"><span class="dot blue"></span> My Ongoing Bids</h3>
                     <div class="bids-table-wrapper">
                         <table class="bids-table">
                             <thead>

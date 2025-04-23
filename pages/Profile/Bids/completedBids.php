@@ -5,6 +5,7 @@ $customer_id = $_SESSION['customer_id'];
 include '../../../database/db.php';
 
 // Get the current date and time
+date_default_timezone_set('Asia/Kolkata');
 $currentDateTime = date('Y-m-d H:i:s');
 
 // Get the specific biddingstone details (completed one)
@@ -32,6 +33,8 @@ $bidsQuery = "
     ORDER BY b.time DESC
 ";
 $bidsResult = $conn->query($bidsQuery);
+
+$purchaseDeadline = date('Y-m-d H:i:s', strtotime($biddingStone['finishDate'] . ' +7 days'));
 
 ?>
 
@@ -97,10 +100,10 @@ $bidsResult = $conn->query($bidsQuery);
                             <div><strong>Stone ID:</strong> <span class="info-value"><?= $biddingStone['stone_id'] ?></span></div>
                             <div><strong>Starting Bid:</strong> <span class="info-value"><?= number_format($biddingStone['startingBid']) ?></span></div>
                             <div><strong>Start Date:</strong> <span class="info-value"><?= $biddingStone['startDate'] ?></span></div>
+                            <div><strong>End Date:</strong> <span class="info-value"><?= $biddingStone['finishDate'] ?></span></div>
                         </div>
 
                         <div class="bid-info">
-                            <div><strong>End Date:</strong> <span class="info-value"><?= $biddingStone['finishDate'] ?></span></div>
                             <div><strong>Highest Bid:</strong> <span class="info-value"><?= number_format($biddingStone['highestBid']) ?></span></div>
                             <div><strong>Overall Status</strong> 
                                 <?php if ($isWinner): ?>
@@ -109,11 +112,19 @@ $bidsResult = $conn->query($bidsQuery);
                                     <span class="info-value bid-result loss">Loss</span>
                                 <?php endif; ?>
                             </div>
-
                             <?php if ($isWinner): ?>
+                                <div class="countdown-timer">
+                                      <strong>Time left to purchase:</strong> 
+                                      <span id="countdown"></span>
+                                  </div>
                                 <div>
                                     <a href="../../Stones/addToCart.php?stone_id=<?= $biddingStone['stone_id'] ?>" class="bid-now-button">Add To Cart</a>
                                 </div>
+                                <p>
+                                    Please note: You must complete the purchase within <strong>7 days</strong>
+                                    of winning the bid. If you fail to do so, the stone will be <strong>revoked</strong>.
+                                    Repeated failure (twice) to complete purchases will result in <strong>disqualification from future bids</strong>.
+                                </p>
                             <?php endif; ?>
                         </div>
                     </div>

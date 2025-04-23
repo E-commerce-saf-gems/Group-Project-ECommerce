@@ -196,7 +196,6 @@ function updateCountdown() {
     if (timeLeft <= 0) {
         document.getElementById("countdown").innerHTML = "Auction has ended";
         
-        // Hide or disable bid form
         const bidFormWrapper = document.querySelector(".bid-form-wrapper");
         if (bidFormWrapper) {
             bidFormWrapper.innerHTML = "<p style='color: red;'>This auction has ended.</p>";

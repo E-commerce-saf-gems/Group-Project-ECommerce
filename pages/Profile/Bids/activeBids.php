@@ -8,12 +8,11 @@ include '../../../database/db.php';  // Your database connection file
 date_default_timezone_set('Asia/Kolkata');
 $currentDateTime = date('Y-m-d H:i:s');
 
-// Get the specific biddingstone details (for the selected bidding stone)
-$biddingStoneId = $_GET['id']; // Get bidding stone ID from URL query string
+$biddingStoneId = $_GET['id']; 
 $biddingStoneQuery = "
     SELECT bs.*, 
            inv.type, inv.colour, inv.shape, inv.origin, inv.description, inv.size, inv.image,
-           (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) AS highestBid
+           (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id AND validity='valid') AS highestBid
     FROM biddingstone bs
     JOIN inventory inv ON bs.stone_id = inv.stone_id
     WHERE bs.biddingStone_id = $biddingStoneId
@@ -24,13 +23,25 @@ $biddingStone = $biddingStoneResult->fetch_assoc();
 
 // Get all the bids for this bidding stone
 $bidsQuery = "
-    SELECT b.bid_id, b.amount,b.validity, b.time, c.firstName AS bidderName
+    SELECT b.bid_id,b.validity, b.amount,b.validity, b.time, c.firstName AS bidderName
     FROM bid b
     INNER JOIN customer c ON b.customer_id = c.customer_id
     WHERE b.biddingStone_id = $biddingStoneId
     ORDER BY b.time DESC
 ";
 $bidsResult = $conn->query($bidsQuery);
+
+// Get the current user's highest valid bid for this stone
+$userBidQuery = "
+    SELECT MAX(amount) AS userHighestBid 
+    FROM bid 
+    WHERE biddingStone_id = $biddingStoneId 
+      AND customer_id = $customer_id 
+      AND validity = 'valid'
+";
+$userBidResult = $conn->query($userBidQuery);
+$userBid = $userBidResult->fetch_assoc();
+$userHighestBid = $userBid['userHighestBid'] ?? 0;
 
 ?>
 
@@ -105,13 +116,41 @@ $bidsResult = $conn->query($bidsQuery);
                               ?></span></div>
                             <div><strong>Description:</strong> <span class="info-value"><?= $biddingStone['description'] ?></span></div>
                             <div><strong>Starting Bid:</strong> <span class="info-value"><?= number_format($biddingStone['startingBid']) ?></span></div>
+                            <div><strong>Start Date:</strong> <span class="info-value"><?= $biddingStone['startDate'] ?></span></div>
+                            <div><strong>End Date:</strong> <span class="info-value"><?= $biddingStone['finishDate'] ?></span></div>
                         </div>
 
                         <div class="bid-info">
-                            <div><strong>Start Date:</strong> <span class="info-value"><?= $biddingStone['startDate'] ?></span></div>
-                            <div><strong>End Date:</strong> <span class="info-value"><?= $biddingStone['finishDate'] ?></span></div>
-                            <div><strong>Time Left:</strong> <span class="info-value">1d 3h</span></div>
-                            <div><strong>Current Highest:</strong> <span class="info-value"><?= number_format($biddingStone['highestBid']) ?></span></div>
+                            <?php
+                              // Calculate the time left between current time and finish date
+                              $finishDate = $biddingStone['finishDate'];
+                              $timeLeft = date_diff(date_create($currentDateTime), date_create($finishDate));
+                              
+                              // Format the time left (only Days, Hours, and Minutes)
+                              $timeLeftFormatted = $timeLeft->invert ? 'Expired' : $timeLeft->format('%dD %hH %iM');
+                            ?>
+                            <div><strong>Time Left:</strong> <span class="info-value"><?= $timeLeftFormatted ?></span></div>
+                            <div><strong>Current Highest:</strong> <span class="info-value bid-result none"><?= number_format($biddingStone['highestBid']) ?></span></div>
+                            <div>
+                              <strong>Your Current Highest:</strong>
+                              <span class="info-value">
+                                <?php if ($userHighestBid): ?>
+                                  <?php if ($userHighestBid < $biddingStone['highestBid']): ?>
+                                    <span class="bid-result loss"><?= number_format($userHighestBid) ?></span>
+                                    <span class="bid-result-difference loss">
+                                      <i class='bx bx-chevrons-down'></i><?= number_format($biddingStone['highestBid'] - $userHighestBid) ?>
+                                    </span>
+                                  <?php else: ?>
+                                    <span class="bid-result win"><?= number_format($userHighestBid) ?></span>
+                                  <?php endif; ?>
+                                <?php else: ?>
+                                  <span class="bid-result">No valid bids yet</span>
+                                <?php endif; ?>
+                              </span>
+                            </div>
+                            <div>
+                                    <a href="../../bidding/bidding-itemPage.php?id=<?= $biddingStone['biddingStone_id'] ?>" class="bid-now-button">Bid Now</a>
+                                  </div>
                         </div>
                     </div>
                 </div>
@@ -125,6 +164,7 @@ $bidsResult = $conn->query($bidsQuery);
                             <th>Time</th>
                             <th>Value</th>
                             <th>Bidder Name</th>
+                            <th>Validity</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -150,6 +190,17 @@ $bidsResult = $conn->query($bidsQuery);
                                       <?php endif; ?>
                                   </td>
                                   <td><?= $row['bidderName'] ?></td>
+                                  <td>
+                                      <?php if($row['validity'] == 'invalid'): ?> 
+                                        <span class="bid-result loss">
+                                          <?= $row['validity'] ?>
+                                        </span>
+                                      <?php else: ?>
+                                        <span class="bid-result win">
+                                          <?= $row['validity'] ?>
+                                        </span>
+                                      <?php endif; ?>
+                                  </td>
                               </tr>
                           <?php
                               $previousAmount = $currentAmount; // Update for next loop

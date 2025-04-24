@@ -11,7 +11,7 @@ $myBidsQuery = "
     SELECT bs.*, 
            i.image, CONCAT (i.size, 'crt ' ,i.colour, '  ', i.type) as stone,
            (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id AND customer_id = $customer_id) AS myHighestBid,
-           (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) AS highestBid
+           (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id AND validity='valid') AS highestBid
     FROM biddingstone bs
     JOIN inventory i ON bs.stone_id = i.stone_id
     WHERE bs.startDate <= '$currentDateTime' 
@@ -29,7 +29,7 @@ $myBidsResult = $conn->query($myBidsQuery);
 $liveBidsQuery = "
     SELECT bs.*, 
            i.image, CONCAT (i.size, 'crt  ' ,i.colour, '  ', i.type) as stone,
-           (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) as highestBid
+           (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id AND validity='valid') as highestBid
     FROM biddingstone bs
     JOIN inventory i ON bs.stone_id = i.stone_id
     WHERE bs.startDate <= '$currentDateTime' AND bs.finishDate > '$currentDateTime'
@@ -47,9 +47,9 @@ $upcomingResult = $conn->query($upcomingQuery);
 $completedQuery = "
     SELECT bs.*, 
            i.image, CONCAT (i.size, 'crt  ' ,i.colour, '  ', i.type) as stone,
-           (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) as finalValue,
+           (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id AND validity='valid') as finalValue,
            (CASE 
-                WHEN (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id AND bs.customer_id = $customer_id) = (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id) 
+                WHEN (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id AND bs.customer_id = $customer_id) = (SELECT MAX(amount) FROM bid WHERE biddingStone_id = bs.biddingStone_id AND validity='valid') 
                 THEN 'Win' ELSE 'Loss' 
             END) as result
     FROM biddingstone bs
@@ -91,7 +91,7 @@ $completedResult = $conn->query($completedQuery);
             <h2>Hello</h2>
             <ul>
                 <li><a href="../Details/MyDetails.php">My Details</a></li>
-                <li><a href="../Bids/MyBids.html" class="active">My Bids</a></li>
+                <li><a href="../Bids/MyBids.php" class="active">My Bids</a></li>
                 <li><a href="../Wishlist/MyWishlist.html">My Wishlist</a></li>
                 <li><a href="../Sales/MySales.html">My Sales</a></li>
                 <li><a href="../Meetings/MyMeetings.php">My Meetings</a></li>

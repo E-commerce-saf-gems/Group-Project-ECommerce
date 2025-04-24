@@ -34,7 +34,8 @@ $bookedResult = $bookedStmt->get_result();
 $bookedTime = $bookedResult->fetch_assoc();
 
 // Fetch available time slots (those with 'available' status)
-$timeSlotsQuery = "SELECT availableTimes_id, date, time FROM availabletimes WHERE availability = 'available'";
+$timeSlotsQuery = "SELECT availableTimes_id, date, time FROM availabletimes WHERE availability = 'available'AND CONCAT(date, ' ', time) >= NOW()     /*hide past time slots*/
+                        ORDER BY date, time";
 $timeSlotsResult = $conn->query($timeSlotsQuery);
 
 // Close the statement for meeting details
@@ -49,13 +50,15 @@ $bookedStmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../styles/common.css">
     <link rel="stylesheet" href="../profile.css">
+    <link rel="stylesheet" href="./bids.css">
     <link rel="stylesheet" href="../../../components/profileHeader/header.css">
     <link rel="stylesheet" href="../../../components/footer/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="preload" as="image" href="../../../assets/images/logo.png">
+
     <title>Edit Meeting</title>
 </head>
 <body>
@@ -117,5 +120,11 @@ $bookedStmt->close();
 // Close database connection
 $conn->close();
 ?>
+
+<script src="../../../components/profileHeader/header.js"></script>
+    <script src="../../components/footer/footer.js"></script>
+    <script src="./profile.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

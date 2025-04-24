@@ -31,7 +31,7 @@ $result = $conn->query($sql);
 </head>
 <body>
     <custom-header></custom-header>
-    <div class="profile-container profile-h1">
+    <div class="profile-container profile-h2">
         <div class="profile-sidebar">
             <h2>Hello</h2>
             <ul>
@@ -73,11 +73,10 @@ if ($result->num_rows > 0) {
         ];
         $statusFullWord = $statusMap[$row['status']] ?? 'Unknown'; // Default to 'Unknown' if status is unrecognized
 
-        // Map type codes to full words
-        $typeFullWord = $row['type'] === 'on' ? 'Online' : ($row['type'] === 'ph' ? 'Physical' : 'Unknown');
+        
 
         echo "<tr>
-                <td>{$typeFullWord}</td>
+                <td>{$row['type']}</td>
                 <td>{$row['date']}</td>
                 <td>{$row['time']}</td>
                 <td>{$row['email']}</td>
@@ -113,5 +112,9 @@ if ($result->num_rows > 0) {
         }
     </script>
     <script src="../../../components/profileHeader/header.js"></script>
+    <script src="../../components/footer/footer.js"></script>
+    <script src="./profile.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

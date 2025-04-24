@@ -17,7 +17,7 @@
 <body>
     <custom-header></custom-header>
 
-    <div class="profile-container profile-h1">
+    <div class="profile-container profile-h2">
         <div class="profile-sidebar">
             <h2>Hello</h2>
             <ul>
@@ -28,7 +28,6 @@
                 <li><a href="../Requests/MyRequest.php">Requests</a></li>
             </ul>
         </div>
-        
                  <!-- Main Content -->
                 <div class="main-content">
                     <h1>My Account</h1>

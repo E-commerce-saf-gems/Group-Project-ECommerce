@@ -22,7 +22,7 @@
 <body>
     <custom-header></custom-header>
 
-    <div class="profile-container profile-h1">
+    <div class="profile-container profile-h2">
         <div class="profile-sidebar">
             <h2>Hello</h2>
             <ul>

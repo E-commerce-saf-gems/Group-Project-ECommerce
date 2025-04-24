@@ -50,13 +50,16 @@ class Header extends HTMLElement {
               <img src="../../assets/images/logo.png" width="179" height="26" alt="SAF GEMS">
             </a>
 
-            <div class="header-actions">
-              <div class="dropdown">
-                <button class="header-action-btn dropdown-toggle" aria-label="user" data-nav-link>
-                  <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
-                </button>
-                ${isLoggedIn ? loggedInMenu : loggedOutMenu}
-              </div>
+        <div class="header-actions">
+          <div class="dropdown">
+            <button class="header-action-btn dropdown-toggle" aria-label="user" data-nav-link>
+              <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+            </button>
+            <ul class="dropdown-menu">
+                    <li><a href="../../pages/Profile/Details/MyDetails.php" class="dropdown-item">Profile</a></li>
+                    <li><a href="#" class="dropdown-item" id="logout">Logout</a></li>
+            </ul>
+          </div>
 
               <a href="../cart/cart.php">
                 <button class="header-action-btn" aria-label="cart item">

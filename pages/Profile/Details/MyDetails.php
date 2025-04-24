@@ -65,11 +65,11 @@ $conn->close();
     <title>My Details</title>
 </head>
 <body>
-    <custom-header></custom-header>
+<custom-header></custom-header>
 
-    <div class="profile-container profile-h1">
+<div class="profile-container profile-h2">
         <div class="profile-sidebar">
-            <h2 class="profile-h1">Hello</h2>
+            <h2>Hello</h2>
             <ul>
                 <li><a href="../Details/MyDetails.php" class="active">My Details</a></li>
                 <li><a href="../Bids/MyBids.php">My Bids</a></li>
@@ -165,9 +165,9 @@ $conn->close();
     </div> 
 
     <script src="../../../components/profileHeader/header.js"></script>
-    <script src="../../../components/footer/footer.js"></script>
-    <script src="../profile.js"></script>
+    <script src="../../components/footer/footer.js"></script>
+    <script src="./profile.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

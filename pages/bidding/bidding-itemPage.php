@@ -19,7 +19,7 @@ if (isset($_POST['submit_bid']) && isset($_SESSION['customer_id'])) {
         $conn->begin_transaction();
 
         try {
-            $lockQuery = "SELECT MAX(amount) AS highestBid FROM bid WHERE biddingStone_id = $biddingStoneId FOR UPDATE";
+            $lockQuery = "SELECT MAX(amount) AS highestBid FROM bid WHERE biddingStone_id = $biddingStoneId and bid.validity='valid' FOR UPDATE";
             $lockResult = $conn->query($lockQuery);
             $lockRow = $lockResult->fetch_assoc();
             $currentHighest = $lockRow['highestBid'] ? floatval($lockRow['highestBid']) : 0;
@@ -77,6 +77,7 @@ $highestBidQuery = "
     SELECT MAX(amount) AS highestBid
     FROM bid
     WHERE biddingStone_id = $biddingStoneId
+      AND validity = 'valid'
 ";
 $highestBidResult = $conn->query($highestBidQuery);
 $highestBidRow = $highestBidResult->fetch_assoc();
@@ -243,7 +244,7 @@ function incrementBid(amount) {
     let currentValue = bidInput.value ? parseFloat(bidInput.value) : currentHighestBid + 1000;
     let newValue = currentValue <= currentHighestBid ? currentHighestBid + amount : currentValue + amount;
     bidInput.value = newValue;
-    if (parseFloat(bidInput.value) <= currentHighestBid) {
+    if (parseFloat(bidInput.value) <= HighestBidcurrent) {
         bidInput.value = currentHighestBid + 1000;
     }
 }

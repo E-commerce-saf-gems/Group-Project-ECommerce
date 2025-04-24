@@ -10,6 +10,7 @@ if ($biddingStoneId <= 0) {
 
 $query = "
     SELECT 
+        i.*,
         CONCAT(i.colour, ' ', i.type) AS stone_name, 
         i.image AS stone_image, 
         b.startingBid, 
@@ -94,6 +95,31 @@ $isAuctionStarted = $now >= $startDate; // Checks if auction has already started
             <?php endif; ?>
         </div>
     </div>
+    <div class="stone-details">
+            <h3>Stone Details</h3>
+            <table>
+                <tr>
+                    <th>Stone: </th>
+                    <td><?php echo htmlspecialchars($row['stone_name']); ?></td>
+                </tr>
+                <tr>
+                    <th>Size: </th>
+                    <td><?php echo htmlspecialchars($row['size']); ?> Crt</td>
+                </tr>
+                <tr>
+                    <th>Shape: </th>
+                    <td><?php echo htmlspecialchars($row['shape']); ?></td>
+                </tr>
+                <tr>
+                    <th>Origin: </th>
+                    <td><?php echo htmlspecialchars($row['origin']); ?></td>
+                </tr>
+                <tr>
+                    <th>Description:   </th>
+                    <td><?php echo htmlspecialchars($row['description']); ?></td>
+                </tr>
+            </table>
+        </div>
 </div>
 
 <custom-footer></custom-footer>

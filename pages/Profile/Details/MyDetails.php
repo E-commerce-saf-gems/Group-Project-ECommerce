@@ -73,22 +73,16 @@ $conn->close();
             <ul>
                 <li><a href="../Details/MyDetails.php" class="active">My Details</a></li>
                 <li><a href="../Bids/MyBids.php">My Bids</a></li>
-                <li><a href="../Wishlist/MyWishlist.html">My Wishlist</a></li>
                 <li><a href="../Sales/MySales.html">My Sales</a></li>
                 <li><a href="../Meetings/MyMeetings.php">My Meetings</a></li>
                 <li><a href="../Purchases/MyPurchases.php">Purchases</a></li>
                 <li><a href="../Requests/MyRequest.php">Requests</a></li>
-                <li><a href="../Emails/MyEmails.html">Email Preferences</a></li>
-                <li><a href="../../Login/logout.php">Signout</a></li>
             </ul>
         </div>
         
         <div class="main-content">
             <h1 class="h1">My Account</h1>
             <h2 class="h2">My Details</h2>
-            
-           
-            
            <form class="details-form" method="POST" action="editDetails.php">
                 <div class="form-group">
                     <label for="firstName">First Name</label>

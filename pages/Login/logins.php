@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_now_btn'])) {
             ]);
 
             // Redirect to homepage
-            header("Location: ../homepage/homepage.html");
+            header("Location: ../homepage/homepage.php");
             exit();
         } else {
             // Invalid password

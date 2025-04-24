@@ -30,7 +30,7 @@ class Header extends HTMLElement {
       <header class="header">
         <div class="alert">
           <div class="container">
-            <a href="../bidding/bidding-itemPage.html">
+            <a href="../bidding/bidding-itemPage.php">
               <p class="alert-text">Biddings Now Going On <u>Bid Now</u></p>
             </a>
           </div>
@@ -44,14 +44,9 @@ class Header extends HTMLElement {
               <span class="line line-3"></span>
             </button>
 
-            <div class="input-wrapper">
-              <input type="search" name="search" placeholder="Search product" class="search-field">
-              <button class="search-submit" aria-label="search">
-                <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
-              </button>
-            </div>
+        
 
-            <a href="../homepage/homepage.html" class="logo">
+            <a href="../homepage/homepage.php" class="logo">
               <img src="../../assets/images/logo.png" width="179" height="26" alt="SAF GEMS">
             </a>
 
@@ -74,7 +69,7 @@ class Header extends HTMLElement {
 
             <nav class="navbar">
               <ul class="navbar-list">
-                <li><a href="../homepage/homepage.html" class="navbar-link has-after">Home</a></li>
+                <li><a href="../homepage/homepage.php" class="navbar-link has-after">Home</a></li>
                 <li class="dropdown">
                   <a class="navbar-link dropdown-toggle" data-nav-link>Shop</a>
                   <ul class="dropdown-menu">

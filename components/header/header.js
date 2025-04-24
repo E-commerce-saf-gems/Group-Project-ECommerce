@@ -79,7 +79,7 @@ class Header extends HTMLElement {
                   <a class="navbar-link dropdown-toggle" data-nav-link>Shop</a>
                   <ul class="dropdown-menu">
                     <li><a href="../Stones/StonesHomePage.php" class="dropdown-item">Buy Stones</a></li>
-                    <li><a href="../bidding/bidding.html" class="dropdown-item">Bid</a></li>
+                    <li><a href="../bidding/bidding.php" class="dropdown-item">Bid</a></li>
                   </ul>
                 </li>
                 <li><a href="../aboutPage/about.html" class="navbar-link has-after">About Us</a></li>

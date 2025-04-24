@@ -47,7 +47,7 @@ if (isset($_GET['id'])) {
         <div class="profile-sidebar">
             <h2>Hello</h2>
             <ul>
-            <li><a href="../Bids/MyBids.html">My Bids</a></li>
+            <li><a href="../Bids/MyBids.php">My Bids</a></li>
                 <li><a href="../Wishlist/MyWishlist.html" >My Wishlist</a></li>
                 <li><a href="../Sales/MySales.html">My Sales</a></li>
                 <li><a href="../Meetings/MyMeetings.php">My Meetings</a></li>

@@ -72,7 +72,7 @@ $conn->close();
             <h2 class="profile-h1">Hello</h2>
             <ul>
                 <li><a href="../Details/MyDetails.php" class="active">My Details</a></li>
-                <li><a href="../Bids/MyBids.html">My Bids</a></li>
+                <li><a href="../Bids/MyBids.php">My Bids</a></li>
                 <li><a href="../Wishlist/MyWishlist.html">My Wishlist</a></li>
                 <li><a href="../Sales/MySales.html">My Sales</a></li>
                 <li><a href="../Meetings/MyMeetings.php">My Meetings</a></li>

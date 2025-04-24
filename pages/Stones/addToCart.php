@@ -27,7 +27,7 @@ if ($biddingRow) {
     $biddingStone_id = $biddingRow['biddingStone_id'];
 
     // Step 2: Get the highest bid
-    $bidQuery = "SELECT MAX(amount) AS highestBid FROM bid WHERE biddingStone_id = ?";
+    $bidQuery = "SELECT MAX(amount) AS highestBid FROM bid WHERE biddingStone_id = ? AND validity='valid'";
     $bidStmt = $conn->prepare($bidQuery);
     $bidStmt->bind_param("i", $biddingStone_id);
     $bidStmt->execute();

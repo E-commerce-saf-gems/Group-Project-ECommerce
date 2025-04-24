@@ -36,7 +36,7 @@ $result = $conn->query($sql);
             <h2>Hello</h2>
             <ul>
                 <li><a href="../Details/MyDetails.php">My Details</a></li>
-                <li><a href="../MyBids.html">My Bids</a></li>
+                <li><a href="../MyBids.php">My Bids</a></li>
                 <li><a href="../MyWishlist.html">My Wishlist</a></li>
                 <li><a href="../MySales.html">My Sales</a></li>
                 <li><a href="../MyMeetings.php" class="active">My Meetings</a></li>

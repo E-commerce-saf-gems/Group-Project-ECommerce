@@ -6,7 +6,6 @@ $ssql = "
     SELECT 
         b.biddingStone_id, 
         b.startingBid, 
-        b.currentBid, 
         b.startDate, 
         b.finishDate, 
         i.size AS size,
@@ -245,7 +244,6 @@ if (!$result) {
                 <h3><?php echo htmlspecialchars($row['colour']); ?></h3>
                 <h3><?php echo htmlspecialchars($row['type']); ?></h3>
                 <h4><?php echo htmlspecialchars($row['origin']); ?></h4>
-                <div class="price">Current Bid: Rs.<?php echo number_format($row['currentBid'], 2); ?></div>
                 <div class="days-left">
                     <ion-icon name="timer-outline" aria-hidden="true"></ion-icon>
                     <span>

@@ -35,16 +35,10 @@ this.innerHTML = `
             </ul>
           </div>
 
-          <button class="header-action-btn" aria-label="favourite item">
-            <ion-icon name="star-outline" aria-hidden="true"></ion-icon>
-            <span class="btn-badge">0</span>
-          </button>
-
           <a href="../../cart/cart.php">
             <button class="header-action-btn" aria-label="cart item">
               <data class="btn-text" value="0"></data>
               <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-              <span class="btn-badge">3</span>
             </button>                
           </a>
         </div> 

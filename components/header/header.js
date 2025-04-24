@@ -65,7 +65,6 @@ class Header extends HTMLElement {
                 <button class="header-action-btn" aria-label="cart item">
                   <data class="btn-text" value="0"></data>
                   <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                  <span class="btn-badge">3</span>
                 </button>
               </a>
             </div>

@@ -161,14 +161,14 @@ if (!$result) {
                 alt="<?php echo htmlspecialchars($row['type']); ?>" 
                 style="width: 200px; height: 200px; object-fit: cover;">
 
-                    <div class="card-actions">
+                    <!-- <div class="card-actions">
                         <button class="action-btn btn" aria-label="bid now">
                             <ion-icon name="hammer-outline" aria-hidden="true"></ion-icon>
                         </button>
                         <button class="action-btn btn" aria-label="view more">
                             <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
                         </button>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="card-content">
                     <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['type']); ?></a></h3>

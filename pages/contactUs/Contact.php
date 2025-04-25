@@ -115,12 +115,12 @@
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" autocomplete="off">
           <h3 class="title">Contact us</h3>
           <div class="input-container">
-            <input type="email" name="email" class="input" value="<?php echo htmlspecialchars($email); ?>" required />
+            <input type="email" name="email" class="input" value="<?php echo htmlspecialchars($email); ?>" required pattern="/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address"/>
             <label for="email">Email</label>
             <span>Email</span>
           </div>
           <div class="input-container">
-            <input type="tel" name="phone" class="input" value="<?php echo htmlspecialchars($phone); ?>" required />
+            <input type="tel" name="phone" id="phone" class="input" value="<?php echo htmlspecialchars($phone); ?>" required pattern="^\d{10}$" title="Please enter a 10-digit phone number" />
             <label for="phone">Phone</label>
             <span>Phone</span>
           </div>

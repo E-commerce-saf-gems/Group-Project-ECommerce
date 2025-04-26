@@ -114,10 +114,6 @@ $total_usd = number_format($total_amount * $exchange_rate, 2, '.', '');
 
             <input type="hidden" id="total_amount" value="<?php echo $total_usd; ?>">
 
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Proceed to Checkout</button>
-            </div>
-
             <div id="paypal-button-container"></div>
         </form>
     </main>

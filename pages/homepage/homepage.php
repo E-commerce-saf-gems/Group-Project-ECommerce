@@ -174,15 +174,6 @@ include '../../database/db.php';
                     <?php if (!empty($row['amount']) && $row['amount'] < 2000): ?>
                       <span class="badge" aria-label="discount available">-10%</span>
                     <?php endif; ?>
-
-                    <div class="card-actions">
-                      <button class="action-btn" aria-label="add to cart">
-                        <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                      </button>
-                      <button class="action-btn" aria-label="add to wishlist">
-                        <ion-icon name="star-outline" aria-hidden="true"></ion-icon>
-                      </button>
-                    </div>
                   </div>
 
                   <div class="card-content">

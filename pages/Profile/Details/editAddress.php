@@ -55,7 +55,7 @@ $conn->close();
             <h2>Hello</h2>
             <ul>
                 <li><a href="../Details/MyDetails.php">My Details</a></li>
-                <li><a href="../Bids/MyBids.html" class="active">My Bids</a></li>
+                <li><a href="../Bids/MyBids.php" class="active">My Bids</a></li>
                 <li><a href="../Meetings/MyMeetings.php">My Meetings</a></li>
                 <li><a href="../Purchases/MyPurchases.html">Purchases</a></li>
                 <li><a href="../Requests/MyRequest.php">Requests</a></li>

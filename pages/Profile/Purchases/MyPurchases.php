@@ -26,6 +26,7 @@
                 <li><a href="../Meetings/MyMeetings.php">My Meetings</a></li>
                 <li><a href="../Purchases/MyPurchases.php" class="active">Purchases</a></li>
                 <li><a href="../Requests/MyRequest.php">Requests</a></li>
+                <li><a href="../../Login/logout.php">Signout</a></li>
             </ul>
         </div>
                  <!-- Main Content -->
@@ -66,8 +67,8 @@
                                             <td>" . $row['shipping_method'] . "</td>
                                             <td>" . $row['pickup_date'] . "</td>
                                             <td>" . $row['payment_method'] . "</td>
-                                            <td>LKR " . number_format($row['total_amount'], 2) . " </td>
                                             <td>" . $row['order_status'] . "</td>
+                                            <td>LKR " . number_format($row['total_amount'], 2) . " </td>
                                             <td class='actions'>";
                 
                                     if ($row['order_status'] === 'pending') {

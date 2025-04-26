@@ -596,7 +596,7 @@ body {
 }
 
 .hero-text {
-  font-size: var(--fs-6);
+  font-size: var(--fs-4);
   margin-block: 16px 30px;
 }
 
@@ -622,7 +622,7 @@ body {
   margin: 0 20px;
 }
 .stones-description {
-  font-size: 1em;
+  font-size: 1.3em;
   color: #555;
   max-width: 600px;
   line-height: 1.5;

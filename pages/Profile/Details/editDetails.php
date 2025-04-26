@@ -93,7 +93,8 @@ $conn->close();
             </div>
             <div class="details-form">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($Email); ?>" required>
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($Email); ?>" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+        title="Please enter a valid email address like name@example.com">
             </div>
             <div class="details-form">
                 <label for="phone">Phone Number</label>

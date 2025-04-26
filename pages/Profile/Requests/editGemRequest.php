@@ -26,6 +26,7 @@ if (isset($_GET['id'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,19 +36,23 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="../../../components/footer/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preload" as="image" href="./assets/images/logo.png">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <title>Edit Request Gems</title>
 </head>
+
 <body>
     <custom-header></custom-header>
     <div class="profile-container profile-h1">
         <div class="profile-sidebar">
             <h2>Hello</h2>
             <ul>
-            <li><a href="../Bids/MyBids.php">My Bids</a></li>
+                <li><a href="../Bids/MyBids.php">My Bids</a></li>
                 <li><a href="../Meetings/MyMeetings.php">My Meetings</a></li>
                 <li><a href="../Purchases/MyPurchases.php">Purchases</a></li>
                 <li><a href="../Requests/MyRequest.php">Requests</a></li>
@@ -64,35 +69,66 @@ if (isset($_GET['id'])) {
 
                     <div class="form-group">
                         <label for="gem-type">Gemstone Type</label>
-                        <input type="text" id="gem-type" name="type" value="<?php echo $row['type']; ?>" placeholder="Diamond, Sapphire, Ruby" required>
+                        <select id="gem-type" name="type" required>
+                            <option value="">Select a Gemstone Type</option>
+                            <option value="Diamond" <?php if ($row['type'] === 'Diamond')
+                                echo 'selected'; ?>>Diamond
+                            </option>
+                            <option value="Sapphire" <?php if ($row['type'] === 'Sapphire')
+                                echo 'selected'; ?>>Sapphire
+                            </option>
+                            <option value="ruby" <?php if ($row['type'] === 'ruby')
+                                echo 'selected'; ?>>Ruby</option>
+                            <option value="emerald" <?php if ($row['type'] === 'emerald')
+                                echo 'selected'; ?>>Emerald
+                            </option>
+                            <option value="Amethyst" <?php if ($row['type'] === 'Amethyst')
+                                echo 'selected'; ?>>Amethyst
+                            </option>
+                        </select>
+                        <small id="gem-type-error" style="color: red;"></small>
                     </div>
 
                     <div class="form-group">
                         <label for="carat-weight">Carat Weight</label>
-                        <input type="number" id="carat-weight" name="weight" value="<?php echo $row['weight']; ?>" step="0.1" min="0.1" required>
+                        <input type="number" id="carat-weight" name="weight" value="<?php echo $row['weight']; ?>"
+                            placeholder="1.5" step="0.1" min="0.1" required>
                     </div>
 
                     <div class="form-group">
                         <label for="shape">Shape</label>
                         <select id="shape" name="shape" required>
                             <option value="">Select a Shape</option>
-                            <option value="round" <?php if ($row['shape'] === 'round') echo 'selected'; ?>>Round</option>
-                            <option value="oval" <?php if ($row['shape'] === 'oval') echo 'selected'; ?>>Oval</option>
-                            <option value="princess" <?php if ($row['shape'] === 'princess') echo 'selected'; ?>>Princess</option>
-                            <option value="emerald" <?php if ($row['shape'] === 'emerald') echo 'selected'; ?>>Emerald</option>
-                            <option value="cushion" <?php if ($row['shape'] === 'cushion') echo 'selected'; ?>>Cushion</option>
-                            <option value="marquise" <?php if ($row['shape'] === 'marquise') echo 'selected'; ?>>Marquise</option>
+                            <option value="round" <?php if ($row['shape'] === 'round')
+                                echo 'selected'; ?>>Round</option>
+                            <option value="oval" <?php if ($row['shape'] === 'oval')
+                                echo 'selected'; ?>>Oval</option>
+                            <option value="princess" <?php if ($row['shape'] === 'princess')
+                                echo 'selected'; ?>>Princess
+                            </option>
+                            <option value="emerald" <?php if ($row['shape'] === 'emerald')
+                                echo 'selected'; ?>>Emerald
+                            </option>
+                            <option value="cushion" <?php if ($row['shape'] === 'cushion')
+                                echo 'selected'; ?>>Cushion
+                            </option>
+                            <option value="marquise" <?php if ($row['shape'] === 'marquise')
+                                echo 'selected'; ?>>Marquise
+                            </option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="color">Color</label>
-                        <input type="text" id="color" name="color" value="<?php echo $row['color']; ?>" placeholder="Aqua, Green" required>
+                        <input type="text" id="color" name="color" value="<?php echo $row['color']; ?>"
+                            placeholder="Aqua, Green" required>
+                        <small id="color-error" style="color: red;"></small>
                     </div>
 
                     <div class="form-group">
                         <label for="special-requirements">Special Requirements</label>
-                        <textarea id="special-requirements" name="requirement" cols="100" rows="10" placeholder="Specify any additional requirements, such as clarity, size dimensions, etc."><?php echo $row['requirement']; ?></textarea>
+                        <textarea id="special-requirements" name="requirement" rows="4"
+                            placeholder="Specify any additional requirements, such as clarity, size dimensions, etc."><?php echo $row['requirement']; ?></textarea>
                     </div>
 
                     <?php if ($row['status'] === 'P') { ?>
@@ -114,8 +150,34 @@ if (isset($_GET['id'])) {
     <script src="../profile.js"></script>
     <script src="../../../components/profileHeader/header.js"></script>
     <script src="../../../components/footer/footer.js"></script>
-    
+
+    <script>
+        document.getElementById('customRequestForm').addEventListener('submit', function (e) {
+            const colorField = document.getElementById('color');
+
+            const colorError = document.getElementById('color-error');
+
+            const regex = /^[A-Za-z]+( [A-Za-z]+)*$/; // Matches alphabetic characters and spaces
+
+            colorError.textContent = '';
+
+            let valid = true;
+
+            if (!regex.test(colorField.value)) {
+                colorError.textContent = 'Enter a valid color name with only alphabetic characters and spaces.';
+                valid = false;
+            }
+
+            if (!valid) {
+                e.preventDefault();
+            }
+
+            return valid;
+        });
+    </script>
+
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>

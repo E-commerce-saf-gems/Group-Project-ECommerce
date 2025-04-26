@@ -88,7 +88,7 @@ $total_usd = number_format($total_amount * $exchange_rate, 2, '.', '');
                 </div>
                 <div class="form-group">
                     <label for="address2">Address Line 2</label>
-                    <input type="text" id="address2" name="address2" value="<?php echo htmlspecialchars($customer_details['address2']); ?>">
+                    <input type="text" id="address2" name="address2" value="<?php echo htmlspecialchars($customer_details['address2']); ?>"> 
                 </div>
                 <div class="form-group">
                     <label for="city">City</label>

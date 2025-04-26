@@ -80,7 +80,7 @@ class Header extends HTMLElement {
                   </ul>
                 </li>
                 <li><a href="../aboutPage/about.html" class="navbar-link has-after">About Us</a></li>
-                <li><a href="../contactUs/Contact.html" class="navbar-link has-after">Contact</a></li>
+                <li><a href="../contactUs/Contact.php" class="navbar-link has-after">Contact</a></li>
               </ul>
             </nav>
           </div>

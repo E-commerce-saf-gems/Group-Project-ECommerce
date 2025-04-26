@@ -157,7 +157,7 @@ if (!$result) {
             <div class="shop-card">
                 <div class="card-banner">
                 <img 
-                src="<?php echo htmlspecialchars('http://localhost/Group-Project-ECommerce/assets/images/' . $row['image']); ?>" 
+                src="<?php echo htmlspecialchars('http://localhost/Business-Dashboard/uploads/' . $row['image']); ?>" 
                 alt="<?php echo htmlspecialchars($row['type']); ?>" 
                 style="width: 200px; height: 200px; object-fit: cover;">
 

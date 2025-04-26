@@ -1,13 +1,15 @@
 class Header extends HTMLElement {
   connectedCallback() {
-// JavaScript to dynamically update the profile dropdown
-const isLoggedIn = localStorage.getItem("loggedInUser");
+    // JavaScript to dynamically update the profile dropdown
+    const isLoggedIn = localStorage.getItem("loggedInUser");
 
-this.innerHTML = `
+    this.innerHTML = `
   <header class="header">
     <div class="alert">
       <div class="container">
-        <p class="alert-text">Biddings Now Going On <u>Bid Now</u></p>
+                    <a href="../bidding/bidding.php">
+              <p class="alert-text">Biddings Now Going On <u>Bid Now</u></p>
+            </a>
       </div>
     </div>
 
@@ -47,14 +49,14 @@ this.innerHTML = `
           <ul class="navbar-list">
             <li><a href="../../homepage/homepage.php" class="navbar-link has-after">Home</a></li>
             <li class="dropdown">
-              <a href="#shop" class="navbar-link dropdown-toggle" data-nav-link>Shop</a>
+              <a href="../../pages/Stones/StonesHomePage.php" class="navbar-link dropdown-toggle" data-nav-link>Shop</a>
               <ul class="dropdown-menu">
                 <li><a href="../../Stones/StonesHomePage.php" class="dropdown-item">Buy Stones</a></li>
                 <li><a href="../../bidding/bidding.php" class="dropdown-item">Bid</a></li>
               </ul>
             </li>
             <li><a href="../../aboutPage/about.html" class="navbar-link has-after">About Us</a></li>
-            <li><a href="#" class="navbar-link has-after">Contact</a></li>
+            <li><a href="../../contactUs/Contact.php" class="navbar-link has-after">Contact</a></li>
           </ul>
         </nav>
       </div>

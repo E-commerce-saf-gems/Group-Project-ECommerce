@@ -80,12 +80,9 @@ $bidsResult = $conn->query($bidsQuery);
             <ul>
                 <li><a href="../Details/MyDetails.php">My Details</a></li>
                 <li><a href="../Bids/MyBids.php" class="active">My Bids</a></li>
-                <li><a href="../Wishlist/MyWishlist.html">My Wishlist</a></li>
-                <li><a href="../Sales/MySales.html">My Sales</a></li>
                 <li><a href="../Meetings/MyMeetings.php">My Meetings</a></li>
                 <li><a href="../Purchases/MyPurchases.php">Purchases</a></li>
                 <li><a href="../Requests/MyRequest.php">Requests</a></li>
-                <li><a href="../Emails/MyEmails.html">Email Preferences</a></li>
                 <li><a href="../../Login/logout.php">Signout</a></li>
             </ul>
         </div>
@@ -98,9 +95,10 @@ $bidsResult = $conn->query($bidsQuery);
           </div>
          <?php endif; ?>
          <?php if ($biddingStoneResult->num_rows >0) :?>
-          <?
-            $purchaseDeadline = date('Y-m-d H:i:s', strtotime($biddingStone['finishDate'] . ' +7 days'));
-          ?>
+          <?php 
+  $purchaseDeadline = date('Y-m-d H:i:s', strtotime($biddingStone['finishDate'] . ' +7 days'));
+?>
+
          <div class="main-content">
             <h1>My Account</h1>
             <h2>Completed Bids</h2>

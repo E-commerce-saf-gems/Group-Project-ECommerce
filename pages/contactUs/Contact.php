@@ -115,7 +115,8 @@
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" autocomplete="off">
           <h3 class="title">Contact us</h3>
           <div class="input-container">
-            <input type="email" name="email" class="input" value="<?php echo htmlspecialchars($email); ?>" required pattern="/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Please enter a valid email address"/>
+            <input type="email" name="email" class="input" value="<?php echo htmlspecialchars($email); ?>" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+            title="Please enter a valid email address"/>
             <label for="email">Email</label>
             <span>Email</span>
           </div>

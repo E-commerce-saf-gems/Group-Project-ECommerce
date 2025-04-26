@@ -48,7 +48,7 @@ include '../../database/db.php';
       <ul class="navbar-list">
 
         <li>
-          <a href="/pages/homepage/homepage.html" class="navbar-link" data-nav-link>Home</a>
+          <a href="/pages/homepage/homepage.php" class="navbar-link" data-nav-link>Home</a>
         </li>
 
         <li class="dropdown">

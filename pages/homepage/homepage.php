@@ -65,7 +65,7 @@ include '../../database/db.php';
         </li>
 
         <li>
-          <a href="#contact" class="navbar-link" data-nav-link>Contact</a>
+          <a href="/pages/contactUs/Contact.php" class="navbar-link" data-nav-link>Contact</a>
         </li>
 
       </ul>
@@ -181,7 +181,7 @@ include '../../database/db.php';
                       <span class="span">Rs. <?php echo number_format($row['amount'], 2); ?></span>
                     </div>
 
-                    <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['type']); ?> -
+                    <h3><a href="../Stones/viewmore2.php?id=<?php echo htmlspecialchars($row['stone_id']); ?>" class="card-title"><?php echo htmlspecialchars($row['type']); ?> -
                         <?php echo htmlspecialchars($row['colour']); ?></a></h3>
                     <p class="rating-text"><?php echo htmlspecialchars($row['size']); ?> Carts -
                       <?php echo htmlspecialchars($row['shape']); ?></p>
@@ -245,7 +245,7 @@ include '../../database/db.php';
 
           // Query to fetch stones that are up for bidding, joining the 'bidding' table with 'inventory'
           $query = "
-    SELECT b.stone_id, b.startingBid, b.startDate, b.finishDate, i.type, i.colour, i.image 
+    SELECT b.*, i.type, i.colour, i.image 
     FROM biddingStone b 
     INNER JOIN inventory i ON b.stone_id = i.stone_id
     WHERE b.finishDate > NOW()
@@ -268,7 +268,7 @@ include '../../database/db.php';
                     Starting at <span class="badge"
                       aria-label="starting bid">Rs. <?php echo number_format($row['startingBid'], 2); ?></span>
                   </p>
-                  <a href="../bidding/bidding.php?stone_id=<?php echo htmlspecialchars($row['stone_id']); ?>"
+                  <a href="../bidding/bidding-itemPage.php?id=<?php echo htmlspecialchars($row['biddingStone_id']); ?>"
                     class="btn-link">
                     <span class="span">Bid Now</span>
                     <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>

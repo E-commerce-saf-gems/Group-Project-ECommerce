@@ -1,7 +1,16 @@
 <?php
+session_start();
 include('../../../database/db.php'); // Include the database connection
 
-// SQL query to fetch meeting details along with date and time from availabletimes
+// Check if the customer is logged in
+if (!isset($_SESSION['customer_id'])) {
+    header('Location: ../../Login/login.php'); // Redirect to login if not logged in
+    exit();
+}
+
+$customer_id = $_SESSION['customer_id'];
+
+// SQL query to fetch ONLY the logged-in customer's meeting details
 $sql = "SELECT 
             meeting.meeting_id, 
             meeting.type, 
@@ -12,9 +21,15 @@ $sql = "SELECT
         FROM meeting
         JOIN customer ON meeting.customer_id = customer.customer_id
         JOIN availabletimes ON meeting.availableTimes_id = availabletimes.availableTimes_id
+        WHERE meeting.customer_id = ?
         ORDER BY availabletimes.date DESC";
-$result = $conn->query($sql);
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $customer_id);
+$stmt->execute();
+$result = $stmt->get_result();
 ?>
+
 
 
 <!DOCTYPE html>
@@ -36,10 +51,10 @@ $result = $conn->query($sql);
             <h2>Hello</h2>
             <ul>
                 <li><a href="../Details/MyDetails.php">My Details</a></li>
-                <li><a href="../MyBids.php">My Bids</a></li>
+                <li><a href="../Bids/MyBids.php">My Bids</a></li>
                 <li><a href="../MyMeetings.php" class="active">My Meetings</a></li>
                 <li><a href="../Purchases/MyPurchases.php">Purchases</a></li>
-                <li><a href="../MyRequest.php">Requests</a></li>
+                <li><a href="../Requests/MyRequest.php">Requests</a></li>
                 <li><a href="../../Login/logout.php">Signout</a></li>
             </ul>
         </div>

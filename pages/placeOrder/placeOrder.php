@@ -212,5 +212,7 @@ $total_usd = number_format($total_amount * $exchange_rate, 2, '.', '');
     <script src="placeOrder.js"></script>
     <script src="../../components/header/header.js"></script>
     <script src="../../components/footer/footer.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

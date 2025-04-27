@@ -119,11 +119,12 @@ if (isset($_GET['id'])) {
                     </div>
 
                     <div class="form-group">
-                        <label for="color">Color</label>
-                        <input type="text" id="color" name="color" value="<?php echo $row['color']; ?>"
-                            placeholder="Aqua, Green" required>
-                        <small id="color-error" style="color: red;"></small>
-                    </div>
+    <label for="color">Color</label>
+    <select id="color" name="color" required>
+        <!-- Options will be populated dynamically based on the selected gemstone -->
+    </select>
+    <small id="color-error" style="color: red;"></small>
+</div>
 
                     <div class="form-group">
                         <label for="special-requirements">Special Requirements</label>
@@ -152,28 +153,68 @@ if (isset($_GET['id'])) {
     <script src="../../../components/footer/footer.js"></script>
 
     <script>
-        document.getElementById('customRequestForm').addEventListener('submit', function (e) {
-            const colorField = document.getElementById('color');
+        const gemColorMap = {
+    Diamond: ["Colorless", "Blue", "Pink", "Yellow", "Green", "Brown"],
+    Sapphire: ["Blue", "Pink", "Yellow", "White", "Green"],
+    Ruby: ["Red", "Pink", "Purplish Red"],
+    Emerald: ["Green", "Bluish Green"],
+    Amethyst: ["Purple", "Violet"],
+    Topaz: ["Blue", "Yellow", "Pink", "Clear", "Orange"]
+};
 
-            const colorError = document.getElementById('color-error');
+// The current selected gemstone type and color from PHP
+const currentGemType = "<?php echo $row['type']; ?>";
+const currentColor = "<?php echo $row['color']; ?>";
 
-            const regex = /^[A-Za-z]+( [A-Za-z]+)*$/; // Matches alphabetic characters and spaces
+function populateColors(selectedGem) {
+    const colorSelect = document.getElementById("color");
+    colorSelect.innerHTML = '<option value="">Select Color</option>';
 
-            colorError.textContent = '';
+    if (gemColorMap[selectedGem]) {
+        gemColorMap[selectedGem].forEach(color => {
+            const option = document.createElement("option");
+            option.value = color;
+            option.textContent = color;
 
-            let valid = true;
-
-            if (!regex.test(colorField.value)) {
-                colorError.textContent = 'Enter a valid color name with only alphabetic characters and spaces.';
-                valid = false;
+            if (color === currentColor) {
+                option.selected = true;
             }
 
-            if (!valid) {
-                e.preventDefault();
-            }
-
-            return valid;
+            colorSelect.appendChild(option);
         });
+    }
+}
+
+// Populate colors on page load
+document.addEventListener('DOMContentLoaded', function () {
+    populateColors(currentGemType);
+});
+
+// Repopulate colors when gem-type changes
+document.getElementById("gem-type").addEventListener("change", function () {
+    populateColors(this.value);
+});
+
+// Validation on submit
+document.getElementById('editGemsForm').addEventListener('submit', function (e) {
+    const colorField = document.getElementById('color');
+    const colorError = document.getElementById('color-error');
+
+    const regex = /^[A-Za-z]+( [A-Za-z]+)*$/; // only letters and spaces
+    colorError.textContent = '';
+
+    let valid = true;
+
+    if (!regex.test(colorField.value)) {
+        colorError.textContent = 'Enter a valid color name (letters and spaces only).';
+        valid = false;
+    }
+
+    if (!valid) {
+        e.preventDefault();
+    }
+});
+
     </script>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

@@ -37,7 +37,7 @@
 
 .action-button {
     background-color: #449b9b;
-    color: white;
+    color: rgb(0, 0, 0);
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
@@ -51,7 +51,7 @@
 }
 
 .action-button.secondary {
-    background-color: white;
+    background-color: rgb(0, 0, 0);
     color: #449b9b;
     border: 2px solid #449b9b;
 }

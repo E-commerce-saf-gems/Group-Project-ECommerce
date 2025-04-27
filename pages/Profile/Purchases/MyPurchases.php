@@ -62,22 +62,24 @@
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
                                     echo "<tr>
-                                            <td>" . $row['order_id'] . "</td>
-                                            <td>" . $row['order_date'] . "</td>
-                                            <td>" . $row['shipping_method'] . "</td>
-                                            <td>" . $row['pickup_date'] . "</td>
-                                            <td>" . $row['payment_method'] . "</td>
-                                            <td>" . $row['order_status'] . "</td>
-                                            <td>LKR " . number_format($row['total_amount'], 2) . " </td>
-                                            <td class='actions'>";
-                
+                                    <td>" . $row['order_id'] . "</td>
+                                    <td>" . $row['order_date'] . "</td>
+                                    <td>" . $row['shipping_method'] . "</td>
+                                    <td>" . $row['pickup_date'] . "</td>
+                                    <td>" . $row['payment_method'] . "</td>
+                                    <td>" . $row['order_status'] . "</td>
+                                    <td>LKR " . number_format($row['total_amount'], 2) . "</td>
+                                    <td class='actions'>";
+                                        
                                     if ($row['order_status'] === 'pending') {
-                                        echo "<a href='#' onclick='confirmDeleteOrder(" . $row['order_id'] . ")' class='btn'><i class='bx bx-trash'></i></a>";
+                                        echo "<a href='#' onclick='confirmDeleteOrder(" . $row['order_id'] . ")' class='action-button'><i class='fas fa-trash'></i></a> ";
                                     }
                                     
-                                    echo "<a href='./viewPurchase.php?id=" . $row['order_id'] . "' class='btn'><i class='bx bx-eye'></i></a>";
-                                    echo "</td>
-                                        </tr>";
+                                    echo "<a href='./viewPurchase.php?id=" . $row['order_id'] . "' class='action-button secondary'><i class='fas fa-eye'></i></a>";
+                                    
+                            echo "</td>
+                                </tr>";
+                            
                                 }
                             } else {
                                 echo "<tr><td colspan='5'>No orders found.</td></tr>";

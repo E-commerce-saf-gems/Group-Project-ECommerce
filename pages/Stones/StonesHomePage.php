@@ -147,6 +147,7 @@ if (!$result) {
                value="<?= isset($_GET['max-price']) ? htmlspecialchars($_GET['max-price']) : ''; ?>" 
                onchange="document.getElementById('filter-form').submit();">
     </div>
+    <button type="button" onclick="window.location.href='<?= strtok($_SERVER['REQUEST_URI'], '?'); ?>'">Reset Filters</button>
 </form>
 
         </aside>

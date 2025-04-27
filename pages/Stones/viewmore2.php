@@ -46,13 +46,13 @@ if (isset($_GET['id'])) {
     <div class="thumbnails">
       <?php if (!empty($row['image'])): ?>
         <img
-          src="http://localhost/Group-Project-ECommerce/assets/images/<?php echo htmlspecialchars($row['certificate']); ?>"
+          src="http://localhost/Business-Dashboard/uploads/<?php echo htmlspecialchars($row['certificate']); ?>"
           alt="Thumbnail 1" onclick="viewCertificate()" />
       <?php endif; ?>
     </div>
     <div class="main-image">
       <?php if (!empty($row['image'])): ?>
-        <img src="http://localhost/Group-Project-ECommerce/assets/images/<?php echo htmlspecialchars($row['image']); ?>"
+        <img src="http://localhost/Business-Dashboard/uploads/<?php echo htmlspecialchars($row['image']); ?>"
           alt="Main Image" />
       <?php endif; ?>
     </div>
@@ -94,7 +94,7 @@ if ($suggestionsResult && $suggestionsResult->num_rows > 0):
     <?php while ($suggestion = $suggestionsResult->fetch_assoc()): ?>
       <div class="shop-card">
       <img
-  src="http://localhost/Group-Project-ECommerce/assets/images/<?php echo htmlspecialchars($suggestion['image']); ?>"
+  src="http://localhost/Business-Dashboard/uploads/<?php echo htmlspecialchars($suggestion['image']); ?>"
   alt="Product"
   style="cursor: pointer;"
   onclick="window.location.href='../../pages/Stones/viewmore2.php?id=<?php echo $suggestion['stone_id']; ?>';" />

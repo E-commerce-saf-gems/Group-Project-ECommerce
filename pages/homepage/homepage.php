@@ -535,7 +535,7 @@ function updateCountdown() {
 
     if (timeLeft <= 0) {
         document.getElementById("countdown").innerHTML = "Auction has started";
-        clearInterval(countdownTimer); // Stop the timer
+        clearInterval(countdownTimer);
         return;
     }
 
@@ -550,9 +550,8 @@ function updateCountdown() {
     document.getElementById("seconds").textContent = seconds;
 }
 
-// Update the countdown every second
 const countdownTimer = setInterval(updateCountdown, 1000);
-updateCountdown(); // Call immediately to avoid delay
+updateCountdown(); 
 </script>
 </body>
 

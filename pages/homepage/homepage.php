@@ -1,6 +1,15 @@
 <?php
-include '../../database/db.php';  
+include '../../database/db.php'; 
+
+
+$query = "SELECT * FROM inventory WHERE availability = 'available' AND visibility = 'show'";
+$result = $conn->query($query);
+
+if (!$result) {
+    die("Query failed: " . $conn->error);
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -136,60 +145,58 @@ include '../../database/db.php';
       </section>
 
       <div class="stones-section">
-        <div class="stones-title">
-          <h1 class="h1">Our Stones</h1>
-        </div>
-        <div class="vertical-line"></div>
-        <p class="stones-description">
-          Discover the beauty and uniqueness of our carefully selected gems. Each stone is handpicked for its
-          brilliance, clarity, and color, ensuring that you receive only the finest quality. Whether you're looking for
-          a timeless classic or a unique statement piece, our collection of gems is sure to impress.
-        </p>
-      </div>
-      <section class="section shop" id="shop" aria-label="shop" data-section>
-        <?php
+    <div class="stones-title">
+        <h1 class="h1">Our Stones</h1>
+    </div>
+    <div class="vertical-line"></div>
+    <p class="stones-description">
+        Discover the beauty and uniqueness of our carefully selected gems. Each stone is handpicked for its
+        brilliance, clarity, and color, ensuring that you receive only the finest quality. Whether you're looking for
+        a timeless classic or a unique statement piece, our collection of gems is sure to impress.
+    </p>
+</div>
+<section class="section shop" id="shop" aria-label="shop" data-section">
+    <?php
+    $query = "SELECT * FROM inventory WHERE availability = 'available' AND visibility = 'show'";
+    $result = $conn->query($query);
 
-        $query = "SELECT * FROM inventory where availability='available'"; 
-        $result = $conn->query($query);
+    if (!$result) {
+        die("Query failed: " . $conn->error);
+    }
+    ?>
 
-        if (!$result) {
-          die("Query failed: " . $conn->error);
-        }
-        ?>
-
-        <div class="container">
-          <ul class="has-scrollbar">
+    <div class="container">
+        <ul class="has-scrollbar">
             <?php while ($row = $result->fetch_assoc()): ?>
-              <li class="scrollbar-item">
-                <div class="shop-card">
-                  <div class="card-banner img-holder" style="--width: 540; --height: 720;">
-                    <img src="../../assets/images/<?php echo htmlspecialchars($row['image']); ?>" width="540" height="720"
-                      loading="lazy" alt="<?php echo htmlspecialchars($row['stone_id']); ?>" class="img-cover">
+                <li class="scrollbar-item">
+                    <div class="shop-card">
+                        <div class="card-banner img-holder" style="--width: 540; --height: 720;">
+                            <img src="http://localhost/Business-Dashboard/uploads/<?php echo htmlspecialchars($row['image']); ?>" width="540" height="720"
+                                loading="lazy" alt="<?php echo htmlspecialchars($row['stone_id']); ?>" class="img-cover">
 
-                    <?php if (!empty($row['amount']) && $row['amount'] < 2000): ?>
-                      <span class="badge" aria-label="discount available">-10%</span>
-                    <?php endif; ?>
-                  </div>
+                            <?php if (!empty($row['amount']) && $row['amount'] < 2000): ?>
+                                <span class="badge" aria-label="discount available">-10%</span>
+                            <?php endif; ?>
+                        </div>
 
-                  <div class="card-content">
-                    <div class="price">
-                      <span class="span">Rs. <?php echo number_format($row['amount'], 2); ?></span>
+                        <div class="card-content">
+                            <div class="price">
+                                <span class="span">Rs. <?php echo number_format($row['amount'], 2); ?></span>
+                            </div>
+
+                            <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['type']); ?> -
+                                    <?php echo htmlspecialchars($row['colour']); ?></a></h3>
+                            <p class="rating-text"><?php echo htmlspecialchars($row['size']); ?> Carts -
+                                <?php echo htmlspecialchars($row['shape']); ?></p>
+                            <p class="description-text"><?php echo htmlspecialchars($row['description']); ?></p>
+                        </div>
                     </div>
-
-                    <h3><a href="#" class="card-title"><?php echo htmlspecialchars($row['type']); ?> -
-                        <?php echo htmlspecialchars($row['colour']); ?></a></h3>
-                    <p class="rating-text"><?php echo htmlspecialchars($row['size']); ?> Carts -
-                      <?php echo htmlspecialchars($row['shape']); ?></p>
-                    <p class="description-text"><?php echo htmlspecialchars($row['description']); ?></p>
-                  </div>
-                </div>
-              </li>
+                </li>
             <?php endwhile; ?>
-          </ul>
-          <a href="../Stones/StonesHomePage.php" class="btn btn-primary view-all-btn">View All</a>
-        </div>
-
-      </section>
+        </ul>
+        <a href="../Stones/StonesHomePage.php" class="btn btn-primary view-all-btn">View All</a>
+    </div>
+</section>
 
 
       <!-- New Collection -->
@@ -305,7 +312,6 @@ include '../../database/db.php';
 
       <!-- #OFFER -->
       <?php
-
 $query = "SELECT i.stone_id, i.type, i.image, b.startingBid, b.startDate, b.biddingStone_id
           FROM inventory i
           JOIN biddingstone b ON i.stone_id = b.stone_id
@@ -321,10 +327,8 @@ if ($result->num_rows > 0) {
     $image_url = $row['image'];
     $starting_bid = $row['startingBid'];
     $start_date = new DateTime($row['startDate']);
-    $start_date_formatted = $start_date->format('M d, Y');  
-
-    $current_date = new DateTime();
-    $interval = $current_date->diff($start_date);
+    $start_date_formatted = $start_date->format('M d, Y H:i:s'); // Include time for JavaScript
+    $start_date_js = $start_date->format('Y-m-d H:i:s'); // Format for JavaScript
 
     echo '<section class="section offer" id="offer" aria-label="offer" data-section>';
     echo '<div class="container">';
@@ -344,22 +348,25 @@ if ($result->num_rows > 0) {
     echo 'Participate in our exclusive auction for a rare, unheated ' . $stone_name . '. Bidding starts at Rs. ' . number_format($starting_bid, 2) . '. Don\'t miss your chance to own this stunning gemstone.';
     echo '</p>';
 
-    echo '<div class="countdown">';
-    echo '<span class="time" aria-label="days">' . $interval->format('%d') . '</span>';
-    echo '<span class="time" aria-label="hours">' . $interval->format('%h') . '</span>';
-    echo '<span class="time" aria-label="minutes">' . $interval->format('%i') . '</span>';
-    echo '<span class="time" aria-label="seconds">' . $interval->format('%s') . '</span>';
+    echo '<div class="countdown" id="countdown">';
+    echo '<span class="time" id="days" aria-label="days">--</span>';
+    echo '<span class="time" id="hours" aria-label="hours">--</span>';
+    echo '<span class="time" id="minutes" aria-label="minutes">--</span>';
+    echo '<span class="time" id="seconds" aria-label="seconds">--</span>';
     echo '</div>';
 
     echo '<a href="../bidding/upcomingBids.php?id=' . $row['biddingStone_id'] . '" class="btn btn-primary">Join the Bid</a>';
     echo '</div>';
     echo '</div>';
     echo '</section>';
+
+    // Pass the start date to JavaScript
+    echo '<script>';
+    echo 'const auctionStartTime = new Date("' . $start_date_js . '").getTime();';
+    echo '</script>';
 } else {
     echo "No upcoming bids available.";
 }
-
-$conn->close();
 ?>
 
 
@@ -521,6 +528,32 @@ $conn->close();
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
+  <script>
+function updateCountdown() {
+    const now = new Date().getTime();
+    const timeLeft = auctionStartTime - now;
+
+    if (timeLeft <= 0) {
+        document.getElementById("countdown").innerHTML = "Auction has started";
+        clearInterval(countdownTimer); // Stop the timer
+        return;
+    }
+
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+}
+
+// Update the countdown every second
+const countdownTimer = setInterval(updateCountdown, 1000);
+updateCountdown(); // Call immediately to avoid delay
+</script>
 </body>
 
 </html>

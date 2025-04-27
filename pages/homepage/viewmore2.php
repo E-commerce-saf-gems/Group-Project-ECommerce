@@ -252,7 +252,7 @@ if (isset($_GET['id'])) {
       <div class="shop-card-container">
         <?php for ($i = 0; $i < 4; $i++): ?>
           <div class="shop-card">
-            <img src="http://localhost/Group-Project-ECommerce/assets/images/<?php echo htmlspecialchars($row['image']); ?>" alt="Product" />
+            <img src="http://localhost/Business-Dashboard/uploads/<?php echo htmlspecialchars($row['image']); ?>" alt="Product" />
             <h4><?php echo htmlspecialchars($row['type']); ?></h4>
             <p class="price">Rs. <?php echo htmlspecialchars($row['amount']); ?></p>
           </div>

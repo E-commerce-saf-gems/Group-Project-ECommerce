@@ -259,7 +259,6 @@ if (isset($_GET['id'])) {
         <?php endfor; ?>
       </div>
     
-      <!-- Certificate Modal -->
       <div class="bid-confirmation" id="bid-confirmation" style="display:none;">
         <h3>Certificate</h3>
         <?php if (!empty($row['certificate'])): ?>

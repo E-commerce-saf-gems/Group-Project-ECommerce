@@ -1,11 +1,10 @@
 <?php
-include '../../database/db.php'; // Include the database connection
+include '../../database/db.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $biddingStoneId = intval($_POST['biddingStoneId']);
     $newBid = floatval($_POST['newBid']);
 
-    // Fetch the current bid
     $query = "SELECT currentBid FROM biddingstone WHERE biddingStone_id = $biddingStoneId";
     $result = $conn->query($query);
 
@@ -13,9 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $row = $result->fetch_assoc();
         $currentBid = floatval($row['currentBid']);
 
-        // Ensure the new bid is valid
         if ($newBid >= $currentBid + 500) {
-            // Update the bid in the database
             $updateQuery = "UPDATE biddingstone SET currentBid = $newBid WHERE biddingStone_id = $biddingStoneId";
             if ($conn->query($updateQuery)) {
                 echo json_encode(['success' => true]);

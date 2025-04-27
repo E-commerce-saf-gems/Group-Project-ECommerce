@@ -181,7 +181,6 @@ if (isset($_GET['id'])) {
         <div class="product-detail" id="product-detail">
             <div class="product-image">
             <?php if (!empty($row['image'])): ?>
-                  <!-- <p>Current Image:</p> -->
                   <img src="http://localhost/Business-Dashboard/uploads/<?php echo htmlspecialchars($row['image']); ?>" alt="Uploaded Image";/>
               <?php endif; ?>            
             </div>
@@ -203,8 +202,7 @@ if (isset($_GET['id'])) {
         </div>
     </div>
 
-<!-- Add an overlay for the background -->
-    <!-- Modal for displaying the certificate -->
+
     
     <div class="bid-confirmation" id="bid-confirmation">
         <h3>Certificate</h3>

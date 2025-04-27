@@ -1,7 +1,6 @@
 <?php
 include '../../database/db.php';
 
-// Base query
 $ssql = "SELECT 
             stone_id, amount, 
             type, 
@@ -14,7 +13,6 @@ $ssql = "SELECT
         FROM inventory
         WHERE visibility = 'show' AND (availability = 'available' OR availability = 'Available')";
 
-// Apply filters
 if (isset($_GET['carat-weight']) && !empty($_GET['carat-weight'])) {
     $caratWeight = (float)$_GET['carat-weight'];
     $ssql .= " AND size <= $caratWeight";
@@ -45,7 +43,6 @@ if (isset($_GET['max-price']) && is_numeric($_GET['max-price'])) {
     $ssql .= " AND amount <= $maxPrice";
 }
 
-// Sorting
 if (isset($_GET['sort']) && !empty($_GET['sort'])) {
     $sortOption = $_GET['sort'];
     if ($sortOption == 'price-low-to-high') {
@@ -53,10 +50,10 @@ if (isset($_GET['sort']) && !empty($_GET['sort'])) {
     } elseif ($sortOption == 'price-high-to-low') {
         $ssql .= " ORDER BY amount DESC";
     } else {
-        $ssql .= " ORDER BY stone_id DESC"; // default or new arrival
+        $ssql .= " ORDER BY stone_id DESC"; 
     }
 } else {
-    $ssql .= " ORDER BY stone_id DESC"; // default sort
+    $ssql .= " ORDER BY stone_id DESC"; 
 }
 
 $result = $conn->query($ssql);
@@ -87,7 +84,6 @@ if (!$result) {
     <custom-header></custom-header>
 
     <div class="container">
-        <!-- Sidebar for filter and sort options -->
         <aside class="sidebar">
             <h2>Filter & Sort</h2>
             <form method="GET" id="filter-form">
@@ -152,7 +148,6 @@ if (!$result) {
 
         </aside>
 
-<!-- Main content area with product catalog -->
 <main class="product-catalog">
                 <?php while ($row = $result->fetch_assoc()) : ?>
             <div class="shop-card">

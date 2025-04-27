@@ -15,7 +15,6 @@ function sendPasswordResetEmail($get_name,$get_email,$token) {
     $mail = new PHPMailer(true);
 
     try {
-        //Server settings
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      
         $mail->isSMTP();                                            
        
@@ -39,13 +38,12 @@ function sendPasswordResetEmail($get_name,$get_email,$token) {
             </button>
         " ;
 
-        //Content
-        $mail->isHTML(true);                      //Set email format to HTML
+        
+        $mail->isHTML(true);                      
         $mail->Subject = 'Password Reset Link';
         $mail->Body    = $email_template ;
     
         $mail->send();
-       // echo 'Message has been sent';
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }

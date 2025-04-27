@@ -24,7 +24,6 @@ function sendOrderEmail($first_name, $email, $order) {
         $mail->setFrom('sadheeysalim10@gmail.com', 'Saf Gems');
         $mail->addAddress($email, $first_name);
 
-        // Build Product List
         $product_list = "";
         foreach ($order['products'] as $product) {
             $product_list .= "
@@ -37,7 +36,6 @@ function sendOrderEmail($first_name, $email, $order) {
             ";
         }
 
-        // Email Template
         $email_template = "
             <h2 style='color: #449f9f;'>Order Confirmation - Order #{$order['order_id']}</h2>
             <p>Dear $first_name,</p>

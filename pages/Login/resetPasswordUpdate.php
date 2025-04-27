@@ -1,13 +1,11 @@
 <?php
-// Connect to your database
-include './db.php'; // Adjust path as needed
+include './db.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = trim($_POST['email']);
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
 
-    // Basic validations
     if (empty($email) || empty($new_password) || empty($confirm_password)) {
         echo "<script>alert('All fields are required!'); window.history.back();</script>";
         exit();
@@ -23,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    // Check if customer exists
     $query = "SELECT * FROM customer WHERE email = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $email);
@@ -35,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
-    // If exists, update password
     $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
     $update = "UPDATE customer SET password = ? WHERE email = ?";

@@ -1,7 +1,6 @@
 <?php
-include '../../database/db.php'; // Include the database connection
+include '../../database/db.php'; 
 
-// Base query
 $ssql = "
     SELECT 
         b.biddingStone_id, 
@@ -24,7 +23,6 @@ $ssql = "
         b.finishDate > NOW() AND b.startDate < NOW()
 ";
 
-// Apply filters
 if (isset($_GET['carat-weight']) && !empty($_GET['carat-weight'])) {
     $caratWeight = (float)$_GET['carat-weight'];
     $ssql .= " AND i.size <= $caratWeight";
@@ -59,7 +57,6 @@ if (isset($_GET['max-price']) && is_numeric($_GET['max-price'])) {
     $ssql .= " AND b.startingBid <= $maxPrice";
 }
 
-// Sorting
 if (isset($_GET['sort']) && !empty($_GET['sort'])) {
     $sortOption = $_GET['sort'];
     if ($sortOption == 'price-low-to-high') {
@@ -67,10 +64,10 @@ if (isset($_GET['sort']) && !empty($_GET['sort'])) {
     } elseif ($sortOption == 'price-high-to-low') {
         $ssql .= " ORDER BY b.startingBid DESC";
     } else {
-        $ssql .= " ORDER BY b.startDate DESC"; // Default sorting
+        $ssql .= " ORDER BY b.startDate DESC"; 
     }
 } else {
-    $ssql .= " ORDER BY b.startDate DESC"; // Default sorting
+    $ssql .= " ORDER BY b.startDate DESC"; 
 }
 
 $result = $conn->query($ssql);
@@ -101,7 +98,6 @@ if (!$result) {
     <custom-header></custom-header>
 
     <div class="container">
-        <!-- Sidebar for filter and sort options -->
         <aside class="sidebar">
             <h2>Filter & Sort</h2>
             <form method="GET" id="filter-form">
@@ -162,7 +158,6 @@ if (!$result) {
                onchange="document.getElementById('filter-form').submit();">
                </div>
 
-         <!-- Reset Button -->
     <div class="filter-section">
         <button type="button" onclick="window.location.href='bidding.php'" class="btn btn-secondary">Reset Filters</button>
     </div>
@@ -170,13 +165,11 @@ if (!$result) {
 </form>
 </aside>
 
-<!-- Upcoming Bids Section -->
 <main class="content">
     <h1 style="margin-left: 20px;">Upcoming Bids</h1>
     <div class="slider-container">
         <div class="slider" id="slider">
             <?php
-            // Fetch upcoming bids data
             $upcomingBidsQuery = "
                 SELECT 
                     b.biddingStone_id, 
@@ -204,7 +197,6 @@ if (!$result) {
                 die("Query failed: " . $conn->error);
             }
 
-            // Loop through the results and display each upcoming bid
             while ($row = $upcomingBidsResult->fetch_assoc()) :
             ?>
                 <div class="slide">
@@ -228,7 +220,6 @@ if (!$result) {
     </div>
 
 
-<!-- Main content area with product catalog -->
 <h1 style="margin-left: 20px;">Available Bids</h1>
     <main class="product-catalog">
 
@@ -287,7 +278,7 @@ if (!$result) {
         const moveSlider = (direction) => {
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
-        const visibleSlides = 3; // Adjust based on how many slides fit in view
+        const visibleSlides = 3; 
 
     if (direction === 'next') {
         index = (index + 1) % totalSlides;
@@ -296,7 +287,7 @@ if (!$result) {
     }
 
     const offset = index * (100 / visibleSlides);
-    slider.style.transform = `translateX(-${offset}%)`; // Fixed template literal
+    slider.style.transform = `translateX(-${offset}%)`; 
 };
 
 if (nextBtn && prevBtn) {

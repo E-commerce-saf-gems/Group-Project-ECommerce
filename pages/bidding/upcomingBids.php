@@ -37,7 +37,7 @@ $row = $result->fetch_assoc();
 $startDateStr = $row['startDate'];
 $now = new DateTime();
 $startDate = new DateTime($row['startDate']);
-$isAuctionStarted = $now >= $startDate; // Checks if auction has already started
+$isAuctionStarted = $now >= $startDate; 
 ?>
 
 <!DOCTYPE html>

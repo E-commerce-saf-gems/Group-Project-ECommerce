@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $postalCode = $data['postalCode'] ?? '';
     $country = $data['country'] ?? '';
 
-    // Calculate total from cart
     $total_sql = "SELECT SUM(inventory.amount) AS total FROM cart 
                   INNER JOIN inventory ON cart.stone_id = inventory.stone_id 
                   WHERE cart.customer_id = ?";
@@ -33,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $total_amount = $row['total'] ?? 0;
     $stmt->close();
 
-    // Insert order
     $insert_sql = "INSERT INTO orders (customer_id, shipping_method, payment_method, pickup_date, address1, address2, city, postalCode, country, total_amount) 
                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($insert_sql);
@@ -43,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $order_id = $conn->insert_id;
         $stmt->close();
 
-        // Get all stone_ids from cart
         $cart_sql = "SELECT inventory.stone_id, inventory.amount FROM cart 
                      INNER JOIN inventory ON cart.stone_id = inventory.stone_id 
                      WHERE cart.customer_id = ?";
@@ -52,26 +49,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
         $result = $stmt->get_result();
 
-        // Insert into order_items table
         while ($row = $result->fetch_assoc()) {
             $stone_id = $row['stone_id'];
             $amount = $row['amount'];
 
-            // Insert each item into order_items
             $insert_order_item_sql = "INSERT INTO order_items (order_id, stone_id, price) VALUES (?, ?, ?)";
             $insert_stmt = $conn->prepare($insert_order_item_sql);
             $insert_stmt->bind_param("iii", $order_id, $stone_id, $amount);
             $insert_stmt->execute();
             $insert_stmt->close();
 
-            // Update the inventory availability to 'notAvailable'
             $updateStmt = $conn->prepare("UPDATE inventory SET availability = 'notAvailable' WHERE stone_id = ?");
             $updateStmt->bind_param("i", $stone_id);
             $updateStmt->execute();
             $updateStmt->close();
         }
 
-        // 🧹 Clear the cart
         $delete_cart_sql = "DELETE FROM cart WHERE customer_id = ?";
         $stmt = $conn->prepare($delete_cart_sql);
         $stmt->bind_param("i", $customer_id);

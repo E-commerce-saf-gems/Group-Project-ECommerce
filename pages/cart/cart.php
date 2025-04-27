@@ -1,22 +1,16 @@
 <?php
 
-// Include the database connection
 include('../../database/db.php'); 
 
-// Start the session
 session_start();
 
-// Check if the customer is logged in
 if (!isset($_SESSION['customer_id']) || empty($_SESSION['customer_id'])) {
-    // Redirect to the login page if not logged in
     header("Location: ../Login/login.php?notloggedIn=1");
     exit();
 }
 
-// Get the logged-in customer's ID
 $customer_id = $_SESSION['customer_id'];
 
-// Prepare the SQL query to fetch the cart and inventory details
 $sql = "SELECT cart.cart_id, inventory.type, inventory.amount, inventory.image
         FROM cart
         JOIN inventory ON cart.stone_id = inventory.stone_id
@@ -24,17 +18,13 @@ $sql = "SELECT cart.cart_id, inventory.type, inventory.amount, inventory.image
 $stmt = $conn->prepare($sql);
 
 if (!$stmt) {
-    // Handle SQL preparation error
     die("SQL error: " . $conn->error);
 }
 
-// Bind the customer ID parameter to the query
 $stmt->bind_param("i", $customer_id);
 
-// Execute the query
 $stmt->execute();
 
-// Get the result set
 $result = $stmt->get_result();
 
 ?>

@@ -135,7 +135,6 @@ include '../../database/db.php';
         </div>
       </section>
 
-      <!-- stones -->
       <div class="stones-section">
         <div class="stones-title">
           <h1 class="h1">Our Stones</h1>
@@ -150,8 +149,7 @@ include '../../database/db.php';
       <section class="section shop" id="shop" aria-label="shop" data-section>
         <?php
 
-        // Query to fetch gemstone data from the inventory table
-        $query = "SELECT * FROM inventory where availability='available'"; // Assuming your table is named 'inventory'
+        $query = "SELECT * FROM inventory where availability='available'"; 
         $result = $conn->query($query);
 
         if (!$result) {
@@ -165,12 +163,9 @@ include '../../database/db.php';
               <li class="scrollbar-item">
                 <div class="shop-card">
                   <div class="card-banner img-holder" style="--width: 540; --height: 720;">
-                    <!-- Display image dynamically -->
                     <img src="../../assets/images/<?php echo htmlspecialchars($row['image']); ?>" width="540" height="720"
                       loading="lazy" alt="<?php echo htmlspecialchars($row['stone_id']); ?>" class="img-cover">
 
-                    <!-- If any discount is available, display it -->
-                    <!-- Example: You can add a discount column in your table or apply logic to check if a discount exists -->
                     <?php if (!empty($row['amount']) && $row['amount'] < 2000): ?>
                       <span class="badge" aria-label="discount available">-10%</span>
                     <?php endif; ?>
@@ -243,13 +238,12 @@ include '../../database/db.php';
 
           <?php
 
-          // Query to fetch stones that are up for bidding, joining the 'bidding' table with 'inventory'
           $query = "
     SELECT b.stone_id, b.startingBid, b.startDate, b.finishDate, i.type, i.colour, i.image 
     FROM biddingStone b 
     INNER JOIN inventory i ON b.stone_id = i.stone_id
     WHERE b.finishDate > NOW()
-    LIMIT 3";  // Only get active bids
+    LIMIT 3";  
           
           $result = $conn->query($query);
 
@@ -293,7 +287,6 @@ include '../../database/db.php';
 
 
 
-      <!-- custom request -->
       <div class="stones-section">
         <div class="stones-title">
           <h1 class="h1">Couldnt Find<br>What You Want?</h1>
@@ -313,7 +306,6 @@ include '../../database/db.php';
       <!-- #OFFER -->
       <?php
 
-// Query to get the first upcoming bid
 $query = "SELECT i.stone_id, i.type, i.image, b.startingBid, b.startDate, b.biddingStone_id
           FROM inventory i
           JOIN biddingstone b ON i.stone_id = b.stone_id
@@ -324,19 +316,16 @@ $query = "SELECT i.stone_id, i.type, i.image, b.startingBid, b.startDate, b.bidd
 $result = $conn->query($query);
 
 if ($result->num_rows > 0) {
-    // Fetch the data for the first upcoming bid
     $row = $result->fetch_assoc();
     $stone_name = $row['type'];
     $image_url = $row['image'];
     $starting_bid = $row['startingBid'];
     $start_date = new DateTime($row['startDate']);
-    $start_date_formatted = $start_date->format('M d, Y');  // Format start date
+    $start_date_formatted = $start_date->format('M d, Y');  
 
-    // Get the remaining time until the auction starts
     $current_date = new DateTime();
     $interval = $current_date->diff($start_date);
 
-    // Display the "offer" section with dynamic data
     echo '<section class="section offer" id="offer" aria-label="offer" data-section>';
     echo '<div class="container">';
     echo '<figure class="offer-banner">';

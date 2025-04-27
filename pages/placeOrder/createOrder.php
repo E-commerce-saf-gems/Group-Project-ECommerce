@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->close();
 
         // Get all stone_ids from cart
-        $cart_sql = "SELECT inventory.stone_id FROM cart 
+        $cart_sql = "SELECT inventory.stone_id, inventory.amount FROM cart 
                      INNER JOIN inventory ON cart.stone_id = inventory.stone_id 
                      WHERE cart.customer_id = ?";
         $stmt = $conn->prepare($cart_sql);
@@ -52,8 +52,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
         $result = $stmt->get_result();
 
+        // Insert into order_items table
         while ($row = $result->fetch_assoc()) {
             $stone_id = $row['stone_id'];
+            $amount = $row['amount'];
+
+            // Insert each item into order_items
+            $insert_order_item_sql = "INSERT INTO order_items (order_id, stone_id, price) VALUES (?, ?, ?)";
+            $insert_stmt = $conn->prepare($insert_order_item_sql);
+            $insert_stmt->bind_param("iii", $order_id, $stone_id, $amount);
+            $insert_stmt->execute();
+            $insert_stmt->close();
+
+            // Update the inventory availability to 'notAvailable'
             $updateStmt = $conn->prepare("UPDATE inventory SET availability = 'notAvailable' WHERE stone_id = ?");
             $updateStmt->bind_param("i", $stone_id);
             $updateStmt->execute();

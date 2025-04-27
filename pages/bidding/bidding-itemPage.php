@@ -118,6 +118,7 @@ $isAuctionEnded = $now >= $finishDate;
 <body>
 <custom-header></custom-header>
 
+
 <div class="bid-container">
 <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
                 <div class="success-message">
@@ -232,8 +233,8 @@ $isAuctionEnded = $now >= $finishDate;
 </div>
 
 </div>
-
-<custom-footer></custom-footer>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script src="../../components/header/header.js"></script>
 <script src="../../components/footer/footer.js"></script>
 

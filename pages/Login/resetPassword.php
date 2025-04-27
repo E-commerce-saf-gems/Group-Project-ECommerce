@@ -5,41 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Forgot Password</title>
     <link rel="stylesheet" href="../RegisterPage/register.css" />
-   
+    <link rel="stylesheet" href="./forgotPassword.html">
   </head>
   <body>
     
 
     <div>
-    <form action="resetPasswordUpdate.php" method="post">
+    <form action="resetPasswordUpdate.php" method="post" id="resetForm">
   <label for="email">Email Address:</label>
-  <input
-    type="email"
-    id="email"
-    name="email"
-    placeholder="Enter your email"
-    required
-  />
+  <input type="email" id="email" name="email" placeholder="Enter your email" required />
+  <span id="email-error" class="error-message"></span>
   <br />
 
   <label for="new-password">New Password:</label>
-  <input
-    type="password"
-    id="new-password"
-    name="new_password"
-    placeholder="Enter new password"
-    required
-  />
+  <input type="password" id="new-password" name="new_password" placeholder="Enter new password" required />
+  <span id="password-error" class="error-message"></span>
   <br />
 
   <label for="confirm-password">Re-enter New Password:</label>
-  <input
-    type="password"
-    id="confirm-password"
-    name="confirm_password"
-    placeholder="Re-enter new password"
-    required
-  />
+  <input type="password" id="confirm-password" name="confirm_password" placeholder="Re-enter new password" required />
+  <span id="confirm-password-error" class="error-message"></span>
   <br />
 
   <div class="button-section">
@@ -48,9 +33,11 @@
   </div>
 </form>
 
+
       <script src="password.js"></script>
     </div>
 
     
   </body>
+  <script src="./password.js"></script>
 </html>

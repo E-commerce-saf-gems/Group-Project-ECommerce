@@ -37,11 +37,10 @@ $result = $conn->query($sql);
             <ul>
                 <li><a href="../Details/MyDetails.php">My Details</a></li>
                 <li><a href="../MyBids.php">My Bids</a></li>
-                <li><a href="../MySales.html">My Sales</a></li>
                 <li><a href="../MyMeetings.php" class="active">My Meetings</a></li>
-                <li><a href="../MyPurchases.php">Purchases</a></li>
+                <li><a href="../Purchases/MyPurchases.php">Purchases</a></li>
                 <li><a href="../MyRequest.php">Requests</a></li>
-                
+                <li><a href="../../Login/logout.php">Signout</a></li>
             </ul>
         </div>
         <div class="main-content">

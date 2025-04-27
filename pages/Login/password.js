@@ -1,53 +1,60 @@
-
-// Function to redirect to the login page
-function loginpage() {
-    window.location.href = 'login.php';
-}
-
-
- // Validate passwords function
- function validatePasswords() {
-    const newPassword = document.getElementById("new-password");
-    const confirmPassword = document.getElementById("confirm-password");
-    const newPasswordError = document.getElementById("new-password-error");
-    const confirmPasswordError = document.getElementById("confirm-password-error");
-
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-    newPasswordError.textContent = "";
-    confirmPasswordError.textContent = "";
-    
-// Validate password against the pattern
-if (!passwordPattern.test(newPassword.value)) {
-    newPasswordError.textContent = "Password must be at least 8 characters, contain uppercase, lowercase, number, and special character.";
-    newPasswordError.style.color = "red";
-    newPassword.classList.add("error");
-    return false;
-}
-
-// Check if re-enter password field is empty
-if (confirmPassword.value.trim() === "") {
-    confirmPasswordError.textContent = "Re-enter password field cannot be empty";
-    confirmPasswordError.style.color = "red";
-    confirmPassword.classList.add("error");
-    return false;
-}
-
-
-    if (password.value !== confirmPassword.value) {
-        /*passwordError.textContent = "Passwords do not match.";*/
-        confirmPasswordError.textContent = "Password do not match";
-        confirmPasswordError.style.color = "red";
-        /*password.classList.add("error");*/
-        confirmPassword.classList.add("error");
-        return false;
-    }
-    newPassword.classList.remove("error");
-    confirmPassword.classList.remove("error");
-    return true;
-}
-
-  document.getElementById("new-password").addEventListener("input", validatePasswords );
-  document.getElementById("new-password").addEventListener("blur", validatePasswords );
-  document.getElementById("confirm-password").addEventListener("input", validatePasswords);
-  document.getElementById("confirm-password").addEventListener("blur", validatePasswords);
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById('resetForm');
+    const emailField = document.getElementById('email');
+    const passwordField = document.getElementById('new-password');
+    const confirmPasswordField = document.getElementById('confirm-password');
+  
+    const emailError = document.getElementById('email-error');
+    const passwordError = document.getElementById('password-error');
+    const confirmPasswordError = document.getElementById('confirm-password-error');
+  
+    // Email validation on blur
+    emailField.addEventListener('blur', function () {
+      if (!validateEmail(emailField.value)) {
+        emailError.textContent = 'Enter a valid email address.';
+      } else {
+        emailError.textContent = '';
+      }
+    });
+  
+    // Password validation live
+    passwordField.addEventListener('input', function () {
+      if (passwordField.value.length < 6) {
+        passwordError.textContent = 'Password must be at least 6 characters.';
+      } else {
+        passwordError.textContent = '';
+      }
+    });
+  
+    // Confirm password validation live
+    confirmPasswordField.addEventListener('input', function () {
+      if (confirmPasswordField.value !== passwordField.value) {
+        confirmPasswordError.textContent = 'Passwords do not match.';
+      } else {
+        confirmPasswordError.textContent = '';
+      }
+    });
+  
+    // Final check before submitting
+    form.addEventListener('submit', function (e) {
+      if (
+        emailError.textContent !== '' ||
+        passwordError.textContent !== '' ||
+        confirmPasswordError.textContent !== ''
+      ) {
+        e.preventDefault();
+        alert('Please fix the errors before submitting.');
+      }
+    });
+  });
+  
+  // Helper function
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email.toLowerCase());
+  }
+  
+  function loginpage() {
+    window.location.href = "../LoginPage/login.php";
+  }
+  

@@ -1,6 +1,5 @@
 class Header extends HTMLElement {
   connectedCallback() {
-    // JavaScript to dynamically update the profile dropdown
     const isLoggedIn = localStorage.getItem("loggedInUser");
 
     this.innerHTML = `

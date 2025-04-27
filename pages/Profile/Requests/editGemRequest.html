@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,15 +11,17 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preload" as="image" href="./assets/images/logo.png">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
-
-
     <title>Edit Request Gems</title>
 </head>
+
 <body>
     <custom-header></custom-header>
     <div class="profile-container profile-h1">
@@ -27,80 +30,66 @@
             <ul>
                 <li><a href="MyDetails.php">My Details</a></li>
                 <li><a href="MyBids.php">My Bids</a></li>
-                <li><a href="MyMeetings.html" >My Meetings</a></li>
+                <li><a href="MyMeetings.html">My Meetings</a></li>
                 <li><a href="MyInvoices.html">Invoices</a></li>
                 <li><a href="MyRequest.html" class="active">Requests</a></li>
                 <li><a href="../../Login/logout.php">Signout</a></li>
             </ul>
         </div>
 
-     <div class="main-content">
-        <h1>Edit Request Gems</h1>
-        <h2>Enter Details</h2>
+        <div class="main-content">
+            <h1>Edit Request Gems</h1>
+            <h2>Enter Details</h2>
             <div class="tab-content">
                 <form class="edit-sales-form" id="editGemsForm">
                     <div class="form-group">
                         <label for="date">Date</label>
                         <input type="date" id="date" name="date" required>
                     </div>
-    
-                    <!-- Customer Field -->
+
                     <div class="form-group">
                         <label for="shape">Shape</label>
                         <input type="text" id="shape" name="shape" placeholder="Shape" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="Gem Type">Gem Type</label>
                         <input type="text" id="type" name="type" placeholder="Gem Type" required>
                     </div>
 
-                    <!-- NIC Field -->
-                     <div class="form-group">
+                    <div class="form-group">
                         <label for="weight">Weight</label>
                         <input type="number" id="weight" name="weight" placeholder="Weight" required>
                     </div>
 
-                    <!-- Email Field -->
-                     <div class="form-group">
+                    <div class="form-group">
                         <label for="color">Color</label>
                         <input type="text" id="color" name="color" placeholder="Color" required>
                     </div>
 
-                    <!-- Total purchases Field -->
-                     <div class="form-group">
+                    <div class="form-group">
                         <label for="special">Special Requirements</label>
                         <input type="text" id="special" name="special" placeholder="Special Requirements" required>
                     </div>
 
-                    <!-- Status Field -->
-                    <!-- <div class="form-group">
-                        <label for="status">Status</label>
-                        <select id="status" name="status">
-                            <option value="online">Online Registered</option>
-                            <option value="offline">Walking Customer</option>
-                        </select>
-                    </div>
-                     -->
-                    <!-- Save Button -->
                     <div class="form-actions">
                         <div class="form-actions">
                             <button type="submit" class="btn-save">
                                 <i class='bx bx-save'></i> Save Changes
                             </button>
-                        </div>                        
+                        </div>
                     </div>
                 </form>
             </div>
+        </div>
     </div>
-</div>
 
     <script src="profile.js"></script>
     <script src="/components/header/header.js"></script>
     <script src="/components/footer/footer.js"></script>
-    
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </body>
+
 </html>

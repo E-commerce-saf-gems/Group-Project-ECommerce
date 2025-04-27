@@ -12,10 +12,8 @@
             const selectedShippingMethod = document.querySelector("input[name='shipping-method']:checked").value;
             const selectedPaymentMethod = document.querySelector("input[name='payment-method']:checked").value;
 
-            // Show pickup date only if "Store Pickup" is selected
             pickupDateContainer.style.display = selectedShippingMethod === "store-pickup" ? "block" : "none";
 
-            // Show shipping address only if "Home Shipping" is selected
             shippingAddressContainer.style.display = selectedShippingMethod === "home-shipping" ? "block" : "none";
 
             // Show or hide Pay In Store option based on shipping method

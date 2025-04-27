@@ -41,8 +41,6 @@ $customerID = $_SESSION['customer_id'];
                 An error occurred while submitting your request! Try again!
             </div>
         <?php endif; ?>
-
-
         <form id="customRequestForm" action="./createCustomRequest.php" method="post">
             <div>
                 <h3 class="h3" style="text-align: center;">Request a Custom Gemstone</h3>
@@ -66,7 +64,6 @@ $customerID = $_SESSION['customer_id'];
                         <option value="">Select Color</option>
                     </select>
                 </div>
-
 
                 <div class="form-group">
                     <label for="carat-weight">Carat Weight</label>
@@ -117,7 +114,6 @@ $customerID = $_SESSION['customer_id'];
             const gem = this.value;
             const colorSelect = document.getElementById("color");
 
-            // Clear current options
             colorSelect.innerHTML = '<option value="">Select Color</option>';
 
             if (gemColorMap[gem]) {
@@ -130,6 +126,7 @@ $customerID = $_SESSION['customer_id'];
             }
         });
 
+        
     </script>
 
     <script src="../../components/footer/footer.js"></script>

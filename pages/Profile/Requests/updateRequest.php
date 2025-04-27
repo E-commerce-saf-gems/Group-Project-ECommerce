@@ -10,7 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $color = $_POST['color'];
     $requirement = $_POST['requirement'];
 
-    // Update query
     $sql = "UPDATE request SET date=?, shape=?, type=?, weight=?, color=?, requirement=? WHERE request_id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssssssi", $date, $shape, $type, $weight, $color, $requirement, $request_id);

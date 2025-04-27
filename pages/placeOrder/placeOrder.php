@@ -104,14 +104,6 @@ $total_usd = number_format($total_amount * $exchange_rate, 2, '.', '');
                 </div>
             </div>
 
-            <div class="radio-group" style="display: none;">
-                <h2>Select Payment Type</h2>
-                <label class="radio-label" hidden>
-                    <input type="radio" name="payment-method" value="pay-online" checked hidden>
-                    Pay Online
-                </label>
-            </div>
-
             <input type="hidden" id="total_amount" value="<?php echo $total_usd; ?>">
 
             <div id="paypal-button-container"></div>

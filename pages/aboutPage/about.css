@@ -1,13 +1,11 @@
-/*-----------------------------------*\
-  #ABOUT US SECTION
-\*-----------------------------------*/
+
 .about-us {
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
   align-items: center;
   justify-content: center;
-  flex-direction: row-reverse; /* Swap the content and image */
+  flex-direction: row-reverse; 
 }
 
 .about-content {
@@ -30,20 +28,18 @@
 .img-responsive {
   width: 100%;
   border-radius: var(--radius-3);
-  box-shadow: var(--shadow-2); /* Subtle shadow for the image */
+  box-shadow: var(--shadow-2); 
 }
 
-/* Add a specific media query for larger screens */
 @media (min-width: 992px) {
   .about-us {
-    flex-direction: row; /* Restore the original orientation */
+    flex-direction: row;
   }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .about-us {
-    flex-direction: column; /* Stack on mobile */
+    flex-direction: column;
   }
 
   .about-image {
@@ -51,9 +47,6 @@
   }
 }
 
-/*-----------------------------------*\
-  #CERTIFICATION SECTION
-\*-----------------------------------*/
 .certification {
   display: flex;
   flex-direction: column;
@@ -81,12 +74,11 @@
 
 .certification ion-icon {
   font-size: 60px;
-  color: var(--teal); /* Use the teal color for the icon */
+  color: var(--teal); 
   margin-left: 305px;
   margin-bottom: 50 px;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .certification {
     padding-inline: 15px;

@@ -1,40 +1,29 @@
 <?php
 
-// Include the database connection
 include('../../database/db.php'); 
 
-// Start the session
 session_start();
 
-// Check if the customer is logged in
 if (!isset($_SESSION['customer_id']) || empty($_SESSION['customer_id'])) {
-    // Redirect to the login page if not logged in
     header("Location: ../Login/login.php?notloggedIn=1");
     exit();
 }
 
-// Get the logged-in customer's ID
 $customer_id = $_SESSION['customer_id'];
 
-// Prepare the SQL query to fetch the cart and inventory details
 $sql = "SELECT cart.cart_id, inventory.type, inventory.amount, inventory.image
         FROM cart
         JOIN inventory ON cart.stone_id = inventory.stone_id
         WHERE cart.customer_id = ?";
+        
 $stmt = $conn->prepare($sql);
 
 if (!$stmt) {
-    // Handle SQL preparation error
     die("SQL error: " . $conn->error);
 }
 
-// Bind the customer ID parameter to the query
 $stmt->bind_param("i", $customer_id);
-
-// Execute the query
 $stmt->execute();
-
-// Get the result set
 $result = $stmt->get_result();
 
 ?>
@@ -71,10 +60,10 @@ $result = $stmt->get_result();
             <tbody id="cart-items">
     <?php
         $subtotal = 0;
-        $hasItems = false; // Flag to check if cart has items
+        $hasItems = false; 
 
         while ($row = $result->fetch_assoc()) {
-            $hasItems = true; // Mark that the cart has items
+            $hasItems = true; 
             $product_name = htmlspecialchars($row['type']);
             $product_price = htmlspecialchars($row['amount']);
             $product_total = $product_price; 
@@ -98,7 +87,6 @@ $result = $stmt->get_result();
         
         $total = $subtotal;
 
-        // If cart is empty, display message
         if (!$hasItems) {
             echo "<tr><td colspan='4' class='empty-cart-message'>No items in the cart.</td></tr>";
         }

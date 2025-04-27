@@ -21,11 +21,6 @@ inputs.forEach((input) =>{
 'use strict';
 
 
-
-/**
- * add event on element
- */
-
 const addEventOnElem = function (elem, type, callback) {
   if (elem.length > 1) {
     for (let i = 0; i < elem.length; i++) {
@@ -36,11 +31,6 @@ const addEventOnElem = function (elem, type, callback) {
   }
 }
 
-
-
-/**
- * navbar toggle
- */
 
 const navTogglers = document.querySelectorAll("[data-nav-toggler]");
 const navbar = document.querySelector("[data-navbar]");
@@ -60,12 +50,6 @@ const closeNavbar = function () {
 }
 
 addEventOnElem(navbarLinks, "click", closeNavbar);
-
-
-
-/**
- * header sticky & back top btn active
- */
 
 const header = document.querySelector("[data-header]");
 const backTopBtn = document.querySelector("[data-back-top-btn]");

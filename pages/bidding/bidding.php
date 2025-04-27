@@ -287,7 +287,7 @@ if (!$result) {
         const moveSlider = (direction) => {
         const slides = document.querySelectorAll('.slide');
         const totalSlides = slides.length;
-        const visibleSlides = 3; // Adjust based on how many slides fit in view
+        const visibleSlides = 3; 
 
     if (direction === 'next') {
         index = (index + 1) % totalSlides;
@@ -296,7 +296,7 @@ if (!$result) {
     }
 
     const offset = index * (100 / visibleSlides);
-    slider.style.transform = `translateX(-${offset}%)`; // Fixed template literal
+    slider.style.transform = `translateX(-${offset}%)`; 
 };
 
 if (nextBtn && prevBtn) {

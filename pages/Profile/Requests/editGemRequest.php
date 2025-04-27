@@ -119,12 +119,11 @@ if (isset($_GET['id'])) {
                     </div>
 
                     <div class="form-group">
-    <label for="color">Color</label>
-    <select id="color" name="color" required>
-        <!-- Options will be populated dynamically based on the selected gemstone -->
-    </select>
-    <small id="color-error" style="color: red;"></small>
-</div>
+                        <label for="color">Color</label>
+                        <select id="color" name="color" required>
+                        </select>
+                        <small id="color-error" style="color: red;"></small>
+                    </div>
 
                     <div class="form-group">
                         <label for="special-requirements">Special Requirements</label>
@@ -154,66 +153,44 @@ if (isset($_GET['id'])) {
 
     <script>
         const gemColorMap = {
-    Diamond: ["Colorless", "Blue", "Pink", "Yellow", "Green", "Brown"],
-    Sapphire: ["Blue", "Pink", "Yellow", "White", "Green"],
-    Ruby: ["Red", "Pink", "Purplish Red"],
-    Emerald: ["Green", "Bluish Green"],
-    Amethyst: ["Purple", "Violet"],
-    Topaz: ["Blue", "Yellow", "Pink", "Clear", "Orange"]
-};
+            Diamond: ["Colorless", "Blue", "Pink", "Yellow", "Green", "Brown"],
+            Sapphire: ["Blue", "Pink", "Yellow", "White", "Green"],
+            Ruby: ["Red", "Pink", "Purplish Red"],
+            Emerald: ["Green", "Bluish Green"],
+            Amethyst: ["Purple", "Violet"],
+            Topaz: ["Blue", "Yellow", "Pink", "Clear", "Orange"]
+        };
 
-// The current selected gemstone type and color from PHP
-const currentGemType = "<?php echo $row['type']; ?>";
-const currentColor = "<?php echo $row['color']; ?>";
+        const currentGemType = "<?php echo $row['type']; ?>";
+        const currentColor = "<?php echo $row['color']; ?>";
 
-function populateColors(selectedGem) {
-    const colorSelect = document.getElementById("color");
-    colorSelect.innerHTML = '<option value="">Select Color</option>';
+        function populateColors(selectedGem) {
+            const colorSelect = document.getElementById("color");
+            colorSelect.innerHTML = '<option value="">Select Color</option>';
 
-    if (gemColorMap[selectedGem]) {
-        gemColorMap[selectedGem].forEach(color => {
-            const option = document.createElement("option");
-            option.value = color;
-            option.textContent = color;
+            if (gemColorMap[selectedGem]) {
+                gemColorMap[selectedGem].forEach(color => {
+                    const option = document.createElement("option");
+                    option.value = color;
+                    option.textContent = color;
 
-            if (color === currentColor) {
-                option.selected = true;
+                    if (color === currentColor) {
+                        option.selected = true;
+                    }
+
+                    colorSelect.appendChild(option);
+                });
             }
+        }
 
-            colorSelect.appendChild(option);
+        document.addEventListener('DOMContentLoaded', function () {
+            populateColors(currentGemType);
         });
-    }
-}
 
-// Populate colors on page load
-document.addEventListener('DOMContentLoaded', function () {
-    populateColors(currentGemType);
-});
+        document.getElementById("gem-type").addEventListener("change", function () {
+            populateColors(this.value);
+        });
 
-// Repopulate colors when gem-type changes
-document.getElementById("gem-type").addEventListener("change", function () {
-    populateColors(this.value);
-});
-
-// Validation on submit
-document.getElementById('editGemsForm').addEventListener('submit', function (e) {
-    const colorField = document.getElementById('color');
-    const colorError = document.getElementById('color-error');
-
-    const regex = /^[A-Za-z]+( [A-Za-z]+)*$/; // only letters and spaces
-    colorError.textContent = '';
-
-    let valid = true;
-
-    if (!regex.test(colorField.value)) {
-        colorError.textContent = 'Enter a valid color name (letters and spaces only).';
-        valid = false;
-    }
-
-    if (!valid) {
-        e.preventDefault();
-    }
-});
 
     </script>
 

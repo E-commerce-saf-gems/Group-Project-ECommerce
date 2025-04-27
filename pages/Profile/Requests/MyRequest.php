@@ -1,11 +1,10 @@
 <?php
 session_start();
-include('../../../database/db.php'); // Include the database connection
+include('../../../database/db.php'); 
 
 $customer_id = $_SESSION['customer_id'] ?? null;
 
 if (!$customer_id) {
-    // Redirect if not logged in
     header("Location: ../../Login/login.php");
     exit();
 }

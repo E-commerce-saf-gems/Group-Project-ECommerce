@@ -3,7 +3,7 @@ session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// Check if the user is logged in
+
 if (!isset($_SESSION['customer_id'])) {
     header("Location: ../Login/login.php?notloggedIn=1");
     exit;
@@ -11,11 +11,11 @@ if (!isset($_SESSION['customer_id'])) {
 
 $customerID = $_SESSION['customer_id'];
 
-// Include database connection
+
 include './db.php';
 
 try {
-    // Fetch customer details
+    
     $sqlCustomer = "SELECT firstname, lastname, email, contactNo FROM customer WHERE customer_id = ?";
     $stmt = $conn->prepare($sqlCustomer);
     $stmt->bind_param("i", $customerID);
@@ -24,7 +24,7 @@ try {
     $stmt->fetch();
     $stmt->close();
 
-    // Fetch billing address
+    
     $sqlAddress = "SELECT address1, address2, city, country, postalCode FROM customer WHERE customer_id = ?";
     $stmt = $conn->prepare($sqlAddress);
     $stmt->bind_param("i", $customerID);
@@ -81,7 +81,7 @@ $conn->close();
     <div class="main-content">
         <h1>Edit Your Details</h1>
         <form method="POST" action="updateDetails.php" class="details-form">
-            <!-- Personal Details -->
+            
             <h2>Personal Information</h2>
             <div class="details-form">
                 <label for="firstName">First Name</label>
@@ -101,7 +101,7 @@ $conn->close();
                 <input type="text" id="phone" name="contactNo" value="<?php echo htmlspecialchars($Phone); ?>" required>
             </div>
 
-            <!-- Billing Address -->
+            
             <h2>Billing Address</h2>
             <div class="details-form">
                 <label for="billingAddress1">Address Line 1</label>

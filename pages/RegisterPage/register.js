@@ -5,16 +5,15 @@ if (!photo) {
 }
 
 
-// To Validate Email
 function validateEmail() {
     const email = document.getElementById("email");
     const emailError = document.getElementById("email-error");
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    // Clear previous error messages
+    
     emailError.textContent = "";
 
-    // Validate email
+    
     if (!emailPattern.test(email.value)) {
         emailError.textContent = "Please enter a valid email address";
         emailError.style.color = "red";
@@ -27,13 +26,13 @@ function validateEmail() {
     }
 }
 
-// Add event listeners to remove the error message when input changes or loses focus
+
   document.getElementById("email").addEventListener("input", validateEmail );
   document.getElementById("email").addEventListener("blur", validateEmail );
 
 
 
-  // Validate passwords function
+  
 function validatePasswords() {
     const password = document.getElementById("password");
     const confirmPassword = document.getElementById("confirm-password");
@@ -45,7 +44,7 @@ function validatePasswords() {
     passwordError.textContent = "";
     confirmPasswordError.textContent = "";
     
-// Validate password against the pattern
+
 if (!passwordPattern.test(password.value)) {
     passwordError.textContent = "Password must be at least 8 characters, contain uppercase, lowercase, number, and special character.";
     passwordError.style.color = "red";
@@ -53,7 +52,7 @@ if (!passwordPattern.test(password.value)) {
     return false;
 }
 
-// Check if re-enter password field is empty
+
 if (confirmPassword.value.trim() === "") {
     confirmPasswordError.textContent = "Re-enter password field cannot be empty";
     confirmPasswordError.style.color = "red";
@@ -63,10 +62,10 @@ if (confirmPassword.value.trim() === "") {
 
 
     if (password.value !== confirmPassword.value) {
-        /*passwordError.textContent = "Passwords do not match.";*/
+        
         confirmPasswordError.textContent = "Password do not match";
         confirmPasswordError.style.color = "red";
-        /*password.classList.add("error");*/
+        
         confirmPassword.classList.add("error");
         return false;
     }
@@ -82,7 +81,7 @@ if (confirmPassword.value.trim() === "") {
 
 
 
-  //validate phoneNumber
+  
   function validatephoneNumber(){
     const phone = document.getElementById("phone");
     const phoneError = document.getElementById("phone-error");
@@ -116,35 +115,35 @@ function validateDOB() {
   const birthDate = new Date(dob.value);
   const age = today.getFullYear() - birthDate.getFullYear();
 
-  // Adjust the age calculation if the birthday hasn't occurred yet this year
+  
   const monthDifference = today.getMonth() - birthDate.getMonth();
   if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
     age--;
   }
 
-  dobError.textContent = ""; // Clear previous error message
+  dobError.textContent = ""; 
 
-  // Check if the age is 18 or older
+  
   if (age < 18) {
-    // Show error message if under 18
+    
     dobError.textContent = "You must be at least 18 years old to register.";
     dobError.style.color = "red";
     dob.classList.add("error");
   } else {
-    // Remove error styling if valid
-    dobError.textContent = ""; // Clear error message
+    
+    dobError.textContent = ""; 
     dob.classList.remove("error");
   }
 }
 
-// Add event listeners to validate on input (typing) and blur (losing focus)
+
 document.getElementById("dob").addEventListener("input", validateDOB);
 document.getElementById("dob").addEventListener("blur", validateDOB);
 
 
 
    
-  //validate nic number
+  
   function validateNIC(){
     const nic = document.getElementById("nic");
     const nicError = document.getElementById("nic-error");
@@ -170,42 +169,30 @@ document.getElementById("dob").addEventListener("blur", validateDOB);
 
 
   
-  // Combined form validation for step 1 that includes email and password validation
-/*function validateForm() {
-    if (!validateEmail() || !validatePasswords()) {
-      return false;
-    }
-    return validateStep(1);
-  }*/
-
-  // Navigate to the next step
+  
 function nextStep(currentStep) {
     const formError = document.getElementById(`step${currentStep}`).querySelector(".form-error");
     
-    // Clear any previous error messages
+    
     formError.textContent = "";
   
-   /* if (currentStep === 1 && !validateForm()) {
-      // If there are validation issues in step 1, exit without moving forward
-      formError.textContent = "Please fix the errors in the form.";
-      return;
-    }*/
+   
   
 
     if (validateStep(currentStep)) {
-      // If the current step is valid, show the next step
+      
       showStep(currentStep + 1);
     } else {
-      // Display an error message if required fields are missing
+      
       formError.textContent = "Please fill all required fields.";
     }
 
   }
-  // Add this code to ensure the form fields trigger validation
+  
 document.querySelectorAll("input").forEach(inputField => {
     inputField.addEventListener("input", function () {
       const formError = inputField.closest(".step").querySelector(".form-error");
-      formError.textContent = ""; // Clear the error message on input
+      formError.textContent = ""; 
     });
   });
 
@@ -227,7 +214,7 @@ document.querySelectorAll("input").forEach(inputField => {
     },
   };
   
-  // Initialize video stream
+  
   async function init() {
     try {
       const stream = await navigator.mediaDevices.getUserMedia(constraints);
@@ -247,7 +234,7 @@ document.querySelectorAll("input").forEach(inputField => {
   const context = canvas.getContext("2d");
   snap.addEventListener("click", function () {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    // Convert the captured image to base64 and set it as hidden input value
+    
     const dataURL = canvas.toDataURL("image/png");
     document.getElementById("photo").value = dataURL;
   });

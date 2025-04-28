@@ -2,9 +2,7 @@
 
 
 
-/**
- * add event on element
- */
+
 
 const addEventOnElem = function (elem, type, callback) {
   if (elem.length > 1) {
@@ -18,9 +16,7 @@ const addEventOnElem = function (elem, type, callback) {
 
 
 
-/**
- * navbar toggle
- */
+
 
 const navTogglers = document.querySelectorAll("[data-nav-toggler]");
 const navbar = document.querySelector("[data-navbar]");
@@ -43,9 +39,7 @@ addEventOnElem(navbarLinks, "click", closeNavbar);
 
 
 
-/**
- * header sticky & back top btn active
- */
+
 
 const header = document.querySelector("[data-header]");
 const backTopBtn = document.querySelector("[data-back-top-btn]");
@@ -78,9 +72,7 @@ addEventOnElem(window, "scroll", headerSticky);
 
 
 
-/**
- * scroll reveal effect
- */
+
 
 const sections = document.querySelectorAll("[data-section]");
 

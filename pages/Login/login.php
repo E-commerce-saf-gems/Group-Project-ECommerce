@@ -61,10 +61,7 @@
           />
         </br>
 
-       <!-- <div class="terms">
-            <input type="checkbox" id="terms">
-            <label for="terms">I accept terms & conditions</label>
-        </div>-->
+      
        
             <button type="submit" name="login_now_btn" class="login-btn">Login</button>
 

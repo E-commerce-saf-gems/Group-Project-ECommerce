@@ -70,7 +70,7 @@ $conn->close();
 
 
                 <label for="email">Email Address:</label>
-                <input id="email" name="email" placeholder="Enter your Email" value="<?php echo $customerEmail; ?>" required>
+                <input id="email" name="email" placeholder="Enter your Email" value="<?php echo $customerEmail; ?>" required >
                 <span id="email-error" class="error-msg"></span>
                 <br />
 

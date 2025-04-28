@@ -59,23 +59,23 @@
         <?php
         include('./db.php'); 
 
-        // Initialize variables
+        
         $email = $phone = $name = $message = "";
         $success_message = "";
         $error_message = "";
 
-        // Check if form is submitted
+        
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $email = htmlspecialchars($_POST['email'] ?? '');
             $phone = htmlspecialchars($_POST['phone'] ?? '');
             $name = htmlspecialchars($_POST['name'] ?? '');
             $message = htmlspecialchars($_POST['message'] ?? '');
 
-            // Check if fields are empty
+            
             if (empty($email) || empty($phone) || empty($name) || empty($message)) {
                 $error_message = "❌ All fields are required.";
             } else {
-                // Prepare SQL statement
+                
                 $stmt = $conn->prepare("INSERT INTO contactUs_inquries (email, phoneNo, name, message) VALUES (?, ?, ?, ?)");
 
                 if (!$stmt) {
@@ -86,23 +86,23 @@
                     if ($stmt->execute()) {
                         $success_message = "✅ Thank you for contacting us! We will get back to you soon.";
 
-                        // Clear form fields after success
+                        
                         $email = $phone = $name = $message = "";
                     } else {
                         $error_message = "❌ Execution failed: " . $stmt->error;
                     }
 
-                    // Close statement
+                    
                     $stmt->close();
                 }
             }
 
-            // Close connection
+            
             $conn->close();
         }
         ?>
 
-        <!-- Display Success or Error Messages -->
+        
         <?php if (!empty($success_message)) : ?>
           <div class="success-message"><?php echo $success_message; ?></div>
         <?php endif; ?>
@@ -111,7 +111,7 @@
           <div class="error-message"><?php echo $error_message; ?></div>
         <?php endif; ?>
 
-        <!-- Contact Form -->
+        
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" autocomplete="off">
           <h3 class="title">Contact us</h3>
           <div class="input-container">
@@ -146,14 +146,14 @@
   <script src="/components/footer/footer.js"></script>
 
   <script>
-    // Load header
+    
     fetch('/components/header/header.html')
       .then(response => response.text())
       .then(data => {
         document.getElementById('header-placeholder').innerHTML = data;
       });
 
-    // Load footer
+    
     document.addEventListener("DOMContentLoaded", function () {
       fetch('/components/footer/footer.html')
         .then(response => response.text())

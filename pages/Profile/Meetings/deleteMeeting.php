@@ -1,11 +1,11 @@
 <?php
-include('../../../database/db.php'); // Include the database connection
+include('../../../database/db.php'); 
 
-// Check if the meeting ID is passed
+
 if (isset($_GET['id'])) {
     $meetingId = $_GET['id'];
 
-    // Update the status to 'RD' (Request to Delete)
+    
     $sql = "UPDATE meeting SET status = 'RD' WHERE meeting_id = ?";
     
     $stmt = $conn->prepare($sql);

@@ -24,7 +24,7 @@ $billingpostalCode ="";
 include './db.php';
 
 try {
-    // Fetch user details
+    
     $sql = "SELECT firstname, lastname, email, contactNo FROM customer WHERE customer_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $customerID);
@@ -33,7 +33,7 @@ try {
     $stmt->fetch();
     $stmt->close();
 
-    // Fetch addresses
+    
     $sqlAddress = "SELECT address1, address2,city,country,postalCode FROM customer WHERE customer_id = ?";
     $stmt = $conn->prepare($sqlAddress);
     $stmt->bind_param("i", $customerID);
@@ -113,35 +113,7 @@ $conn->close();
                 <button type="submit" class="btn btn-primary">Update Details</button>
             </form>
             <br>
-            <!--<h2 class="h2">Password</h2>
-            <form class="password-form">
-                <div class="form-group">
-                    <label for="currentPassword">Current Password</label>
-                    <input type="password" id="currentPassword" name="currentPassword" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="newPassword">New Password</label>
-                    <input type="password" id="newPassword" name="newPassword" required>
-                    <ul>
-                        <div>
-                            <li>One capital letter</li>
-                            <li>lowercase letter</li> 
-                        </div>
-                        <div>
-                            <li>One number</li>
-                            <li>One special character</li>
-                        </div>
-                    </ul>
-                </div>
-                
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required>
-                </div>
-                
-                <button type="submit" class="btn btn-primary">Update Password</button>
-            </form>-->
+           
             
             <h2>Billing & Shipping Details</h2>
             <form class="details-form" method="POST" action="editAddress.php">
@@ -153,7 +125,7 @@ $conn->close();
                     <p><?php echo htmlspecialchars($billingcity ?? 'Not available'); ?></p>
                     <p><?php echo htmlspecialchars($billingcountry ?? 'Not available'); ?></p>
                     <p><?php echo htmlspecialchars($billingpostalCode ?? 'Not available'); ?></p>
-                   <!-- <button class="btn btn-primary">Edit Address</button> -->
+                  
                 </div>
                 <br>
                 <div class="address">

@@ -5,14 +5,14 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Ensure `id` parameter is passed
+
 if (!isset($_GET['id'])) {
     die('Meeting ID not provided.');
 }
 
 $meetingId = $_GET['id'];
 
-// Fetch the meeting details
+
 $query = "SELECT meeting_id, availableTimes_id FROM meeting WHERE meeting_id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $meetingId);
@@ -20,12 +20,12 @@ $stmt->execute();
 $result = $stmt->get_result();
 $meeting = $result->fetch_assoc();
 
-// If no meeting is found, show an error and exit
+
 if (!$meeting) {
     die('Meeting not found.');
 }
 
-// Fetch the booked date and time for the current availableTimes_id
+
 $bookedTimeQuery = "SELECT date, time FROM availabletimes WHERE availableTimes_id = ?";
 $bookedStmt = $conn->prepare($bookedTimeQuery);
 $bookedStmt->bind_param("i", $meeting['availableTimes_id']);
@@ -33,12 +33,12 @@ $bookedStmt->execute();
 $bookedResult = $bookedStmt->get_result();
 $bookedTime = $bookedResult->fetch_assoc();
 
-// Fetch available time slots (those with 'available' status)
+
 $timeSlotsQuery = "SELECT availableTimes_id, date, time FROM availabletimes WHERE availability = 'available'AND CONCAT(date, ' ', time) >= NOW()     /*hide past time slots*/
                         ORDER BY date, time";
 $timeSlotsResult = $conn->query($timeSlotsQuery);
 
-// Close the statement for meeting details
+
 $stmt->close();
 $bookedStmt->close();
 ?>
@@ -82,7 +82,7 @@ $bookedStmt->close();
         <h1>Edit Meeting</h1>
         <h2>Enter Details</h2>
         <div class="tab-content">
-            <!-- Display the current booked date and time -->
+             
             <div class="booked-info">
                 <p><strong>Currently Booked:</strong> 
                     <?php 
@@ -91,7 +91,7 @@ $bookedStmt->close();
                 </p>
             </div>
 
-            <!-- Form to edit meeting -->
+            
             <form method="POST" action="updateMeeting.php">
                 <input type="hidden" name="meeting_id" value="<?php echo htmlspecialchars($meeting['meeting_id']); ?>">
                 <input type="hidden" name="currentAvailableTime_id" value="<?php echo htmlspecialchars($meeting['availableTimes_id']); ?>">
@@ -117,7 +117,7 @@ $bookedStmt->close();
 </div>
 
 <?php
-// Close database connection
+
 $conn->close();
 ?>
 

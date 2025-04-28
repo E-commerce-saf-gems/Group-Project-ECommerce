@@ -311,7 +311,7 @@ if (nextBtn && prevBtn) {
             caratWeightDisplay.textContent = caratWeightInput.value + ' carats';
         });
 
-        </script>
+    </script>
 </body>
 
 </html>

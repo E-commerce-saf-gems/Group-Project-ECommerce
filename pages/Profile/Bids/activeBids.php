@@ -2,9 +2,8 @@
 session_start();
 $customer_id = $_SESSION['customer_id'];
 
-include '../../../database/db.php';  // Your database connection file
+include '../../../database/db.php';  
 
-// Get the current date and time
 date_default_timezone_set('Asia/Kolkata');
 $currentDateTime = date('Y-m-d H:i:s');
 
@@ -21,7 +20,6 @@ $biddingStoneQuery = "
 $biddingStoneResult = $conn->query($biddingStoneQuery);
 $biddingStone = $biddingStoneResult->fetch_assoc();
 
-// Get all the bids for this bidding stone
 $bidsQuery = "
     SELECT b.bid_id,b.validity, b.amount,b.validity, b.time, c.firstName AS bidderName
     FROM bid b
@@ -31,7 +29,6 @@ $bidsQuery = "
 ";
 $bidsResult = $conn->query($bidsQuery);
 
-// Get the current user's highest valid bid for this stone
 $userBidQuery = "
     SELECT MAX(amount) AS userHighestBid 
     FROM bid 
@@ -81,7 +78,6 @@ $userHighestBid = $userBid['userHighestBid'] ?? 0;
             </ul>
         </div>
 
-        <!-- Main Content -->
         <div class="main-content">
             <h1>My Account</h1>
             <h2>My Bids</h2>
@@ -119,11 +115,9 @@ $userHighestBid = $userBid['userHighestBid'] ?? 0;
 
                         <div class="bid-info">
                             <?php
-                              // Calculate the time left between current time and finish date
                               $finishDate = $biddingStone['finishDate'];
                               $timeLeft = date_diff(date_create($currentDateTime), date_create($finishDate));
                               
-                              // Format the time left (only Days, Hours, and Minutes)
                               $timeLeftFormatted = $timeLeft->invert ? 'Expired' : $timeLeft->format('%dD %hH %iM');
                             ?>
                             <div><strong>Time Left:</strong> <span class="info-value"><?= $timeLeftFormatted ?></span></div>
@@ -200,7 +194,7 @@ $userHighestBid = $userBid['userHighestBid'] ?? 0;
                                   </td>
                               </tr>
                           <?php
-                              $previousAmount = $currentAmount; // Update for next loop
+                              $previousAmount = $currentAmount; 
                           endwhile;
                           ?>
                       </tbody>

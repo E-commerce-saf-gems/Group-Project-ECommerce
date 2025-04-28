@@ -1,11 +1,9 @@
 <?php
-include('../../../database/db.php'); // Include your database connection here
+include('../../../database/db.php');
 
-// Check if request_id is provided in the URL
 if (isset($_GET['id'])) {
     $request_id = $_GET['id'];
 
-    // Fetch the record from the database
     $sql = "SELECT * FROM request WHERE request_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $request_id);

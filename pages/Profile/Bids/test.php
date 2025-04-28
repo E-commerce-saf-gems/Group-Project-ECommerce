@@ -4,7 +4,7 @@ $customer_id = $_SESSION['customer_id'];
 
 include '../../../database/db.php';
 
-date_default_timezone_set('Asia/Kolkata'); // Replace with your timezone
+date_default_timezone_set('Asia/Kolkata');
 $currentDateTime = date('Y-m-d H:i:s');
 
 echo "Local time is: $currentDateTime<br>";

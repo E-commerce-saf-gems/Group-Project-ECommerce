@@ -113,7 +113,6 @@ $total_usd = number_format($total_amount * $exchange_rate, 2, '.', '');
     <script src="https://www.paypal.com/sdk/js?client-id=AVle4HaFl3fiWsj3VRw3uC-Gb1NwhZ4j632SBgURYzQr8G9oR5KsrpkXUmCleQx3hNTwUnq5ZIdx8VRc&currency=USD"></script>
 
     <script>
-    // Dynamically show/hide shipping or pickup sections
     document.querySelectorAll('input[name="shipping-method"]').forEach(radio => {
         radio.addEventListener('change', (e) => {
             const isPickup = e.target.value === 'store-pickup';
@@ -134,13 +133,12 @@ $total_usd = number_format($total_amount * $exchange_rate, 2, '.', '');
         createOrder: function(data, actions) {
             const total = document.getElementById('total_amount').value;
 
-            // Manual validation
             const shippingMethod = document.querySelector('input[name="shipping-method"]:checked').value;
             const pickupDate = document.getElementById('pickup-date').value;
 
             if (shippingMethod === 'store-pickup' && !pickupDate) {
                 alert("Please select a pickup date before proceeding.");
-                return actions.reject(); // Stop PayPal flow
+                return actions.reject();
             }
 
             return actions.order.create({
@@ -191,10 +189,8 @@ $total_usd = number_format($total_amount * $exchange_rate, 2, '.', '');
         const pickupInput = document.getElementById('pickup-date');
         const now = new Date();
 
-        // Add 24 hours (1 day)
         now.setDate(now.getDate() + 1);
 
-        // Format to YYYY-MM-DD
         const minDate = now.toISOString().split('T')[0];
 
         pickupInput.min = minDate;

@@ -4,11 +4,9 @@ $customer_id = $_SESSION['customer_id'];
 
 include '../../../database/db.php';
 
-// Get the current date and time
 date_default_timezone_set('Asia/Kolkata');
 $currentDateTime = date('Y-m-d H:i:s');
 
-// Get the specific biddingstone details (completed one)
 $biddingStoneId = $_GET['id'];
 
 $biddingStoneQuery = "
@@ -23,10 +21,8 @@ $biddingStoneQuery = "
 $biddingStoneResult = $conn->query($biddingStoneQuery);
 $biddingStone = $biddingStoneResult->fetch_assoc();
 
-// Determine if the logged-in user is the winner
 $isWinner = isset($biddingStone['customer_id']) && $biddingStone['customer_id'] == $customer_id;
 
-// Get the current user's highest valid bid for this stone
 $userBidQuery = "
     SELECT MAX(amount) AS userHighestBid 
     FROM bid 
@@ -39,7 +35,6 @@ $userBid = $userBidResult->fetch_assoc();
 $userHighestBid = $userBid['userHighestBid'] ?? 0;
 
 
-// Get all bids for the stone
 $bidsQuery = "
     SELECT b.bid_id, b.amount,b.validity, b.time, c.firstName AS bidderName, b.customer_id
     FROM bid b
@@ -87,7 +82,6 @@ $bidsResult = $conn->query($bidsQuery);
             </ul>
         </div>
 
-        <!-- Main Content -->
          <?php if($biddingStoneResult->num_rows ==0):?>
           <div class="main-content">
             <h1>My Account</h1>
@@ -226,7 +220,7 @@ $bidsResult = $conn->query($bidsQuery);
                                   </td>
                               </tr>
                           <?php
-                              $previousAmount = $currentAmount; // Update for next loop
+                              $previousAmount = $currentAmount;
                           endwhile;
                           ?>
                       </tbody>

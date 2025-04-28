@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const passwordError = document.getElementById('password-error');
     const confirmPasswordError = document.getElementById('confirm-password-error');
   
-    // Email validation on blur
     emailField.addEventListener('blur', function () {
       if (!validateEmail(emailField.value)) {
         emailError.textContent = 'Enter a valid email address.';
@@ -17,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   
-    // Password validation live
     passwordField.addEventListener('input', function () {
       if (passwordField.value.length < 6) {
         passwordError.textContent = 'Password must be at least 6 characters.';
@@ -26,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   
-    // Confirm password validation live
     confirmPasswordField.addEventListener('input', function () {
       if (confirmPasswordField.value !== passwordField.value) {
         confirmPasswordError.textContent = 'Passwords do not match.';
@@ -35,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   
-    // Final check before submitting
     form.addEventListener('submit', function (e) {
       if (
         emailError.textContent !== '' ||
@@ -48,7 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
   
-  // Helper function
   function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email.toLowerCase());

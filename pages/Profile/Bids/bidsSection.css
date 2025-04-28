@@ -179,23 +179,23 @@
   
 
 .bid-result.win {
-    background-color: #e8f5e9;  /* Light green background */
-    color: #2e7d32;  /* Dark green text */
+    background-color: #e8f5e9;  
+    color: #2e7d32;  
 }
 
 .bid-result.loss {
-    background-color: #ffebee;  /* Light red background */
-    color: #c62828;  /* Dark red text */
+    background-color: #ffebee;  
+    color: #c62828;  
 }
 
 .bid-result.pending {
-    background-color: #fff5eb;  /* Light red background */
-    color: #c66a28;  /* Dark red text */
+    background-color: #fff5eb;  
+    color: #c66a28; 
 }
 
 .bid-result.none {
-    background-color: #ebf7ff;  /* Light red background */
-    color: #2845c6;  /* Dark red text */
+    background-color: #ebf7ff; 
+    color: #2845c6; 
 }
 
 

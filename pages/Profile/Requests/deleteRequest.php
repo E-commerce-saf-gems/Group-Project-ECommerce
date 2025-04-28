@@ -8,7 +8,7 @@ if (isset($_GET['id'])) {
 
     if ($conn->query($sql) === TRUE) {
         header("Location: ./MyRequest.php?deleteSuccess=1");
-        
+
     } else {
         echo "Error updating record: " . $conn->error;
         header("Location: ./MyRequest.php?deleteSuccess=2");

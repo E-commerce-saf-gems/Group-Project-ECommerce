@@ -1,3 +1,5 @@
+
+
 /* Product Detail Layout */
 .product-detail-container {
   display: flex;
@@ -48,7 +50,7 @@
 .product-info h2 {
   margin: 0 0 10px;
   font-size: 24px;
-  color: #000000;
+  color: #333;
 }
 
 .product-info .price {

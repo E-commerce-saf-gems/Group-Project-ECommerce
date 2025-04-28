@@ -103,7 +103,6 @@ $completedResult = $conn->query($completedQuery);
             <h1>My Account</h1>
             <h2>My Bids</h2>
             <div class="bids-wrapper">
-                <!-- My Active Bids -->
                 <div class="bids-box">
                     <h3 class="mybids-text"><span class="dot blue"></span> My Ongoing Bids</h3>
                     <div class="bids-table-wrapper">
@@ -166,7 +165,6 @@ $completedResult = $conn->query($completedQuery);
                     </div>
                 </div>
 
-                <!-- Live Bids -->
                 <div class="bids-box">
                     <h3 class="active-text"><span class="dot red"></span> Current Live Bids</h3>
                     <div class="bids-table-wrapper">
@@ -200,7 +198,6 @@ $completedResult = $conn->query($completedQuery);
                     </div>
                 </div>
 
-                <!-- Completed Bids -->
                 <div class="bids-box">
                     <h3 class="completed-text"><span class="dot green"></span>Completed Bids</h3>
                     <div class="bids-table-wrapper">

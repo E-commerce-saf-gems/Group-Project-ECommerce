@@ -11,10 +11,24 @@ $sql = "SELECT
             meeting.status
         FROM meeting
         JOIN customer ON meeting.customer_id = customer.customer_id
-        JOIN availabletimes ON meeting.availableTimes_id = availabletimes.availableTimes_id
-        ORDER BY availabletimes.date DESC";
+        JOIN availabletimes ON meeting.availableTimes_id = availabletimes.availableTimes_id";
+
+
+if (isset($_GET['status']) && !empty($_GET['status'])) {
+    $status = $conn->real_escape_string($_GET['status']);
+    $sql .= " WHERE meeting.status = '$status'";
+}
+
+
+$sql .= " ORDER BY availabletimes.date DESC";
+
+
 $result = $conn->query($sql);
+
+
+
 ?>
+
 
 
 <!DOCTYPE html>
@@ -48,6 +62,20 @@ $result = $conn->query($sql);
             <h1>My Account</h1>
             <h2>My Meetings</h2>
 
+            <form method="GET" id="filter-form">
+            
+          <label for="type-filter">Status:</label>
+          <select id="type-filter" name="status" onchange="document.getElementById('filter-form').submit();">
+              <option value="">All</option>
+              <option value="C" <?= (isset($_GET['status']) && $_GET['status'] == "C") ? 'selected' : ''; ?>>Completed</option>
+              <option value="P" <?= (isset($_GET['status']) && $_GET['status'] == "P") ? 'selected' : ''; ?>>Pending</option>
+              <option value="A" <?= (isset($_GET['status']) && $_GET['status'] == "A") ? 'selected' : ''; ?>>Approved</option>
+              
+          </select>
+          
+          </form>
+
+
             <div class="tab-content">
                 <table class="sales-table">
                     <thead>
@@ -65,13 +93,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         
-        $statusMap = [
-            'P' => 'Pending Request Meeting',
-            'A' => 'Meeting Approved',
-            'C' => 'Meeting Completed',
-            'R' => 'Pending Request to Delete'
-        ];
-        $statusFullWord = $statusMap[$row['status']] ?? 'Unknown'; 
+        
 
         
 
@@ -80,7 +102,7 @@ if ($result->num_rows > 0) {
                 <td>{$row['date']}</td>
                 <td>{$row['time']}</td>
                 <td>{$row['email']}</td>
-                <td>{$statusFullWord}</td>
+                <td>{$row['status']}</td>
                 <td class='actions'>";
         
         if ($row['status'] === 'P') {

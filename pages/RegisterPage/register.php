@@ -20,7 +20,7 @@ function sendVerificationEmail($first_name, $email, $token) {
     $mail = new PHPMailer(true);
 
     try {
-        //Server settings
+        
         $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      
         $mail->isSMTP();                                            
        
@@ -44,13 +44,13 @@ function sendVerificationEmail($first_name, $email, $token) {
             </button>
         " ;
 
-        //Content
-        $mail->isHTML(true);                      //Set email format to HTML
+        
+        $mail->isHTML(true);                     
         $mail->Subject = 'Email Verification';
         $mail->Body    = $email_template ;
     
         $mail->send();
-       // echo 'Message has been sent';
+       
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
     }
 
-    // Step 3: Continue collecting data for Step 2 and Step 3
+    
     $gender = mysqli_real_escape_string($conn, $_POST['gender']);
     $dob = mysqli_real_escape_string($conn, $_POST['dob']);
     $phone = mysqli_real_escape_string($conn, $_POST['phone']);
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     $target_dir = "../../uploads/";
-    // Photo handling
+    
     if (!empty($_POST['photo'])) {
         $base64_string = $_POST['photo'];
         $data = explode(',', $base64_string);
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = "Photo capture was not successful.";
     }
 
-    // Handle ID copy upload
+    
     if (!empty($_FILES["id_copy"]["name"])) {
         $id_copy_file = $target_dir . basename($_FILES["id_copy"]["name"]);
         if (!move_uploaded_file($_FILES["id_copy"]["tmp_name"], $id_copy_file)) {
@@ -115,13 +115,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = "ID copy is required.";
     }
 
-    // Insert into database if there are no errors
+    
     if (empty($errors)) {
-        // Check if email already exists
+        
         $email_check_query = "SELECT * FROM customer WHERE email = '$email' LIMIT 1";
         $email_result = mysqli_query($conn, $email_check_query);
         
-        // Check if NIC already exists
+       
         $nic_check_query = "SELECT * FROM customer WHERE NIC = '$nic' LIMIT 1";
         $nic_result = mysqli_query($conn, $nic_check_query);
         
@@ -136,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     
         if (empty($errors)) {
-            // If no errors, proceed with registration
+            
             $sql = "INSERT INTO customer (title, firstName, lastName, email, password, gender, DOB, contactNo, address1, address2, city, country, postalCode, NIC, image, pdf, token)
                     VALUES ('$title', '$first_name', '$last_name', '$email', '$hashed_password', '$gender', '$dob', '$phone', '$address1', '$address2', '$city', '$country', '$postal_code', '$nic', '$photo_file', '$id_copy_file', '$token')";
             
@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 header("Location: ./register.html") ;
             }
         } else {
-            // Output errors
+            
             foreach ($errors as $error) {
                 echo "<p style='color: red;'>$error</p>";
             }
@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
 
 
-    // Close the database connection
+    
     mysqli_close($conn);
 }
 ?>
